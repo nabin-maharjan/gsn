@@ -25,7 +25,7 @@ var gulp = require('gulp'),
   combineMq = require('gulp-combine-mq');
   
   
-  var wpFolderName="gulp-wp";
+  var wpFolderName="gsn";
 
 / SASS OUTPUT OPTION /
 var sassOptions = {
