@@ -4,7 +4,6 @@ p{
 	}
 header{	
 	background: $gray_bg;
-	height: 500px;
 	color: red;
 	@include max-screen($mq-tablet){
 		background:yellow;	
