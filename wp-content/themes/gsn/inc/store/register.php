@@ -23,14 +23,31 @@ class Store{
 		  )';
 			dbDelta($sql);
 			
-			add_action( 'wp_ajax_store_registration', 'store_registration' );
-			add_action( 'wp_ajax_nopriv_store_registration', 'store_registration' );
+			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
+			add_action( 'wp_ajax_nopriv_store_registration', array($this,'store_registration') );
 
 		}
 		public function store_registration(){
-			$v = new Valitron\Validator($_POST);
-			
-			
+			$response=array();
+			try{
+				if(!empty($_POST['formdata'])){
+					$data =unserialize($_POST['formdata']);
+					$v = new Valitron\Validator($data);
+					$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','latitute','lognitue'));
+					
+					if($v->validate()) {
+						$response['status']="success";
+						$response['msg']="weldone !!!!";
+					} else {
+						// Errors
+						throw new Exception($v->errors());
+					}
+				}
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
 		}
 	
 	

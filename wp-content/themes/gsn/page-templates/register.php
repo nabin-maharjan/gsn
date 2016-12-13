@@ -148,7 +148,28 @@ jQuery("#register_form").validate({
 	  storeLocation : "Please mark your location on map",
     },
   submitHandler: function(form) {
-    alert('hi');
+	  var formdata=jQuery(form).serialize();
+		   var data = {
+					'action': 'store_registration',
+					'formdata': formdata
+				};
+
+		
+		jQuery.ajax({
+         type : "post",
+         dataType : "json",
+         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
+         data : {action: "action", formdata : formdata},
+         success: function(response) {
+            if(response.type == "success") {
+               jQuery("#vote_counter").html(response.vote_count)
+            }
+            else {
+               alert("Your vote could not be added")
+            }
+         }
+      })  
+
   }
  });
 

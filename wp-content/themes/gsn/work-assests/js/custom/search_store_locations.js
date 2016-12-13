@@ -1,6 +1,8 @@
 // JavaScript Document
 function myMap() {	
   var storeLocation=document.getElementById("storeLocation");
+  var latittude_cntr=document.getElementById("latitute");
+  var lognitude_cntr=document.getElementById("lognitue");
   var mapCanvas = document.getElementById("map");
   var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
   var mapOptions = {
@@ -20,12 +22,13 @@ function myMap() {
 	google.maps.event.addListener(map, "click", function (event) {
 		var latitude = event.latLng.lat();
 		var longitude = event.latLng.lng();
-		
+		latittude_cntr.value = latitude;
+		lognitude_cntr.value = longitude;
 		// This event listener will call addMarker() when the map is clicked.
 		marker.setPosition(event.latLng);
 		// Center of map
 		map.panTo(new google.maps.LatLng(latitude,longitude));
-		storeLocation.value=latitude +','+longitude;
+		//storeLocation.value=latitude +','+longitude;
 		getAddress(event.latLng);
 	}); //end addListener
 	
