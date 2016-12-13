@@ -64,7 +64,7 @@
     <!-- Row end -->
     <!-- Row start -->
     <div class="form-group row">
-      <label for="companyName" class="col-sm-2 col-form-label col-form-label-sm">Store Name</label>
+      <label for="storeName" class="col-sm-2 col-form-label col-form-label-sm">Store Name</label>
       <div class="col-sm-10">
         <input type="text" class="form-control form-control-sm " name="storeName" id="storeName" placeholder="Store Name">
       </div>
@@ -85,7 +85,9 @@
      	 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
      	 <div id="map" style="width:100%;height:500px"></div>
          Selected Location :<span id="selected_location_label"></span>
-        <input type="hidden" class="form-control form-control-sm" name="storeLocation" id="storeLocation" placeholder="Store Location">
+        <input type="hidden" class="form-control form-control-sm" name="latitute" id="latitute">
+        <input type="hidden" class="form-control form-control-sm" name="lognitue" id="lognitue">
+        
       </div>
     </div>
     <!-- Row end -->
@@ -114,6 +116,11 @@ jQuery("#register_form").validate({
         required: true,
         minlength: 5
       },
+	  cpassword :{
+		  minlength : 5,
+          equalTo : "#password"  
+		  
+	  },
 	  mobileNumber: {
 		required: true,
 		minlength:9,
@@ -134,6 +141,9 @@ jQuery("#register_form").validate({
         required: "Please provide a password",
         minlength: "Your password must be at least 5 characters long"
       },
+	  cpassword: {
+		  equalTo : "Comfirm password and password must be same."
+	  },
       email: "Please enter a valid email address",
 	  storeLocation : "Please mark your location on map",
     },
