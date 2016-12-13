@@ -16,6 +16,10 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 function enquee_scripts(){
 
 	// Enqueue custom all js//
+	if( is_page_template( 'page-templates/register.php')){
+		wp_enqueue_script( 'jquery-validate-min', get_template_directory_uri() . '/assets/js/vendor/jquery.validate.min.js', array(), '1.0.0', true );
+	}
+
 	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
