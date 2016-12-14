@@ -5,9 +5,38 @@
  * @package GSN
  * @since GSN 1.0
  */
- 
  get_header();
  ?>
+ <section>
+  <h3>Login</h3>
+   <div class="container">
+   <form name="login_form" id="login_form">
+  <!-- Row start -->
+    <div class="form-group row">
+      <label for="loginEmailAddress" class="col-sm-2 col-form-label col-form-label-sm">Email Address</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="loginEmailAddress" id="loginEmailAddress" placeholder="Email Address">
+      </div>
+    </div>
+    <!-- Row end -->
+    
+     <!-- Row start -->
+    <div class="form-group row">
+      <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Password</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="loginPassword" id="loginPassword" placeholder="Password">
+      </div>
+    </div>
+    <!-- Row end -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+   </div>
+ 
+ </section>
+ 
+ 
+ <section>
+ <h3>Register</h3>
  <div class="container">
   <form name="register_form" id="register_form">
   <!-- Row start -->
@@ -85,22 +114,78 @@
      	 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
      	 <div id="map" style="width:100%;height:500px"></div>
          Selected Location :<span id="selected_location_label"></span>
+          <input type="hidden" class="form-control form-control-sm" name="storeFullAddress" id="storeFullAddress">
         <input type="hidden" class="form-control form-control-sm" name="latitute" id="latitute">
-        <input type="hidden" class="form-control form-control-sm" name="lognitue" id="lognitue">
+        <input type="hidden" class="form-control form-control-sm" name="lognitute" id="lognitute">
         
       </div>
     </div>
     <!-- Row end -->
-    
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-
+</section>
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=myMap"></script>
 <script>
+/* Login jQuery validation Procress */
+jQuery("#login_form").validate({
+	rules: {
+      loginEmailAddress: {
+        required: true,
+        email: true
+      },
+      loginPassword: {
+        required: true,
+      },
+    },
+	// Specify validation error messages
+    messages: {
+      password: "Please provide a password",
+      emailAddress: "Please enter a valid email address",
+    },
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+		jQuery.ajax({
+         type : "post",
+         dataType : "json",
+         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
+         data : {action: "store_login", formdata : formdata},
+         success: function(response) {
+            if(response.status == "success") {
+               jQuery("#vote_counter").html(response.vote_count)
+            }
+            else {
+				// validation error occurs
+				if(response.code=="406"){
+					var data= jQuery.parseJSON(response.msg);		
+					
+					jQuery.each(data,function(index,value){
+						 if(jQuery('#'+index+'-error').length){
+							 jQuery('#'+index+'-error').html();
+						 }else{
+							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
+							 jQuery(error_html).insertAfter('#'+index);
+						 }
+					});
+				}else{
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore("#login_form");
+					
+				}
+            }
+         }
+      })  
+  }
+	
+});
+
+
+
+
+
+/* Registration jQuery validation process */
 jQuery("#register_form").validate({
-	 ignore: ['storeLocation'],
+	 ignore: ['storeFullAddress'],
 	// Specify validation rules
     rules: {
       // The key name on the left side is the name attribute
@@ -129,8 +214,8 @@ jQuery("#register_form").validate({
       },
 	  storeName : "required",
 	  panNumber : "required",
-	  storeLocation :  "required"
-	  
+	  storeFullAddress :  "required"
+	
 	  
     },
     // Specify validation error messages
@@ -149,27 +234,35 @@ jQuery("#register_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-		   var data = {
-					'action': 'store_registration',
-					'formdata': formdata
-				};
-
-		
 		jQuery.ajax({
          type : "post",
          dataType : "json",
          url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "action", formdata : formdata},
+         data : {action: "store_registration", formdata : formdata},
          success: function(response) {
-            if(response.type == "success") {
+            if(response.status == "success") {
                jQuery("#vote_counter").html(response.vote_count)
             }
             else {
-               alert("Your vote could not be added")
+				// validation error occurs
+				if(response.code=="406"){
+					var data= jQuery.parseJSON(response.msg);		
+					
+					jQuery.each(data,function(index,value){
+						 if(jQuery('#'+index+'-error').length){
+							 jQuery('#'+index+'-error').html();
+						 }else{
+							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
+							 jQuery(error_html).insertAfter('#'+index);
+						 }
+					});
+				}else{
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter('.btn-primary');
+					
+				}
             }
          }
       })  
-
   }
  });
 

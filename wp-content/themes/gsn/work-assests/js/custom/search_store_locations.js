@@ -1,10 +1,12 @@
 // JavaScript Document
 function myMap() {	
-  var storeLocation=document.getElementById("storeLocation");
+  var storeLocation=document.getElementById("storeFullAddress");
   var latittude_cntr=document.getElementById("latitute");
-  var lognitude_cntr=document.getElementById("lognitue");
+  var lognitude_cntr=document.getElementById("lognitute");
   var mapCanvas = document.getElementById("map");
   var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
+ 
+
   var mapOptions = {
     center:defaultLocation, 
     zoom: 10
@@ -28,7 +30,7 @@ function myMap() {
 		marker.setPosition(event.latLng);
 		// Center of map
 		map.panTo(new google.maps.LatLng(latitude,longitude));
-		//storeLocation.value=latitude +','+longitude;
+	
 		getAddress(event.latLng);
 	}); //end addListener
 	
@@ -73,6 +75,7 @@ function myMap() {
 				  if(results[0]) {
 					  console.log(results);
 					  jQuery('#selected_location_label').html(results[0].formatted_address);
+					  	storeLocation.value=results[0].formatted_address;
 				  }
 				  else {
 					   console.log("No results");

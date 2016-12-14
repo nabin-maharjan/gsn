@@ -87,3 +87,6 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+/** define Encryption key */
+define('ENCRYPTION_KEY', '10f94de8193835eb828b73210d1d0d89');
