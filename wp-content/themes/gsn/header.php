@@ -1,3 +1,7 @@
+<?php 
+global $store;
+$store->check_access_store();
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head profile="http://www.w3.org/2005/10/profile">
@@ -10,4 +14,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header><h1>this is header</h1></header>
+<header>
+<h1>this is header</h1>
+
+</header>

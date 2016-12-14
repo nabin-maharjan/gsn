@@ -148,7 +148,7 @@ gulp.task('browser-sync', function() {
 	 proxy: "http://localhost/"+wpFolderName+"/",
    // host: 'nabin.com',
     injectChanges: true,
-    open: 'external',
+    open: 'internal',
     notify: false
   });
 });

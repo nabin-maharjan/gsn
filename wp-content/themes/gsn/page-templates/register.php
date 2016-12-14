@@ -153,9 +153,9 @@ jQuery("#login_form").validate({
          data : {action: "store_login", formdata : formdata},
          success: function(response) {
             if(response.status == "success") {
-               jQuery("#vote_counter").html(response.vote_count)
-            }
-            else {
+               window.location.href=response.redirectUrl;
+			   return false;
+            }else {
 				// validation error occurs
 				if(response.code=="406"){
 					var data= jQuery.parseJSON(response.msg);		
@@ -249,9 +249,9 @@ jQuery("#register_form").validate({
          data : {action: "store_registration", formdata : formdata},
          success: function(response) {
             if(response.status == "success") {
-               jQuery("#vote_counter").html(response.vote_count)
-            }
-            else {
+               window.location.href=response.redirectUrl;
+			   return false;
+			}else {
 				// validation error occurs
 				if(response.code=="406"){
 					var data= jQuery.parseJSON(response.msg);		

@@ -7,7 +7,8 @@ new Agile_Input_Fields();
 ////////////////////////////////////
 /*  Store Register pages */
 include("inc/store/register.php");
-new Store();
+global $store;
+$store=new Store();
 
 /////////////////////////////////////////
 /* for custom post type loads */

@@ -1,6 +1,9 @@
 <?php 
 require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
+	
+	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city;
+	
 	public function __construct(){
 		global $wpdb;
 		$tablename=$wpdb->prefix."store";
@@ -42,6 +45,44 @@ class Store{
 			/* add ajax function for email address check*/
 			add_action( 'wp_ajax_email_is_exists', array($this,'email_is_exists') );
 			add_action( 'wp_ajax_nopriv_email_is_exists', array($this,'email_is_exists') );
+			
+			/* set store properties */
+			add_action('init',array($this,'get'),1);
+	}
+	public function check_access_store(){
+		global $store;
+		//var_dump($store);die;
+		if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
+			wp_redirect( site_url("/register/"));
+			exit;
+		}else if($store->id!=NULL && is_page_template( 'page-templates/register.php')){
+			//var_dump($store);die;
+			wp_redirect( site_url("/dashboard/"));
+			exit;
+		}
+	}
+	
+	public function get($id=0){
+		//session_destroy();
+		if($id==0){
+			if(!empty($_SESSION['gsn_store_id'])){
+				
+				$id=mc_decrypt($_SESSION['gsn_store_id'],ENCRYPTION_KEY);
+				
+			}	
+		}
+		if($id!=0){
+			global $wpdb;
+			$query=$wpdb->prepare("select * from ".$wpdb->prefix ."store where id=%s",$id); // Prepare query
+			$storeobj = $wpdb->get_row($query );
+			foreach($storeobj as $key=>$value){
+				$this->$key=$value;
+			}
+			
+			//var_dump($storeobj); die;
+			//$this->id=$storeobj->id;
+		}
+		return $this;
 	}
 	
 	/*
@@ -129,6 +170,7 @@ class Store{
 						$response['status']="success";
 						$response['code']='200';
 						$response['msg']="weldone !!!!";
+						$response['redirectUrl']=site_url("/dashboard/");
 					} else {
 						// Errors
 						$err_msg=json_encode($v->errors());
@@ -168,6 +210,7 @@ class Store{
 							$response['status']="success";
 							$response['code']='200';
 							$response['msg']="weldone !!!!";
+							$response['redirectUrl']=site_url("/dashboard/");
 						}else{
 							// Errors
 							throw new Exception("Your username or password didnot match.",'404');
