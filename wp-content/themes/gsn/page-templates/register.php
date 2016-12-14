@@ -232,6 +232,14 @@ jQuery("#register_form").validate({
       email: "Please enter a valid email address",
 	  storeLocation : "Please mark your location on map",
     },
+	onfocusout: function(element){
+		if(jQuery(element).attr('name')==="emailAddress"){
+			 if(jQuery(element).valid()){
+				 check_email_exists(jQuery(element).val());
+			 };
+		}
+	},
+	
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
 		jQuery.ajax({
@@ -265,5 +273,37 @@ jQuery("#register_form").validate({
       })  
   }
  });
+ 
+ function check_email_exists(email){
+	jQuery.ajax({
+         type : "post",
+         dataType : "json",
+         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
+         data : {action: "email_is_exists", email : email},
+         success: function(response) {
+            if(response.status == "success") {
+            }
+            else {
+				// validation error occurs
+				if(response.code=="406"){
+					var data= jQuery.parseJSON(response.msg);		
+					
+					jQuery.each(data,function(index,value){
+						 if(jQuery('#'+index+'-error').length){
+							 jQuery('#'+index+'-error').html();
+						 }else{
+							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
+							 jQuery(error_html).insertAfter('#'+index);
+						 }
+					});
+				}else{
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter('.btn-primary');
+					
+				}
+            }
+         }
+      })
+	 
+ }
 
 </script>
