@@ -63,7 +63,7 @@ gulp.task('sass', function () {
 
 /////////// Script TASK /////////////
 gulp.task("global-scripts", function() {
-  return gulp.src("work-assests/js/custom/*.js")
+  return gulp.src("work-assests/js/custom/**/*.js")
    .pipe(sourcemaps.init()) 
    .pipe(jshint())
    .pipe(include())      
@@ -165,8 +165,8 @@ var plumberErrorHandler = { errorHandler: notify.onError({
 //Watch task
 gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin'], function(){
    gulp.watch('work-assests/scss/**/*.scss', ['sass']); 
-   gulp.watch('work-assests/js/*.js', ['global-scripts']);
-    gulp.watch('work-assests/js/admin/*.js', ['global-scripts-admin']);
+   gulp.watch('work-assests/js/**/*.js', ['global-scripts']);
+    gulp.watch('work-assests/js/admin/**/*.js', ['global-scripts-admin']);
    gulp.watch('work-assests/images/*.+(png|jpg|jpeg|gif|svg)', ['img']);
     gulp.watch('./*.php', reload);
 });

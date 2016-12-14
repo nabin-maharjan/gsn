@@ -1,7 +1,13 @@
 <?php
+include("vendor/autoload.php");
 include("inc/basic.php");
 include("inc/input-fields.php");
 new Agile_Input_Fields();
+
+////////////////////////////////////
+/*  Store Register pages */
+include("inc/store/register.php");
+new Store();
 
 /////////////////////////////////////////
 /* for custom post type loads */
