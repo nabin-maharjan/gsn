@@ -45,6 +45,11 @@ class Store{
 			/* add ajax function for email address check*/
 			add_action( 'wp_ajax_email_is_exists', array($this,'email_is_exists') );
 			add_action( 'wp_ajax_nopriv_email_is_exists', array($this,'email_is_exists') );
+			/* ad ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_logout', array($this,'gsn_store_logout') );
+			add_action( 'wp_ajax_nopriv_gsn_store_logout', array($this,'gsn_store_logout') );
+			
+			
 			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
@@ -76,10 +81,22 @@ class Store{
 			foreach($storeobj as $key=>$value){
 				$this->$key=$value;
 			}
-			//var_dump($storeobj); die;
-			//$this->id=$storeobj->id;
 		}
 		return $this;
+	}
+	
+	/*
+	* logout store function
+	
+	*/
+	public function gsn_store_logout(){
+		session_destroy();
+		$response =array();
+		$response['status']="success";
+		$response['code']='200';
+		$response['msg']="weldone !!!!";
+		$response['redirectUrl']=site_url("/register/");
+		echo json_encode($response); die;
 	}
 	/*
 	
@@ -162,11 +179,25 @@ class Store{
 						global $wpdb;
 						$datas['password']= sha1(md5($datas['password']));
 						$insert = $wpdb->insert($wpdb->prefix ."store", $datas);
-						$_SESSION['gsn_store_id']=mc_encrypt($insert,ENCRYPTION_KEY);//encrypt and store in session
-						$response['status']="success";
-						$response['code']='200';
-						$response['msg']="weldone !!!!";
-						$response['redirectUrl']=site_url("/dashboard/");
+						if($insert){
+							/* ADD Store parent category based on store name */
+							$cid = wp_insert_term(
+								sanitize_text_field($datas['storeName']), // the term 
+								'product_cat', // the taxonomy
+								array(
+									'description'=>"Store Parent  Category ",
+									'slug' => sanitize_title($datas['storeName']),
+									'parent' =>0
+								)
+							);	
+							$_SESSION['gsn_store_id']=mc_encrypt($insert,ENCRYPTION_KEY);//encrypt and store in session
+							$response['status']="success";
+							$response['code']='200';
+							$response['msg']="weldone !!!!";
+							$response['redirectUrl']=site_url("/dashboard/");
+						}else{
+							throw new Exception("Error while proccessing data!",'400');
+						}
 					} else {
 						// Errors
 						$err_msg=json_encode($v->errors());
@@ -225,4 +256,6 @@ class Store{
 			echo json_encode($response);die();
 		}
 }
+global $store;
+$store=new Store();
 

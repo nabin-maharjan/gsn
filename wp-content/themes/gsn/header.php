@@ -11,10 +11,16 @@ $store->check_access_store();
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
+<script>var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";</script>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <header>
-<h1>this is header</h1>
+<h1>this is header <?php if($store->id!=NULL){?>
+	
+	<button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
+<?php } ?></h1>
+
+
 
 </header>

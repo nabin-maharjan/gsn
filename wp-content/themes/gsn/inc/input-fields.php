@@ -442,3 +442,4 @@ class Agile_Input_Fields{
 		echo json_encode($msg); die;	
 	}
 }
+new Agile_Input_Fields();
