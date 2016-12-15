@@ -66,9 +66,7 @@ class Store{
 		//session_destroy();
 		if($id==0){
 			if(!empty($_SESSION['gsn_store_id'])){
-				
 				$id=mc_decrypt($_SESSION['gsn_store_id'],ENCRYPTION_KEY);
-				
 			}	
 		}
 		if($id!=0){
@@ -78,13 +76,11 @@ class Store{
 			foreach($storeobj as $key=>$value){
 				$this->$key=$value;
 			}
-			
 			//var_dump($storeobj); die;
 			//$this->id=$storeobj->id;
 		}
 		return $this;
 	}
-	
 	/*
 	
 	* get store by email address
