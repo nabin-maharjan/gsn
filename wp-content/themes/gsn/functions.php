@@ -6,6 +6,7 @@ include("inc/input-fields.php");
 /*  Store Register pages */
 include("inc/store/register.php");
 include("inc/store/category.php");
+include("inc/store/product.php");
 /////////////////////////////////////////
 /* for custom post type loads */
 include("inc/custom-post-type.php");

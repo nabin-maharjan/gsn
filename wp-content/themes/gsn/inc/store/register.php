@@ -2,7 +2,7 @@
 require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
 	
-	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city;
+	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id;
 	
 	public function __construct(){
 		global $wpdb;
@@ -17,7 +17,6 @@ class Store{
 				firstName varchar(50) NOT NULL,
 				lastName varchar(50) NOT NULL,
 				emailAddress varchar(100) NOT NULL,
-				password text default NULL,
 				mobileNumber varchar(100) default NULL,
 				storeName varchar(50) default NULL,
 				panNumber varchar(20) default NULL,
@@ -25,6 +24,7 @@ class Store{
 				latitute DECIMAL(20, 18) NOT NULL,
 				storeFullAddress varchar(255) default NULL,
 				city varchar(20) default NULL,
+				user_id bigint,
 				PRIMARY KEY  (id)
 			  )';
 			dbDelta($sql);
@@ -53,7 +53,59 @@ class Store{
 			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
+			
+			/* add store role*/
+			add_action('init',array($this,'add_store_role'));
+			/* add filter only show current user media */
+			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
+			
+			/* add media upload files */
+			 add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
+			
 	}
+	
+	
+	
+	 /* Add the media uploader script */
+  public function my_media_lib_uploader_enqueue() {
+    wp_enqueue_media();
+    wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
+    wp_enqueue_script( 'media-lib-uploader-js' );
+  }
+ 
+	
+	/*
+	
+	*function to restrict user to media
+	
+	*/
+	public function show_current_user_attachments( $query ) {
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			$query['author'] = $user_id;
+		}
+		return $query;
+	}
+	
+	
+	
+	/* 
+	* function to add store role
+	*/
+	public function add_store_role(){
+			$result = add_role(
+			'store_contributor',
+			__( 'Store' ),
+			array(
+				'read'         => true,  // true allows this capability
+				'edit_posts'   => true,
+				'delete_posts' => true, // Use false to explicitly deny
+				'upload_files' => true,
+			)
+		);
+	}
+	
+	
 	public function check_access_store(){
 		global $store;
 		//var_dump($store);die;
@@ -70,16 +122,17 @@ class Store{
 	public function get($id=0){
 		//session_destroy();
 		if($id==0){
-			if(!empty($_SESSION['gsn_store_id'])){
-				$id=mc_decrypt($_SESSION['gsn_store_id'],ENCRYPTION_KEY);
-			}	
+			$id=get_current_user_id();
 		}
+		//var_dump($id);
 		if($id!=0){
 			global $wpdb;
-			$query=$wpdb->prepare("select * from ".$wpdb->prefix ."store where id=%s",$id); // Prepare query
+			$query=$wpdb->prepare("select * from ".$wpdb->prefix ."store where user_id=%s",$id); // Prepare query
 			$storeobj = $wpdb->get_row($query );
-			foreach($storeobj as $key=>$value){
-				$this->$key=$value;
+			if($storeobj){
+				foreach($storeobj as $key=>$value){
+					$this->$key=$value;
+				}
 			}
 		}
 		return $this;
@@ -90,7 +143,7 @@ class Store{
 	
 	*/
 	public function gsn_store_logout(){
-		session_destroy();
+		wp_logout();;
 		$response =array();
 		$response['status']="success";
 		$response['code']='200';
@@ -126,12 +179,11 @@ class Store{
 				 }
 			 }
 
-		$query=$wpdb->prepare("select count(*) from ".$wpdb->prefix ."store where emailAddress=%s",$email); // Prepare query
-		$store = $wpdb->get_var($query);
+		 $exists = email_exists($email);
 		
 		if($request_ajax) {
 		
-			if($store>0){
+			if($exists>0){
 				$msg=json_encode(array('emailAddress'=>array("Email Address Already Exists")));
 				throw new Exception($msg,'406');
 			}else{
@@ -175,22 +227,37 @@ class Store{
 					$v->rule('equals','cpassword','password');
 					if($v->validate()) {
 						/* insert to database */
-						unset($datas['cpassword']);// remove cpassword field
+						
 						global $wpdb;
-						$datas['password']= sha1(md5($datas['password']));
-						$insert = $wpdb->insert($wpdb->prefix ."store", $datas);
-						if($insert){
+
+						$user_id=wp_create_user($datas['emailAddress'], $datas['password'], $datas['emailAddress'] );
+						if($user_id){
+							unset($datas['cpassword']);// remove cpassword field
+							unset($datas['password']); // remove password field
+							$datas['user_id']=$user_id;
+							$insert = $wpdb->insert($wpdb->prefix ."store", $datas);
+							
+							$user = new WP_User($user_id);
+							// Replace the current role with 'editor' role
+							$user->set_role( 'store_contributor' );
+							//set_user_role($user_id,'store_contributor');
+							if($insert){
 							/* ADD Store parent category based on store name */
 							$cid = wp_insert_term(
 								sanitize_text_field($datas['storeName']), // the term 
-								'product_cat', // the taxonomy
-								array(
-									'description'=>"Store Parent  Category ",
-									'slug' => sanitize_title($datas['storeName']),
-									'parent' =>0
-								)
-							);	
-							$_SESSION['gsn_store_id']=mc_encrypt($insert,ENCRYPTION_KEY);//encrypt and store in session
+									'product_cat', // the taxonomy
+									array(
+										'description'=>"Store Parent  Category ",
+										'slug' => sanitize_title($datas['storeName']),
+										'parent' =>0
+									)
+								);
+							}
+							
+							/* login user */
+							wp_set_current_user($user_id);
+    						wp_set_auth_cookie($user_id);
+							
 							$response['status']="success";
 							$response['code']='200';
 							$response['msg']="weldone !!!!";
@@ -228,12 +295,21 @@ class Store{
 						/* insert to database */
 						global $wpdb;
 						
-						$datas['loginPassword']= sha1(md5($datas['loginPassword']));// encrpt password
+						//$datas['loginPassword']= sha1(md5($datas['loginPassword']));// encrpt password
 						
-						$query=$wpdb->prepare("select id from ".$wpdb->prefix ."store where emailAddress=%s and password=%s Limit 1",$datas['loginEmailAddress'],$datas['loginPassword']); // Prepare query
-						$store = $wpdb->get_var($query); // get data from table
-						if($store){
-							$_SESSION['gsn_store_id']=mc_encrypt($store,ENCRYPTION_KEY);
+						
+						$creds['user_login'] = $datas['loginEmailAddress'];
+    					$creds['user_password'] = $datas['loginPassword'];
+						$user=wp_signon( $creds, false );
+						
+						//$query=$wpdb->prepare("select id from ".$wpdb->prefix ."store where emailAddress=%s and password=%s Limit 1",$datas['loginEmailAddress'],$datas['loginPassword']); // Prepare query
+						//$store = $wpdb->get_var($query); // get data from table
+						if(!empty($user->ID)){
+							/* login user */
+							wp_set_current_user($user->ID);
+    						wp_set_auth_cookie($user->ID);
+							
+							//$_SESSION['gsn_store_id']=mc_encrypt($store,ENCRYPTION_KEY);
 							$response['status']="success";
 							$response['code']='200';
 							$response['msg']="weldone !!!!";

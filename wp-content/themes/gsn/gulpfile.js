@@ -168,7 +168,7 @@ gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scrip
    gulp.watch('work-assests/js/**/*.js', ['global-scripts']);
     gulp.watch('work-assests/js/admin/**/*.js', ['global-scripts-admin']);
    gulp.watch('work-assests/images/*.+(png|jpg|jpeg|gif|svg)', ['img']);
-    gulp.watch('./*.php', reload);
+    gulp.watch('./**/*.php', reload);
 });
 
 // Default task to be run with `gulp`

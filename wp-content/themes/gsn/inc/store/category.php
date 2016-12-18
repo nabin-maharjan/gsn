@@ -16,45 +16,43 @@ class GsnCategory{
 					$v->rule('required', 'name');
 					if($v->validate()) {
 						/* insert to database */
-						global $wpdb;
-						
-						/*
-						
-						object(WP_Error)#1038 (2) {
-							  ["errors"]=>
-							  array(1) {
-								["term_exists"]=>
-								array(1) {
-								  [0]=>
-								  string(62) "A term with the name provided already exists with this parent."
-								}
-							  }
-							  ["error_data"]=>
-							  array(1) {
-								["term_exists"]=>
-								int(6)
-							  }
-							}
-						
-						
-						*/
-						
-						
+						global $wpdb, $store;						
+						$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);						
 						$cid = wp_insert_term(
 							sanitize_text_field($datas['name']), // the term 
 							'product_cat', // the taxonomy
 							array(
-								'description'=> sanitize_text_field($data['description']),
+								'description'=> sanitize_text_field($datas['description']),
 								'slug' => sanitize_title($datas['name']),
-								'parent' =>($datas['parent']>0)?sanitize_text_field($datas['parent']):0
+								'parent' =>$parent_id
 							)
 						);
-						var_dump($cid);die;
+						//if(empty($cid
+						if(empty($cid->errors)){
+							$args = array(
+							//'show_count'   => 1,
+							'hierarchical' => 1,
+							'child_of' =>$storeParentCat->term_id,
+							'taxonomy'     => 'product_cat',
+							'hide_empty' => false,
+							'name'               => 'parent',
+							'id'                 => 'parent',
+							'class'              => 'form-control form-control-sm',
+							'show_option_none'    => 'None',
+							'echo'				=>false
+						);
 						
-						$response['status']="success";
-						$response['code']='200';
-						$response['msg']="weldone !!!!";
-						$response['redirectUrl']=site_url("/dashboard/");
+						$dropdow_cat=wp_dropdown_categories( $args );						
+							
+							$response['status']="success";
+							$response['code']='200';
+							$response['msg']="Category successfully added";
+							$response['dropdown']=$dropdow_cat;
+							//$response['redirectUrl']=site_url("/dashboard/");
+						}else{
+							throw new Exception("Name provided Category already exists");
+						}
 					} else {
 						// Errors
 						$err_msg=json_encode($v->errors());

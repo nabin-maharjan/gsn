@@ -42,6 +42,25 @@ function myStartSession() {
 }
 
 
+// Add custom query variables
+add_action('init',function(){
+	global $wp;
+	$wp->add_query_var('store_product_slug');
+	//add_query_arg( 'store_product_slug' );
+});
+
+// Add rewrites rules
+function gsn_rewrite_basic() {
+  add_rewrite_rule('^store-product/([^/]*)/?', 'index.php?pagename=store-product&store_product_slug=$matches[1]', 'top');
+}
+add_action('init', 'gsn_rewrite_basic');
+
+
+
+
+
+
+
 
 // Encrypt Function
 function mc_encrypt($encrypt, $key){

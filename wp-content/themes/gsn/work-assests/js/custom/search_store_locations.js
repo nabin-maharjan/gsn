@@ -10,7 +10,7 @@ function myMap() {
   var mapOptions = {
     center:defaultLocation, 
     zoom: 10
-  }
+  };
 
   var map = new google.maps.Map(mapCanvas, mapOptions);
   //marker
@@ -46,7 +46,7 @@ function myMap() {
         // more details for that place.
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
-          if (places.length == 0) {
+          if (places.length === 0) {
             return;
           }
           // For each place, get the icon, name and location.
