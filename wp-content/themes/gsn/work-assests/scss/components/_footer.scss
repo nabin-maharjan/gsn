@@ -6,6 +6,6 @@ footer {
   }
   @include max-screen($mq-tablet) {
     font-size: 20px;
-    color: red;
+    color: red; font-weight:bold;
   }
 }
