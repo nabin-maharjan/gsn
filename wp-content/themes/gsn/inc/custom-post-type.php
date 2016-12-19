@@ -345,7 +345,7 @@ class Custom_Post_Type
 										$first_array= array_slice($repeater_value, 0, 1);;
 										$first_array_keys= array_keys($first_array);
 										$count_row=count($repeater_value[$first_array_keys[0]] );
-										$new_data_repeater=[];
+										$new_data_repeater=array();
 										for($i=0; $i<$count_row; $i++){
 											foreach($repeater_value as $key=>$value){
 												$new_data_repeater[$i][$key]=$value[$i];

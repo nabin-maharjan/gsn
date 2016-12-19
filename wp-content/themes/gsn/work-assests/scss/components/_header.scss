@@ -1,0 +1,32 @@
+header {
+  background: $gray_bg;
+  color: red;
+
+  @include max-screen($mq-tablet) {
+    background: yellow;
+  }
+  @include max-screen($mq-mobile) {
+    background: #454454;
+  }
+  h1 {
+    color: red;
+    @include border-radius(10px);
+    background: $red_bg;
+    @include box-shadow(0, 0, 10px, 10px, rgba(0, 0, 0, 0.5));
+
+    @include max-screen($mq-mobile) {
+      color: #454454;
+    }
+    a {
+      color: #dadada;
+      display: block;
+
+      &:hover {
+        text-decoration: underline;
+        background: $red_bg;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+}

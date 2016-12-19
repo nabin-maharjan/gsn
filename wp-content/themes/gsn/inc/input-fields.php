@@ -83,7 +83,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=text] with labels */
 	//////////////////////////////////////////////////////////////////
-	public function input_text_html($id,$label,$arg=[]){
+	public function input_text_html($id,$label,$arg=array()){
 		extract($arg);
 		
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
@@ -104,7 +104,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=password] with labels */
 	//////////////////////////////////////////////////////////////////
-	public function input_password_html($id,$label,$arg=[]){
+	public function input_password_html($id,$label,$arg=array()){
 		extract($arg);
 		
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
@@ -126,7 +126,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=text] with labels */
 	//////////////////////////////////////////////////////////////////
-	public function input_textarea_html($id,$label,$arg=[]){
+	public function input_textarea_html($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -147,7 +147,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated wp editor with labels */
 	//////////////////////////////////////////////////////////////////
-	public function input_editor($id,$label,$arg=[]){
+	public function input_editor($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -166,7 +166,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=checkbox]  with labels*/
 	//////////////////////////////////////////////////////////////////
-	public function input_checkbox_html($id,$label,$arg=[]){
+	public function input_checkbox_html($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -192,7 +192,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=radio]  with labels*/
 	//////////////////////////////////////////////////////////////////
-	public function input_radio_html($id,$label,$arg=[]){
+	public function input_radio_html($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -216,7 +216,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated select  with labels*/
 	//////////////////////////////////////////////////////////////////
-	public function input_dropdown_html($id,$label,$arg=[]){
+	public function input_dropdown_html($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -261,7 +261,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for print  formated image  with labels*/
 	//////////////////////////////////////////////////////////////////
-	public function input_image_html($id,$label,$arg=[]){
+	public function input_image_html($id,$label,$arg=array()){
 		extract($arg);
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$post_id=get_the_ID();
@@ -281,7 +281,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for  generate repeater field*/
 	//////////////////////////////////////////////////////////////////
-	public function repeater_field($repeater_name,$fieldset,$counter,$data=[]){
+	public function repeater_field($repeater_name,$fieldset,$counter,$data=array()){
 		$html="";
 		
 		foreach($fieldset as $label=>$field){
@@ -382,7 +382,7 @@ class Agile_Input_Fields{
 	/////////////////////////////////////////////////////////////////////
 	/* Function for  print repeater field*/
 	//////////////////////////////////////////////////////////////////
-	public function input_repeater($id,$label,$arg=[]){
+	public function input_repeater($id,$label,$arg=array()){
 		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
 		$repeater_name=$arg['name'];
 		$html='<tr><th colspan="2"><label for="' . $repeater_name . '">' . $label . '</label></th></tr><tr><td colspan="2"> <table data-repeater_name="'.$repeater_name.'" id="'.$repeater_name.'_repeater" data-fieldset=\''.(json_encode($arg['fieldset'])).'\'><tbody>';
@@ -442,3 +442,4 @@ class Agile_Input_Fields{
 		echo json_encode($msg); die;	
 	}
 }
+new Agile_Input_Fields();

@@ -37,6 +37,9 @@ define('DB_CHARSET', 'utf8mb4');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+/** define Encryption key */
+define('ENCRYPTION_KEY', '10f94de8193835eb828b73210d1d0d89');
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -87,3 +90,5 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+
