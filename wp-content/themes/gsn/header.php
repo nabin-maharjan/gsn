@@ -16,10 +16,10 @@ $store->check_access_store();
 </head>
 <body <?php body_class(); ?>>
 <header>
-<h1>this is header <?php if($store->id!=NULL){?>
-	
-	<button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
-<?php } ?></h1>
+<h1>GS<N/h1>
+<?php if($store->id!=NULL){?>  
+  <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
+<?php } ?>
 
 
 
