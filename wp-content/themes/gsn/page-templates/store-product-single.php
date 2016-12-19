@@ -11,6 +11,8 @@
  $attachment_ids = $product->get_gallery_attachment_ids();
  $stock_in=$prodClass->stock_in_list($product->post->ID);
  $stock_out=$prodClass->stock_out_list($product->post->ID);
+ echo "<pre>";
+ var_dump(get_post_meta($product->id)); die;
  ?>
  <section>
  <h1><?php echo $product->post->post_title; ?></h1>
@@ -35,7 +37,6 @@
 
 	} ?>
  </section>
- 
  <section>
  <p>Stock In</p>
  <?php 
@@ -62,6 +63,4 @@
  }
  ?>
  </section>
- 
- 
  <?php get_footer();?>

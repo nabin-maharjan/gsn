@@ -92,7 +92,9 @@ gulp.task("global-scripts-admin", function() {
 		"work-assests/js/admin/**/*.js"
 	  ]))
 	.pipe(concat("all-admin.js"))
-    .pipe(uglify())
+    .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
     .pipe(size({ gzip: true, showFiles: true }))
 	
    .pipe(gulp.dest("assets/js/admin/"))
@@ -129,7 +131,7 @@ gulp.task('clean', function() {
 })
 
 gulp.task('clean:assets', function() {
-  return del.sync(['assets/**/*', '!assets/images', '!assets/images/**/*']);
+  return del.sync(['assets/**/*', '!assets/images', '!assets/images/**/*', '!assets/js/vendor/**/*']);
 });
 
 // browser-sync task for starting the server.
