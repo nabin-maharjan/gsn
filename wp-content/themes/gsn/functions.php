@@ -16,3 +16,4 @@ $custom_post_types->add_column_admin();
 $custom_post_types->agile_admin_scripts();
 //////////////////////////////////
 add_theme_support( 'post-thumbnails' );
+show_admin_bar( false);

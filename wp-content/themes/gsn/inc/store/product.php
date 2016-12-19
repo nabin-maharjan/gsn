@@ -65,13 +65,24 @@ class GsnProduct{
 		}
 		
 		
-		// add ajax function for add product process
+			// add ajax function for add product process
 			add_action( 'wp_ajax_gsn_add_product', array($this,'add') );
 			add_action( 'wp_ajax_nopriv_gsn_add_product', array($this,'add') );
+			// add ajax function for add product stock process
+			add_action( 'wp_ajax_gsn_add_stock', array($this,'add_stock') );
+			add_action( 'wp_ajax_nopriv_gsn_add_stock', array($this,'add_stock') );
+			// add ajax function for out product stock process
+			add_action( 'wp_ajax_gsn_out_stock', array($this,'out_stock') );
+			add_action( 'wp_ajax_nopriv_gsn_out_stock', array($this,'out_stock') );
+			
+			
+			
 			
 			
 		}
-	
+	/*
+	* function to add product
+	*/
 	public function add(){
 		//var_dump($_POST); die;
 		try{
@@ -160,6 +171,117 @@ class GsnProduct{
 			echo json_encode($response);die();
 	}
 	
+	/*
+	* function for add stock
+	*/
+	public function add_stock(){
+		//var_dump($_POST); die;
+		try{
+			if(!empty($_POST['formdata'])){
+				parse_str($_POST['formdata'], $datas);
+				$v = new Valitron\Validator($datas);
+				$v->rule('required', array('qty','product_id'));
+				$v->rule('integer','qty');
+				$v->rule('min','qty',1);
+				if($v->validate()) {
+					global $store, $wpdb;
+					$old_stock=get_post_meta($datas['product_id'],'_stock',true);
+					$new_stock=(int)$old_stock+(int)$datas['qty'];
+					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product
+					if($update_status){
+						/* insert to stock in table */
+						$stock_in_args=array(
+							'productID' =>$datas['product_id'],
+							'qty'=>$datas['qty'],
+							'user_id'=>$store->user_id,
+							'transaction_date'=> date('Y-m-d H:i:s')
+						);
+						$insert_stock = $wpdb->insert($wpdb->stock_in, $stock_in_args);// insert to stock in table
+						
+					}
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="weldone !!!!";
+					//$response['redirectUrl']=site_url("/dashboard/");
+
+				} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+					    throw new Exception($err_msg,'406');
+					}
+			}
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	
+		
+	}
+	
+	/*
+	* function for out stock
+	*/
+	public function out_stock(){
+		//var_dump($_POST); die;
+		try{
+			if(!empty($_POST['formdata'])){
+				parse_str($_POST['formdata'], $datas);
+				$v = new Valitron\Validator($datas);
+				$v->rule('required', array('qty','product_id'));
+				$v->rule('integer','qty');
+				$v->rule('min','qty',1);
+				if($v->validate()) {
+					global $store, $wpdb;
+					/* update new total sales */
+					$old_sales=get_post_meta($datas['product_id'],'total_sales',true);
+					$new_sales=(int)$old_sales+(int)$datas['qty'];
+					$update_status=update_post_meta($datas['product_id'],'total_sales',$new_sales);// update total sales  of product
+					
+					/* update  new stock status */
+					$old_stock=get_post_meta($datas['product_id'],'_stock',true);
+					$new_stock=(int)$old_stock-(int)$datas['qty'];
+					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product
+					
+					if($update_status){
+						/* insert to stock in table */
+						$stock_in_args=array(
+							'productID' =>$datas['product_id'],
+							'qty'=>$datas['qty'],
+							'user_id'=>$store->user_id,
+							'transaction_date'=> date('Y-m-d H:i:s')
+						);
+						$insert_stock = $wpdb->insert($wpdb->stock_out, $stock_in_args);// insert to stock in table
+						
+					}
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="weldone !!!!";
+					//$response['redirectUrl']=site_url("/dashboard/");
+
+				} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+					    throw new Exception($err_msg,'406');
+					}
+			}
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	
+		
+	}
+	
+	
+	
+	
+	
 	
 	/*
 	* list of all stock in of specifi product
@@ -170,7 +292,7 @@ class GsnProduct{
 		if($user_id==""){
 			$user_id=$store->user_id;
 		}
-		$query=$wpdb->prepare("select * from ".$wpdb->stock_in ." where productID=%s and user_id=%s",$product_id,$user_id); // Prepare query
+		$query=$wpdb->prepare("select * from ".$wpdb->stock_in ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
 	
@@ -183,7 +305,7 @@ class GsnProduct{
 		if($user_id==""){
 			$user_id=$store->user_id;
 		}
-		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s",$product_id,$user_id); // Prepare query
+		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
 	
