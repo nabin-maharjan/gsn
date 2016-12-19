@@ -7,22 +7,18 @@
 @import "vendor/bootstrap/bootstrap";
 
 
-/* ====== Mixin Partial CSS ====== */
+/* ====== BASE CSS ====== */
 
-@import "mixin/mixin";
+@import "base/variable";
+@import "base/mixin";
 
 /* ====== Font Family CSS ====== */
 
 @include font-face(welcome, '../../fonts/sweetness-webfont', 500, normal, eot woff2 woff);
 
-
 /* ====== Font Family CSS ====== */
 
-/* ====== Import Partial CSS ====== */
-
-@import "partials/variable";
-@import "partials/main";
-@import "partials/responsive";
-
-/* ====== Import Partial CSS ====== */
+/* ====== Import COMPONENT CSS ====== */
+@import "components/main";
+/* ====== Import COMPONENT CSS ====== */
 

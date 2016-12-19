@@ -10,7 +10,7 @@ jQuery('#logoutBtn').on('click',function(e){
 			   return false;
             }
          }
-      }) 
+      });
 	
 });
 jQuery(document).ready(function(e) {
@@ -29,7 +29,7 @@ jQuery(document).ready(function(e) {
     mediaUploader.on('select', function() {
       attachment = mediaUploader.state().get('selection').first().toJSON();
       jQuery('#image_id').val(attachment.id);
-	  jQuery('#image_src').attr('src',attachment.url)
+  	  jQuery('#image_src').attr('src',attachment.url);
     });
     // Open the uploader dialog
     mediaUploader.open();
