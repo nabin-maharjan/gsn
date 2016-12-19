@@ -1,0 +1,11 @@
+footer {
+  background: $gray_bg;
+
+  @include max-screen($mq-mobile) {
+    font-size: 60px;
+  }
+  @include max-screen($mq-tablet) {
+    font-size: 20px;
+    color: red; font-weight:bold;
+  }
+}
