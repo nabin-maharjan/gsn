@@ -9,133 +9,133 @@
  ?>
 <section class="landing">  
   <div class="container">
+    <h1 class="page-title">Welcome to test</h1>
     <!-- LOGIN and REGISTER Form -->
     <div class="landing__form">      
       <!-- TAB NAV -->
-      <ul id="landing__tab" class="nav nav-tabs clearfix" role="tablist">
-        <li class="active" role="presentation">
-          <a href="#login" role="tab" data-toggle="tab">Login</a>
-        </li>
-        <li role="presentation">
-          <a href="#register" role="tab" data-toggle="tab">Register</a>
-        </li>
-      </ul>
+      <div class="landing__nav">
+        <ul id="landing__tab" class="nav nav-tabs clearfix landing__tab" role="tablist">
+          <li class="active" role="presentation">
+            <a href="#login" role="tab" data-toggle="tab">Login</a>
+          </li>
+          <li role="presentation">
+            <a href="#register" role="tab" data-toggle="tab">Register</a>
+          </li>
+        </ul>
+      </div>
       <!-- TAB NAV End -->
       <!-- TAB CONTENT -->
       <div class="landing__tab-content tab-content clearfix">
         <!-- Login Form -->
         <div id="login" class="tab-pane active tab-content__login" role="tabpanel">
-          <h2>Login</h2>
           <form name="login_form" id="login_form">
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="loginEmailAddress" class="col-sm-2 col-form-label col-form-label-sm">Email Address</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="loginEmailAddress" id="loginEmailAddress" placeholder="Email Address">
+            <div class="form-group">
+              <label for="loginEmailAddress" class="form-label">Email Address</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
               </div>
             </div>
-            <!-- Row end -->
-            
+            <!-- Row end -->            
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Password</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="loginPassword" id="loginPassword" placeholder="Password">
+            <div class="form-group">
+              <label for="login_password" class="form-label">Password</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
               </div>
             </div>
             <!-- Row end -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-submit">Login</button>
           </form>
         </div>
         <!-- Login Form End -->
         <!-- Register Form -->
         <div id="register" class="tab-pane tab-content__register" role="tabpanel">
-          <h2>Register</h2>
           <form name="register_form" id="register_form">
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="firstName" id="firstName" placeholder="First Name">
+            <div class="form-group">
+              <label for="firstName" class="form-label">First Name</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name">
               </div>
             </div>
             <!-- Row end -->
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="lastName" class="col-sm-2 col-form-label col-form-label-sm">Last Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm"  name="lastName"  id="lastName"  placeholder="Last Name">
+            <div class="form-group">
+              <label for="lastName" class="form-label">Last Name</label>
+              <div class="form-input">
+                <input type="text" class="form-control"  name="lastName"  id="lastName"  placeholder="Enter your last name">
               </div>
             </div>
             <!-- Row end -->
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="emailAddress" class="col-sm-2 col-form-label col-form-label-sm">Email Address</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="emailAddress" id="emailAddress" placeholder="Email Address">
+            <div class="form-group">
+              <label for="emailAddress" class="form-label">Email Address</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
               </div>
             </div>
             <!-- Row end -->
             
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="password" class="col-sm-2 col-form-label col-form-label-sm">Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control form-control-sm" name="password" id="password" placeholder="Password">
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <div class="form-input">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
               </div>
             </div>
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="cpassword" class="col-sm-2 col-form-label col-form-label-sm">Confirm Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control form-control-sm" name="cpassword" id="cpassword" placeholder="confirm Password">
+            <div class="form-group">
+              <label for="cpassword" class="form-label">Confirm Password</label>
+              <div class="form-input">
+                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
               </div>
             </div>
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="mobileNumber" class="col-sm-2 col-form-label col-form-label-sm">Mobile Number</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="mobileNumber" id="mobileNumber" placeholder="Mobile Location">
+            <div class="form-group">
+              <label for="mobileNumber" class="form-label">Mobile Number</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
               </div>
             </div>
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="storeName" class="col-sm-2 col-form-label col-form-label-sm">Store Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm " name="storeName" id="storeName" placeholder="Store Name">
+            <div class="form-group">
+              <label for="storeName" class="form-label">Store Name</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
               </div>
             </div>
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="panNumber" class="col-sm-2 col-form-label col-form-label-sm">Pan Number</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control form-control-sm" name="panNumber"  id="panNumber" placeholder="Pan Number">
+            <div class="form-group">
+              <label for="panNumber" class="form-label">Pan Number</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter yout pan number">
               </div>
             </div>
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group row">
-              <label for="storeLocation" class="col-sm-2 col-form-label col-form-label-sm">Store Location</label>
-              <div class="col-sm-10">
+            <div class="form-group">
+              <label for="storeLocation" class="form-label">Store Location</label>
+              <div class="form-input">
                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                <div id="map" style="width:100%;height:500px"></div>
                  Selected Location :<span id="selected_location_label"></span>
-                <input type="hidden" class="form-control form-control-sm" name="storeFullAddress" id="storeFullAddress">
-                <input type="hidden" class="form-control form-control-sm" name="latitute" id="latitute">
-                <input type="hidden" class="form-control form-control-sm" name="lognitute" id="lognitute">                  
+                <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
+                <input type="hidden" class="form-control" name="latitute" id="latitute">
+                <input type="hidden" class="form-control" name="lognitute" id="lognitute">                  
               </div>
             </div>
             <!-- Row end -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-submit">Register</button>
           </form>
         </div>
         <!-- Register Form End -->
@@ -145,6 +145,7 @@
     <!-- LOGIN and REGISTER Form End -->   
   </div> 
 </section>
+<!-- LANDING FORM End -->
 
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
