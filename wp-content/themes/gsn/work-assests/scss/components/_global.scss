@@ -1,3 +1,43 @@
 p {
   color: $red_bg;
 }
+a, a:hover, a:focus{
+  outline: none;
+  text-decoration: none;
+}
+.page-title{
+  font-weight: bolder;
+  margin: 0 0 25px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.form-label{
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-control{
+  border-radius: 0;
+
+  &.error{
+    border-color: red;
+  }
+}
+.btn-submit{
+  background: $dark_gray;
+  border-radius: 0;
+  color: white;
+  font-weight: bold;
+  padding: 10px 30px;
+  text-transform: uppercase;  
+
+  &:hover{
+    background: $gray_bg;
+  }
+}
+label.error{
+  color: red;
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+}
