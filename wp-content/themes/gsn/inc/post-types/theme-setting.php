@@ -4,9 +4,24 @@ $setting->create('Theme Color Setting');
 $setting->add_post_type_support(array('thumbnail'));
 //$event->add_taxonomy( 'category' );
 //$event->add_taxonomy( 'author' );
+/* remove editor from post */
+add_action('init',function(){
+	remove_post_type_support('theme_color_setting','editor');
+});
+
+/* add meta fields to post */
 $setting->add_meta_box( 
     'Theme Collor Setting', 
     array(
+	'Default theme' =>array(
+				'name'=>'default_theme',
+				'class'=>' test test',
+				'type'=>"radio",
+				'options'=>array(
+						'no'=>'No',
+						'yes'=>'Yes',
+					)
+				),
 	
 		'Header Background Color' =>array(
 			'name'=>'header_background_color',
