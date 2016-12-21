@@ -10,7 +10,62 @@
  global $store;
 //var_dump(current_user_can( 'upload_files' ) );die;
 /* insert custom attributes */
+?>
 
+<section>
+<?php
+	global $gsn_settings;
+	$gsn_themes=$gsn_settings->available_theme();
+?>
+	<h3>Settings</h3>
+    <div class="container">
+   <form name="category_create_form" id="category_create_form">
+   
+   <!-- Row start -->
+    <div class="form-group row">
+      <label for="upload-button" class="col-sm-2 col-form-label col-form-label-sm">Logo</label>
+      <div class="col-sm-10">
+          <div class="upload_cntr">
+          <?php
+             if(has_post_thumbnail($product->id)){
+                 $post_thumbnail_id = get_post_thumbnail_id( $product->id );
+                $post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );
+            }?>
+          
+            <input id="logo_image_id" class="image_id" type="hidden" name="logo_image_id" value="<?php echo (!empty($post_thumbnail_id))?$post_thumbnail_id:"";?>" />
+            <img class="image_src" width="150" src="<?php echo (!empty($post_thumnail_url))?$post_thumnail_url:"";?>">
+             
+             <input type="button" class="btn btn-info upload-image-button" value="Upload Image" />
+             </div>
+          </div>
+    </div>
+    <!-- Row end -->
+   
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+      <div class="col-sm-10">
+      <?php foreach($gsn_themes as $gsn_theme){
+		  $theme_image=get_the_post_thumbnail_url($gsn_theme->ID);
+		?>
+      	<label class="checkbox-inline"><input type="radio" name="gsn_theme" value=""><img src="<?php echo $theme_image; ?>" alt="<?php echo $gsn_theme->post_title;?>" width="150"></label>
+      <?php } ?>
+      </div>
+    </div>
+    <!-- Row end -->
+    
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+</section>
+
+
+
+ 
+ 
+ <section>
+ <?php
 $product_edit=false;
 if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
 	$product= new WC_product(sanitize_text_field($_GET['pid']));
@@ -18,9 +73,6 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
 	$product_edit=true;
 }
  ?>
- 
- 
- <section>
   <h3>Product</h3>
    <div class="container">
    <form name="product_create_form" id="product_create_form">
@@ -94,18 +146,19 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
     <div class="form-group row">
       <label for="upload-button" class="col-sm-2 col-form-label col-form-label-sm">Image</label>
       <div class="col-sm-10">
+       <div class="upload_cntr">
       <?php
 		 if(has_post_thumbnail($product->id)){
 			 $post_thumbnail_id = get_post_thumbnail_id( $product->id );
 			$post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );
 		}?>
       
-        <input id="image_id" type="hidden" name="image_id" value="<?php echo (!empty($post_thumbnail_id))?$post_thumbnail_id:"";?>" />
-        <img id="image_src" width="150" src="<?php echo (!empty($post_thumnail_url))?$post_thumnail_url:"";?>">
+        <input id="image_id" class="image_id" type="hidden" name="image_id" value="<?php echo (!empty($post_thumbnail_id))?$post_thumbnail_id:"";?>" />
+        <img class="image_src" width="150" src="<?php echo (!empty($post_thumnail_url))?$post_thumnail_url:"";?>">
          
- 		 <input id="upload-button" type="button" class="btn btn-info" value="Upload Image" />
+ 		 <input type="button" class="btn btn-info upload-image-button" value="Upload Image" />
          
-         
+         </div>
       </div>
     </div>
     <!-- Row end -->
@@ -114,13 +167,14 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
     <div class="form-group row">
       <label for="upload-button-multiple" class="col-sm-2 col-form-label col-form-label-sm">Product image gallery</label>
       <div class="col-sm-10">
+       <div class="upload_cntr">
       <?php 
 	  	if(!empty($product)){
 			$pic_galleries=get_post_meta($product->id,'_product_image_gallery',true);
 			$pic_galleries_ids=explode(",",$pic_galleries);
 		}?>
 
-        <input id="image_ids" type="hidden" name="image_ids" value="<?php echo (!empty($pic_galleries))?$pic_galleries:"";?>" />
+        <input id="image_ids" class="image_ids" type="hidden" name="image_ids" value="<?php echo (!empty($pic_galleries))?$pic_galleries:"";?>" />
  		 
          <div class="gallery_image_cntr">
          	<?php if(!empty($pic_galleries_ids)){ 
@@ -131,7 +185,10 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
          <?php } }?>
          </div>
          
-         <input id="upload-button-multiple" type="button" class="btn btn-info" value="Add Image" />
+         <input  type="button" class="btn btn-info upload-button-multiple" value="Add Image" />
+         </div>
+         
+         
       </div>
     </div>
     <!-- Row end -->
@@ -139,7 +196,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
     
     <!-- Row start -->
     <div class="form-group row">
-      <label for="upload-button-multiple" class="col-sm-2 col-form-label col-form-label-sm">Specifications</label>
+      <label class="col-sm-2 col-form-label col-form-label-sm">Specifications</label>
     </div>
     <!-- Row end -->
     <!-- Row product Attributes cntr start -->
@@ -179,7 +236,10 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
       </div>
     </div>
     <!-- Row end -->
-    
+    <?php if($product_edit){ ?>
+    <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
+    <input type="hidden" name="action" value="edit">
+    <?php }?>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
    </div>

@@ -79,6 +79,24 @@ gulp.task("global-scripts", function() {
    .pipe(gulp.dest("assets/js/custom/"))
     .pipe(reload({stream:true}));
 });
+/////////// Script TASK /////////////
+gulp.task("global-scripts-vendors", function() {
+  return gulp.src("work-assests/js/vendor/**/*.js")
+   .pipe(sourcemaps.init()) 
+   //.pipe(jshint())
+   .pipe(include())      
+   .on('error', console.log)
+   .pipe(jshint.reporter('default'))
+   .pipe(order([
+		"work-assests/js/vendor/**/*.js"
+	  ]))
+	//.pipe(concat("vendor-min.js"))
+    .pipe(uglify())
+    .pipe(size({ gzip: true, showFiles: true }))
+	
+   .pipe(gulp.dest("assets/js/vendor/"))
+    .pipe(reload({stream:true}));
+});
 
 /////////// Script TASK /////////////
 gulp.task("global-scripts-admin", function() {
@@ -131,7 +149,7 @@ gulp.task('clean', function() {
 })
 
 gulp.task('clean:assets', function() {
-  return del.sync(['assets/**/*', '!assets/images', '!assets/images/**/*', '!assets/js/vendor/**/*']);
+  return del.sync(['assets/**/*', '!assets/images', '!assets/images/**/*']);
 });
 
 // browser-sync task for starting the server.
@@ -165,7 +183,7 @@ var plumberErrorHandler = { errorHandler: notify.onError({
 
 
 //Watch task
-gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin'], function(){
+gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin','global-scripts-vendors'], function(){
    gulp.watch('work-assests/scss/**/*.scss', ['sass']); 
    gulp.watch('work-assests/js/**/*.js', ['global-scripts']);
     gulp.watch('work-assests/js/admin/**/*.js', ['global-scripts-admin']);
@@ -192,7 +210,7 @@ gulp.task('default', function (callback) {
 gulp.task('build', function(callback){
   runSequence(
     'clean:assets',
-    ['sass', 'global-scripts', 'img','global-scripts-admin'],
+    ['sass', 'global-scripts', 'img','global-scripts-admin','global-scripts-vendors'],
     callback
   )
 });

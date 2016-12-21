@@ -84,23 +84,36 @@ class GsnProduct{
 	* function to add product
 	*/
 	public function add(){
-		//var_dump($_POST); die;
 		try{
 			if(!empty($_POST['formdata'])){
 				parse_str($_POST['formdata'], $datas);
+				$edit_flag=false;
+				if(!empty($datas['action']) && $datas['action']=="edit"){
+					$edit_flag=true;
+				}
 				$v = new Valitron\Validator($datas);
-				$v->rule('required', array('name','description','price','stock','image_id'));
-				$v->rule('numeric',array('price','stock'));
+				if($edit_flag){
+					$v->rule('required', array('name','description','price','image_id'));
+					$v->rule('numeric','price');
+				}else{
+					$v->rule('required', array('name','description','price','stock','image_id'));
+					$v->rule('numeric',array('price','stock'));
+				}
 				$v->rule('array',array('attribute_name','attribute_value'));
 				if($v->validate()) {
+					
 					global $store, $wpdb;
-					$post_id = wp_insert_post( array(
-						'post_author' => $store->user_id,
-						'post_title' => sanitize_text_field($datas['name']),
-						'post_content' => sanitize_text_field($datas['description']),
-						'post_status' => 'publish',
-						'post_type' => "product",
-					) );
+					if($edit_flag){
+						$post_id =$datas['product_id'];
+					}else{
+						$post_id = wp_insert_post( array(
+							'post_author' => $store->user_id,
+							'post_title' => sanitize_text_field($datas['name']),
+							'post_content' => sanitize_text_field($datas['description']),
+							'post_status' => 'publish',
+							'post_type' => "product",
+						) );
+					}
 					
 					
 					set_post_thumbnail( $post_id, $datas['image_id'] );
@@ -145,7 +158,6 @@ class GsnProduct{
 					for($i=0; $i<$loop_count; $i++){
 						$attribute_slug="pa_".str_replace(" ","_",trim($attribute_name[$i]));
 						$term_taxonomy_ids = wp_set_object_terms($post_id,$attribute_value, $attribute_slug, true );
-						
 						$thedata[$attribute_slug]=array( 
 								   'name'=>$attribute_slug, 
 								   'value'=>$attribute_value[$i],
@@ -155,23 +167,16 @@ class GsnProduct{
 						);
 					}
 					update_post_meta($post_id,'_product_attributes',$thedata);// update attributes
-					
-					
-					
-					/* insert to stock in table */
-					$stock_in_args=array(
-						'productID' =>$post_id,
-						'qty'=>$datas['stock'],
-						'user_id'=>$store->user_id,
-						'transaction_date'=> date('Y-m-d H:i:s')
-					);
-					$insert_stock = $wpdb->insert($wpdb->stock_in, $stock_in_args);
-					
-					
-					
-					
-					
-					
+					if(!$edit_flag){
+						/* insert to stock in table */
+						$stock_in_args=array(
+							'productID' =>$post_id,
+							'qty'=>$datas['stock'],
+							'user_id'=>$store->user_id,
+							'transaction_date'=> date('Y-m-d H:i:s')
+						);
+						$insert_stock = $wpdb->insert($wpdb->stock_in, $stock_in_args);
+					}
 					$response['status']="success";
 					$response['code']='200';
 					$response['msg']="weldone !!!!";

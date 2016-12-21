@@ -17,11 +17,15 @@
  //echo "<pre>";
 // var_dump(get_post_meta($product->id));
  ?>
- <div><a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a></div>
+<section>
+
+	
+
+</section>
  
  
  <section>
- <h1><?php echo $product->post->post_title; ?></h1>
+ <h1><?php echo $product->post->post_title; ?> <a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a></h1>
  <div><?php echo apply_filters('the_content',$product->post->post_content);?></div>
  <div> Price : <?php echo $product->get_price();?></div>
  <div> Available Stock : <?php echo $product->get_stock_quantity();?></div>

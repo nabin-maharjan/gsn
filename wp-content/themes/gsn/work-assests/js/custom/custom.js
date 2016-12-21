@@ -16,8 +16,9 @@ jQuery('#logoutBtn').on('click',function(e){
 jQuery(document).ready(function(e) {
     var mediaUploader;
 
-  jQuery('#upload-button').click(function(e) {
+  jQuery('.upload-image-button').click(function(e) {
     e.preventDefault();
+	var trigger_btn=jQuery(this);
     // Extend the wp.media object
     mediaUploader = wp.media.frames.file_frame = wp.media({
       title: 'Choose Image',
@@ -28,8 +29,8 @@ jQuery(document).ready(function(e) {
     // When a file is selected, grab the URL and set it as the text field's value
     mediaUploader.on('select', function() {
       attachment = mediaUploader.state().get('selection').first().toJSON();
-      jQuery('#image_id').val(attachment.id);
-  	  jQuery('#image_src').attr('src',attachment.url);
+      trigger_btn.parents('div.upload_cntr').find('.image_id').val(attachment.id);
+  	  trigger_btn.parent('div.upload_cntr').find('.image_src').attr('src',attachment.url);
     });
     // Open the uploader dialog
     mediaUploader.open();
@@ -37,8 +38,9 @@ jQuery(document).ready(function(e) {
   
   
   
-  jQuery('#upload-button-multiple').click(function(e) {
+  jQuery('.upload-button-multiple').click(function(e) {
     e.preventDefault();
+	var trigger_btn=jQuery(this);
     // Extend the wp.media object
     mediaUploader = wp.media.frames.file_frame = wp.media({
       title: 'Choose Image',
@@ -51,7 +53,7 @@ jQuery(document).ready(function(e) {
       selection = mediaUploader.state().get('selection');
 	  var ids=[];
 	  if(jQuery('#image_ids').length){
-		  var galleries_id=jQuery('#image_ids').val();
+		  var galleries_id=trigger_btn.parents('div.upload_cntr').find('#image_ids').val();
 	      ids=galleries_id.split(',');
 	  }
 	  
@@ -66,8 +68,8 @@ jQuery(document).ready(function(e) {
 			}
 		
 		});
-		jQuery('.gallery_image_cntr').append(image_html);
-		jQuery('#image_ids').val(ids.join());
+		trigger_btn.parents('div.upload_cntr').find('.gallery_image_cntr').append(image_html);
+		trigger_btn.parents('div.upload_cntr').find('#image_ids').val(ids.join());
     });
     // Open the uploader dialog
     mediaUploader.open();
