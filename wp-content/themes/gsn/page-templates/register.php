@@ -52,8 +52,9 @@
         <!-- Register Form -->
         <div id="register" class="tab-pane tab-content__register" role="tabpanel">
           <form name="register_form" id="register_form">
+		  	<div class="row">
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="firstName" class="form-label">First Name</label>
               <div class="form-input">
                 <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name">
@@ -61,7 +62,7 @@
             </div>
             <!-- Row end -->
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="lastName" class="form-label">Last Name</label>
               <div class="form-input">
                 <input type="text" class="form-control"  name="lastName"  id="lastName"  placeholder="Enter your last name">
@@ -69,7 +70,7 @@
             </div>
             <!-- Row end -->
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-12">
               <label for="emailAddress" class="form-label">Email Address</label>
               <div class="form-input">
                 <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
@@ -78,7 +79,7 @@
             <!-- Row end -->
             
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="password" class="form-label">Password</label>
               <div class="form-input">
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
@@ -87,7 +88,7 @@
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="cpassword" class="form-label">Confirm Password</label>
               <div class="form-input">
                 <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
@@ -96,16 +97,25 @@
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="mobileNumber" class="form-label">Mobile Number</label>
               <div class="form-input">
                 <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
               </div>
             </div>
             <!-- Row end -->
+			
+			<!-- Row start -->
+            <div class="form-group col-sm-6">
+              <label for="landlineNumber" class="form-label">Mobile Number</label>
+              <div class="form-input">
+                <input type="text" class="form-control" name="landlineNumber" id="landlineNumber" placeholder="Enter your landline number">
+              </div>
+            </div>
+            <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="storeName" class="form-label">Store Name</label>
               <div class="form-input">
                 <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
@@ -114,16 +124,16 @@
             <!-- Row end -->
 
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group col-sm-6">
               <label for="panNumber" class="form-label">Pan Number</label>
               <div class="form-input">
-                <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter yout pan number">
+                <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
               </div>
             </div>
             <!-- Row end -->
-
+			</div>
             <!-- Row start -->
-            <div class="form-group">
+            <div class="form-group clearfix">
               <label for="storeLocation" class="form-label">Store Location</label>
               <div class="form-input">
                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
