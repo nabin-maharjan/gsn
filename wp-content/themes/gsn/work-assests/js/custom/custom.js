@@ -50,14 +50,23 @@ jQuery(document).ready(function(e) {
     mediaUploader.on('select', function() {
       selection = mediaUploader.state().get('selection');
 	  var ids=[];
+	  if(jQuery('#image_ids').length){
+		  var galleries_id=jQuery('#image_ids').val();
+	      ids=galleries_id.split(',');
+	  }
+	  
 	  var image_html="";
 	  selection.map( function( attachment ) {
-		var attachment1 = attachment.toJSON();
-		console.log(attachment1);
-		 ids.push(attachment1.id);
-		 image_html+="<img src='"+attachment1.url+"'>";
+			var attachment1 = attachment.toJSON();			
+			// Find and remove item from an array
+			var i = ids.indexOf(String(attachment1.id));
+			if(i ===-1) {
+				 ids.push(attachment1.id);
+				 image_html+="<span class=\"attachment-span\"><img src='"+attachment1.url+"'><i class=\"remove_attachment_gallery\" data-pic-id='"+attachment1.id+"' >remove</i></span>";
+			}
+		
 		});
-		jQuery('.gallery_image_cntr').html(image_html);
+		jQuery('.gallery_image_cntr').append(image_html);
 		jQuery('#image_ids').val(ids.join());
     });
     // Open the uploader dialog

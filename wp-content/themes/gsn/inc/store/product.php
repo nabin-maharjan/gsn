@@ -91,9 +91,8 @@ class GsnProduct{
 				$v = new Valitron\Validator($datas);
 				$v->rule('required', array('name','description','price','stock','image_id'));
 				$v->rule('numeric',array('price','stock'));
+				$v->rule('array',array('attribute_name','attribute_value'));
 				if($v->validate()) {
-				
-					//string(82) "name=product1&category=-1&description=tst&price=1&stock=1&image_id=20&image_ids=22"
 					global $store, $wpdb;
 					$post_id = wp_insert_post( array(
 						'post_author' => $store->user_id,
@@ -120,7 +119,7 @@ class GsnProduct{
 					update_post_meta( $post_id, 'total_sales', '0' );
 					update_post_meta( $post_id, '_downloadable', 'no' );
 					update_post_meta( $post_id, '_virtual', 'yes' );
-					update_post_meta( $post_id, '_regular_price', '' );
+					update_post_meta( $post_id, '_regular_price', $datas['price']  );
 					update_post_meta( $post_id, '_sale_price', $datas['price'] );
 					update_post_meta( $post_id, '_purchase_note', '' );
 					update_post_meta( $post_id, '_featured', 'no' );
@@ -138,6 +137,26 @@ class GsnProduct{
 					update_post_meta( $post_id, '_backorders', 'no' );
 					update_post_meta( $post_id, '_stock',  $datas['stock'] );
 					
+					/* insert custom attributes */
+					$thedata=array();
+					$attribute_name=$datas['attribute_name'];
+					$attribute_value=$datas['attribute_value'];
+					$loop_count=count($attribute_name);
+					for($i=0; $i<$loop_count; $i++){
+						$attribute_slug="pa_".str_replace(" ","_",trim($attribute_name[$i]));
+						$term_taxonomy_ids = wp_set_object_terms($post_id,$attribute_value, $attribute_slug, true );
+						
+						$thedata[$attribute_slug]=array( 
+								   'name'=>$attribute_slug, 
+								   'value'=>$attribute_value[$i],
+								   'is_visible' => '1',
+								   'is_variation' => '1',
+								   'is_taxonomy' => '1'
+						);
+					}
+					update_post_meta($post_id,'_product_attributes',$thedata);// update attributes
+					
+					
 					
 					/* insert to stock in table */
 					$stock_in_args=array(
@@ -147,6 +166,8 @@ class GsnProduct{
 						'transaction_date'=> date('Y-m-d H:i:s')
 					);
 					$insert_stock = $wpdb->insert($wpdb->stock_in, $stock_in_args);
+					
+					
 					
 					
 					

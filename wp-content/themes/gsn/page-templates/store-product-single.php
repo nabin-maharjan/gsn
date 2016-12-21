@@ -12,10 +12,42 @@
  $stock_in=$prodClass->stock_in_list($product->id);
  $stock_out=$prodClass->stock_out_list($product->id);
  $available_stock=$product->get_stock_quantity();
+ $attributes=get_post_meta($product->id,"_product_attributes",true);
  
  //echo "<pre>";
 // var_dump(get_post_meta($product->id));
  ?>
+ <div><a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a></div>
+ 
+ 
+ <section>
+ <h1><?php echo $product->post->post_title; ?></h1>
+ <div><?php echo apply_filters('the_content',$product->post->post_content);?></div>
+ <div> Price : <?php echo $product->get_price();?></div>
+ <div> Available Stock : <?php echo $product->get_stock_quantity();?></div>
+ <div> Total Sales : <?php echo get_post_meta($product->post->ID,'total_sales',true);?></div>
+ <div>
+ 	<?php
+	 if(has_post_thumbnail($product->post->ID)){
+		echo get_the_post_thumbnail( $product->post->ID, 'thumbnail' );
+	}?>
+
+ </div>
+
+ </section>
+ 
+ <section>
+ <h2>Specification</h2>
+ <?php foreach($attributes as $attribute){
+	 $att_name=explode('_',$attribute['name']);
+	 array_shift($att_name);
+	 $att_name=ucfirst(trim(implode(" ",$att_name)));
+	 ?>
+	 <div><?php echo $att_name; ?>: <?php echo $attribute['value']; ?></div>
+ <?php }?>
+ </section>
+ 
+ 
  <section>
   <h3>Add Stock</h3>
    <div class="container">
@@ -54,23 +86,7 @@
  
  </section>
  
- 
- 
- <section>
- <h1><?php echo $product->post->post_title; ?></h1>
- <div><?php echo apply_filters('the_content',$product->post->post_content);?></div>
- <div> Price : <?php echo $product->get_price();?></div>
- <div> Available Stock : <?php echo $product->get_stock_quantity();?></div>
- <div> Total Sales : <?php echo get_post_meta($product->post->ID,'total_sales',true);?></div>
- <div>
- 	<?php
-	 if(has_post_thumbnail($product->post->ID)){
-		echo get_the_post_thumbnail( $product->post->ID, 'thumbnail' );
-	}?>
 
- </div>
- </section>
- 
  <section>
  	<p>Image gallery</p>
    <?php  foreach( $attachment_ids as $attachment_id ) 
