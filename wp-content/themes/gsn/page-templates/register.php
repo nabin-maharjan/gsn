@@ -105,14 +105,6 @@
             </div>
             <!-- Row end -->
 			
-			<!-- Row start -->
-            <div class="form-group col-sm-6">
-              <label for="landlineNumber" class="form-label">Mobile Number</label>
-              <div class="form-input">
-                <input type="text" class="form-control" name="landlineNumber" id="landlineNumber" placeholder="Enter your landline number">
-              </div>
-            </div>
-            <!-- Row end -->
 
             <!-- Row start -->
             <div class="form-group col-sm-6">
@@ -131,19 +123,47 @@
               </div>
             </div>
             <!-- Row end -->
+			<!-- Row start -->
+			<div class="bd-example bd-example-padded-bottom col-sm-6">
+			<label for="panNumber" class="form-label">Set Your Store Location</label>
+				<button type="button" class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
+			</div>
+			<!-- Row end -->
 			</div>
             <!-- Row start -->
-            <div class="form-group clearfix">
-              <label for="storeLocation" class="form-label">Store Location</label>
-              <div class="form-input">
-               <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-               <div id="map" style="width:100%;height:500px"></div>
-                 Selected Location :<span id="selected_location_label"></span>
-                <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
-                <input type="hidden" class="form-control" name="latitute" id="latitute">
-                <input type="hidden" class="form-control" name="lognitute" id="lognitute">                  
-              </div>
-            </div>
+			
+			<div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="gridModalLabel">Find Your Store Location</h4>
+						</div>
+						<div class="modal-body">
+						<div class="form-group clearfix">
+						  
+						  <div class="form-input">
+						   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+						   <div id="map" style="width:100%;height:500px"></div>
+							 Selected Location :<span id="selected_location_label"></span>
+							<input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
+							<input type="hidden" class="form-control" name="latitute" id="latitute">
+							<input type="hidden" class="form-control" name="lognitute" id="lognitute">                  
+						  </div>
+						</div>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+            
             <!-- Row end -->
             <button type="submit" class="btn btn-submit">Register</button>
           </form>
