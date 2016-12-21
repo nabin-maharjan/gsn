@@ -126,7 +126,7 @@
 			<!-- Row start -->
 			<div class="bd-example bd-example-padded-bottom col-sm-6">
 			<label for="panNumber" class="form-label">Set Your Store Location</label>
-				<button type="button" class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
+				<button type="button" class="btn btn-primary col-sm-12 brick_red" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
 			</div>
 			<!-- Row end -->
 			</div>
