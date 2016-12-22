@@ -119,6 +119,10 @@ class Custom_Post_Type
 	public function add_post_type_support($supports ){
 		 add_post_type_support($this->post_type_name , $supports );
 	}
+	
+	public function remove_post_type_support($supports ){
+		 remove_post_type_support($this->post_type_name,$supports);
+	}
      
 	//////////////////////////////////////////////////////////////////////////////////////
     ////////////////// Method to attach the taxonomy to the post type /////////////////////

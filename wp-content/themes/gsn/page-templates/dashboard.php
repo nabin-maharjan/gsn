@@ -11,30 +11,28 @@
 //var_dump(current_user_can( 'upload_files' ) );die;
 /* insert custom attributes */
 ?>
-
 <section>
 <?php
-	global $gsn_settings;
-	$gsn_themes=$gsn_settings->available_theme();
+	global $gsnSettingsClass;
+	$gsn_themes=$gsnSettingsClass->available_theme();
+	$gsn_settings=$gsnSettingsClass->get();
+	
+	
 ?>
 	<h3>Settings</h3>
     <div class="container">
-   <form name="category_create_form" id="category_create_form">
-   
+   <form name="store_setting_form" id="store_setting_form">
    <!-- Row start -->
     <div class="form-group row">
       <label for="upload-button" class="col-sm-2 col-form-label col-form-label-sm">Logo</label>
       <div class="col-sm-10">
           <div class="upload_cntr">
           <?php
-             if(has_post_thumbnail($product->id)){
-                 $post_thumbnail_id = get_post_thumbnail_id( $product->id );
-                $post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );
+             if($gsn_settings->logo!=NULL){
+                $post_thumnail_url=wp_get_attachment_url($gsn_settings->logo, 'thumbnail' );
             }?>
-          
-            <input id="logo_image_id" class="image_id" type="hidden" name="logo_image_id" value="<?php echo (!empty($post_thumbnail_id))?$post_thumbnail_id:"";?>" />
+            <input id="logo" class="image_id" type="hidden" name="logo" value="<?php echo (!empty($gsn_settings->logo))?$gsn_settings->logo:"";?>" />
             <img class="image_src" width="150" src="<?php echo (!empty($post_thumnail_url))?$post_thumnail_url:"";?>">
-             
              <input type="button" class="btn btn-info upload-image-button" value="Upload Image" />
              </div>
           </div>
@@ -43,26 +41,38 @@
    
     <!-- Row start -->
     <div class="form-group row">
-      <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+      <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Themes</label>
       <div class="col-sm-10">
-      <?php foreach($gsn_themes as $gsn_theme){
+      <?php 
+	  
+	   $selected_theme_id=($gsn_settings->selected_theme!=NULL)?$gsn_settings->selected_theme:"";
+	  foreach($gsn_themes as $gsn_theme){
 		  $theme_image=get_the_post_thumbnail_url($gsn_theme->ID);
+		  $default_theme=get_post_meta($gsn_theme->ID,'default_theme',true);// get default theme  check
+		  
+		  /* theme checked proccess */
+		  $theme_checked="";
+		  if(!empty($selected_theme_id) && $selected_theme_id==$gsn_theme->ID){
+			  $theme_checked="checked";
+		  }else if(empty($selected_theme_id) && $default_theme=="yes" ){
+			  $theme_checked="checked";
+			  
+		  }
 		?>
-      	<label class="checkbox-inline"><input type="radio" name="gsn_theme" value=""><img src="<?php echo $theme_image; ?>" alt="<?php echo $gsn_theme->post_title;?>" width="150"></label>
+      	<label class="checkbox-inline"><input type="radio" name="selected_theme" value="<?php echo $gsn_theme->ID;?>" <?php echo $theme_checked ?>><img src="<?php echo $theme_image; ?>" alt="<?php echo $gsn_theme->post_title;?>" width="150"></label>
       <?php } ?>
       </div>
     </div>
     <!-- Row end -->
     
-    
+    <?php if($gsn_settings->id!=NULL){?>
+    	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
+    <?php }?>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   </div>
 </section>
 
-
-
- 
  
  <section>
  <?php
@@ -327,6 +337,46 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
 
  <script> 
  
+  /* Store Setting jQuery validation Procress */
+jQuery("#store_setting_form").validate({
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+		jQuery.ajax({
+         type : "post",
+         dataType : "json",
+         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
+         data : {action: "gsn_add_store_setting", formdata : formdata},
+         success: function(response) {
+            if(response.status == "success") {
+             //  window.location.href=response.redirectUrl;
+			 jQuery(form)[0].reset();
+			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
+			 
+			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
+			   return false;
+            }else {
+				// validation error occurs
+				if(response.code=="406"){
+					var data= jQuery.parseJSON(response.msg);		
+					
+					jQuery.each(data,function(index,value){
+						 if(jQuery('#'+index+'-error').length){
+							 jQuery('#'+index+'-error').html();
+						 }else{
+							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
+							 jQuery(error_html).insertAfter('#'+index);
+						 }
+					});
+				}else{
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore("#login_form");
+					
+				}
+            }
+         }
+      })  
+  }
+	
+});
  
  jQuery(document).on('click','.remove_attachment_gallery',function(){
 	 var galleries_id=jQuery('#image_ids').val();
