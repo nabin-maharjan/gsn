@@ -1,7 +1,7 @@
 // JavaScript Document
 $('#gridSystemModal').on('shown.bs.modal', function() {
     myMap();
-})
+});
 
 function myMap() {	
   var storeLocation=document.getElementById("storeFullAddress");

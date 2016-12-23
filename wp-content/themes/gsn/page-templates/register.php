@@ -39,7 +39,7 @@
             <!-- Row end -->            
             <!-- Row start -->
             <div class="form-group">
-              <label for="login_password" class="form-label">Password</label>
+              <label for="login_password" class="form-label" type="password">Password</label>
               <div class="form-input">
                 <input type="text" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
               </div>

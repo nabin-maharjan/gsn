@@ -1,9 +1,13 @@
-p {
-  color: $red_bg;
-}
 a, a:hover, a:focus{
+  color: inherit;
   outline: none;
   text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+li {
+  display: inline-block;
 }
 .page-title{
   font-weight: bolder;
@@ -42,3 +46,13 @@ label.error{
   margin-top: 3px;
 }
 .btn{border-radius: 0; border:none;}
+
+.p15{
+  padding: 0 15px;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
