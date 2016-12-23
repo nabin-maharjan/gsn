@@ -1,26 +1,43 @@
 .header {
 
   &__top {
+    background: $black;
+    color: $white;
+    font-size: 14px;
     height: 35px;
-    line-height: 35px;
-    background: $dark_gray;
-    color: #fff;
+    line-height: 35px;    
   }
+
+  &__bottom {
+    height: 100px;
+    line-height: 100px;
+  }
+
+  &__logo {
+    text-transform: uppercase;    
+
+    h1{
+      line-height: 100px;
+      font-weight: bolder;
+    }
+  }
+  // /__logo
 }
 
-.top{
-  color: #fff;
+// top bar
+.top {
+  color: $white;
   text-transform: uppercase;
   
   a {
     &:hover {
-      color: $light_gray;
+      color: $brick_red;
     }
   }
 
   ul {
     li {
-      margin-right: 10px;
+      margin-right: 15px;
 
       .fa {
         margin-right: 5px;
@@ -33,6 +50,99 @@
   }
 
   &__right-icons {
-
+    ul {
+      li {
+        margin-right: 0;
+        margin-left: 15px;
+      }
+    }
   }
 }
+// /.top bar
+
+// navigation
+.nav {
+  font-size: 0;
+
+  li{  
+    font-size: 16px;    
+    position: relative;
+    cursor: pointer;
+
+    &.active, &:hover > a {
+      color: $brick_red;
+    }
+
+  }
+
+  a{
+    display: block;
+    font-weight: bold;
+    line-height: 100px;
+    padding: 0 25px;
+    text-transform: uppercase;
+    transition: all 0.5s ease;    
+  }  
+}
+.dropdown{
+  transition: all 0.3s ease;
+  
+  &__link {
+    position: relative;
+
+    &::after{
+      content: '\f0d7';
+      font-family: FontAwesome;
+    }
+  }
+
+  &__menu {    
+    background: $black;
+    color: $white;    
+    left: 0;    
+    min-width: 100%;
+    opacity: 0;
+    padding: 10px 0;
+    position: absolute;
+    top: 100%;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+    visibility: hidden;
+    white-space: nowrap;
+
+    li {
+      display: block;
+      line-height: 1;      
+
+      a {
+        display: block;
+        line-height: 1;
+        padding: 10px 25px;
+
+        &.dropdown__link::after{
+          content: '\f0da';
+          float: right;
+          margin-left: 5px;
+        }
+      }  
+
+      .dropdown__menu {
+        left: 100%;
+        top: 0;
+      } 
+
+      &:hover > .dropdown__menu{
+        opacity: 1;        
+        transform: translateY(0);
+        visibility: visible;        
+      }
+    }
+  }
+  
+  &:hover > &__menu {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+// /.navigation
