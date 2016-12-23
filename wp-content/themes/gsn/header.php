@@ -11,13 +11,14 @@ $store->check_access_store();
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <script>var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";</script>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <header>
 <?php if($store->id!=NULL){?>  
-  <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
+  <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout<i class="fa fa-sign-out" aria-hidden="true"></i></button>
 <?php } ?>
 
 

@@ -2,10 +2,6 @@
 $('#gridSystemModal').on('shown.bs.modal', function() {
     myMap();
 });
-
-
-
-
 function myMap() {	
   var storeLocation=document.getElementById("storeFullAddress");
   var latittude_cntr=document.getElementById("latitute");
