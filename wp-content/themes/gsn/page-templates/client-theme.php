@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
  * Template Name: Client Theme
