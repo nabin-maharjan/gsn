@@ -17,15 +17,15 @@
  //echo "<pre>";
 // var_dump(get_post_meta($product->id));
  ?>
-<section>
-
-	
-
-</section>
- 
  
  <section>
- <h1><?php echo $product->post->post_title; ?> <a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a></h1>
+ <h1><?php echo $product->post->post_title; ?> <a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a> 
+ <?php if($product->is_featured()){?>
+ <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
+ <?php }else{ ?>
+ <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
+ <?php } ?>
+ </h1>
  <div><?php echo apply_filters('the_content',$product->post->post_content);?></div>
  <div> Price : <?php echo $product->get_price();?></div>
  <div> Available Stock : <?php echo $product->get_stock_quantity();?></div>
@@ -37,8 +37,56 @@
 	}?>
 
  </div>
-
  </section>
+ 
+ 
+ <section>
+ <h3>Sales Product</h3>
+ 
+ <form name="set_sale_product_form" id="set_sale_product_form">
+  <!-- Row start -->
+    <div class="form-group row">
+      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Price:</label>
+      <div class="col-sm-10"><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
+    </div>
+    <!-- Row end -->
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Sales Price:</label>
+      <div class="col-sm-10">
+      <?php echo get_woocommerce_currency_symbol();?> 
+        <input type="text" class="form-control form-control-sm" name="sale_price" id="sale_price" placeholder="Sales Price">
+      </div>
+    </div>
+    <!-- Row end -->
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start from:</label>
+      <div class="col-sm-10">
+      <?php echo get_woocommerce_currency_symbol();?> 
+        <input type="text" class="form-control form-control-sm" name="sale_from" id="sale_from" placeholder="Sales From">
+      </div>
+    </div>
+    <!-- Row end -->
+    
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales End On:</label>
+      <div class="col-sm-10">
+      <?php echo get_woocommerce_currency_symbol();?> 
+        <input type="text" class="form-control form-control-sm" name="sale_end_on" id="sale_end_on" placeholder="Sales From">
+      </div>
+    </div>
+    <!-- Row end -->
+    <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+ 
+ </section>
+ 
+ 
+ 
+ 
  
  <section>
  <h2>Specification</h2>
@@ -129,6 +177,29 @@
  <?php get_footer();?>
  <script>
  /* Add Stock Process */
+jQuery("#set_sale_product_form").validate({
+	ignore: ['product_id'],
+	rules: {
+      product_id: "required",
+	  qty :{
+		  required:true,
+		  digits : true,
+		  min :1
+	  }
+    },
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+	   var data= {action: "gsn_set_sale_product_price", formdata : formdata};
+	  var response=ajax_call_post(data,'#set_sale_product_form','',function(response){
+		  // window.location.href=response.redirectUrl;
+			  location.reload();
+			   return false;
+	 });
+  }
+	
+});
+
+ /* Add Stock Process */
 jQuery("#stock_add_form").validate({
 	ignore: ['product_id'],
 	rules: {
@@ -141,41 +212,19 @@ jQuery("#stock_add_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-		jQuery.ajax({
-         type : "post",
-         dataType : "json",
-         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "gsn_add_stock", formdata : formdata},
-         success: function(response) {
-            if(response.status == "success") {
-              // window.location.href=response.redirectUrl;
+	   var data= {action: "gsn_add_stock", formdata : formdata};
+	  var response=ajax_call_post(data,'#stock_out_form','',function(response){
+		  // window.location.href=response.redirectUrl;
 			  location.reload();
 			   return false;
-            }else {
-				// validation error occurs
-				if(response.code=="406"){
-					var data= jQuery.parseJSON(response.msg);		
-					
-					jQuery.each(data,function(index,value){
-						 if(jQuery('#'+index+'-error').length){
-							 jQuery('#'+index+'-error').html();
-						 }else{
-							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
-							 jQuery(error_html).insertAfter('#'+index);
-						 }
-					});
-				}else{
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore("#login_form");
-					
-				}
-            }
-         }
-      })  
+	 });
   }
 	
 });
 
- 
+
+
+
  /* Add Stock Process */
 jQuery("#stock_out_form").validate({
 	ignore: ['product_id'],
@@ -189,36 +238,12 @@ jQuery("#stock_out_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-		jQuery.ajax({
-         type : "post",
-         dataType : "json",
-         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "gsn_out_stock", formdata : formdata},
-         success: function(response) {
-            if(response.status == "success") {
-              // window.location.href=response.redirectUrl;
+	  var data= {action: "gsn_out_stock", formdata : formdata};
+	  var response=ajax_call_post(data,'#stock_out_form','',function(response){
+		  // window.location.href=response.redirectUrl;
 			  location.reload();
 			   return false;
-            }else {
-				// validation error occurs
-				if(response.code=="406"){
-					var data= jQuery.parseJSON(response.msg);		
-					
-					jQuery.each(data,function(index,value){
-						 if(jQuery('#'+index+'-error').length){
-							 jQuery('#'+index+'-error').html();
-						 }else{
-							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
-							 jQuery(error_html).insertAfter('#'+index);
-						 }
-					});
-				}else{
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore("#login_form");
-					
-				}
-            }
-         }
-      })  
+	 });
   }
 	
 });

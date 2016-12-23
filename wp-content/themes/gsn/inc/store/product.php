@@ -63,8 +63,6 @@ class GsnProduct{
 			//add the shortcut so you can use $wpdb->stats
 			$wpdb->tables[] = str_replace($wpdb->prefix, '', $tablename); 
 		}
-		
-		
 			// add ajax function for add product process
 			add_action( 'wp_ajax_gsn_add_product', array($this,'add') );
 			add_action( 'wp_ajax_nopriv_gsn_add_product', array($this,'add') );
@@ -74,10 +72,15 @@ class GsnProduct{
 			// add ajax function for out product stock process
 			add_action( 'wp_ajax_gsn_out_stock', array($this,'out_stock') );
 			add_action( 'wp_ajax_nopriv_gsn_out_stock', array($this,'out_stock') );
-			
-			
-			
-			
+			//add ajax function for make product feature
+			add_action( 'wp_ajax_gsn_make_product_feature', array($this,'make_feature') );
+			add_action( 'wp_ajax_nopriv_gsn_make_product_feature', array($this,'make_feature') );
+			//add ajax function for make product feature
+			add_action( 'wp_ajax_gsn_remove_product_feature', array($this,'remove_feature') );
+			add_action( 'wp_ajax_nopriv_gsn_remove_product_feature', array($this,'remove_feature') );
+			//add ajax function for make product feature
+			add_action( 'wp_ajax_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
+			add_action( 'wp_ajax_nopriv_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			
 		}
 	/*
@@ -133,13 +136,13 @@ class GsnProduct{
 					update_post_meta( $post_id, '_downloadable', 'no' );
 					update_post_meta( $post_id, '_virtual', 'yes' );
 					update_post_meta( $post_id, '_regular_price', $datas['price']  );
-					update_post_meta( $post_id, '_sale_price', $datas['price'] );
+					update_post_meta( $post_id, '_sale_price','');
 					update_post_meta( $post_id, '_purchase_note', '' );
 					update_post_meta( $post_id, '_featured', 'no' );
-					update_post_meta( $post_id, '_weight', '' );
+					/*update_post_meta( $post_id, '_weight', '' );
 					update_post_meta( $post_id, '_length', '' );
 					update_post_meta( $post_id, '_width', '' );
-					update_post_meta( $post_id, '_height', '' );
+					update_post_meta( $post_id, '_height', '' );*/
 					update_post_meta( $post_id, '_sku', '' );
 					update_post_meta( $post_id, '_product_attributes', array() );
 					update_post_meta( $post_id, '_sale_price_dates_from', '' );
@@ -196,6 +199,110 @@ class GsnProduct{
 			}
 			echo json_encode($response);die();
 	}
+	
+	
+	
+	
+	/*
+	* function to make product Feature
+	*/
+	public function set_sale_product_price(){
+		try{
+			if(!empty($_POST['formdata'])){
+				parse_str($_POST['formdata'], $datas);
+				$v = new Valitron\Validator($datas);
+				$v->rule('required', 'product_id');
+				if($v->validate()) {
+					var_dump($datas); die;
+					global $wpdb;
+					update_post_meta($_POST['product_id'],'_featured','yes');
+					
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="weldone !!!!";
+					//$response['redirectUrl']=site_url("/dashboard/");
+
+				} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+					    throw new Exception($err_msg,'406');
+					}
+			}
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	}
+	
+	/*
+	* function to make product Feature
+	*/
+	public function make_feature(){
+		try{
+			if(!empty($_POST['product_id'])){
+				$v = new Valitron\Validator($_POST);
+				$v->rule('required', 'product_id');
+				if($v->validate()) {
+					global $wpdb;
+					update_post_meta($_POST['product_id'],'_featured','yes');
+					
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="weldone !!!!";
+					//$response['redirectUrl']=site_url("/dashboard/");
+
+				} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+					    throw new Exception($err_msg,'406');
+					}
+			}
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	}
+	
+	/*
+	* function to make product Feature
+	*/
+	public function remove_feature(){
+		try{
+			if(!empty($_POST['product_id'])){
+				$v = new Valitron\Validator($_POST);
+				$v->rule('required', 'product_id');
+				if($v->validate()) {
+					global $wpdb;
+					update_post_meta($_POST['product_id'],'_featured','no');
+					
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="weldone !!!!";
+					//$response['redirectUrl']=site_url("/dashboard/");
+
+				} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+					    throw new Exception($err_msg,'406');
+					}
+			}
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	}
+	
+	
+	
 	
 	/*
 	* function for add stock

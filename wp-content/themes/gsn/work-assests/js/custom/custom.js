@@ -1,16 +1,70 @@
-jQuery('#logoutBtn').on('click',function(e){
-	jQuery.ajax({
+var ajax_call_post= function (data,error_wrap_container,error_load_position,callback){
+	//https://www.youtube.com/watch?v=D65_a5Xz8jw&index=11&list=LLW5hrUUw4tgM65epULHXoGA
+	var xhr=jQuery.ajax({
          type : "post",
          dataType : "json",
          url :ajaxUrl,
-         data : {action: "gsn_store_logout"},
+         data :data,
          success: function(response) {
             if(response.status == "success") {
-              window.location.href=response.redirectUrl;
-			   return false;
+               callback(response);
+            }else {
+				// validation error occurs
+				if(response.code=="406"){
+					var data= jQuery.parseJSON(response.msg);		
+					
+					jQuery.each(data,function(index,value){
+						 if(jQuery('#'+index+'-error').length){
+							 jQuery('#'+index+'-error').html();
+						 }else{
+							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
+							 jQuery(error_html).insertAfter('#'+index);
+						 }
+					});
+				}else{
+					if(error_load_position=="after"){
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter(error_wrap_container);
+					}else{
+						 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(error_wrap_container);
+					}
+					
+				}
             }
          }
       });
+	 return xhr;
+};
+
+
+/* Make product Feature */
+jQuery('.make_product_feature').on('click',function(){
+	var product_id=jQuery(this).data('product_id');
+	var data = {action: "gsn_make_product_feature", product_id : product_id};
+	
+	 var response=ajax_call_post(data,'','',function(response){
+		 console.log(response);
+	 });
+	 
+});
+
+/* Remove product Feature */
+jQuery('.remove_product_feature').on('click',function(){
+	var product_id=jQuery(this).data('product_id');
+	var data= {action: "gsn_remove_product_feature", product_id : product_id};
+	 var response=ajax_call_post(data,'','',function(response){
+		 console.log(response);
+		 
+	 });
+});
+
+jQuery('#logoutBtn').on('click',function(e){
+	var data={action: "gsn_store_logout"};
+	var response=ajax_call_post(data,'',function(response){
+		if(response.status == "success") {
+		  window.location.href=response.redirectUrl;
+		   return false;
+		}
+	});
 	
 });
 jQuery(document).ready(function(e) {

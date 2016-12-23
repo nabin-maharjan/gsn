@@ -159,11 +159,6 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-            
             <!-- Row end -->
             <button type="submit" class="btn btn-submit">Register</button>
           </form>
@@ -178,7 +173,7 @@
 <!-- LANDING FORM End -->
 
 <?php get_footer(); ?>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places"></script>
 <script>
 /* Login jQuery validation Procress */
 jQuery("#login_form").validate({
@@ -198,35 +193,12 @@ jQuery("#login_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-		jQuery.ajax({
-         type : "post",
-         dataType : "json",
-         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "store_login", formdata : formdata},
-         success: function(response) {
-            if(response.status == "success") {
-               window.location.href=response.redirectUrl;
-			   return false;
-            }else {
-				// validation error occurs
-				if(response.code=="406"){
-					var data= jQuery.parseJSON(response.msg);		
-					
-					jQuery.each(data,function(index,value){
-						 if(jQuery('#'+index+'-error').length){
-							 jQuery('#'+index+'-error').html();
-						 }else{
-							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
-							 jQuery(error_html).insertAfter('#'+index);
-						 }
-					});
-				}else{
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore("#login_form");
-					
-				}
-            }
-         }
-      }); 
+	  var data= {action: "store_login", formdata : formdata};
+	 var response=ajax_call_post(data,'#login_form','',function(response){
+		  window.location.href=response.redirectUrl;
+		return false;
+	 });
+	  
   }
 	
 });
@@ -294,68 +266,20 @@ jQuery("#register_form").validate({
 	
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-		jQuery.ajax({
-         type : "post",
-         dataType : "json",
-         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "store_registration", formdata : formdata},
-         success: function(response) {
-            if(response.status == "success") {
-               window.location.href=response.redirectUrl;
-			   return false;
-			}else {
-				// validation error occurs
-				if(response.code=="406"){
-					var data= jQuery.parseJSON(response.msg);		
-					
-					jQuery.each(data,function(index,value){
-						 if(jQuery('#'+index+'-error').length){
-							 jQuery('#'+index+'-error').html();
-						 }else{
-							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
-							 jQuery(error_html).insertAfter('#'+index);
-						 }
-					});
-				}else{
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter('.btn-primary');
-					
-				}
-            }
-         }
-      }); 
+	  var data= {action: "store_registration", formdata : formdata};
+	 var response=ajax_call_post(data,'#register_form','',function(response){
+		 window.location.href=response.redirectUrl;
+		 return false;
+		 
+	 });
   }
  });
  
  function check_email_exists(email){
-	jQuery.ajax({
-         type : "post",
-         dataType : "json",
-         url :"<?php echo admin_url( 'admin-ajax.php' ); ?>",
-         data : {action: "email_is_exists", email : email},
-         success: function(response) {
-            if(response.status == "success") {
-            }
-            else {
-				// validation error occurs
-				if(response.code=="406"){
-					var data= jQuery.parseJSON(response.msg);		
-					
-					jQuery.each(data,function(index,value){
-						 if(jQuery('#'+index+'-error').length){
-							 jQuery('#'+index+'-error').html();
-						 }else{
-							 var error_html='<label id="#'+index+'-error" class="error" for="'+index+'">'+value[0]+'</label>';
-							 jQuery(error_html).insertAfter('#'+index);
-						 }
-					});
-				}else{
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter('.btn-primary');
-					
-				}
-            }
-         }
-      });
-	 
+	 var data= {action: "email_is_exists", email : email};
+	 var response=ajax_call_post(data,'.btn-primary','after',function(response){
+		 console.log(response);
+	 });	 
  }
 
  jQuery('#landing__tab a').on('click', function(e) {
