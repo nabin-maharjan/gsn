@@ -21,6 +21,7 @@ $store->check_access_store();
   <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout<i class="fa fa-sign-out" aria-hidden="true"></i></button>
 <?php } ?>
 
-
-
+<?php wp_nav_menu( array( 
+'theme_location' => 'store-header-menu',
+ ) ); ?>
 </header>

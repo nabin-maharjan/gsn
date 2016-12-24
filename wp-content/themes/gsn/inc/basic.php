@@ -45,6 +45,20 @@ function my_enqueue($hook) {
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
+/*
+* Register navigation menu
+*/
+
+function gsn_register_my_menus() {
+  register_nav_menus(
+    array(
+      'store-header-menu' => __( 'Store Header Menu' ),
+    )
+  );
+}
+add_action( 'init', 'gsn_register_my_menus' );
+
+
 /*  session */
 add_action('init', 'myStartSession', 1);
 function myStartSession() {
@@ -66,6 +80,34 @@ function gsn_rewrite_basic() {
   add_rewrite_rule('^store-product/([^/]*)/?', 'index.php?pagename=store-product&store_product_slug=$matches[1]', 'top');
 }
 add_action('init', 'gsn_rewrite_basic');
+
+
+
+
+add_filter('term_link', 'term_link_filter', 10, 3);
+function term_link_filter( $url, $term, $taxonomy ) {
+	$top_level_category=get_term_top_most_parent($term->term_id,$taxonomy);
+    return str_replace($top_level_category->slug."/","",$url );
+}
+
+
+// determine the topmost parent of a term
+function get_term_top_most_parent($term_id, $taxonomy){
+    // start from the current term
+    $parent  = get_term_by( 'id', $term_id, $taxonomy);
+    // climb up the hierarchy until we reach a term with parent = '0'
+    while ($parent->parent != '0'){
+        $term_id = $parent->parent;
+        $parent  = get_term_by( 'id', $term_id, $taxonomy);
+    }
+    return $parent;
+}
+
+
+
+
+
+
 
 
 

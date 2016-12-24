@@ -9,7 +9,39 @@ class GsnSetting{
 		// add ajax function for out product stock process
 		add_action( 'wp_ajax_gsn_add_store_setting', array($this,'add_store_setting') );
 		add_action( 'wp_ajax_nopriv_gsn_add_store_setting', array($this,'add_store_setting') );
+		/* add custom menu to store header menu */
+		add_filter( 'wp_nav_menu_items',array($this, 'gsn_custom_item_store_header_menu'), 10, 2 );
 	}
+	
+	/*
+	*Fucntion to add custom item to store header menu
+	*/
+function gsn_custom_item_store_header_menu ( $items, $args ) {
+    if ($args->theme_location == 'store-header-menu') {
+        $item= '<li>Category <ul class="children">';
+		//var_dump($storeParentCat); die;
+		global $store;
+		$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
+			$args = array(
+			'taxonomy'     => 'product_cat',
+			'depth' =>1,
+		
+		'pad_counts'   => false,
+		  'hierarchical' => true,
+		  'title_li'     => $title,
+			'hide_empty' => false,
+			'child_of' =>$storeParentCat->term_id,
+			'echo' =>false,
+		);
+		$item.=wp_list_categories($args);
+		$item.='</ul></li>';
+		
+		
+		$items=$item.$items;
+    }
+    return $items;
+}
+	
 	/*
 	*function for get store settings 
 	*/

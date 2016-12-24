@@ -16,8 +16,7 @@
 	global $gsnSettingsClass;
 	$gsn_themes=$gsnSettingsClass->available_theme();
 	$gsn_settings=$gsnSettingsClass->get();
-	
-	
+
 ?>
 	<h3>Settings</h3>
     <div class="container">
@@ -158,6 +157,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
       <div class="col-sm-10">
        <div class="upload_cntr">
       <?php
+	  $post_thumnail_url="";
 		 if(has_post_thumbnail($product->id)){
 			 $post_thumbnail_id = get_post_thumbnail_id( $product->id );
 			$post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );

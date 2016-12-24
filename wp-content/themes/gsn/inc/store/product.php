@@ -324,10 +324,9 @@ class GsnProduct{
 				$v->rule('min','qty',1);
 				if($v->validate()) {
 					global $store, $wpdb;
-					
 					$product=new WC_product($datas['product_id']);
 					$update_status=$product->increase_stock($datas['qty']);
-					
+					//var_dump($update_status); die;
 					/*$old_stock=get_post_meta($datas['product_id'],'_stock',true);
 					$new_stock=(int)$old_stock+(int);
 					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product
@@ -391,7 +390,6 @@ class GsnProduct{
 					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product*/
 					$product=new WC_product($datas['product_id']);
 					$update_status=$product->reduce_stock($datas['qty']);
-					
 					
 					if($update_status){
 						/* insert to stock in table */
