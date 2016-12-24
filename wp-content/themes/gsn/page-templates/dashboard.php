@@ -332,6 +332,59 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
    </div>
  
  </section>
+ 
+ 
+ <section>
+ <h3>Featured Product</h3>
+    <ul class="products">
+	<?php
+		$args = array(
+			'post_type' => 'product',
+			'meta_key' => '_featured',
+			'meta_value' => 'yes', 
+			'posts_per_page' => 6,
+			'author'=>$store->user_id
+			);
+		$loop = new WP_Query( $args );
+		if ( $loop->have_posts() ) {
+			while ( $loop->have_posts() ) : $loop->the_post();
+				wc_get_template_part( 'content', 'product' );
+			endwhile;
+		} else {
+			echo __( 'No products found' );
+		}
+		wp_reset_postdata();
+	?>
+</ul>
+    
+    
+    
+    
+ </section>
+ 
+ <section>
+ <h3>New Products</h3>
+ 
+ <ul class="products">
+	<?php
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => 12,
+			'author'=>$store->user_id
+			);
+		$loop = new WP_Query( $args );
+		if ( $loop->have_posts() ) {
+			while ( $loop->have_posts() ) : $loop->the_post();
+				wc_get_template_part( 'content', 'product' );
+			endwhile;
+		} else {
+			echo __( 'No products found' );
+		}
+		wp_reset_postdata();
+	?>
+</ul><!--/.products-->
+ 
+ </section>
 
  <?php get_footer(); ?>
 

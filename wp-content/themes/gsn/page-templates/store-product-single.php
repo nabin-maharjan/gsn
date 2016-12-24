@@ -14,8 +14,8 @@
  $available_stock=$product->get_stock_quantity();
  $attributes=get_post_meta($product->id,"_product_attributes",true);
  
- //echo "<pre>";
-// var_dump(get_post_meta($product->id));
+//echo "<pre>";
+//var_dump(get_post_meta($product->id));
  ?>
  
  <section>
@@ -55,27 +55,24 @@
       <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Sales Price:</label>
       <div class="col-sm-10">
       <?php echo get_woocommerce_currency_symbol();?> 
-        <input type="text" class="form-control form-control-sm" name="sale_price" id="sale_price" placeholder="Sales Price">
+        <input type="text" class="form-control form-control-sm" value="<?php echo $product->sale_price;?>" name="sale_price" id="sale_price" placeholder="Sales Price">
       </div>
     </div>
     <!-- Row end -->
     <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start from:</label>
-      <div class="col-sm-10">
-      <?php echo get_woocommerce_currency_symbol();?> 
-        <input type="text" class="form-control form-control-sm" name="sale_from" id="sale_from" placeholder="Sales From">
-      </div>
-    </div>
-    <!-- Row end -->
     
     <!-- Row start -->
     <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales End On:</label>
-      <div class="col-sm-10">
-      <?php echo get_woocommerce_currency_symbol();?> 
-        <input type="text" class="form-control form-control-sm" name="sale_end_on" id="sale_end_on" placeholder="Sales From">
-      </div>
+      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start:</label>
+      <div class="input-daterange input-group col-sm-8" id="datepicker">
+      <?php 
+	  $start_date=get_post_meta($product->id, '_sale_price_dates_from', true);
+	  $end_date=get_post_meta($product->id, '_sale_price_dates_to', true);
+	  ?>
+            <input type="text" class="input-sm form-control" value="<?php echo (!empty($start_date))?date('Y-m-d',$start_date):"";?>" name="sale_start" />
+            <span class="input-group-addon">to</span>
+            <input type="text" class="input-sm form-control" value="<?php echo (!empty($end_date))?date('Y-m-d',$end_date):"";?>"  name="sale_end" />
+        </div>
     </div>
     <!-- Row end -->
     <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
@@ -176,15 +173,19 @@
  </section>
  <?php get_footer();?>
  <script>
+ 
+ /* datepicker */
+ jQuery('.input-daterange').datepicker({
+	 format: "yyyy-mm-dd",
+});
  /* Add Stock Process */
 jQuery("#set_sale_product_form").validate({
 	ignore: ['product_id'],
 	rules: {
       product_id: "required",
-	  qty :{
+	  sale_price :{
 		  required:true,
 		  digits : true,
-		  min :1
 	  }
     },
   submitHandler: function(form) {
@@ -192,7 +193,7 @@ jQuery("#set_sale_product_form").validate({
 	   var data= {action: "gsn_set_sale_product_price", formdata : formdata};
 	  var response=ajax_call_post(data,'#set_sale_product_form','',function(response){
 		  // window.location.href=response.redirectUrl;
-			  location.reload();
+			 // location.reload();
 			   return false;
 	 });
   }

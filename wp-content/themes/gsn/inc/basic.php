@@ -4,6 +4,11 @@
  *link vendor css file  on top
  */
 function enquee_style_css(){
+	
+	if( is_page_template('page-templates/store-product-single.php') ){
+		wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all' );
+	}
+	
 	// Enqueue custom stylesheet//
 	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all' );
 }
@@ -18,8 +23,16 @@ function enquee_scripts(){
     wp_enqueue_script( 'jquery-validate-min', get_template_directory_uri() . '/assets/js/vendor/jquery.validate.min.js', array('jquery'), '1.0.0', false );
     wp_enqueue_script( 'tether-js', get_template_directory_uri() . '/assets/js/vendor/tether.min.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js', array('jquery'), '1.0.0', true );
+	
+if( is_page_template('page-templates/store-product-single.php') ){
+	wp_enqueue_script( 'bootstrap-datepicker-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap-datepicker.min.js', array('jquery'), '1.0.0', true );
+	
+	}
+	
 	// Enqueue custom all js//    
 	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array('jquery'), '1.0.0', true );
+	
+	
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
 

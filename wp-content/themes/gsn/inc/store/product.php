@@ -213,9 +213,15 @@ class GsnProduct{
 				$v = new Valitron\Validator($datas);
 				$v->rule('required', 'product_id');
 				if($v->validate()) {
-					var_dump($datas); die;
-					global $wpdb;
-					update_post_meta($_POST['product_id'],'_featured','yes');
+					update_post_meta($datas['product_id'],'_sale_price',$datas['sale_price']);
+					update_post_meta($datas['product_id'],'_price',$datas['sale_price']);
+					
+					if(!empty($datas['sale_start'])){
+						update_post_meta($datas['product_id'],'_sale_price_dates_from',strtotime($datas['sale_start']));
+					}
+					if(!empty($datas['sale_end'])){
+						update_post_meta($datas['product_id'],'_sale_price_dates_to',strtotime($datas['sale_end']));
+					}
 					
 					$response['status']="success";
 					$response['code']='200';
@@ -318,9 +324,15 @@ class GsnProduct{
 				$v->rule('min','qty',1);
 				if($v->validate()) {
 					global $store, $wpdb;
-					$old_stock=get_post_meta($datas['product_id'],'_stock',true);
-					$new_stock=(int)$old_stock+(int)$datas['qty'];
+					
+					$product=new WC_product($datas['product_id']);
+					$update_status=$product->increase_stock($datas['qty']);
+					
+					/*$old_stock=get_post_meta($datas['product_id'],'_stock',true);
+					$new_stock=(int)$old_stock+(int);
 					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product
+					update_post_meta($datas['product_id'],'_stock_status','instock');// update stock of 
+					*/
 					if($update_status){
 						/* insert to stock in table */
 						$stock_in_args=array(
@@ -369,14 +381,17 @@ class GsnProduct{
 				if($v->validate()) {
 					global $store, $wpdb;
 					/* update new total sales */
-					$old_sales=get_post_meta($datas['product_id'],'total_sales',true);
+					/*$old_sales=get_post_meta($datas['product_id'],'total_sales',true);
 					$new_sales=(int)$old_sales+(int)$datas['qty'];
 					$update_status=update_post_meta($datas['product_id'],'total_sales',$new_sales);// update total sales  of product
-					
+					*/
 					/* update  new stock status */
-					$old_stock=get_post_meta($datas['product_id'],'_stock',true);
+					/*$old_stock=get_post_meta($datas['product_id'],'_stock',true);
 					$new_stock=(int)$old_stock-(int)$datas['qty'];
-					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product
+					$update_status=update_post_meta($datas['product_id'],'_stock',$new_stock);// update stock of product*/
+					$product=new WC_product($datas['product_id']);
+					$update_status=$product->reduce_stock($datas['qty']);
+					
 					
 					if($update_status){
 						/* insert to stock in table */
