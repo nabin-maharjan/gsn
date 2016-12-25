@@ -10,7 +10,7 @@ class GsnSetting{
 		add_action( 'wp_ajax_gsn_add_store_setting', array($this,'add_store_setting') );
 		add_action( 'wp_ajax_nopriv_gsn_add_store_setting', array($this,'add_store_setting') );
 		/* add custom menu to store header menu */
-		add_filter( 'wp_nav_menu_items',array($this, 'gsn_custom_item_store_header_menu'), 10, 2 );
+		//add_filter( 'wp_nav_menu_items',array($this, 'gsn_custom_item_store_header_menu'), 1, 2 );
 	}
 	
 	/*
@@ -18,26 +18,28 @@ class GsnSetting{
 	*/
 function gsn_custom_item_store_header_menu ( $items, $args ) {
     if ($args->theme_location == 'store-header-menu') {
-        $item= '<li>Category <ul class="children">';
-		//var_dump($storeParentCat); die;
+		
 		global $store;
-		$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
-			$args = array(
-			'taxonomy'     => 'product_cat',
-			'depth' =>1,
-		
-		'pad_counts'   => false,
-		  'hierarchical' => true,
-		  'title_li'     => $title,
-			'hide_empty' => false,
-			'child_of' =>$storeParentCat->term_id,
-			'echo' =>false,
-		);
-		$item.=wp_list_categories($args);
-		$item.='</ul></li>';
-		
-		
-		$items=$item.$items;
+		$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+		$sub_term=get_term_children($storeParentCat->term_id, 'product_cat'); 
+		if(count($sub_term)>0){
+			$item= '<li class="menu-item menu-item-has-children">Category <ul class="sub-menu">';
+			//var_dump($storeParentCat); die;
+			/*menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-6 current_page_item menu-item-has-children dropdown menu-item-106*/
+				$args = array(
+							'taxonomy'     => 'product_cat',
+							'depth' =>0,
+							'pad_counts'   => false,
+							'hierarchical' => true,
+							'title_li'     => false,
+							'hide_empty' => false,
+							'child_of' =>$storeParentCat->term_id,
+							'echo' =>false,
+			);
+			$item.=wp_list_categories($args);
+			$item.='</ul></li>';
+			$items=$item.$items;
+		}
     }
     return $items;
 }

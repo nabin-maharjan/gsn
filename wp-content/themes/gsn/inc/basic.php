@@ -105,9 +105,78 @@ function get_term_top_most_parent($term_id, $taxonomy){
 
 
 
+function _custom_nav_menu_item( $title, $url, $order, $parent = 0 ){
+  $item = new stdClass();
+  $item->ID = 1000000 + $order + parent;
+  $item->db_id = $item->ID;
+  $item->title = $title;
+  $item->url = $url;
+  $item->menu_order = $order;
+  $item->menu_item_parent = $parent;
+  $item->type = '';
+  $item->object = '';
+  $item->object_id = '';
+  $item->classes = array();
+  $item->target = '';
+  $item->attr_title = '';
+  $item->description = '';
+  $item->xfn = '';
+  $item->status = '';
+  return $item;
+}
 
-
-
+// define the customize_nav_menu_available_items callback 
+function filter_customize_nav_menu_available_items( $items, $menu, $arg ) {
+	global $store;
+	$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+		$sub_term=get_term_children($storeParentCat->term_id, 'product_cat'); 
+		if(count($sub_term)>0){
+			$term_args = array(
+							'taxonomy'     => 'product_cat',
+							'depth' =>0,
+							'pad_counts'   => false,
+							'hierarchical' => true,
+							'title_li'     => false,
+							'hide_empty' => false,
+							'child_of' =>$storeParentCat->term_id,
+							'echo' =>false,
+			);
+			
+			$terms=get_terms($term_args);
+			$new_item_array=array();
+			$order=$storeParentCat->term_id;
+			$new_item_array[]=_custom_nav_menu_item('Categories','', $order,0);
+				foreach ( $terms as $new_item_data ) {
+				
+				$order=$new_item_data->term_id;
+				if($storeParentCat->term_id==$new_item_data->parent){
+					$order_parent=1000000 + $new_item_data->parent;
+				}else{
+				
+					$order_parent=1000000 + $new_item_data->parent;
+				}
+				
+				$term_link=get_term_link($new_item_data->term_id,'product_cat');
+				$item = _custom_nav_menu_item($new_item_data->name, $term_link,$order,$order_parent );
+				$new_item_array[] = $item;
+					//$menu_order++;
+				}
+				foreach($items as $item){
+					$new_item_array[]=$item;
+				}
+				
+			return $new_item_array;
+			
+			
+		}else{
+			
+			return $items;
+		}
+	
+	
+	};
+// add the filter 
+add_filter( 'wp_get_nav_menu_items', 'filter_customize_nav_menu_available_items', 10, 3 );
 
 
 

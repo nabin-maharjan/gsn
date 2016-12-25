@@ -1,6 +1,7 @@
 <?php
 include("vendor/autoload.php");
 include("inc/basic.php");
+include("inc/boostrap-walker.php");
 include("inc/input-fields.php");
 ////////////////////////////////////
 /*  Store Register pages */

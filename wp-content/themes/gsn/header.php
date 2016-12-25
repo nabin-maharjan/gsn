@@ -23,5 +23,6 @@ $store->check_access_store();
 
 <?php wp_nav_menu( array( 
 'theme_location' => 'store-header-menu',
+'walker'=>new wp_bootstrap_navwalker ()
  ) ); ?>
 </header>
