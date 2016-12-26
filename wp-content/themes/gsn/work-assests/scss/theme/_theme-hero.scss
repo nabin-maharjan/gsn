@@ -1,0 +1,22 @@
+.hero-part {  
+  height: 550px;
+
+  .half-height {
+    height: 50%;
+    padding-bottom: 10px;
+
+    &:last-child {
+      padding-bottom: 0;
+      padding-top: 10px;
+    }
+  }
+
+  .half-image {
+    background-color: $brick_red;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 100%;
+  }
+}
