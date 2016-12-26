@@ -130,6 +130,9 @@ jQuery(document).ready(function(e) {
   });
   
   
-  
+  $('.cart__icon a').on('click', function(e) {
+    e.preventDefault();    
+    $(this).parents('.cart-cntr').find('.cart__content').slideToggle();
+  });
   
 });

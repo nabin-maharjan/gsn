@@ -34,6 +34,7 @@ $store->check_access_store();
 
 <?php wp_nav_menu( array( 
 'theme_location' => 'store-header-menu',
+'menu_class' => 'nav navbar-nav nav__links',
 'walker'=>new wp_bootstrap_navwalker ()
  ) ); ?>
 </header>
