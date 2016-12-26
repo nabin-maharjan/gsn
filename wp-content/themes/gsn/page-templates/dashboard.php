@@ -66,6 +66,7 @@
     
     <?php if($gsn_settings->id!=NULL){?>
     	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
+         <input type="hidden" name="action" value="edit">
     <?php }?>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

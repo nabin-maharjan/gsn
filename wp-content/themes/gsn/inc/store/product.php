@@ -279,6 +279,7 @@ class GsnProduct{
 	* function to make product Feature
 	*/
 	public function remove_feature(){
+		$response= array();
 		try{
 			if(!empty($_POST['product_id'])){
 				$v = new Valitron\Validator($_POST);
@@ -454,11 +455,6 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
-	
-	
-	
-	
-	
 	public function get_all_store_product(){
 		
 		global $store;
@@ -469,7 +465,6 @@ class GsnProduct{
 				 );
 		return new WP_Query($args);
 	}
-	
 	public function get_store_product(){
 		
 		$product_slug=get_query_var('store_product_slug');
@@ -486,6 +481,8 @@ class GsnProduct{
 		 }
 		 return false;
 	}
+	
+	
 	
 	
 }
