@@ -3,10 +3,11 @@ require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
 	
 	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id;
+	private $store_table;
 	
 	public function __construct(){
 		global $wpdb;
-		$tablename=$wpdb->prefix."store";
+		$this->store_table=$wpdb->prefix."store";
 		//$wpdb->show_errors(); 
 		//check if there are any tables of that name already
 		if($wpdb->get_var("show tables like '$tablename'") !== $tablename) 
@@ -48,6 +49,11 @@ class Store{
 			/* ad ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_logout', array($this,'gsn_store_logout') );
 			add_action( 'wp_ajax_nopriv_gsn_store_logout', array($this,'gsn_store_logout') );
+			/* ad ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_profile_setting', array($this,'store_registration') );
+			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
+			
+			
 			
 			
 			
@@ -127,7 +133,7 @@ class Store{
 		//var_dump($id);
 		if($id!=0){
 			global $wpdb;
-			$query=$wpdb->prepare("select * from ".$wpdb->prefix ."store where user_id=%s",$id); // Prepare query
+			$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$id); // Prepare query
 			$storeobj = $wpdb->get_row($query );
 			if($storeobj){
 				foreach($storeobj as $key=>$value){
@@ -217,54 +223,80 @@ class Store{
 			try{
 				if(!empty($_POST['formdata'])){
 					parse_str($_POST['formdata'], $datas);
+					
+					$edit_flag=false;
+					if(!empty($datas['action']) && $datas['action']=="edit"){
+						$edit_flag=true;
+					}
 					$v = new Valitron\Validator($datas);
-					$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress'));
+					if($edit_flag){
+						$v->rule('required', array('firstName','lastName','emailAddress','mobileNumber','storeName','panNumber','storeFullAddress'));
+					}else{
+						$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress'));
+					}
 					$v->rule('email','emailAddress');
 					$v->rule('lengthMin','password',5);
 					$v->rule('numeric','mobileNumber');
 					$v->rule('lengthMin','mobileNumber',9);
 					$v->rule('lengthMax','mobileNumber',10);
-					$v->rule('equals','cpassword','password');
+					if(!$edit_flag){
+						$v->rule('equals','cpassword','password');
+					}
 					if($v->validate()) {
 						/* insert to database */
-						
 						global $wpdb;
-
-						$user_id=wp_create_user($datas['emailAddress'], $datas['password'], $datas['emailAddress'] );
-						if($user_id){
-							unset($datas['cpassword']);// remove cpassword field
-							unset($datas['password']); // remove password field
-							$datas['user_id']=$user_id;
-							$insert = $wpdb->insert($wpdb->prefix ."store", $datas);
-							
-							$user = new WP_User($user_id);
-							// Replace the current role with 'editor' role
-							$user->set_role( 'store_contributor' );
-							//set_user_role($user_id,'store_contributor');
-							if($insert){
-							/* ADD Store parent category based on store name */
-							$cid = wp_insert_term(
-								sanitize_text_field($datas['storeName']), // the term 
-									'product_cat', // the taxonomy
-									array(
-										'description'=>"Store Parent  Category ",
-										'slug' => sanitize_title($datas['storeName']),
-										'parent' =>0
-									)
-								);
+						if($edit_flag){
+							$store_id=$datas['gsn_store_id'];
+							unset($datas['action']);
+							unset($datas['gsn_store_id']);
+							$update_status=$wpdb->update($this->store_table,$datas, array('id'=>$store_id));
+							if($update_status){
+								$response['status']="success";
+								$response['code']='200';
+								$response['msg']="weldone !!!!";
+								$response['redirectUrl']=site_url("/dashboard/");
+							}else{
+								throw new Exception("Error while updating store",'400');	
 							}
 							
-							/* login user */
-							wp_set_current_user($user_id);
-    						wp_set_auth_cookie($user_id);
-							
-							$response['status']="success";
-							$response['code']='200';
-							$response['msg']="weldone !!!!";
-							$response['redirectUrl']=site_url("/dashboard/");
 						}else{
-							throw new Exception("Error while proccessing data!",'400');
+							$user_id=wp_create_user($datas['emailAddress'], $datas['password'], $datas['emailAddress'] );
+							if($user_id){
+								unset($datas['cpassword']);// remove cpassword field
+								unset($datas['password']); // remove password field
+								$datas['user_id']=$user_id;
+								$insert = $wpdb->insert($this->store_table, $datas);
+								
+								$user = new WP_User($user_id);
+								// Replace the current role with 'editor' role
+								$user->set_role( 'store_contributor' );
+								//set_user_role($user_id,'store_contributor');
+								if($insert){
+								/* ADD Store parent category based on store name */
+								$cid = wp_insert_term(
+									sanitize_text_field($datas['storeName']), // the term 
+										'product_cat', // the taxonomy
+										array(
+											'description'=>"Store Parent  Category ",
+											'slug' => sanitize_title($datas['storeName']),
+											'parent' =>0
+										)
+									);
+								}
+								
+								/* login user */
+								wp_set_current_user($user_id);
+								wp_set_auth_cookie($user_id);
+								
+								$response['status']="success";
+								$response['code']='200';
+								$response['msg']="weldone !!!!";
+								$response['redirectUrl']=site_url("/dashboard/");
+							}else{
+								throw new Exception("Error while proccessing data!",'400');
+							}
 						}
+						
 					} else {
 						// Errors
 						$err_msg=json_encode($v->errors());

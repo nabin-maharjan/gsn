@@ -7,12 +7,16 @@ function myMap() {
   var latittude_cntr=document.getElementById("latitute");
   var lognitude_cntr=document.getElementById("lognitute");
   var mapCanvas = document.getElementById("map");
-  var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
- 
+   var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
+   var zoomlevel=12;
+  if(location_Lat!==0){
+	 defaultLocation= new google.maps.LatLng(location_Lat,location_Lan);
+	 zoomlevel=16;
+  }
 
   var mapOptions = {
     center:defaultLocation, 
-    zoom: 10
+    zoom: zoomlevel
   };
 
   var map = new google.maps.Map(mapCanvas, mapOptions);

@@ -1,6 +1,8 @@
 <?php 
 global $store;
 $store->check_access_store();
+//echo "<pre>";
+//var_dump($store); die;
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -12,7 +14,16 @@ $store->check_access_store();
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<script>var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";</script>
+	<script>
+        var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
+        var location_Lat=0;
+		var location_Lan=0;
+        <?php if($store->id!=NULL){?>
+       	 location_Lat=<?php echo $store->latitute;?>;
+		 location_Lan=<?php echo $store->lognitute; ?>;
+        <?php } ?>
+    </script>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
