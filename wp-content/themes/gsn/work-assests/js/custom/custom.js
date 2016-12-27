@@ -69,8 +69,7 @@ jQuery(document).on('click','.cart-product-remove .remove-link',function(e){
 jQuery(document).click(function(event) { 
     if(!jQuery(event.target).closest('.item__cart  .cart.cart-cntr').length) {
         if(jQuery('.item__cart .cart__content').is(":visible")) {
-           // jQuery('.item__cart .cart.cart-cntr .cart__icon a').trigger('click');
-		    jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
+          jQuery('.item__cart .cart.cart-cntr .cart__icon a').trigger('click');		    
         }
     }        
 });
