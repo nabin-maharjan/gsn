@@ -1,6 +1,10 @@
 <?php 
 global $store;
+global $gsnCart;
+global $gsnSettingsClass;
+$gsnSettings=$gsnSettingsClass->get($store->user_id);
 $store->check_access_store();
+$logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -12,14 +16,18 @@ $store->check_access_store();
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<script>var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";</script>
+	<script>
+        var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
+        var location_Lat=0;
+		var location_Lan=0;
+        <?php if($store->id!=NULL){?>
+       	 location_Lat=<?php echo $store->latitute;?>;
+		 location_Lan=<?php echo $store->lognitute; ?>;
+       <?php } ?>
+    </script>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<?php 
-global $gsnCart;
-
-?>
   <header class="header gsn-header">
     <div class="header__top">
       <div class="container">
@@ -27,17 +35,17 @@ global $gsnCart;
           <div class="top top-icons clearfix p15">
             <div class="top__left-icons fl">
               <ul>
-                <li><a href="tel:014444444"><i class="fa fa-phone"></i> 014444444</a></li>
-                <li><i class="fa fa-map-marker"></i>Somwhere</li>
+                <li><a href="tel:014444444"><i class="fa fa-phone"></i> <?php echo $store->mobileNumber;?></a></li>
+                <li><i class="fa fa-map-marker"></i><?php echo $store->storeFullAddress;?></li>
               </ul>
             </div>
             <!-- /.top__left-icons -->
-            <div class="top__right-icons fr">
+            <!--div class="top__right-icons fr">
               <ul>
                 <li><a href="#"><i class="fa fa-sign-in"></i> Login</a></li>
                 <li><a href="#"><i class="fa fa-user-plus"></i> Register</a></li>
               </ul>
-            </div>
+            </div-->
             <!-- /.top__right-icons -->
           </div>
           <!-- /.top-icons -->
@@ -49,7 +57,7 @@ global $gsnCart;
       <div class="container">
         <div class="row">
           <div class="col-md-3 header__logo">
-            <h1 class="logo">Logo</h1>
+            <h1 class="logo"><img src="<?php echo $logo_img; ?>" width="150" alt="<?php echo $store->storeName;?>"></h1>
           </div>
           <!-- /.header__logo -->
           <div class="col-md-9 header__main-items">
