@@ -17,8 +17,12 @@
     text-transform: uppercase;    
 
     h1{
-      line-height: 100px;
+      // line-height: 100px;
       font-weight: bolder;
+
+      img {
+        max-width: 150px;
+      }
     }
   }
   // /__logo
