@@ -426,6 +426,28 @@ class GsnProduct{
 	}
 	
 	
+	/*
+	* Function to get feature Product
+	*/
+	
+	public function  get_feature_product($count=5){
+		
+		$meta_query   = WC()->query->get_meta_query();
+		$meta_query[] = array(
+			'key'   => '_featured',
+			'value' => 'yes'
+		);
+		$args = array(
+			'post_type'   =>  'product',
+			'stock'       =>  1,
+			'posts_per_page'   =>$count,
+			'orderby'     =>  'date',
+			'order'       =>  'DESC',
+			'meta_query'  =>  $meta_query
+		);
+		return  new WP_Query( $args );
+		
+	}
 	
 	
 	
@@ -486,4 +508,5 @@ class GsnProduct{
 	
 	
 }
-new GsnProduct();
+global $gsnProduct;
+$gsnProduct =new GsnProduct();
