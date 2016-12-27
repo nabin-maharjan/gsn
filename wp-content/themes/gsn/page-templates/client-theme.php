@@ -117,7 +117,7 @@ get_header("store");
       </div>
     </section>
     <!-- /.hero-section -->    
-    <section class="new-section">
+    <section class="sales-section">
       <div class="container">
         <div class="section-divider"></div>
         <div class="row">          
@@ -128,7 +128,40 @@ get_header("store");
               <?php
                 $args = array(
                   'post_type' => 'product',
-                  'posts_per_page' => 12,
+                  'posts_per_page' => 8,
+                  'author'=>$store->user_id
+                  );
+                $loop = new WP_Query( $args );
+                if ( $loop->have_posts() ) {
+                  while ( $loop->have_posts() ) : $loop->the_post();
+                    wc_get_template_part( 'content', 'product' );
+                  endwhile;
+                } else {
+                  echo __( 'No products found' );
+                }
+                wp_reset_postdata();
+              ?>
+            </ul>
+            <!--/.products-->     
+          </div>
+        </div>
+      </div>         
+    </section>
+    <!-- /.sales-section -->
+
+    <!-- /.hero-section -->    
+    <section class="new-section">
+      <div class="container">
+        <div class="section-divider"></div>
+        <div class="row">          
+          <h3 class="section-title">New products</h3>
+          
+          <div class="home-product-list-cntr">
+            <ul class="products clearfix">
+              <?php
+                $args = array(
+                  'post_type' => 'product',
+                  'posts_per_page' => 8,
                   'author'=>$store->user_id
                   );
                 $loop = new WP_Query( $args );

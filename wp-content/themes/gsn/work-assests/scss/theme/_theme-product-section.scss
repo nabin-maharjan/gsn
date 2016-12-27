@@ -1,6 +1,9 @@
+main {
+  clear: both;
+}
 .section-divider {
   border-bottom: 2px solid $light_gray;
-  margin: 50px 0 30px;
+  margin: 20px 0 30px;
 }
 .section-title {
   font-size: 24px;
@@ -12,7 +15,20 @@
 }
 
 .home-product-list-cntr {
+  
+  .products {
+    font-size: 0;
+
+    .product-list-item {
+      display: inline-block;
+      float: none;
+      font-size: 16px;
+      margin-bottom: 30px;
+      vertical-align: top;
+    }
+  }
+
   .product-image-cntr .product-image {
-    height: 350px;
+    height: 200px;
   }
 }
