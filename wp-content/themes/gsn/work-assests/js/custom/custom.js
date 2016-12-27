@@ -157,7 +157,7 @@ jQuery(document).ready(function(e) {
     mediaUploader.open();
   });
   
-  
+
  jQuery('.item__cart  .cart__icon a').on('click', function(e) {
     e.preventDefault();  
     jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
