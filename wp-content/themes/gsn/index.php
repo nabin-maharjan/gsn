@@ -1,6 +1,10 @@
 <?php
 // Silence is golden.
-get_header("store");
+if(is_shop()){
+	get_header("store");
+}else{
+	get_header();
+}
 ?>
 <div class="wrap container">
 	<?php if ( is_home() && ! is_front_page() ) : ?>
