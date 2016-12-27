@@ -1,4 +1,4 @@
-var ajax_call_post= function (data,error_wrap_container,error_load_position,callback){
+var ajax_call_post= function (data,error_wrap_container,error_load_position,callback,complete_callback){
 	//https://www.youtube.com/watch?v=D65_a5Xz8jw&index=11&list=LLW5hrUUw4tgM65epULHXoGA
 	var xhr=jQuery.ajax({
          type : "post",
@@ -12,7 +12,6 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 				// validation error occurs
 				if(response.code=="406"){
 					var data= jQuery.parseJSON(response.msg);		
-					
 					jQuery.each(data,function(index,value){
 						 if(jQuery('#'+index+'-error').length){
 							 jQuery('#'+index+'-error').html();
@@ -30,7 +29,10 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 					
 				}
             }
-         }
+         },
+		 complete: function(){
+			 complete_callback();
+		 }
       });
 	 return xhr;
 };
@@ -45,6 +47,31 @@ jQuery('.make_product_feature').on('click',function(){
 		 console.log(response);
 	 });
 	 
+});
+
+/* 
+*Remove item from cart when button click 
+*/
+jQuery(document).on('click','.cart-product-remove .remove-link',function(e){
+	e.preventDefault();
+	jQuery(this).parents('.cart__list-cntr');
+	var item_key=jQuery(this).data('cart-item-key');
+	var data= {action: "gsn_remove_item_from_cart", item_key : item_key};
+	 var response=ajax_call_post(data,'','',function(response){
+		 jQuery('.cart__content .cart__list').html(response.item_html);
+		 jQuery('.cart__content .total__cost').html(response.cart_total);
+		 jQuery('.cart__icon .cart-indicator').html(response.qty);
+	 },function(){});
+});
+/*
+*Close mini cart if user click outside mini cart
+*/
+jQuery(document).click(function(event) { 
+    if(!jQuery(event.target).closest('.item__cart  .cart.cart-cntr').length) {
+        if(jQuery('.item__cart .cart__content').is(":visible")) {
+          jQuery('.item__cart .cart.cart-cntr .cart__icon a').trigger('click');		    
+        }
+    }        
 });
 
 /* Remove product Feature */
@@ -129,10 +156,10 @@ jQuery(document).ready(function(e) {
     mediaUploader.open();
   });
   
-  
-  $('.cart__icon a').on('click', function(e) {
-    e.preventDefault();    
-    $(this).parents('.cart-cntr').find('.cart__content').slideToggle();
+
+ jQuery('.item__cart  .cart__icon a').on('click', function(e) {
+    e.preventDefault();  
+    jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
   });
   
 });

@@ -10,11 +10,11 @@ class Store{
 		$this->store_table=$wpdb->prefix."store";
 		//$wpdb->show_errors(); 
 		//check if there are any tables of that name already
-		if($wpdb->get_var("show tables like '$tablename'") !== $tablename) 
+		if($wpdb->get_var("show tables like '$tablename'") !== $this->store_table) 
 		{
 			$sql = '
-			  CREATE TABLE '.$tablename.' (
-				id int(11) NOT NULL auto_increment,
+			  CREATE TABLE '.$this->store_table.' (
+				id int NOT NULL auto_increment,
 				firstName varchar(50) NOT NULL,
 				lastName varchar(50) NOT NULL,
 				emailAddress varchar(100) NOT NULL,
@@ -33,9 +33,9 @@ class Store{
 		//register the new table with the wpdb object
 		if (!isset($wpdb->store)) 
 		{
-			$wpdb->store = $tablename; 
+			$wpdb->store = $this->store_table; 
 			//add the shortcut so you can use $wpdb->stats
-			$wpdb->tables[] = str_replace($wpdb->prefix, '', $tablename); 
+			$wpdb->tables[] = str_replace($wpdb->prefix, '', $this->store_table); 
 		}
 			// add ajax function for registration process
 			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );

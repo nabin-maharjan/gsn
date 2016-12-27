@@ -1,0 +1,20 @@
+.footer {
+  background: $dark_gray;  
+  color: $white;
+  margin-top: 70px;  
+  padding: 35px 0 40px;
+
+  &__items {
+
+    h3 {      
+      font-size: 16px;      
+      font-weight: bold;
+      padding-bottom: 25px;
+      text-transform: uppercase;      
+    }
+  }
+}
+
+.footer-map-cntr {
+  
+}

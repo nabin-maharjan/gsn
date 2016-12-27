@@ -21,7 +21,7 @@ class GsnSetting{
 	
 public function _custom_nav_menu_item( $title, $url, $order, $parent = 0 ){
   $item = new stdClass();
-  $item->ID = 1000000 + $order + parent;
+  $item->ID = 1000000 + $order;
   $item->db_id = $item->ID;
   $item->title = $title;
   $item->url = $url;
@@ -39,7 +39,9 @@ public function _custom_nav_menu_item( $title, $url, $order, $parent = 0 ){
   return $item;
 }
 
-// define the customize_nav_menu_available_items callback 
+/* 
+*define the customize_nav_menu_available_items callback 
+*/
 public function filter_customize_nav_menu_available_items( $items, $menu, $arg ) {
 	global $store;
 	$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
@@ -95,7 +97,8 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		  'post_type'   => 'store_setting',
 		  'post_author' =>$author_id,
 		);
-		$post=array_shift(get_posts($args));
+		$posts=get_posts($args);
+		$post=array_shift($posts);
 		$post_metas=get_post_meta($post->ID);
 		$this->id=$post->ID;
 		$this->logo=array_shift($post_metas['logo']);
@@ -121,18 +124,24 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		try{
 			if(!empty($_POST['formdata'])){
 				parse_str($_POST['formdata'], $datas);
-				
+				$edit_flag=false;
+				if(!empty($datas['action']) && $datas['action']=="edit"){
+					$edit_flag=true;
+				}
 				$v = new Valitron\Validator($datas);
 				//$v->rule('required', 'name');
 				if($v->validate()) {
-					global $store;					
-					$post_id = wp_insert_post( array(
+					global $store;	
+					if($edit_flag){
+						$post_id =$datas['gsn_settings_id'];
+					}else{
+						$post_id = wp_insert_post( array(
 							'post_author' => $store->user_id,
 							'post_title' => $store->storeName,
 							'post_status' => 'publish',
 							'post_type' => "store_setting",
 						) );
-						
+					}
 					foreach($datas as $key=>$value){
 						update_post_meta($post_id,$key,$value);
 						
@@ -156,6 +165,8 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		echo json_encode($response);die();
 		
 	}
+	
+	
 }
 global $gsnSettingsClass;
 $gsnSettingsClass =new GsnSetting();

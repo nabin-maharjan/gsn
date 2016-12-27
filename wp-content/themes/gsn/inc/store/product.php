@@ -279,6 +279,7 @@ class GsnProduct{
 	* function to make product Feature
 	*/
 	public function remove_feature(){
+		$response= array();
 		try{
 			if(!empty($_POST['product_id'])){
 				$v = new Valitron\Validator($_POST);
@@ -425,6 +426,28 @@ class GsnProduct{
 	}
 	
 	
+	/*
+	* Function to get feature Product
+	*/
+	
+	public function  get_feature_product($count=5){
+		
+		$meta_query   = WC()->query->get_meta_query();
+		$meta_query[] = array(
+			'key'   => '_featured',
+			'value' => 'yes'
+		);
+		$args = array(
+			'post_type'   =>  'product',
+			'stock'       =>  1,
+			'posts_per_page'   =>$count,
+			'orderby'     =>  'date',
+			'order'       =>  'DESC',
+			'meta_query'  =>  $meta_query
+		);
+		return  new WP_Query( $args );
+		
+	}
 	
 	
 	
@@ -454,11 +477,6 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
-	
-	
-	
-	
-	
 	public function get_all_store_product(){
 		
 		global $store;
@@ -469,7 +487,6 @@ class GsnProduct{
 				 );
 		return new WP_Query($args);
 	}
-	
 	public function get_store_product(){
 		
 		$product_slug=get_query_var('store_product_slug');
@@ -488,5 +505,8 @@ class GsnProduct{
 	}
 	
 	
+	
+	
 }
-new GsnProduct();
+global $gsnProduct;
+$gsnProduct =new GsnProduct();
