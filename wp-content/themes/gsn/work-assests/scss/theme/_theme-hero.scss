@@ -27,10 +27,10 @@
   }
 
   .product-image{
-    background-color: $brick_red;
+    background-color: #ececec;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     display: block;
     height: 100%;
     position: relative;
