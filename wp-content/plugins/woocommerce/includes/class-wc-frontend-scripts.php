@@ -171,7 +171,6 @@ class WC_Frontend_Scripts {
 
 		// Register frontend scripts conditionally
 		if ( $ajax_cart_en ) {
-			var_dump("asdf");
 			self::enqueue_script( 'wc-add-to-cart', $frontend_script_path . 'add-to-cart' . $suffix . '.js' );
 		}
 		if ( is_cart() ) {
