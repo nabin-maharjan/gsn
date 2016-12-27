@@ -189,10 +189,7 @@ echo do_shortcode('[featured_products per_page="12" columns="4"]');
   <!-- /.main -->
 
   <?php get_footer('store') ?>
-
-  <script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/jquery-3.1.1.min.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/slick.min.js"></script>
-  <script src="<?php echo get_template_directory_uri(); ?>/assets/js/custom/all.js"></script>
 
   <script>
     $(document).ready(function() {
