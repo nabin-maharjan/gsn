@@ -35,7 +35,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			$post_thumnail_url="";
 		 	if(has_post_thumbnail($product->id)){
 				$post_thumbnail_id = get_post_thumbnail_id( $product->id );
-				$post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );
+				$post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'medium' );
 			}
  		?>
       <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url;?>')"></a>
