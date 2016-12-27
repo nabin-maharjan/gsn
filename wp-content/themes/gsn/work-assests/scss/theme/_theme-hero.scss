@@ -1,3 +1,6 @@
+.hero-section {
+  margin-bottom: 50px;
+}
 .hero-part {  
   height: 600px;
 
@@ -96,7 +99,33 @@
     transform: scale(1.1);
   }
 
-  
+  .product-info-cntr {    
+    margin-top: 20px;
+    padding: 0 10px;
+    text-align: center;    
+
+    h3 {
+      font-style: italic;
+      font-size: 18px;
+      margin-bottom: 5px;
+
+      a:hover {
+        color: $brick_red;
+      }
+    }
+
+    span.price {
+      font-weight: bold;
+
+      del {
+        color: $space_gray;
+      }
+
+      ins {
+        text-decoration: none;
+      }
+    }
+  }  
 }
 // /.product-block
 
