@@ -11,6 +11,7 @@
  //echo "<pre>";
  //var_dump($store);die;
 ?>
+<div class="container-fluid">
 <section>
 <?php
 	global $gsnSettingsClass;
@@ -18,8 +19,9 @@
 	$gsn_settings=$gsnSettingsClass->get();
 
 ?>
+
 	<h3>Settings</h3>
-    <div class="container">
+    <div class="container clearfix">
    <form name="store_setting_form" id="store_setting_form">
    <!-- Row start -->
     <div class="form-group row">
@@ -72,10 +74,6 @@
   </form>
   </div>
 </section>
-
-
-
-
 
 <section>
 	<h3>Profile Settings</h3>
@@ -413,8 +411,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
   </form>
    </div>
  
- </section>
- 
+ </section> 
  
 <section>
  <h3>Featured Product</h3>
@@ -444,7 +441,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
     
  </section>
  
- <section>
+<section>
  <h3>New Products</h3>
  
  <ul class="products">
@@ -467,7 +464,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
 </ul><!--/.products-->
  
  </section>
-
+</div>
  <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
  <script> 
