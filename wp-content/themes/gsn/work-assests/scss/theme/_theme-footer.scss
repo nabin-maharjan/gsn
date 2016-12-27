@@ -1,8 +1,6 @@
-.footer {
-  background: $dark_gray;  
+.footer {   
   color: $white;
-  margin-top: 70px;  
-  padding: 35px 0 40px;
+  margin-top: 70px;    
 
   &__items {
 
@@ -12,9 +10,60 @@
       padding-bottom: 25px;
       text-transform: uppercase;      
     }
+
+    a:hover {
+      color: $brick_red;
+    }
+  }
+
+  &-social {
+    li {
+      margin: 0 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    a {
+      font-size: 20px;
+    }
   }
 }
 
 .footer-map-cntr {
+  background-color: $brick_red;
+  display: block;
+  height: 250px;
+}
+
+.top-footer {
+  background: $dark_gray; 
+  padding: 35px 0 40px;
+}
+
+.bottom-footer {
+  background: $black;
+  height: 35px;
+  line-height: 35px;
   
+  li {
+    margin: 0 15px;
+    float: left;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  a {
+    color: $light_gray;
+    font-size: 12px;
+    line-height: 1;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $brick_red;
+    }
+  }
 }
