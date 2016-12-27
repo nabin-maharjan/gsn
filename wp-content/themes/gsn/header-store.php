@@ -40,12 +40,12 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
               </ul>
             </div>
             <!-- /.top__left-icons -->
-            <div class="top__right-icons fr">
+            <!--div class="top__right-icons fr">
               <ul>
                 <li><a href="#"><i class="fa fa-sign-in"></i> Login</a></li>
                 <li><a href="#"><i class="fa fa-user-plus"></i> Register</a></li>
               </ul>
-            </div>
+            </div-->
             <!-- /.top__right-icons -->
           </div>
           <!-- /.top-icons -->
