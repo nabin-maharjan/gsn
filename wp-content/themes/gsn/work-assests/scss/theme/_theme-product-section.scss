@@ -1,0 +1,18 @@
+.section-divider {
+  border-bottom: 2px solid $light_gray;
+  margin: 50px 0 30px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: bolder;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.home-product-list-cntr {
+  .product-image-cntr .product-image {
+    height: 350px;
+  }
+}

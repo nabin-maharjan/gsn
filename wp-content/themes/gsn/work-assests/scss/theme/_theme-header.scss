@@ -17,8 +17,12 @@
     text-transform: uppercase;    
 
     h1{
-      line-height: 100px;
+      // line-height: 100px;
       font-weight: bolder;
+
+      img {
+        max-width: 150px;
+      }
     }
   }
   // /__logo
@@ -68,6 +72,7 @@
     font-size: 16px;    
     position: relative;
     cursor: pointer;
+    float: left;
 
     &.active, &:hover > a {
       color: $brick_red;
@@ -108,6 +113,7 @@
     transition: all 0.3s ease;
     visibility: hidden;
     white-space: nowrap;
+    z-index: 2;
 
     li {
       display: block;
@@ -166,7 +172,8 @@
       position: absolute;
       right: 0;
       top: 50%;
-      width: 24px;      
+      width: 24px; 
+      z-index: 2;     
     }
     a {
       padding-right: 30px;
@@ -187,6 +194,7 @@
     top: 100%;
     white-space: nowrap;
     width: 380px;
+    z-index: 2;
 
     > * {
       line-height: 1;
@@ -210,6 +218,11 @@
   &__buttons {
     margin-top: 20px;
     text-align: right;
+
+    a:hover {
+      background: $brick_red;
+      color: $white;
+    }
   }
 }
 
