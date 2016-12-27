@@ -5,11 +5,7 @@
  * @package GSN
  * @since GSN 1.0
  */
- global $woocommerce;
-//$woocommerce->load();
 get_header("store");
-echo do_shortcode('[featured_products per_page="12" columns="4"]');
-
 ?>
 
   <main class="main main-content">
