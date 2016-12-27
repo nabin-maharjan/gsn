@@ -1,6 +1,6 @@
 <?php
 // Silence is golden.
-if(is_realy_woocommerce_page()){
+if(is_realy_woocommerce_page()|| is_shop()){
 	get_header("store");
 }else{
 	get_header();
