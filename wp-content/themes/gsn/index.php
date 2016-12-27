@@ -2,8 +2,7 @@
 // Silence is golden.
 get_header("store");
 ?>
-
-<div class="wrap">
+<div class="wrap container">
 	<?php if ( is_home() && ! is_front_page() ) : ?>
 		<header class="page-header">
 			<h1 class="page-title"><?php single_post_title(); ?></h1>
