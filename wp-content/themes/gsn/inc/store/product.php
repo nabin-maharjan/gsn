@@ -122,8 +122,11 @@ class GsnProduct{
 					set_post_thumbnail( $post_id, $datas['image_id'] );
 					/* set category */
 					$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+					//var_dump($storeParentCat->term_id);
 					$cat_id=($datas['category']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['category']);				
-					wp_set_object_terms( $post_id, $cat_id, 'product_cat' );
+					//var_dump($cat_id);die;
+					//wp_set_object_terms( $post_id, $cat_id, 'product_cat' );
+					wp_set_post_terms( $post_id, $cat_id, 'product_cat', false ) ;
 					
 					/* add images gallery */
 					update_post_meta($post_id,'_product_image_gallery',$datas['image_ids']);
@@ -138,7 +141,7 @@ class GsnProduct{
 					update_post_meta( $post_id, '_regular_price', $datas['price']  );
 					update_post_meta( $post_id, '_sale_price','');
 					update_post_meta( $post_id, '_purchase_note', '' );
-					update_post_meta( $post_id, '_featured', 'no' );
+					//update_post_meta( $post_id, '_featured', 'no' );
 					/*update_post_meta( $post_id, '_weight', '' );
 					update_post_meta( $post_id, '_length', '' );
 					update_post_meta( $post_id, '_width', '' );
@@ -151,7 +154,9 @@ class GsnProduct{
 					update_post_meta( $post_id, '_sold_individually', '' );
 					update_post_meta( $post_id, '_manage_stock', 'yes' );
 					update_post_meta( $post_id, '_backorders', 'no' );
-					update_post_meta( $post_id, '_stock',  $datas['stock'] );
+					if(!$edit_flag){
+						update_post_meta( $post_id, '_stock',  $datas['stock'] );
+					}
 					
 					/* insert custom attributes */
 					$thedata=array();
@@ -343,11 +348,16 @@ class GsnProduct{
 						);
 						$insert_stock = $wpdb->insert($wpdb->stock_in, $stock_in_args);// insert to stock in table
 						
+						$response['status']="success";
+						$response['code']='200';
+						$response['msg']="weldone !!!!";
+						//$response['redirectUrl']=site_url("/dashboard/");
+						
+					}else{
+						throw new Exception("Error occured while updating product stock");
+						
 					}
-					$response['status']="success";
-					$response['code']='200';
-					$response['msg']="weldone !!!!";
-					//$response['redirectUrl']=site_url("/dashboard/");
+					
 
 				} else {
 						// Errors
@@ -431,7 +441,7 @@ class GsnProduct{
 	*/
 	
 	public function  get_feature_product($count=5){
-		
+		global $store;
 		$meta_query   = WC()->query->get_meta_query();
 		$meta_query[] = array(
 			'key'   => '_featured',
@@ -439,16 +449,55 @@ class GsnProduct{
 		);
 		$args = array(
 			'post_type'   =>  'product',
-			'stock'       =>  1,
+			//'stock'       =>  1,
+			'author'=>$store->user_id,
 			'posts_per_page'   =>$count,
-			'orderby'     =>  'date',
-			'order'       =>  'DESC',
 			'meta_query'  =>  $meta_query
 		);
 		return  new WP_Query( $args );
 		
 	}
 	
+	/*
+	*Function to return list of sale product
+	*/
+	public function get_sale_product_list($count=4){
+		global $store;
+		$args = array(
+				'post_type'      => 'product',
+				'posts_per_page' => $count,
+				'author'=>$store->user_id,
+				'meta_query'     => array(
+					'relation' => 'OR',
+					array( // Simple products type
+						'key'           => '_sale_price',
+						'value'         => 0,
+						'compare'       => '>',
+						'type'          => 'numeric'
+					),
+					array( // Variable products type
+						'key'           => '_min_variation_sale_price',
+						'value'         => 0,
+						'compare'       => '>',
+						'type'          => 'numeric'
+					)
+				)
+			);
+			return new WP_Query( $args );
+  }
+	
+	/*
+	*
+	*/
+	public function get_new_product_list($count=4){
+		$args = array(
+                  'post_type' => 'product',
+                  'posts_per_page' => $count,
+                  'author'=>$store->user_id
+                  );
+         return new WP_Query( $args );
+		
+	}
 	
 	
 	
@@ -488,7 +537,6 @@ class GsnProduct{
 		return new WP_Query($args);
 	}
 	public function get_store_product(){
-		
 		$product_slug=get_query_var('store_product_slug');
 		global $store;
 		$args=array( 

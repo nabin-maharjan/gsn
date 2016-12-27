@@ -179,8 +179,10 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
       <label for="category" class="col-sm-2 col-form-label col-form-label-sm">Category</label>
       <div class="col-sm-10 parent_dropdown_cntr" >
       <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
-	  		$selected_term= (empty($product->post->post_title))?$product->post->post_title:"";
-	  
+	  		$selected_term= wp_get_post_terms( $product->id, 'product_cat' );
+			if(is_array($selected_term)){
+				$selected_term=array_shift($selected_term);
+			}
 	  ?>
         
         <?php 
@@ -194,7 +196,8 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
 			'name'               => 'category',
 			'id'                 => 'category',
 			'class'              => 'form-control form-control-sm',
-			'show_option_none'    => 'None'
+			'show_option_none'    => 'None',
+			'selected'           => $selected_term->term_id,
 		);
 		
 		wp_dropdown_categories( $args );
