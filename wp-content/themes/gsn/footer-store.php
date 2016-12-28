@@ -1,5 +1,4 @@
 <?php global $store;?>
-
  <footer class="footer gsn-footer">
   <div class="top-footer">
     <div class="container">
@@ -14,7 +13,6 @@
         </div>
         <!-- /.footer__contact -->
         <div class="col-sm-6 footer__items footer-map">
-          <h3>Map</h3>
           <div class="footer-map-cntr" id="storeMap" ></div>
         </div>
         <!-- /.footer__map -->
@@ -46,15 +44,28 @@
   <!-- /.bottom-footer -->
 </footer>
   <!-- /.footer -->
-  
 
   
 <?php wp_footer(); ?>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=storemyMap"></script>
 <script>
 function storemyMap(){
-	alert('hi');
+	var mapCanvas = document.getElementById("storeMap");
+   var defaultLocation= new google.maps.LatLng(<?php echo $store->latitute;?>,<?php echo $store->lognitute;?>);
+   var zoomlevel=13;
+  var mapOptions = {
+    center:defaultLocation, 
+    zoom: zoomlevel
+  };
+
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  //marker
+  var marker = new google.maps.Marker({
+          position: defaultLocation,
+          map: map,
+          title: 'Hello World!'
+        });
 }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=storemyMap"></script>
 </body>
 </html>
