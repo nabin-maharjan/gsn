@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <main class="main main-content">
-	This is category page
+	<div class="section">
+		
+	</div>
 </main>
 <!-- /.main -->

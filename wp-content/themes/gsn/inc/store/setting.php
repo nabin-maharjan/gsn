@@ -95,7 +95,7 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$args = array(
 		  'numberposts' =>1,
 		  'post_type'   => 'store_setting',
-		  'post_author' =>$author_id,
+		  'author' =>$author_id,
 		);
 		$posts=get_posts($args);
 		$post=array_shift($posts);
