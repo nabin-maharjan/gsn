@@ -1,5 +1,5 @@
 main {
-  clear: both;
+  clear: both;  
 }
 .section-divider {
   border-bottom: 2px solid $light_gray;
@@ -14,17 +14,20 @@ main {
   text-transform: uppercase;
 }
 
-.home-product-list-cntr {
+.product-list-cntr {
   
-  .products {
+  ul.products {
     font-size: 0;
 
-    .product-list-item {
+    li.product-list-item {
       display: inline-block;
       float: none;
       font-size: 16px;
+      margin: 0;
       margin-bottom: 30px;
+      padding: 0 15px;
       vertical-align: top;
+      width: 25%;
     }
   }
 

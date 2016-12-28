@@ -129,7 +129,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
         <div class="section-divider"></div>
         <div class="row">          
           <h3 class="section-title">On sale products</h3>
-          <div class="home-product-list-cntr">
+          <div class="product-list-cntr">
                 <ul class="products clearfix">
                   <?php while ( $sale_product_list->have_posts() ) : $sale_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );
@@ -153,7 +153,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
         <div class="row">          
           <h3 class="section-title">New products</h3>
           
-          <div class="home-product-list-cntr">
+          <div class="product-list-cntr">
             <ul class="products clearfix">
                  <?php  while ( $new_product_list->have_posts() ) : $new_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );

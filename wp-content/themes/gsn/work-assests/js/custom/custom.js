@@ -156,10 +156,40 @@ jQuery(document).ready(function(e) {
     mediaUploader.open();
   });
   
-
- jQuery('.item__cart  .cart__icon a').on('click', function(e) {
+  // cart slideToggle
+  jQuery('.item__cart  .cart__icon a').on('click', function(e) {
     e.preventDefault();  
     jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
   });
+
+    $('.main-content').css({'margin-top': $('.header__bottom').height()});
   
+  $(document).on('scroll', function() {
+    // backToTop Display
+    var y = $(this).scrollTop(),
+        item = $('.back-to-top'),
+        topHeaderHeight = $('.header__top').height(),
+        mainHeader = $('.header__bottom');        
+    if(y > 400) {
+      item.fadeIn();
+    } else {
+      item.fadeOut();
+    }
+
+    //mainHeader Sticky    
+    if(y >= topHeaderHeight) {
+      mainHeader.addClass('stick');
+    } else {
+      mainHeader.removeClass('stick');
+    }
+  });
+  // backToTop Click
+  $('.back-to-top').on('click', function(e) {
+    e.preventDefault();
+    $('body, html').animate({
+      scrollTop: 0
+    }, 600);
+  });
+  
+
 });
