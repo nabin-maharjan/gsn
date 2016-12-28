@@ -12,14 +12,18 @@
     background: $white;
     height: 100px;
     line-height: 100px;
+    position: absolute;
+    width: 100%;
+    z-index: 4;
 
-    // &.stick {
-    //   left: 0;
-    //   position: fixed;
-    //   top: 0; 
-    //   width: 100%;   
-    //   z-index: 4;  
-    // }
+    &.stick {
+      box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
+      left: 0;
+      position: fixed;
+      top: 0; 
+      width: 100%;   
+      z-index: 4;  
+    }
   }
 
   &__logo {

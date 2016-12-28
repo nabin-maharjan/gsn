@@ -161,25 +161,27 @@ jQuery(document).ready(function(e) {
     e.preventDefault();  
     jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
   });
+
+    $('.main-content').css({'margin-top': $('.header__bottom').height()});
   
   $(document).on('scroll', function() {
     // backToTop Display
     var y = $(this).scrollTop(),
         item = $('.back-to-top'),
         topHeaderHeight = $('.header__top').height(),
-        mainHeader = $('.header__bottom');
+        mainHeader = $('.header__bottom');        
     if(y > 400) {
       item.fadeIn();
     } else {
       item.fadeOut();
     }
 
-    // mainHeader Sticky
-    // if(y >= topHeaderHeight) {
-    //   mainHeader.addClass('stick');
-    // } else {
-    //   mainHeader.removeClass('stick');
-    // }
+    //mainHeader Sticky    
+    if(y >= topHeaderHeight) {
+      mainHeader.addClass('stick');
+    } else {
+      mainHeader.removeClass('stick');
+    }
   });
   // backToTop Click
   $('.back-to-top').on('click', function(e) {
