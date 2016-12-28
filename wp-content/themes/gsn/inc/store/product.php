@@ -490,6 +490,7 @@ class GsnProduct{
 	*
 	*/
 	public function get_new_product_list($count=4){
+		global $store;
 		$args = array(
                   'post_type' => 'product',
                   'posts_per_page' => $count,
