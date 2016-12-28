@@ -65,6 +65,36 @@
       </div>
     </div>
     <!-- Row end -->
+     <div class="form-group row">
+     <div class="col-sm-12"><h3>Social Links</h3></div>
+     </div>
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">Facebook Url</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->facebook))?$gsn_settings->facebook:"";?>" name="facebook" id="facebook">
+      </div>
+    </div>
+    <!-- Row end -->
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">Twitter Url</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->twitter))?$gsn_settings->twitter:"";?>" name="twitter" id="twitter">
+      </div>
+    </div>
+    <!-- Row end -->
+     <!-- Row start -->
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">Google+ Url</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->googleplus))?$gsn_settings->googleplus:"";?>" name="googleplus" id="googleplus">
+      </div>
+    </div>
+    <!-- Row end -->
+    
+    
+    
     
     <?php if($gsn_settings->id!=NULL){?>
     	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
@@ -492,6 +522,17 @@ jQuery("#profile_setting_form").validate({
  
   /* Store Setting jQuery validation Procress */
 jQuery("#store_setting_form").validate({
+	rules: {
+      facebook:{
+		url: true  
+	  },
+	  googleplus:{
+		url: true  
+	  },
+	  twitter: {
+		url: true  
+	  },
+    },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
 	  var data= {action: "gsn_add_store_setting", formdata : formdata};

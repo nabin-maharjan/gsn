@@ -103,6 +103,9 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$this->id=$post->ID;
 		$this->logo=array_shift($post_metas['logo']);
 		$this->selected_theme=array_shift($post_metas['selected_theme']);
+		$this->facebook=array_shift($post_metas['facebook']);
+		$this->twitter=array_shift($post_metas['twitter']);
+		$this->googleplus=array_shift($post_metas['googleplus']);
 		return $this;
 	}
 	
