@@ -1,3 +1,5 @@
+<?php global $store;?>
+
  <footer class="footer gsn-footer">
   <div class="top-footer">
     <div class="container">
@@ -5,17 +7,15 @@
         <div class="col-sm-3 footer__items footer-contact">
           <h3>Keep in touch</h3>
           <ul class="contact-info">
-            <li>12345 Street name, California, USA</li>
-            <li><a href="tel:0123 456 789">0123 456 789</a></li>
-            <li><a href="mailto:support@company.com">support@company.com</a></li>
+            <li><?php echo $store->storeFullAddress;?></li>
+            <li><a href="tel:<?php echo $store->mobileNumber;?>"><?php echo $store->mobileNumber;?></a></li>
+            <li><a href="mailto:<?php echo $store->emailAddress;?>"><?php echo $store->emailAddress;?></a></li>
           </ul>
         </div>
         <!-- /.footer__contact -->
         <div class="col-sm-6 footer__items footer-map">
           <h3>Map</h3>
-          <div class="footer-map-cntr" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/new-1.jpg');">
-            
-          </div>
+          <div class="footer-map-cntr" id="storeMap" ></div>
         </div>
         <!-- /.footer__map -->
         <div class="col-sm-3 footer__items footer-social">
@@ -46,6 +46,15 @@
   <!-- /.bottom-footer -->
 </footer>
   <!-- /.footer -->
+  
+
+  
 <?php wp_footer(); ?>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=storemyMap"></script>
+<script>
+function storemyMap(){
+	alert('hi');
+}
+</script>
 </body>
 </html>
