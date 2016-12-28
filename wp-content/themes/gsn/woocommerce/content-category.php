@@ -22,8 +22,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <main class="main main-content">
-	<div class="section">
-		
-	</div>
+	<section class="page-hero page-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 page__top-info">
+					<h1>Utility</h1>
+					<div class="page__top-desc">
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+					</div>
+					<div class="page__breadcrumb">
+						<nav class="woocommerce-breadcrumb">
+							<a href="#">Home</a>
+							/
+							Utility
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.page-hero -->
+	<section class="item-list-cntr">
+		<div class="container">
+			<div class="row">
+				<div class="list__items">
+					<ul>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.item-list-cntr -->
 </main>
 <!-- /.main -->
