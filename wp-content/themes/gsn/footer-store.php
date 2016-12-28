@@ -45,7 +45,13 @@
   </div>
   <!-- /.bottom-footer -->
 </footer>
-  <!-- /.footer -->
+<!-- /.footer -->
+<div class="back-to-top">
+  <a href="#">
+    <i class="fa fa-angle-up"></i>
+  </a>
+</div>
+<!-- /.back-to-top -->
 <?php wp_footer(); ?>
 </body>
 </html>

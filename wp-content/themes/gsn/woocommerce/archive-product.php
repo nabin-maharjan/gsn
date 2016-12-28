@@ -20,8 +20,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); ?>
-
+get_header( 'store' ); ?>
+	<?php 
+		if(is_tax()){
+			$termid=get_queried_object()->term_id;
+			$terms = get_term_children( $termid, 'product_cat');
+			if ( !empty( $terms ) && !is_wp_error( $terms ) ){
+				get_template_part( 'woocommerce/content', 'category' );
+			}
+		}
+	?>
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.
@@ -105,4 +113,4 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_sidebar' );
 	?>
 
-<?php get_footer( 'shop' ); ?>
+<?php get_footer( 'store' ); ?>
