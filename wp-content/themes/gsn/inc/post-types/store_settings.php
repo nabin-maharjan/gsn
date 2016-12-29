@@ -3,9 +3,9 @@ $store_setting = new Custom_Post_Type();
 $store_setting->create('Store Setting');
 
 /* remove editor from post */
-add_action('init',function(){
+/*add_action('init',function(){
 	remove_post_type_support('store_setting','editor');
-});
+});*/
 global $gsnSettingsClass;
 $gsn_themes=$gsnSettingsClass->available_theme();
 $available_themes_options=array();

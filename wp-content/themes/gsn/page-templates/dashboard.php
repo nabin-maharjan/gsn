@@ -10,6 +10,7 @@
  global $store;
  //echo "<pre>";
  //var_dump($store);die;
+
 ?>
 <div class="container-fluid">
 <section>
@@ -17,7 +18,6 @@
 	global $gsnSettingsClass;
 	$gsn_themes=$gsnSettingsClass->available_theme();
 	$gsn_settings=$gsnSettingsClass->get();
-
 ?>
 
 	<h3>Settings</h3>
@@ -64,6 +64,23 @@
       <?php } ?>
       </div>
     </div>
+    <!-- Row end -->
+     <div class="form-group row">
+     <div class="col-sm-12"><h3>About your Store</h3></div>
+     </div>
+    <!-- Row start -->
+    
+     <!-- Row start -->
+    <div class="form-group row">
+      <div class="col-sm-12">
+      <?php
+	   echo wp_editor($gsn_settings->aboutStore,'aboutStore');
+	   ?>
+      </div>
+    </div>
+    <!-- Row end -->
+    
+     
     <!-- Row end -->
      <div class="form-group row">
      <div class="col-sm-12"><h3>Social Links</h3></div>
@@ -535,13 +552,18 @@ jQuery("#store_setting_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-	  var data= {action: "gsn_add_store_setting", formdata : formdata};
+	 // console.log(formdata);
+
+	  var about_content =tinyMCE.activeEditor.getContent();
+//	  console.log(escaped);
+	  var data= {action: "gsn_add_store_setting", formdata : formdata, aboutStore:about_content};
 	  var response=ajax_call_post(data,"#store_setting_form",'',function(response){
 		 //  window.location.href=response.redirectUrl;
 			 jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
 			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
 	 });
+	 
   }
 });
  

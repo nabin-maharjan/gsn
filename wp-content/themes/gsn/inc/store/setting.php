@@ -106,6 +106,7 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$this->facebook=array_shift($post_metas['facebook']);
 		$this->twitter=array_shift($post_metas['twitter']);
 		$this->googleplus=array_shift($post_metas['googleplus']);
+		$this->aboutStore=$post->post_content;
 		return $this;
 	}
 	
@@ -137,18 +138,28 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 					global $store;	
 					if($edit_flag){
 						$post_id =$datas['gsn_settings_id'];
+						// Update post 37
+						  $my_post = array(
+							  'ID'           =>$post_id ,
+							  'post_content' => $_POST['aboutStore'],
+						  );
+						
+						// Update the post into the database
+						  wp_update_post( $my_post );
 					}else{
 						$post_id = wp_insert_post( array(
 							'post_author' => $store->user_id,
 							'post_title' => $store->storeName,
 							'post_status' => 'publish',
 							'post_type' => "store_setting",
+							 'post_content' =>$_POST['aboutStore']
 						) );
 					}
 					foreach($datas as $key=>$value){
 						update_post_meta($post_id,$key,$value);
 						
 					}
+					update_post_meta($post_id,$key,$value);
 					$response['status']="success";
 					$response['code']='200';
 					$response['msg']="successfully added";

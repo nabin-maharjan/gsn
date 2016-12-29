@@ -19,28 +19,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
 get_header( 'store' ); ?>
 	<?php 
-		if(is_tax()){
+		if(is_tax() || is_shop()){
 			$termid=get_queried_object()->term_id;
 			$terms = get_term_children( $termid, 'product_cat');
-			if ( !empty( $terms ) && !is_wp_error( $terms ) ){
-				get_template_part( 'woocommerce/content', 'category' );
-			}
+			get_template_part( 'woocommerce/content', 'category' );
 		}
 	?>
-	<?php	
-		/**
-		 * woocommerce_before_main_content hook.
-		 *
-		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 * @hooked woocommerce_breadcrumb - 20
-		 */
-		/*
-		do_action( 'woocommerce_before_main_content' );
-		*/
-	?>
+
 
 		<?php /* if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 

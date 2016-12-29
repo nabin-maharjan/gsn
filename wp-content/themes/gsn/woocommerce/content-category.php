@@ -19,24 +19,45 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+global $store;
+global $gsnSettingsClass;
+$gsn_themes=$gsnSettingsClass->available_theme();
+$gsn_settings=$gsnSettingsClass->get();
 ?>
 
 <main class="main main-content">
 	<section class="page-hero page-top">
-		<div class="container">
+		<div
+         class="container">
 			<div class="row">
 				<div class="col-sm-12 page__top-info">
-					<h1>Utility</h1>
-					<div class="page__top-desc">
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-					</div>
-					<div class="page__breadcrumb">
-						<nav class="woocommerce-breadcrumb">
-							<a href="#">Home</a>
-							/
-							Utility
-						</nav>
-					</div>
+                <?php 
+				if(is_shop()){
+					$terms=get_term_by( 'name', $store->storeName,'product_cat');	?>
+                    <h1><?php echo $store->storeName;?></h1>
+					<div class="page__top-desc"><?php echo apply_filters('the_content',$gsn_settings->aboutStore); ?></div>
+                    <?php 
+				}
+				if ( is_tax()){ 
+					$queried_object = get_queried_object();
+					$term_id =  (int) $queried_object->term_id;
+					$terms=get_term($term_id,'product_cat');
+				?>
+					<h1><?php echo $terms->name;?></h1>
+					<div class="page__top-desc"><?php echo $terms->description;?></div>
+				<?php }?>
+				<?php	
+						/**
+						 * woocommerce_before_main_content hook.
+						 *
+						 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+						 * @hooked woocommerce_breadcrumb - 20
+						 */
+						
+						do_action( 'woocommerce_before_main_content' );
+						
+					?>
+					
 				</div>
 			</div>
 		</div>
@@ -47,16 +68,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="row">
 				<div class="list__items">
 					<ul>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
-						<li class="col-sm-2 col-md-3 list-item"><a href="#">Testing</a></li>
+                    <?php 
+					
+						$args = array(
+							'type'                     => 'post',
+							'parent'                 => $terms->term_id,
+							'orderby'                  => 'name',
+							'order'                    => 'ASC',
+							'hide_empty'               => FALSE,
+							'hierarchical'             => 1,
+							'taxonomy'                 => 'product_cat',
+							); 
+							$child_categories = get_categories($args );
+
+						foreach($child_categories as $child){
+					?>
+						<li class="col-sm-2 col-md-3 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
+                        <?php } ?>
+
 					</ul>
 				</div>
 			</div>

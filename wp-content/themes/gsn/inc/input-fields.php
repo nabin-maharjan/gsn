@@ -52,8 +52,17 @@ class Agile_Input_Fields{
 	//////////////////////////////////////////////////////////////////
 	public function input_radio($arg){
 		extract($arg);
+		$firstSelected=false;
+		if(empty($prev_selected_options)){
+			$firstSelected=true;
+		}
+		$i=0;
 		foreach($options as $key=>$value){
 			$selected=($key==$prev_selected_options)?"checked":"";
+			if($firstSelected && $i==0){
+				$selected="checked";
+			}
+			$i++;
 			if(!empty($show_label) && $show_label){
 				$html.='<label class="'.$class.'"><input type="radio"   name="' . $name . '" id="' . $id.'_'.$key . '" ' .$selected.' value="' . $key . '" > '.$value.'</label> ';
 			}else{
