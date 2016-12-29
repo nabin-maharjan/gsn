@@ -13,7 +13,32 @@ class GsnSetting{
 		/* add custom menu to store header menu */
 		// add the filter 
 		add_filter( 'wp_get_nav_menu_items', array($this,'filter_customize_nav_menu_available_items'), 10, 3 );	
+		
+		// Set page template for all dashboard page
+		add_action('template_redirect',array($this,'gsn_switch_page_template'));
 	}
+	
+	
+function gsn_switch_page_template() {
+    global $post;
+    // Checks if current post type is a page, rather than a post
+	if (is_page())
+	{	
+			$store_page=get_post_meta($post->ID,'store_page',true);
+			if($store_page=="dashboard"){
+				$template = TEMPLATEPATH . "/page-templates/dashboard.php";
+				if (file_exists($template)) {
+					load_template($template);
+					exit;
+				}
+				
+			}
+	}
+}
+ 
+
+	
+	
 	
 	/*
 	*Fucntion to add custom item to store header menu

@@ -27,18 +27,19 @@ $store->check_access_store();
 </head>
 
 <body <?php body_class(); ?>>
+<?php if(!is_page("Register")){ ?>
   <header class="dashboard-header clearfix">
     <div class="dashboard__header-right fr">
       <div class="header-profile-cntr">
         <a href="#" class="profile-info">
           <i class="fa fa-user"></i>
-          <span>username</span>
+          <span><?php echo $store->firstName ." " . $store->lastName;?></span>
         </a>
         <div class="profile__links">
           <ul>
             <li><a href="#">Your account</a></li>
             <li><a href="#">Account setting</a></li>
-            <li><a href="#">Log out</a></li>
+            <li><a href="javascript:void(0)"  id="logoutBtn">Log out</a></li>
           </ul>
         </div>
       </div>
@@ -58,33 +59,21 @@ $store->check_access_store();
     <nav class="dashboard__nav" id="dashboard-nav">
       <ul>
         <li>
-          <a href="#">
+          <a href="<?php echo site_url("/dashboard/settings/shop/");?>">
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Testing</span>
+            <span>Store Setting</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="<?php echo site_url("/dashboard/settings/profile/");?>">
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Testing</span>
+            <span>Profile Setting</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="<?php echo site_url("/dashboard/settings/profile/");?>">
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Testing</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Testing</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Testing</span>
+            <span>Product</span>
           </a>
         </li>
       </ul>      
@@ -99,4 +88,5 @@ $store->check_access_store();
     'walker'=>new wp_bootstrap_navwalker ()
      ) ); */ ?>
   </header>
+  <?php } ?>
 <!-- /.dashboard-header -->

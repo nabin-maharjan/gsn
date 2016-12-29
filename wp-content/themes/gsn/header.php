@@ -3,7 +3,7 @@ $header_name="";
  if(is_page()|| is_archive() || is_tax()){
 	global $post;
 	$store_page=get_post_meta($post->ID,'store_page',true);
-	if((!empty($store_page) && $store_page=="yes")|| is_archive() || is_tax()){
+	if((!empty($store_page) && $store_page=="store")|| is_archive() || is_tax()){
 		$header_name="store";
 	}
 }

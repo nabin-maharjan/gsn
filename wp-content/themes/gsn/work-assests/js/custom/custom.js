@@ -86,7 +86,7 @@ jQuery('.remove_product_feature').on('click',function(){
 
 jQuery('#logoutBtn').on('click',function(e){
 	var data={action: "gsn_store_logout"};
-	var response=ajax_call_post(data,'',function(response){
+	var response=ajax_call_post(data,'','',function(response){
 		if(response.status == "success") {
 		  window.location.href=response.redirectUrl;
 		   return false;
