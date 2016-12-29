@@ -110,18 +110,34 @@
         </div>
       </div>
       <!-- Row end -->
-      
-      
-      
-      
-      <?php if($gsn_settings->id!=NULL){?>
-      	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
-           <input type="hidden" name="action" value="edit">
-      <?php }?>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+    
+    <!-- Row end -->
+     <div class="form-group row">
+     <div class="col-sm-12"><h3>Payment Information</h3></div>
+     </div>
+    <!-- Row start -->
+    
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">eSewa ID</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
+      </div>
     </div>
-  </section>
+    <!-- Row end -->
+    
+    
+    
+    
+    <?php if($gsn_settings->id!=NULL){?>
+    	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
+         <input type="hidden" name="action" value="edit">
+    <?php }?>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+</section>
 
   <section>
   	<h3>Profile Settings</h3>
@@ -519,11 +535,7 @@
 </main>
  <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
-
-
  <script> 
- 
- 
   /* Store Setting jQuery validation Procress */
 jQuery("#profile_setting_form").validate({
   submitHandler: function(form) {

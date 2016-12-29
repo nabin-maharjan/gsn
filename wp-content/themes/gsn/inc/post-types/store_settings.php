@@ -32,3 +32,21 @@ $store_setting->add_meta_box(
 		)
 		
 	);
+	
+	
+/* add meta fields to post */
+$store_setting->add_meta_box( 
+    'Payment Setting', 
+    array(
+		'esewa Id' =>array(
+			'name'=>'esewaId',
+			'id'=>'esewaId',
+			'class'=>' test test',
+			'type'=>"text",
+			'placeholder'=>""
+			),
+		)
+		
+	);
+	
+	

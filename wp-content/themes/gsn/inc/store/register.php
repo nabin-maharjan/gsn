@@ -54,23 +54,70 @@ class Store{
 			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
 			
 			
-			
+			/* ad ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_contact_action', array($this,'store_contact_action') );
+			add_action( 'wp_ajax_nopriv_gsn_store_contact_action', array($this,'store_contact_action') );
 			
 			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
-			
 			/* add store role*/
 			add_action('init',array($this,'add_store_role'));
 			/* add filter only show current user media */
 			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
-			
 			/* add media upload files */
 			 add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
 			
 	}
-	
-	
+	/*
+	*Function to contact store owner 
+	*/
+	public function store_contact_action(){
+		$response=array();
+			try{
+				if(!empty($_POST['formdata'])){
+					parse_str($_POST['formdata'], $datas);
+					$v = new Valitron\Validator($datas);
+					$v->rule('required', array('fullName','emailAddress','message'));
+					$v->rule('email','emailAddress');
+					$v->rule('numeric','phoneNumber');
+					$v->rule('lengthMin','phoneNumber',9);
+					$v->rule('lengthMax','phoneNumber',10);
+					if($v->validate()) {
+						global $store;
+						$contact_title=$datas['fullName']." contact " . $store->storeName;
+						$post_id = wp_insert_post( array(
+							'post_author' => $store->user_id,
+							'post_title' =>$contact_title,
+							'post_status' => 'publish',
+							'post_type' => "store_contact",
+						) );
+						
+						
+					$headers = 'From: '.$datas['fullName'].' <'.$datas['emailAddress'].'>' . "\r\n";
+					$email_subject="Store Enquiry";
+					foreach($datas as $key=>$value){
+						update_post_meta($post_id,$key,$value);
+					}
+					wp_mail($store->emailAddress, $email_subject, $datas['message'],$headers);
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="successfully added";
+					//$response['redirectUrl']=site_url("/dashboard/");
+						
+					} else {
+						// Errors
+						$err_msg=json_encode($v->errors());
+						throw new Exception($err_msg,'406');
+					}
+				}
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+	}
 	
 	 /* Add the media uploader script */
   public function my_media_lib_uploader_enqueue() {

@@ -4,7 +4,6 @@ Class GsnCart
 
 */
 class GsnCart{
-	
 	public function __construct(){
 		//add ajax function for make product feature
 		add_action( 'wp_ajax_gsn_remove_item_from_cart', array($this,'remove_item_from_cart') );
