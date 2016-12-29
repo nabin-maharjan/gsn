@@ -20,3 +20,14 @@ $custom_post_types->agile_admin_scripts();
 //////////////////////////////////
 add_theme_support( 'post-thumbnails' );
 show_admin_bar( false);
+
+/* modify esewa merchant id */
+add_filter('esewa_merchant_id_filter','modify_merchant_id',10,1);
+function modify_merchant_id($merchant_id){
+	global $gsnSettingsClass;
+	$gsn_settings=$gsnSettingsClass->get();
+	if(!empty($gsn_settings->esewaId)){
+		return $gsn_settings->esewaId;	
+	}
+	return  $merchant_id;
+};
