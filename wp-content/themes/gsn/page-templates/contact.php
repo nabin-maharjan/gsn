@@ -70,7 +70,7 @@ get_header();?>
 		  var formdata=jQuery(form).serialize();
 		  var data= {action: "gsn_store_contact_action", formdata : formdata};
 		  var response=ajax_call_post(data,"#gsn_store_contact_action",'',function(response){
-			 window.location.href=response.redirectUrl;
+			// window.location.href=response.redirectUrl;
 				 jQuery(form)[0].reset();
 				 jQuery('.parent_dropdown_cntr').html(response.dropdown);
 				 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
