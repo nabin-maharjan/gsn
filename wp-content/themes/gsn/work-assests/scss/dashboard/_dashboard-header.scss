@@ -9,7 +9,8 @@ section{
 		box-shadow: 0 3px 6px 0 rgba(0,0,0,0.5);
 		color: $white;
 		padding: 0 20px;
-		text-align: right;		
+		text-align: right;	
+		height: 60px;	
 		position: fixed;
 		z-index: 4;
 		width: 100%;
@@ -87,7 +88,7 @@ section{
 .dashboard__nav {
 	position: fixed;
 	height: 100%;
-	top: 59px;
+	top: 60px;
 	left: 0;
 	// padding-top: 59px;
 	background: $dark__gray;
