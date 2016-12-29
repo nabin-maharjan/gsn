@@ -85,19 +85,25 @@ class Store{
 					$v->rule('lengthMax','phoneNumber',10);
 					if($v->validate()) {
 						global $store;
-						
+						$contact_title=$datas['fullName']." contact " . $store->storeName;
 						$post_id = wp_insert_post( array(
 							'post_author' => $store->user_id,
-							'post_title' => $store->storeName,
+							'post_title' =>$contact_title,
 							'post_status' => 'publish',
-							'post_type' => "store_setting",
-							 'post_content' =>$_POST['aboutStore']
+							'post_type' => "store_contact",
 						) );
 						
 						
-						
-						
-					wp_mail();
+					$headers = 'From: '.$datas['fullName'].' <'.$datas['emailAddress'].'>' . "\r\n";
+					$email_subject="Store Enquiry";
+					foreach($datas as $key=>$value){
+						update_post_meta($post_id,$key,$value);
+					}
+					wp_mail($store->emailAddress, $email_subject, $datas['message'],$headers);
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="successfully added";
+					//$response['redirectUrl']=site_url("/dashboard/");
 						
 					} else {
 						// Errors
@@ -111,7 +117,6 @@ class Store{
 				$response['msg']=$e->getMessage();
 			}
 			echo json_encode($response);die();
-		
 	}
 	
 	 /* Add the media uploader script */
