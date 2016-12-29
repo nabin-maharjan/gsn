@@ -190,6 +190,15 @@ jQuery(document).ready(function(e) {
       scrollTop: 0
     }, 600);
   });
+
+  // dashboard hamburger click
+  $('.dashboard-hamburger').on('click', function() {
+    $(this).parents('.dashboard-header').toggleClass('nav-open');
+  });
+
+  $('.dashboard-nav-overlay').on('click', function() {
+    $('.dashboard-header').removeClass('nav-open');
+  });
   
 
 });

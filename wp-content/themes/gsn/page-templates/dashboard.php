@@ -12,7 +12,7 @@
  //var_dump($store);die;
 
 ?>
-<div class="container-fluid">
+<div class="container">
 <section>
 <?php
 	global $gsnSettingsClass;

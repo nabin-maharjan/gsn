@@ -25,9 +25,11 @@
 @import "components/gallery";
 @import "components/landing";
 @import "components/map";
-@import "components/dashboard";
-@import "components/cart-page";
 /* ====== Import COMPONENT CSS END ====== */
+
+/* ====== Dashboard Styles CSS ====== */
+@import "dashboard/dashboard-home";
+/* ====== Dashboard Styles CSS END ====== */
 
 /* ====== Theme Styles CSS ====== */
 @import "theme/theme-footer.scss";
@@ -35,4 +37,5 @@
 @import "theme/theme-hero";
 @import "theme/theme-product-section.scss";
 @import "theme/theme-category-page.scss";
+@import "theme/theme-cart-page";
 /* ====== Theme Styles CSS END ====== */
