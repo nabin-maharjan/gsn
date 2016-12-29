@@ -35,7 +35,7 @@ $gsn_settings=$gsnSettingsClass->get();
 				if(is_shop()){
 					$terms=get_term_by( 'name', $store->storeName,'product_cat');	?>
                     <h1><?php echo $store->storeName;?></h1>
-					<div class="page__top-desc"><?php echo apply_filters('the_content',$gsn_settings->aboutStore); ?></div>
+					<div class="page__top-desc"></div>
                     <?php 
 				}
 				if ( is_tax()){ 

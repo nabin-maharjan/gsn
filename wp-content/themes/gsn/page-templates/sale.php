@@ -5,7 +5,7 @@
  * @package GSN
  * @since GSN 1.0
  */
-get_header("store");
+get_header();
 global $gsnProduct;
 $feature_products=$gsnProduct->get_feature_product(5);
 $top_sale_list=$gsnProduct->get_sale_product_list(2);
