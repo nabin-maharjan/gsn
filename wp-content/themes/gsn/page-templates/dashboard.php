@@ -12,7 +12,7 @@
  //var_dump($store);die;
 
 ?>
-<div class="container-fluid">
+<div class="container">
 <section>
 <?php
 	global $gsnSettingsClass;
@@ -517,11 +517,7 @@ if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize
 </div>
  <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
-
-
  <script> 
- 
- 
   /* Store Setting jQuery validation Procress */
 jQuery("#profile_setting_form").validate({
   submitHandler: function(form) {

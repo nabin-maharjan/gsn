@@ -1,0 +1,208 @@
+section{ 
+	clear:both; 
+	display:block;
+}
+
+.dashboard {
+	&-header {
+		background: $dark__gray;
+		box-shadow: 0 3px 6px 0 rgba(0,0,0,0.5);
+		color: $white;
+		padding: 0 20px;
+		text-align: right;		
+		position: fixed;
+		z-index: 4;
+		width: 100%;
+
+		&.nav-open .dashboard__nav {
+			width: 250px;
+
+			a span {
+				transform: translateX(0);
+				opacity: 1;			
+				transition: transform 0.3s ease-in-out, opacity 0.8s ease-in-out;
+			}
+		}
+
+		&.nav-open .dashboard-nav-overlay {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&__header-left {
+		position: relative;
+		z-index: 4;
+		margin-top: 15px;
+
+		h1 {
+			display: inline-block;
+			font-size: 26px;
+			font-weight: bold;
+			line-height: 1;
+			margin-left: 20px;
+			text-transform: uppercase;
+		}
+	}
+}
+
+.dashboard-hamburger {
+	cursor: pointer;
+	display: inline-block;
+	height: 18px;
+	width: 30px;
+	float: left;
+	margin-top: 4px;
+
+	span {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: $white;
+		position: relative;
+		top: 50%;
+
+		&::before, &::after {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 2px;
+			background: inherit;
+			position: absolute;
+			top: -8px;
+			left: 0;
+		}
+
+		&::after {
+			top: auto;
+			bottom: -8px;
+		}
+	}
+
+	&:hover span {
+		background: $brick_red;
+	}
+}
+
+.dashboard__nav {
+	position: fixed;
+	height: 100%;
+	top: 59px;
+	left: 0;
+	// padding-top: 59px;
+	background: $dark__gray;
+	width: 70px;
+	overflow-x: hidden;
+	z-index: 3;	
+	transition: all 0.2s ease-in-out;
+
+	ul{
+		li {
+			display: block;
+			height: 50px;
+
+			a {
+				display: block;
+				padding: 0 20px;
+				text-align: left;
+				height: 50px;
+				line-height: 50px;
+				position: relative;
+				transition: all 0.2s ease-in-out;
+				white-space: nowrap;
+
+				&::before {
+					content: '';
+					position: absolute;
+					height: 100%;
+					width: 3px;
+					background: $brick_red;
+					left: 0;
+					top: 0;
+					transition: all 0.2s ease-in-out;
+				}
+
+				&:hover:before {
+					width: 100%;
+				}
+
+				.dashboard-icons {
+					height: 50px;
+					width: 30px;
+					text-align: center;
+					line-height: 50px;
+					font-size: 18px;
+					position: relative;					
+				}
+
+				span {
+					padding-left: 10px;
+					position: relative;
+					display: inline-block;
+					opacity: 0;
+					transform: translateX(-120px);
+					transition: transform 0.8s ease-in-out, opacity 0.3s ease-in-out;
+				}
+			}
+		}
+	}
+}
+
+.dashboard-nav-overlay {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background: rgba(0,0,0,0.3);
+	transition: all 0.2s ease-in-out;
+}
+
+.header-profile-cntr {
+	position: relative;
+
+	.profile-info {
+		line-height: 60px;
+		padding: 0 20px;
+
+		span {
+			margin-left: 5px;
+		}
+
+		&:hover {
+			background: $brick_red;
+		}
+	}
+
+	.profile__links {
+		background: $dark__gray;
+		box-shadow: 0 3px 6px 0 rgba(0,0,0,.5);
+		position: absolute;
+		right: 0;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease-in-out;
+
+		li {
+			display: block;
+
+			a {
+				display: block;
+				padding: 10px 20px;
+
+				&:hover {
+					background: $brick_red;
+				}
+			}
+		}
+	}
+
+	&:hover .profile__links {
+		opacity: 1;
+		visibility: visible;
+	}
+}
