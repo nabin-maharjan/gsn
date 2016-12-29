@@ -4,6 +4,17 @@
     background: $light_gray;    
     padding: 80px 0 30px;    
     width: 100%;
+
+    .woocommerce-breadcrumb {
+      color: $dark_gray;
+      font-weight: bold;
+      margin-bottom: 0;
+      margin-top: 10px;
+
+      a:hover {
+        color: $brick_red;
+      }
+    }
   }
 
   &__top-info {
@@ -20,18 +31,33 @@
     color: $dark_gray;
   }
 
-  &__breadcrumb {
-    margin-top: 10px;
+}
 
-    .woocommerce-breadcrumb {
-      color: $dark_gray;
-      font-weight: bold;
-      margin-bottom: 0;
+.inner-page-cntr {
+  margin-top: 30px;
 
-      a:hover {
-        color: $brick_red;
-      }
-    }
+  p.woocommerce-result-count, form.woocommerce-ordering {
+    margin-bottom: 0;
+  }
+
+  .form-top-info {
+    background: $dark_gray;
+    color: $white;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+  }
+
+  p.woocommerce-result-count {
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  form select {
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+    padding: 8px 12px;
   }
 }
 

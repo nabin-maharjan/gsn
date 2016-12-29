@@ -48,19 +48,23 @@ get_header( 'store' ); ?>
 		?>
 
 		<div class="container">
-			<div class="row">					
+			<div class="row">	
+				<div class="inner-page-cntr">
 					<?php if ( have_posts() ) : ?>
-
-						<?php
-							/**
-							 * woocommerce_before_shop_loop hook.
-							 *
-							 * @hooked woocommerce_result_count - 20
-							 * @hooked woocommerce_catalog_ordering - 30
-							 */
-							do_action( 'woocommerce_before_shop_loop' );
-						?>
-
+					<div class="col-sm-12 inner-page-top-info clearfix">
+						<div class="form-top-info clearfix">
+							<?php
+								/**
+								 * woocommerce_before_shop_loop hook.
+								 *
+								 * @hooked woocommerce_result_count - 20
+								 * @hooked woocommerce_catalog_ordering - 30
+								 */
+								do_action( 'woocommerce_before_shop_loop' );
+							?>
+						</div>
+					</div>	
+					<!-- /.inner-page-top-info -->				
 					<div class="product-list-cntr">
 						<?php woocommerce_product_loop_start(); ?>
 
@@ -83,21 +87,24 @@ get_header( 'store' ); ?>
 							do_action( 'woocommerce_after_shop_loop' );
 						?>
 
-					<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
+						<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
-						<?php wc_get_template( 'loop/no-products-found.php' ); ?>
+							<?php wc_get_template( 'loop/no-products-found.php' ); ?>
 
-					<?php endif; ?>
+						<?php endif; ?>
 
-				<?php
-					/**
-					 * woocommerce_after_main_content hook.
-					 *
-					 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-					 */
-					do_action( 'woocommerce_after_main_content' );
-				?>
+					<?php
+						/**
+						 * woocommerce_after_main_content hook.
+						 *
+						 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+						 */
+						do_action( 'woocommerce_after_main_content' );
+					?>
+				</div>
+				<!-- /.product-list-cntr -->
 			</div>
+			<!-- /.inner-page-cntr -->
 		</div>
 	</div>
 
