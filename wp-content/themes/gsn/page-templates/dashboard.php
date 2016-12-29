@@ -110,6 +110,21 @@
     </div>
     <!-- Row end -->
     
+    <!-- Row end -->
+     <div class="form-group row">
+     <div class="col-sm-12"><h3>Payment Information</h3></div>
+     </div>
+    <!-- Row start -->
+    
+    <!-- Row start -->
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">eSewa ID</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
+      </div>
+    </div>
+    <!-- Row end -->
+    
     
     
     
