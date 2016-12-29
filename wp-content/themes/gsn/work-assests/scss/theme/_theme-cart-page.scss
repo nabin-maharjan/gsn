@@ -118,3 +118,18 @@ h2.entry-title{ margin-bottom:20px; text-transform: uppercase;}
 				}
 	}	
 }
+
+
+.woocommerce-checkout-payment{
+		&#payment ul.payment_methods{
+			li{ 
+			display:block;
+				label{
+					font-weight: 700;
+					}
+				input[type=radio]{ outline:none;}
+				p{ margin-left:25px;}
+			}
+		}
+	}
+
