@@ -159,7 +159,7 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 						update_post_meta($post_id,$key,$value);
 						
 					}
-					update_post_meta($post_id,$key,$value);
+					//update_post_meta($post_id,$key,$value);
 					$response['status']="success";
 					$response['code']='200';
 					$response['msg']="successfully added";
