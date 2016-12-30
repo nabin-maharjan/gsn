@@ -76,7 +76,9 @@ if(jQuery('#map').length){
         });
 		
 		 var geocoder = new google.maps.Geocoder();
-		 function getAddress(latLng) {
+		
+	}
+	 function getAddress(latLng) {
 			geocoder.geocode( {'latLng': latLng},
 			  function(results, status) {
 				if(status == google.maps.GeocoderStatus.OK) {
@@ -96,5 +98,4 @@ if(jQuery('#map').length){
 				}
 			  });
 			}
-	}
 }
