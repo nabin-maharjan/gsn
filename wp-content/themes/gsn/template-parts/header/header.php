@@ -60,20 +60,23 @@ $store->check_access_store();
       <ul>
         <li>
           <a href="<?php echo site_url("/dashboard/settings/shop/");?>">
+            <div class="dashboard-tooltip"><span>Store Setting</span></div>
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Store Setting</span>
+            <span class="nav-text">Store Setting</span>
           </a>
         </li>
         <li>
           <a href="<?php echo site_url("/dashboard/settings/profile/");?>">
+            <div class="dashboard-tooltip"><span>Profile Setting</span></div>
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Profile Setting</span>
+            <span class="nav-text">Profile Setting</span>
           </a>
         </li>
         <li>
           <a href="<?php echo site_url("/dashboard/product/");?>">
+            <div class="dashboard-tooltip"><span>Product</span></div>
             <i class="fa fa-dashboard dashboard-icons"></i>
-            <span>Product</span>
+            <span class="nav-text">Product</span>
           </a>
         </li>
       </ul>      
