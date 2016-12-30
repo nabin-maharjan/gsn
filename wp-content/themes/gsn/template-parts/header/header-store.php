@@ -2,6 +2,8 @@
 global $store;
 global $gsnCart;
 global $gsnSettingsClass;
+global $gsnProduct;
+$storeProducts=$gsnProduct->get_new_product_list(-1);
 $gsnSettings=$gsnSettingsClass->get($store->user_id);
 $store->check_access_store();
 $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
@@ -74,25 +76,14 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                 ?>
               </nav>
             </div>
-            <!-- /.item__nav -->
-            <div class="item__search">
-              <div class="search search-cntr">
-                <div class="search-icon">
-                  <a href="#"><i class="fa fa-search"></i></a>
-                </div>
-                <div class="search__content">
-                  
-                </div>
-              </div>
-            </div>
-            <!-- /.item-search -->
+            <!-- /.item__nav -->            
             <div class="item__cart fr">
               <div class="cart cart-cntr">
                 <div class="cart__icon">                
                	<?php $cart_count = WC()->cart->cart_contents_count;?>
                   <a href="#"><i class="fa fa-shopping-cart"></i><span class="cart-indicator"><?php echo $cart_count;?></span></a>
                 </div>                
-                <div class="cart__content">
+                <div class="cart__content toggle__content">
                   <div class="cart__block">
                     <div class="cart__list-cntr">
                       <ul class="cart__list"><?php echo $gsnCart->get_cart_list_html();?></ul>
@@ -122,6 +113,42 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
               </div>
             </div>
             <!-- /.item-cart -->
+            <div class="item__search fr">
+              <div class="search search-cntr">
+                <div class="search-icon">
+                  <a href="#"><i class="fa fa-search"></i></a>
+                </div>
+                <div class="search__content toggle__content">
+                  <div class="search__block">
+                    <form action="" type="search" name="search" class="clearfix">
+                      <div class="search-select fl">                        
+                        <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); ?>          
+                        <?php 
+                          $args = array(
+                            'hierarchical' => 1,
+                            'child_of' =>$storeParentCat->term_id,
+                            'taxonomy'     => 'product_cat',
+                            'hide_empty' => false,
+                            'name'               => 'parent',
+                            'id'                 => 'parent',
+                            'class'              => 'form-control form-control-sm',
+                            'show_option_none'    => 'Select Category'
+                          );                  
+                          wp_dropdown_categories( $args );                  
+                        ?>
+                      </div>
+                      <div class="search-input fl">
+                        <input type="text" placeholder="Search product" class="form-control form-control-sm">
+                      </div>
+                      <div class="search-button clearfix fl">
+                        <button class="btn btn-submit red-btn search-btn fr">Search</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.item-search -->
           </div>
           <!-- /.header__main-items -->
         </div>
