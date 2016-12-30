@@ -38,7 +38,7 @@
  
  
  
- 
+ <div class="col-sm-4">
  <section>
  <h3>Sales Product</h3>
  
@@ -81,21 +81,10 @@
  </section>
  
  
+ </div>
  
  
- 
- <section>
- <h2>Specification</h2>
- <?php foreach($attributes as $attribute){
-	 $att_name=explode('_',$attribute['name']);
-	 array_shift($att_name);
-	 $att_name=ucfirst(trim(implode(" ",$att_name)));
-	 ?>
-	 <div><?php echo $att_name; ?>: <?php echo $attribute['value']; ?></div>
- <?php }?>
- </section>
- 
- 
+  <div class="col-sm-4">
  <section>
   <h3>Add Stock</h3>
    <div class="container">
@@ -114,7 +103,8 @@
    </div>
  
  </section>
- 
+ </div>
+  <div class="col-sm-4">
   <section>
   <h3>Stock Out</h3>
    <div class="container">
@@ -133,7 +123,7 @@
    </div>
  
  </section>
- 
+ </div>
 <?php /*?>
  <section>
  	<p>Image gallery</p>

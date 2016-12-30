@@ -8,7 +8,7 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
     <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="btn btn-primary">View All Category</a>
     <!-- /.dashboard-top -->
       <div class="summary-cards-cntr clearfix">
-        <div class="col-sm-4 summary__card">
+        <div class="col-sm-3 summary__card">
           <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
@@ -18,7 +18,7 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
         </div>
         <!-- /.summary__card -->
         
-        <div class="col-sm-4 summary__card">
+        <div class="col-sm-3 summary__card">
           <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
