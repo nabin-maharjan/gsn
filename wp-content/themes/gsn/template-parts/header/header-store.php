@@ -67,10 +67,11 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
               </div> -->
               <nav class="main-nav">
                 <?php wp_nav_menu( array( 
-				'theme_location' => 'store-header-menu',
-				'menu_class' => 'nav navbar-nav nav__links',
-				'walker'=>new wp_bootstrap_navwalker ()
-				 ) ); ?>
+          				'theme_location' => 'store-header-menu',
+          				'menu_class' => 'nav navbar-nav nav__links',
+          				'walker'=>new wp_bootstrap_navwalker ()
+          				 ) ); 
+                ?>
               </nav>
             </div>
             <!-- /.item__nav -->
