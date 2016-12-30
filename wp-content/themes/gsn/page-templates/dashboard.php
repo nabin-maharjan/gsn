@@ -91,76 +91,10 @@ jQuery("#store_setting_form").validate({
   }
 });
  
- jQuery(document).on('click','.remove_attachment_gallery',function(){
-	 var galleries_id=jQuery('#image_ids').val();
-	 var galleries_ids=galleries_id.split(',');
-	 var item_to_remove=jQuery(this).data('pic-id');
-	 // Find and remove item from an array
-		var i = galleries_ids.indexOf(String(item_to_remove));
-		if(i != -1) {
-			galleries_ids.splice(i, 1);
-		}
-	 jQuery('#image_ids').val(galleries_ids);
-	 jQuery(this).parent('.attachment-span').remove();
- });
- 
- jQuery('#add_product_attributes').on('click',function(){
-	var attribute_html= "";
-	attribute_html+="<div class=\"form-group row attribute-row\">";
-		attribute_html+="<div class=\"col-sm-4\">";
-			attribute_html+="<label class=\"col-form-label col-form-label-sm\">Name</label>";
-			attribute_html+="<input type=\"text\" class=\"form-control form-control-sm\" name=\"attribute_name[]\">";
-		attribute_html+="</div>";
-		
-		attribute_html+="<div class=\"col-sm-7\">";
-			attribute_html+="<label class=\" col-form-label col-form-label-sm\">Value</label>";
-			attribute_html+="<textarea class=\"form-control form-control-sm\" name=\"attribute_value[]\"></textarea>";
-		attribute_html+="</div>";
-		attribute_html+="<div class=\"col-sm-1\">";
-			attribute_html+="<label class=\" col-form-label col-form-label-sm\">&nbsp;</label>";
-			attribute_html+="<button class=\"btn btn-danger remove-attribute-row\">Remove</button>";
-		attribute_html+="</div>";
-	attribute_html+="</div>";
-	jQuery(attribute_html).appendTo('.product_attribute');
-	 
- });
- 
- jQuery(document).on('click','.remove-attribute-row',function(){
-	 jQuery(this).parents('.attribute-row').remove();
- });
+
  
  
-  /* Login jQuery validation Procress */
-jQuery("#product_create_form").validate({
-	ignore: ['image_id'],
-	rules: {
-      name:"required",
-	  category:"required",
-	  description: "required",
-	  price:{
-		  required: true,
-		  number :true
-		  
-	  },
-	  stock:{
-		  required: true,
-		  number :true
-	  },
-	  image_id: "required"
-	  
-    },
-  submitHandler: function(form) {
-	  var formdata=jQuery(form).serialize();
-	  var data= {action: "gsn_add_product", formdata : formdata};
-	  var response=ajax_call_post(data,"#product_create_form",'',function(response){
-				//  window.location.href=response.redirectUrl;
-				jQuery(form)[0].reset();
-				jQuery('#image_src').attr('src','')
-				jQuery('.gallery_image_cntr').html('');
-	 });
-  }
-	
-});
+
  
  /* Login jQuery validation Procress */
 jQuery("#category_create_form").validate({

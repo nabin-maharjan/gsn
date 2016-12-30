@@ -538,6 +538,11 @@ class GsnProduct{
 		return new WP_Query($args);
 	}
 	public function get_store_product(){
+		
+		if(!empty($_GET['action']) && $_GET['action']=="edit" && !empty($_GET['id'])){
+			$product_id=$_GET['id'];
+			return new WC_product($product_id);
+		}
 		$product_slug=get_query_var('store_product_slug');
 		global $store;
 		$args=array( 
