@@ -74,7 +74,7 @@ jQuery(document).click(function(event) {
         if(jQuery('.item__cart .cart__content').is(":visible")) {
           jQuery('.item__cart .cart.cart-cntr .cart__icon a').trigger('click');		    
         }
-    }        
+    }       
 });
 
 /* Remove product Feature */
@@ -165,7 +165,12 @@ jQuery(document).ready(function(e) {
     jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
   });
 
-    $('.main-content').css({'margin-top': $('.header__bottom').height()});
+  jQuery('.item__search  .search-icon a').on('click', function(e) {
+    e.preventDefault();  
+    jQuery(this).parents('.search-cntr').find('.search__content').slideToggle();
+  });
+
+  $('.main-content').css({'margin-top': $('.header__bottom').height()});
   
   $(document).on('scroll', function() {
     // backToTop Display
