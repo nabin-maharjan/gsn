@@ -71,7 +71,7 @@ $store->check_access_store();
           </a>
         </li>
         <li>
-          <a href="<?php echo site_url("/dashboard/settings/profile/");?>">
+          <a href="<?php echo site_url("/dashboard/product/");?>">
             <i class="fa fa-dashboard dashboard-icons"></i>
             <span>Product</span>
           </a>

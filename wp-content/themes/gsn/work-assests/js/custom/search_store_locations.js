@@ -3,6 +3,7 @@ $('#gridSystemModal').on('shown.bs.modal', function() {
     myMap();
 });
 function myMap() {	
+if(jQuery('#map').length){
   var storeLocation=document.getElementById("storeFullAddress");
   var latittude_cntr=document.getElementById("latitute");
   var lognitude_cntr=document.getElementById("lognitute");
@@ -95,4 +96,5 @@ function myMap() {
 				}
 			  });
 			}
+	}
 }

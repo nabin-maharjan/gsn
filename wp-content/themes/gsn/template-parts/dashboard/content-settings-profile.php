@@ -1,8 +1,9 @@
+<?php global $store;?>
 <section>
-  	<h3>Profile Settings</h3>
+  	
       <div class="container">
      <form name="profile_setting_form" id="profile_setting_form">
-     
+     <h3>Profile Settings</h3>
      <!-- Row start -->
       <div class="form-group row">
         <label for="firstName" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>

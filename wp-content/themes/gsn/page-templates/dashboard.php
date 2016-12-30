@@ -39,10 +39,15 @@ jQuery("#profile_setting_form").validate({
 	  var formdata=jQuery(form).serialize();
 	  var data= {action: "gsn_store_profile_setting", formdata : formdata};
 	  var response=ajax_call_post(data,"#profile_setting_form",'',function(response){
-		 window.location.href=response.redirectUrl;
+		// window.location.href=response.redirectUrl;
 			 jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
-			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			  
+	 },function(){
+		jQuery('html, body').animate({
+				scrollTop: jQuery("body").offset().top
+			}, 500); 
 	 });
   }
 }); 
@@ -72,7 +77,15 @@ jQuery("#store_setting_form").validate({
 		 //  window.location.href=response.redirectUrl;
 			 jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
-			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
+			 jQuery('.alert-success').remove();
+			 
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			 
+	 },function(){
+		 jQuery('html, body').animate({
+				scrollTop: jQuery("body").offset().top
+			}, 500);
+		 
 	 });
 	 
   }
