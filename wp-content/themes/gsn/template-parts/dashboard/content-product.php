@@ -1,6 +1,7 @@
 <?php
-global $gsnProduct, $store;
+global $gsnProduct, $store, $gsnCategory;
 $storeProducts=$gsnProduct->get_new_product_list(-1);
+$count_category=$gsnCategory->get_count_store_category();
 ?>
 <section>
     <a href="<?php echo site_url("/dashboard/product/?action=add");?>" class="btn btn-primary">Add New Product</a>  
@@ -19,9 +20,9 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
         <!-- /.summary__card -->
         
         <div class="col-sm-3 summary__card">
-          <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+          <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
             <div class="">
-              <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
+              <span class="summary-number"><?php echo $count_category;?></span>
               <h2>Category</h2>
             </div>
           </a>

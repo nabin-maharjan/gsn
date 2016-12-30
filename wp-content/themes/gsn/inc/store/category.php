@@ -67,7 +67,17 @@ class GsnCategory{
 			echo json_encode($response);die();
 			
 		}
-		
+		public function get_count_store_category($user_id){
+			global $store;
+			$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+			$args = array(
+				'child_of' =>$storeParentCat->term_id,
+				'taxonomy'     => 'product_cat',
+				'hide_empty' => false,
+			);
+			$store_category=get_terms($args);
+			return count($store_category);
+		}
 }
 global $gsnCategory;
 $gsnCategory=new GsnCategory();
