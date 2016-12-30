@@ -347,10 +347,11 @@
     button {
       display: block;
       width: 100%;
+      background: $brick_red;
       transition: all 0.3s ease;
 
       &:hover {
-        background: $brick_red;
+        background: $petal_green;
       }
     }
   }

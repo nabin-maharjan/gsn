@@ -6,7 +6,7 @@
       </div>
       <!-- /.dashboard-top -->
       <div class="summary-cards-cntr clearfix">
-        <div class="col-sm-4 summary__card">
+        <div class="col-sm-3 summary__card">
           <a href="#" class="summary-info">
             <div class="">
               <span class="summary-number">10</span>
