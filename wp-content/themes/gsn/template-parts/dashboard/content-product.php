@@ -1,3 +1,14 @@
+<?php
+global $gsnProduct, $store;
+$storeProducts=$gsnProduct->get_new_product_list(-1);
+
+?>
+<section>
+    <a href="<?php echo site_url("/dashboard/product/?action=add");?>" class="btn btn-primary">Add New Product</a>
+    <div>Products: <?php echo $storeProducts->found_posts;?></div>
+</section>
+
+
 <section>
    <?php
   $product_edit=false;

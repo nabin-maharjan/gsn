@@ -1,13 +1,12 @@
-<section>
   <?php
   	global $gsnSettingsClass;
   	$gsn_themes=$gsnSettingsClass->available_theme();
   	$gsn_settings=$gsnSettingsClass->get();
   ?>
-
-  	<h3>Settings</h3>
-      <div class="container clearfix">
+<section>
+<div class="container clearfix">
      <form name="store_setting_form" id="store_setting_form">
+     <h3>Shop Settings</h3>
      <!-- Row start -->
       <div class="form-group row">
         <label for="upload-button" class="col-sm-2 col-form-label col-form-label-sm">Logo</label>
@@ -107,11 +106,7 @@
         <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
       </div>
     </div>
-    <!-- Row end -->
-    
-    
-    
-    
+    <!-- Row end -->   
     <?php if($gsn_settings->id!=NULL){?>
     	<input type="hidden" name="gsn_settings_id"  value="<?php echo $gsn_settings->id;?>">
          <input type="hidden" name="action" value="edit">

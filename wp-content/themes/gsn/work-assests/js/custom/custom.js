@@ -31,7 +31,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
             }
          },
 		 complete: function(){
-			 complete_callback();
+			 if(typeof(complete_callback)!=="undefined"){
+				 complete_callback();
+			 }
 		 }
       });
 	 return xhr;
@@ -48,6 +50,7 @@ jQuery('.make_product_feature').on('click',function(){
 	 });
 	 
 });
+
 
 /* 
 *Remove item from cart when button click 
@@ -199,6 +202,7 @@ jQuery(document).ready(function(e) {
   $('.dashboard-nav-overlay').on('click', function() {
     $('.dashboard-header').removeClass('nav-open');
   });
+
   
 
 });
