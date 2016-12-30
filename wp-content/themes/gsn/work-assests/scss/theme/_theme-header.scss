@@ -288,6 +288,7 @@
 .search__content.toggle__content {
   // display: block;
   width: 600px;
+  right: 15px;
 }
 // /.cart
 
@@ -297,7 +298,7 @@
 }
 
 .search {
-  position: relative;
+  // position: relative;
   
   a:hover {
     color: $brick_red;
