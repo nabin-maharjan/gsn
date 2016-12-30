@@ -75,9 +75,16 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
               </nav>
             </div>
             <!-- /.item__nav -->
-            <!-- <div class="item-search">
-              
-            </div> -->
+            <div class="item__search">
+              <div class="search search-cntr">
+                <div class="search-icon">
+                  <a href="#"><i class="fa fa-search"></i></a>
+                </div>
+                <div class="search__content">
+                  
+                </div>
+              </div>
+            </div>
             <!-- /.item-search -->
             <div class="item__cart fr">
               <div class="cart cart-cntr">
