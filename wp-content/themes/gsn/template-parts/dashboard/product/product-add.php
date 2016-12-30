@@ -5,8 +5,8 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
 <section>
    <?php
   $product_edit=false;
-  if(!empty($_GET['pid']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
-  	$product= new WC_product(sanitize_text_field($_GET['pid']));
+  if(!empty($_GET['id']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
+  	$product= new WC_product(sanitize_text_field($_GET['id']));
   	$product_price=get_post_meta($product->id,'_regular_price',true);
   	$product_edit=true;
   }

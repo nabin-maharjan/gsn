@@ -19,25 +19,24 @@
  ?>
  
  <section>
- <h1><?php echo $product->post->post_title; ?> <a href="<?php echo site_url("/dashboard/?pid=".$product->id."&action=edit");?>" class="btn btn-default">Edit</a> 
  <?php if($product->is_featured()){?>
  <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
  <?php }else{ ?>
  <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
  <?php } ?>
  </h1>
- <div><?php echo apply_filters('the_content',$product->post->post_content);?></div>
- <div> Price : <?php echo $product->get_price();?></div>
- <div> Available Stock : <?php echo $product->get_stock_quantity();?></div>
- <div> Total Sales : <?php echo get_post_meta($product->post->ID,'total_sales',true);?></div>
- <div>
- 	<?php
-	 if(has_post_thumbnail($product->post->ID)){
-		echo get_the_post_thumbnail( $product->post->ID, 'thumbnail' );
-	}?>
-
- </div>
  </section>
+ 
+ 
+ <?php 
+ /*
+ * Include product edit form
+ */
+ get_template_part( 'template-parts/dashboard/product/product','add'); 
+ 
+  ?> 
+ 
+ 
  
  
  <section>
@@ -135,13 +134,12 @@
  
  </section>
  
-
+<?php /*?>
  <section>
  	<p>Image gallery</p>
    <?php  foreach( $attachment_ids as $attachment_id ) 
 	{
 	  echo wp_get_attachment_image($attachment_id, 'thumbnail');
-
 	} ?>
  </section>
  
@@ -170,7 +168,7 @@
 	 
  }
  ?>
- </section>
+ </section><?php */?>
  <?php get_footer();?>
  <script>
  
