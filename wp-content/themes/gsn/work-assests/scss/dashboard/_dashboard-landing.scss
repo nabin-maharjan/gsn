@@ -1,0 +1,62 @@
+.dashboard-main-cntr {
+  padding-top: 100px;
+}
+.dashboard-title {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0 15px;
+}
+
+.summary-cards-cntr {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  
+  .summary__card {
+    margin-bottom: 30px;
+    float: none;
+
+    .summary-info {
+      color: $white;
+      background: $brick_red;
+      text-align: center;
+      padding: 50px;
+      display: block;
+
+      > div {
+        position: relative;
+        z-index: 2;
+      }
+
+      span {
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1;
+      }    
+
+      h2 {
+        margin-top: 10px;
+        text-transform: uppercase;
+        font-size: 24px;
+        font-weight: bold;
+      } 
+
+      &:after {
+        content: '';
+        height: 0;
+        bottom: 0;
+        left: 15px;
+        right: 15px;
+        position: absolute;
+        background: $petal_green;
+        z-index: 1;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover::after {
+        height: 100%;
+      }
+    }
+  }
+}
