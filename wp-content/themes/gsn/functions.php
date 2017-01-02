@@ -8,6 +8,7 @@ include("inc/input-fields.php");
 include("inc/store/register.php");
 include("inc/store/category.php");
 include("inc/store/product.php");
+include("inc/store/order.php");
 include("inc/store/cart.php");
 include("inc/store/setting.php");
 /////////////////////////////////////////

@@ -79,6 +79,14 @@ $store->check_access_store();
             <span class="nav-text">Product</span>
           </a>
         </li>
+         <li>
+          <a href="<?php echo site_url("/dashboard/order/");?>">
+            <div class="dashboard-tooltip"><span>Order</span></div>
+            <i class="fa fa-dashboard dashboard-icons"></i>
+            <span class="nav-text">Order</span>
+          </a>
+        </li>
+        
       </ul>      
     </nav>
     <!-- /.dashboard__nav -->  
