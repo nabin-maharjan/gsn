@@ -1,0 +1,126 @@
+// ===================== //
+// product setting pages
+// ===================== //
+.product-links-cntr {
+  padding: 0 15px;
+  font-size: 0;
+
+  a {
+    font-size: 14px;
+    margin-right: 10px;    
+  }
+}
+
+.products__list-cntr {
+
+  .product-list-cntr {
+
+    ul.products {
+
+      li.product-list-item {
+        width: 20%;
+
+        .product-info-cntr {
+
+          h4 {
+            font-size: 14px;            
+            font-weight: normal;
+            margin-bottom: 5px;
+
+            a:hover {
+              color: $brick_red;
+            }
+          }
+
+          .price {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .product-image-cntr .product-image {
+      height: 150px;
+    }
+
+    .cart-btn a {
+      font-size: 11px;
+      padding: 10px 20px;
+
+      &::befre {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.product-feature-setting {
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.product-extra-edit-cntr {
+  margin-top: 30px;
+}
+
+.product-setting button {
+  margin-left: 15px;
+}
+
+.dashboard-main-cntr {
+  button, input[type="button"] {
+    font-size: 14px;
+  }
+}
+
+.add-image-btn {
+  margin-top: 10px;
+}
+
+.attachment-span {
+  display: inline-block;
+  margin-right: 6px;
+  
+  i {
+    display: block;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: $brick_red;
+    }
+  }
+}
+// ===================== //
+// /.product setting pages
+// ===================== //
+
+// ===================== //
+// profile setting pages
+// ===================== //
+.profile-setting-cntr .profile-update-btn {
+  margin-left: 15px;
+  margin-top: 20px;
+}
+// ===================== //
+// /.profile setting pages
+// ===================== //
+
+// ===================== //
+// store setting pages
+// ===================== //
+.store-setting-cntr {
+  .form-group h3 {
+    margin: 0 0 30px;
+  }
+
+  .store-update-btn {
+    margin-left: 15px;
+    margin-top: 20px;
+  }
+}
+// ===================== //
+// /.store setting pages
+// ===================== //

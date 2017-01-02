@@ -2,7 +2,7 @@
 global $gsnProduct, $store;
 $storeProducts=$gsnProduct->get_new_product_list(-1);
 ?>
-<section>
+<section class="product-add-edit-cntr">
    <?php
   $product_edit=false;
   if(!empty($_GET['id']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
@@ -94,11 +94,11 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
   			 $post_thumbnail_id = get_post_thumbnail_id( $product->id );
   			$post_thumnail_url=get_the_post_thumbnail_url( $product->id, 'thumbnail' );
   		}?>
-        
+        <input type="button" class="btn btn-info upload-image-button" value="Upload Image" />
           <input id="image_id" class="image_id" type="hidden" name="image_id" value="<?php echo (!empty($post_thumbnail_id))?$post_thumbnail_id:"";?>" />
           <img class="image_src" width="150" src="<?php echo (!empty($post_thumnail_url))?$post_thumnail_url:"";?>">
            
-   		 <input type="button" class="btn btn-info upload-image-button" value="Upload Image" />
+   		 
            
            </div>
         </div>
@@ -127,7 +127,7 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
            <?php } }?>
            </div>
            
-           <input  type="button" class="btn btn-info upload-button-multiple" value="Add Image" />
+           <input  type="button" class="btn btn-info upload-button-multiple add-image-btn" value="Add Image" />
            </div>
            
            

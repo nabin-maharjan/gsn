@@ -36,7 +36,7 @@
           <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $count_feature_product;?></span>
-              <h2>Feature Product</h2>
+              <h2>Featured Product</h2>
             </div>
           </a>
         </div>

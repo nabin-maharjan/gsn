@@ -18,13 +18,12 @@
 //var_dump(get_post_meta($product->id));
  ?>
  
- <section>
- <?php if($product->is_featured()){?>
- <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
- <?php }else{ ?>
- <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
- <?php } ?>
- </h1>
+ <section class="product-feature-setting">
+   <?php if($product->is_featured()){?>
+   <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
+   <?php }else{ ?>
+   <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
+   <?php } ?>
  </section>
  
  <?php 
@@ -34,92 +33,90 @@
  get_template_part( 'template-parts/dashboard/product/product','add'); 
  
   ?> 
- <div class="col-sm-4">
- <section>
- <h3>Sales Product</h3>
- 
- <form name="set_sale_product_form" id="set_sale_product_form">
-  <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Price:</label>
-      <div class="col-sm-10"><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
-    </div>
-    <!-- Row end -->
-    <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Sales Price:</label>
-      <div class="col-sm-10">
-      <?php echo get_woocommerce_currency_symbol();?> 
-        <input type="text" class="form-control form-control-sm" value="<?php echo $product->sale_price;?>" name="sale_price" id="sale_price" placeholder="Sales Price">
-      </div>
-    </div>
-    <!-- Row end -->
-    <!-- Row start -->
-    
-    <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start:</label>
-      <div class="input-daterange input-group col-sm-8" id="datepicker">
-      <?php 
-	  $start_date=get_post_meta($product->id, '_sale_price_dates_from', true);
-	  $end_date=get_post_meta($product->id, '_sale_price_dates_to', true);
-	  ?>
+
+<section class="product-extra-edit-cntr clearfix">
+  <div class="col-sm-4 product-setting product-sales-setting">
+    <div class="row">
+      <h3>Sales Product</h3> 
+      <form name="set_sale_product_form" id="set_sale_product_form">
+        <!-- Row start -->
+        <div class="form-group clearfix">
+          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Price:</label>
+          <div class="col-sm-10"><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
+        </div>
+        <!-- Row end -->
+
+        <!-- Row start -->
+        <div class="form-group clearfix">
+          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Sales Price:</label>
+          <div class="col-sm-10">
+          <?php echo get_woocommerce_currency_symbol();?> 
+            <input type="text" class="form-control form-control-sm" value="<?php echo $product->sale_price;?>" name="sale_price" id="sale_price" placeholder="Sales Price">
+          </div>
+        </div>
+        <!-- Row end -->
+
+        <!-- Row start -->
+        <div class="form-group clearfix">
+          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start:</label>
+          <div class="input-daterange input-group col-sm-8" id="datepicker">
+            <?php 
+    	        $start_date=get_post_meta($product->id, '_sale_price_dates_from', true);
+    	        $end_date=get_post_meta($product->id, '_sale_price_dates_to', true);
+    	      ?>
             <input type="text" class="input-sm form-control" value="<?php echo (!empty($start_date))?date('Y-m-d',$start_date):"";?>" name="sale_start" />
             <span class="input-group-addon">to</span>
             <input type="text" class="input-sm form-control" value="<?php echo (!empty($end_date))?date('Y-m-d',$end_date):"";?>"  name="sale_end" />
+          </div>
         </div>
+        <!-- Row end -->
+
+        <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-    <!-- Row end -->
-    <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
+  <!-- /.product-sales-setting -->
  
- </section>
- 
- 
- </div>
- 
- 
-  <div class="col-sm-4">
- <section>
-  <h3>Add Stock</h3>
-   <div class="container">
-   <form name="stock_add_form" id="stock_add_form">
-  <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity :</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control form-control-sm" name="qty" id="qty" placeholder="Qty">
-      </div>
+  <div class="col-sm-4 product-setting product-add-stock-setting">
+    <div class="row">
+      <h3>Add Stock</h3>
+      <form name="stock_add_form" id="stock_add_form">
+      <!-- Row start -->
+        <div class="form-group clearfix">
+          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" name="qty" id="qty" placeholder="Qty">
+          </div>
+        </div>
+        <!-- Row end -->
+        <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id;?>">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-    <!-- Row end -->
-    <input type="hidden" name="product_id" id="product_id" value="<?php echo $product->id;?>">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-   </div>
- 
- </section>
- </div>
-  <div class="col-sm-4">
-  <section>
-  <h3>Stock Out</h3>
-   <div class="container">
-   <form name="stock_out_form" id="stock_out_form">
-  <!-- Row start -->
-    <div class="form-group row">
-      <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity :</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control form-control-sm" name="qty" id="stock_out_qty" placeholder="Qty">
-      </div>
+  </div>
+  <!-- /.product-stock-setting -->
+
+  <div class="col-sm-4 product-setting product-stock-out-setting">
+    <div class="row">
+      <h3>Stock Out</h3>   
+      <form name="stock_out_form" id="stock_out_form">
+        <!-- Row start -->
+        <div class="form-group clearfix">
+          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" name="qty" id="stock_out_qty" placeholder="Qty">
+          </div>
+        </div>
+        <!-- Row end -->
+        <input type="hidden" name="product_id" id="stock_out_product_id" value="<?php echo $product->id;?>">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-    <!-- Row end -->
-    <input type="hidden" name="product_id" id="stock_out_product_id" value="<?php echo $product->id;?>">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-   </div>
- 
- </section>
- </div>
+  </div>
+ <!-- /.product-stock-out-setting -->
+</section>
+<!-- /.product-extra-edit-cntr -->
 <?php /*?>
  <section>
  	<p>Image gallery</p>
