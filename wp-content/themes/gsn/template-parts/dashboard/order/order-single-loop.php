@@ -65,10 +65,12 @@ echo $order->billing_address_1;
 ?>
 
 <li <?php post_class('order-list-item dashboard-order dashboard-order-list col-sm-4'); ?>>
+  <div class="order-details-list">
     <p><span>Order ID:</span> #<?php the_ID();?> </p>
     <p><span>Order Date:</span> <?php echo $store_order->order_date; ?> </p>
     <p><span>Order by:</span> <?php echo $store_order->billing_first_name;?> <?php echo $store_order->billing_last_name;?></p>
-    <p><span>Email Address:</span> <?php echo $store_order->billing_email;?></p>
+    <p><span>Email Address:</span> <br> <?php echo $store_order->billing_email;?></p>
     <p><span>Pruchase Item(s):</span> <?php echo count($store_order->get_items());?> </p>
     <a href="<?php echo site_url("/dashboard/order/?action=edit&id=".get_the_ID());?> " class="btn btn-primary view-order-detail">View Detail</a>
+  </div>
 </li>
