@@ -50,3 +50,43 @@
     }
   }
 }
+
+.product-feature-setting {
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.product-extra-edit-cntr {
+  margin-top: 30px;
+}
+
+.product-setting button {
+  margin-left: 15px;
+}
+
+.dashboard-main-cntr {
+  button, input[type="button"] {
+    font-size: 14px;
+  }
+}
+
+.add-image-btn {
+  margin-top: 10px;
+}
+
+.attachment-span {
+  display: inline-block;
+  margin-right: 6px;
+  
+  i {
+    display: block;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: $brick_red;
+    }
+  }
+}

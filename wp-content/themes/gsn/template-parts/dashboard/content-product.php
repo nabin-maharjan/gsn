@@ -5,7 +5,7 @@ $count_category=$gsnCategory->get_count_store_category();
 $count_sale_product=$gsnProduct->get_sale_product_count();
 $count_feature_product=$gsnProduct->get_feature_product_count(-1);
 ?>
-<section class="dashboard-product-cntr">
+<section class="dashboard-product-summary-cntr">
   <div class="product-links-cntr clearfix">
     <a href="<?php echo site_url("/dashboard/product/?action=add");?>" class="btn btn-primary">Add New Product</a>  
     <a href="<?php echo site_url("/dashboard/product/");?>" class="btn btn-primary">View All Product</a>
