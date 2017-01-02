@@ -40,16 +40,16 @@
       <h3>Sales Product</h3> 
       <form name="set_sale_product_form" id="set_sale_product_form">
         <!-- Row start -->
-        <div class="form-group clearfix">
-          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Price:</label>
-          <div class="col-sm-10"><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
+        <div class="form-group p15 clearfix">
+          <label for="qty" class="col-form-label col-form-label-sm">Product Price:</label>
+          <div class=""><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
         </div>
         <!-- Row end -->
 
         <!-- Row start -->
-        <div class="form-group clearfix">
-          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Product Sales Price:</label>
-          <div class="col-sm-10">
+        <div class="form-group p15 clearfix">
+          <label for="qty" class="col-form-label col-form-label-sm">Product Sales Price:</label>
+          <div class="">
           <?php echo get_woocommerce_currency_symbol();?> 
             <input type="text" class="form-control form-control-sm" value="<?php echo $product->sale_price;?>" name="sale_price" id="sale_price" placeholder="Sales Price">
           </div>
@@ -57,9 +57,9 @@
         <!-- Row end -->
 
         <!-- Row start -->
-        <div class="form-group clearfix">
-          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Sales Start:</label>
-          <div class="input-daterange input-group col-sm-8" id="datepicker">
+        <div class="form-group p15 clearfix">
+          <label for="qty" class="col-form-label col-form-label-sm">Sales Start:</label>
+          <div class="input-daterange input-group" id="datepicker">
             <?php 
     	        $start_date=get_post_meta($product->id, '_sale_price_dates_from', true);
     	        $end_date=get_post_meta($product->id, '_sale_price_dates_to', true);
@@ -83,9 +83,9 @@
       <h3>Add Stock</h3>
       <form name="stock_add_form" id="stock_add_form">
       <!-- Row start -->
-        <div class="form-group clearfix">
-          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity:</label>
-          <div class="col-sm-10">
+        <div class="form-group p15 clearfix">
+          <label for="qty" class="col-form-label col-form-label-sm">Quantity:</label>
+          <div class="">
             <input type="text" class="form-control form-control-sm" name="qty" id="qty" placeholder="Qty">
           </div>
         </div>
@@ -102,9 +102,9 @@
       <h3>Stock Out</h3>   
       <form name="stock_out_form" id="stock_out_form">
         <!-- Row start -->
-        <div class="form-group clearfix">
-          <label for="qty" class="col-sm-2 col-form-label col-form-label-sm">Quantity:</label>
-          <div class="col-sm-10">
+        <div class="form-group p15 clearfix">
+          <label for="qty" class="col-form-label col-form-label-sm">Quantity:</label>
+          <div class="">
             <input type="text" class="form-control form-control-sm" name="qty" id="stock_out_qty" placeholder="Qty">
           </div>
         </div>

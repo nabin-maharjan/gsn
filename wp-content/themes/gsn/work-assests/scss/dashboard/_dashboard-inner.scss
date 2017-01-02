@@ -63,8 +63,14 @@
   margin-top: 30px;
 }
 
-.product-setting button {
-  margin-left: 15px;
+.product-setting {
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-left: 15px;
+  }
 }
 
 .dashboard-main-cntr {
@@ -123,4 +129,29 @@
 }
 // ===================== //
 // /.store setting pages
+// ===================== //
+
+// ===================== //
+// order pages
+// ===================== //
+.orders {
+  font-size: 0;
+
+  .order-list-item {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    float: none;
+
+    span {
+      font-weight: bold;
+    }
+
+    .view-order-detail {
+      font-size: 14px;
+    }
+  }
+}
+// ===================== //
+// /.order pages
 // ===================== //
