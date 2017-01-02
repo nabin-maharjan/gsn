@@ -440,7 +440,7 @@ class GsnProduct{
 	* Function to get feature Product
 	*/
 	
-	public function  get_feature_product($count=5){
+	public function get_feature_product($count=5){
 		global $store;
 		$meta_query   = WC()->query->get_meta_query();
 		$meta_query[] = array(
@@ -457,6 +457,14 @@ class GsnProduct{
 		return  new WP_Query( $args );
 		
 	}
+	/*
+	* Function to get Sale Product Count
+	*/
+	public function get_feature_product_count(){
+	 $feature_product=$this->get_feature_product(-1);
+	 return $feature_product->found_posts;
+	}
+	
 	
 	/*
 	*Function to return list of sale product
@@ -485,6 +493,14 @@ class GsnProduct{
 			);
 			return new WP_Query( $args );
   }
+  
+  /*
+  * Function to get Sale Product Count
+  */
+	 public function get_sale_product_count(){
+		 $sale_product=$this->get_sale_product_list(-1);
+		 return $sale_product->found_posts;
+	 }
 	
 	/*
 	*
