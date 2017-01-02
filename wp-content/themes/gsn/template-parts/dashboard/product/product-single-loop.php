@@ -28,7 +28,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 
-<li <?php post_class('col-sm-3 product-list-item dashboard-product'); ?>>
+<li <?php post_class('product-list-item dashboard-product dashboard-product-list'); ?>>
 	<div class="product-block">
 		<div class="product-image-cntr">
 		<?php		
