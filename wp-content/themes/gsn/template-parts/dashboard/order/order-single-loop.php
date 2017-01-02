@@ -69,6 +69,6 @@ echo $order->billing_address_1;
     <p>Order Date : <?php echo $store_order->order_date; ?> </p>
     <p>Order by : <?php echo $store_order->billing_first_name;?> <?php echo $store_order->billing_last_name;?></p>
     <p>Email Address : <?php echo $store_order->billing_email;?></p>
-    <p>Pruchase Item(s): <?php echo count($store_order->get_items());?> </p>
+    <p>Pruchase Item(s): <?php echo $store_order->get_item_count();?> </p>
     <a href="<?php echo site_url("/dashboard/order/?action=edit&id=".get_the_ID());?> " class="btn btn-primary">View Detail</a>
 </li>
