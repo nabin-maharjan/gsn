@@ -52,7 +52,7 @@ $store->check_access_store();
       <div class="dashboard-hamburger">
         <span></span>
       </div>
-      <h1>Dashboard</h1>
+      <h1><a href="<?php echo site_url(); ?>/dashboard">Dashboard</a></h1>
     </div>
     <!-- /.dashboard__header-left -->
 
