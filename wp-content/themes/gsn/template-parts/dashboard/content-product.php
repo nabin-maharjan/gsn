@@ -28,6 +28,28 @@ $count_category=$gsnCategory->get_count_store_category();
           </a>
         </div>
         <!-- /.summary__card -->
+        <div class="col-sm-3 summary__card">
+          <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
+            <div class="">
+              <span class="summary-number"><?php echo $count_category;?></span>
+              <h2>Feature Product</h2>
+            </div>
+          </a>
+        </div>
+        <!-- /.summary__card -->
+        
+        <!-- /.summary__card -->
+        <div class="col-sm-3 summary__card">
+          <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
+            <div class="">
+              <span class="summary-number"><?php echo $count_category;?></span>
+              <h2>Product on Sale</h2>
+            </div>
+          </a>
+        </div>
+        <!-- /.summary__card -->
+        
+        
       </div>
       <!-- /.dashboard-summary-cntr -->
 </section>

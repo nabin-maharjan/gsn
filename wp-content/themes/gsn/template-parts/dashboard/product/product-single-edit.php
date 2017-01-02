@@ -27,7 +27,6 @@
  </h1>
  </section>
  
- 
  <?php 
  /*
  * Include product edit form
@@ -35,9 +34,6 @@
  get_template_part( 'template-parts/dashboard/product/product','add'); 
  
   ?> 
- 
- 
- 
  <div class="col-sm-4">
  <section>
  <h3>Sales Product</h3>
