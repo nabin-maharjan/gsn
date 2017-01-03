@@ -1,9 +1,8 @@
 <?php
-global $gsnProduct, $store, $gsnCategory;
-$storeProducts=$gsnProduct->get_new_product_list(-1);
-$count_category=$gsnCategory->get_count_store_category();
-$count_sale_product=$gsnProduct->get_sale_product_count();
-$count_feature_product=$gsnProduct->get_feature_product_count(-1);
+global $gsnOrder;
+$count_all_order=$gsnOrder->get_all_order_count();
+$count_processing_order=$gsnOrder->get_processing_order_count();
+$count_completed_order=$gsnOrder->get_completed_order_count();
 ?>
 <section class="dashboard-product-cntr">
   <div class="product-links-cntr clearfix">
@@ -16,43 +15,42 @@ $count_feature_product=$gsnProduct->get_feature_product_count(-1);
     <div class="col-sm-3 summary__card">
       <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
         <div class="">
+          <span class="summary-number"><?php echo $count_all_order;?></span>
+          <h2>Order(s)</h2>
+        </div>
+      </a>
+    </div>
+    <!-- /.summary__card -->
+    <div class="col-sm-3 summary__card">
+      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+        <div class="">
+          <span class="summary-number"><?php echo $count_completed_order;?></span>
+          <h2>Completed Order(s)</h2>
+        </div>
+      </a>
+    </div>
+    <!-- /.summary__card -->
+    <div class="col-sm-3 summary__card">
+      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+        <div class="">
+          <span class="summary-number"><?php echo $count_processing_order;?></span>
+          <h2>Processing Order(s)</h2>
+        </div>
+      </a>
+    </div>
+    <!-- /.summary__card -->
+    
+    <div class="col-sm-3 summary__card">
+      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+        <div class="">
           <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
-          <h2>Products</h2>
+          <h2>On-hold Order(s)</h2>
         </div>
       </a>
     </div>
     <!-- /.summary__card -->
     
-    <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
-        <div class="">
-          <span class="summary-number"><?php echo $count_category;?></span>
-          <h2>Category</h2>
-        </div>
-      </a>
-    </div>
-    <!-- /.summary__card -->
 
-    <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
-        <div class="">
-          <span class="summary-number"><?php echo $count_feature_product;?></span>
-          <h2>Feature Product</h2>
-        </div>
-      </a>
-    </div>
-    <!-- /.summary__card -->
-    
-    <!-- /.summary__card -->
-    <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
-        <div class="">
-          <span class="summary-number"><?php echo $count_sale_product;?></span>
-          <h2>Product on Sale</h2>
-        </div>
-      </a>
-    </div>
-    <!-- /.summary__card -->
   </div>
   <!-- /.dashboard-summary-cntr -->
 </section>

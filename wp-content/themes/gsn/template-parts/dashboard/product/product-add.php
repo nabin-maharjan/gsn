@@ -121,10 +121,11 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
            <div class="gallery_image_cntr">
            	<?php if(!empty($pic_galleries_ids)){ 
   				foreach($pic_galleries_ids as $pic_id){
-  					$post_thumnail_url=wp_get_attachment_url( $pic_id, 'thumbnail' );
+					if(!empty($pic_id)){
+  					$post_thumnail_url=wp_get_attachment_image_src( $pic_id, 'thumbnail' );
   			?>
-           		<span class="attachment-span"><img src="<?php echo $post_thumnail_url; ?>"><i class="remove_attachment_gallery" data-pic-id="<?php echo $pic_id;?>" >remove</i></span>
-           <?php } }?>
+           		<span class="attachment-span"><img src="<?php echo $post_thumnail_url[0]; ?>"><i class="remove_attachment_gallery" data-pic-id="<?php echo $pic_id;?>" >remove</i></span>
+           <?php } } }?>
            </div>
            
            <input  type="button" class="btn btn-info upload-button-multiple add-image-btn" value="Add Image" />

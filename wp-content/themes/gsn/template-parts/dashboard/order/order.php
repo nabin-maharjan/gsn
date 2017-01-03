@@ -3,7 +3,6 @@ global $gsnOrder, $store;
 $storeOrders=$gsnOrder->get_all_order();
 ?>
 <section class="products__order-cntr">
-  
   <?php    
   	if($storeOrders->have_posts()) {
   ?> 

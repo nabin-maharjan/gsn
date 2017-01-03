@@ -42,15 +42,14 @@
         <!-- Row start -->
         <div class="form-group p15 clearfix">
           <label for="qty" class="col-form-label col-form-label-sm">Product Price:</label>
-          <div class=""><?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?></div>
+<?php echo get_woocommerce_currency_symbol();?> <?php echo $product->regular_price;?>
         </div>
         <!-- Row end -->
 
         <!-- Row start -->
         <div class="form-group p15 clearfix">
-          <label for="qty" class="col-form-label col-form-label-sm">Product Sales Price:</label>
+          <label for="qty" class="col-form-label col-form-label-sm">Product Sales Price (<?php echo get_woocommerce_currency_symbol();?>):</label>
           <div class="">
-          <?php echo get_woocommerce_currency_symbol();?> 
             <input type="text" class="form-control form-control-sm" value="<?php echo $product->sale_price;?>" name="sale_price" id="sale_price" placeholder="Sales Price">
           </div>
         </div>
