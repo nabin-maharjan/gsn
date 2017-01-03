@@ -17,7 +17,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
   <!-- /.product-links-cntr -->
   <div class="summary-cards-cntr clearfix">
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_all_order;?></span>
           <h2>Order(s)</h2>
@@ -26,7 +26,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
     </div>
     <!-- /.summary__card -->
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=completed");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_completed_order;?></span>
           <h2>Completed Order(s)</h2>
@@ -35,7 +35,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
     </div>
     <!-- /.summary__card -->
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=processing");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_processing_order;?></span>
           <h2>Processing Order(s)</h2>
@@ -45,7 +45,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
     <!-- /.summary__card -->
     
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=on-hold");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_on_hold_order;?></span>
           <h2>On-hold Order(s)</h2>
@@ -54,7 +54,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
     </div>
     <!-- /.summary__card -->
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=cancelled");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_cancelled_order;?></span>
           <h2>Cancelled Order(s)</h2>
@@ -63,7 +63,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
     </div>
     <!-- /.summary__card -->
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=failed");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_failed_order;?></span>
           <h2>Failed Order(s)</h2>
