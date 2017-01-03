@@ -142,24 +142,48 @@
     vertical-align: top;
     font-size: 14px;
     float: none;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     .order-details-list {
-      padding: 15px;
-      border: 1px solid $light_gray;
+      padding: 0 15px;
+      border: 1px solid $lighter_gray;
+    }
+
+    .order-detail-top {
+      background: $lighter_gray;
+      padding: 10px 0;
+      margin-bottom: 10px;
+    }
+
+    .order-detail-bottom {
+      background: $lighter_gray;
+      padding: 10px 0;
     }
 
     p {
       margin-bottom: 5px;
+      font-weight: bold;
     }
 
     span {
+      font-weight: normal;
+    }
+
+    .woocommerce-Price-amount {
       font-weight: bold;
+    }
+
+    .order-detail-price-cntr {
+      margin-top: 5px;
+    }
+
+    .view-order-detail-btn {
+      margin-bottom: 0;
     }
 
     .view-order-detail {
       font-size: 14px;
-      margin-top: 10px;
+      float: right;
     }
   }
 }
