@@ -1,5 +1,9 @@
 <?php
 global $gsnOrder, $store;
+if(!empty($_GET['action']) && $_GET['action']=="view"){
+	
+}
+
 $storeOrders=$gsnOrder->get_all_order();
 ?>
 <section class="products__order-cntr">
