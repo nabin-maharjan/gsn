@@ -35,6 +35,7 @@
       text-align: center;
       padding: 25px;
       display: block;
+      height: 100%;
 
       > div {
         position: relative;
@@ -68,6 +69,10 @@
       &:hover::after {
         height: 100%;
       }
+    }
+
+    &.active .summary-info {
+      background: $petal_green;
     }
   }
 }
