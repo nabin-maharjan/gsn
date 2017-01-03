@@ -169,7 +169,7 @@
       font-weight: normal;
     }
 
-    .woocommerce-Price-amount {
+    .woocommerce-Price-amount, .woocommerce-Price-currencySymbol {
       font-weight: bold;
     }
 
@@ -184,6 +184,41 @@
     .view-order-detail {
       font-size: 14px;
       float: right;
+    }
+  }
+}
+
+.order-summary-detail-cntr {
+  margin-bottom: 15px;
+
+  h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 5px;
+  }
+}
+
+.order-purchased-items-cntr {
+
+  .product-info-cntr {
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+.order-payment-info-cntr {
+
+  p {
+    margin-bottom: 5px;
+    
+    span {
+      font-weight: bold;
     }
   }
 }

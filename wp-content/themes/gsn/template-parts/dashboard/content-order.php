@@ -75,6 +75,7 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
   </div>
   <!-- /.dashboard-summary-cntr -->
 </section>
+<!-- /.dashboard-product-cntr -->
 <?php 
 		$name="";
 		$slug="";
