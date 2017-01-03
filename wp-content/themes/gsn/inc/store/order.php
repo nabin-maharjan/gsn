@@ -36,26 +36,10 @@ class GsnOrder{
 	/*
 	*Function All  order count
 	*/
-	public function get_all_order_count(){
-		$all_order=$this->get_all_order();
+	public function get_all_order_count($status='any'){
+		$all_order=$this->get_all_order(-1,$status);
 		return $all_order->found_posts;
 	}
-	/*
-	*Function All  order count
-	*/
-	public function get_processing_order_count(){
-		$processing_order=$this->get_all_order(-1,'wc-proccessing');
-		return $processing_order->found_posts;
-	}
-	
-	/*
-	*Function All  order count
-	*/
-	public function get_completed_order_count(){
-		$completed_order=$this->get_all_order(-1,'wc-completed');
-		return $completed_order->found_posts;
-	}
-	
 	
 		
 }
