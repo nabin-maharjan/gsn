@@ -66,17 +66,16 @@ echo $order->billing_address_1;
 
 <li <?php post_class('order-list-item dashboard-order dashboard-order-list col-sm-4'); ?>>
   <div class="order-details-list">
-   <div class="row" style="background:#ececec; margin-top:-15px; margin-bottom:10px; padding:5px;">
-        <p class="col-sm-5"><span>ID:</span> #<?php the_ID();?> </p>
-        <p class="col-sm-7"><span>Date:</span> <?php echo $store_order->order_date; ?> </p>
+    <div class="row order-detail-top">
+      <p class="col-sm-5"><span>ID:</span> #<?php the_ID();?> </p>
+      <p class="col-sm-7"><span>Date:</span> <?php echo $store_order->order_date; ?> </p>
     </div>
     <p><span>Order by:</span> <?php echo $store_order->billing_first_name;?> <?php echo $store_order->billing_last_name;?></p>
     <p><span>Email Address:</span> <br> <?php echo $store_order->billing_email;?></p>
     <p><span>Pruchase Item(s):</span> <?php echo count($store_order->get_items());?> </p>
-    <div class="row" style="background:#ececec; margin-bottom:-15px; margin-top:10px; padding:5px;">
-    <p class="col-sm-7">Total : <?php echo woocommerce_price($store_order->get_total());?></p>
-    	<p class="col-sm-5"><a href="<?php echo site_url("/dashboard/order/?action=edit&id=".get_the_ID());?> " class="btn btn-primary view-order-detail">View Detail</a></p>
-        
-        </div>
+    <div class="row order-detail-bottom">
+      <p class="col-sm-7 order-detail-price-cntr"><span>Total:</span> <?php echo woocommerce_price($store_order->get_total());?></p>
+    	<p class="col-sm-5 view-order-detail-btn"><a href="<?php echo site_url("/dashboard/order/?action=edit&id=".get_the_ID());?> " class="btn btn-primary view-order-detail">View Detail</a></p>        
+    </div>
   </div>
 </li>
