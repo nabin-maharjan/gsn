@@ -92,8 +92,19 @@ class GsnProduct{
 			// Add filter for specification tab on product detail page
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
 			
+			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
+			
 			
 		}
+		/*
+		*Function to limit store product only
+		*/
+		function set_store_id_limi_product_list($q){
+			global $store;
+			$q->set( 'author', $store->user_id );
+		}
+		
+		
 		/*
 		*Function to retrieve product list filtered by category
 		*/
