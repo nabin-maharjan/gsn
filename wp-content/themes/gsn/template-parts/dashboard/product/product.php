@@ -22,14 +22,15 @@ if($products==NULL){
 ?>
 <section class="products__list-cntr">
   <h3>Product list</h3>
-  <div class="container">
-      <div class="filter-container">
-        <form method="get">
+  <div class="filter-container">
+    <div class="container">
+      <div class="filter__items clearfix">
+        <form method="get" class="product-filter-form fl">
          <input type="hidden" name="action" value="view">
          <?php if(!empty($_GET['type'])){ ?>
          <input type="hidden" name="type" value="<?php echo sanitize_text_field($_GET['type']);?>">
          <?php } ?>
-            <label>Filter by :</label>
+            <label>Filter by:</label>
             <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
                 $selected_term= wp_get_post_terms( $product->id, 'product_cat' );
                 $selected_term="";
@@ -49,12 +50,19 @@ if($products==NULL){
                 wp_dropdown_categories( $args );
             ?>
            
-            <button type="submit">Filter</button>
+            <button type="submit" class="btn btn-primary product__filter-btn">Filter</button>
         </form>
-      </div> 
-  </div>  
-  <?php    
-    
+        <!-- /.product-filter-form -->
+        <form action="#" class="product-search-form fr">
+          <input type="text" class="form-control form-control-sm" placeholder="Search product">
+          <button class="btn btn-primary product-search-btn">Search</button>
+        </form>
+        <!-- /.product-search-form -->
+      </div>
+    </div> 
+  </div> 
+  <!-- /.filter-container --> 
+  <?php
   	if($products->have_posts()) {
   ?>    
     <div class="product-list-cntr">
@@ -66,9 +74,11 @@ if($products==NULL){
         endwhile; ?>
         </ul>
     </div>
+    <!-- /.product-list-cntr -->
   <?php  
   	} else {
   		echo "Sorry! we are so tired to search for product.";
   	}
   ?>
 </section>
+<!-- /.products__list-cntr -->

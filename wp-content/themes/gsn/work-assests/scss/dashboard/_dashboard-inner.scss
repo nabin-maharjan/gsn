@@ -52,6 +52,61 @@
       }
     }
   }
+
+  .filter{
+
+    &-container {
+      margin-bottom: 30px;
+    }
+
+    &__items {
+      background: $lighter_gray;
+      padding: 10px 15px;
+
+      .product-filter-form {
+        font-size: 14px;
+
+        label {
+          line-height: 30px;
+          margin-bottom: 0;
+        }
+
+        select {          
+          padding: 5px 12px;
+          width: 200px;
+          border: 0;
+          margin-left: 6px;
+          outline: 0;
+        }
+
+        button {
+          padding: 7px 25px;
+          vertical-align: top;
+          margin-left: 6px;
+        }
+      }
+
+      .product-search-form {
+
+        input, button {
+          display: inline-block;
+          width: auto;
+        }
+
+        input {
+          padding: 7px 15px;
+          border: 0;
+          width: 200px;
+        }
+
+        button {
+          margin-left: 6px;
+          padding: 7px 25px;
+          vertical-align: top;
+        }
+      }
+    }
+  }
 }
 
 .product-feature-setting {
@@ -203,6 +258,23 @@
   }
 }
 
+.order_status_change_form {
+  margin-top: 10px;
+
+  select {
+    border-color: $light_gray;
+    padding: 4px 12px;
+    font-size: 14px;
+    width: 250px;
+  }
+
+  button {
+    vertical-align: top;
+    margin-left: 6px;
+    padding: 7px 25px;
+  }
+}
+
 .order-purchased-items-cntr {
 
   .product-info-cntr {
@@ -225,4 +297,64 @@
 }
 // ===================== //
 // /.order pages
+// ===================== //
+
+// ===================== //
+// category pages
+// ===================== //
+.dashboard-category-cntr {
+  
+  h3 {
+    margin: 0 0 30px;
+  }
+}
+
+.category-lists {
+  font-size: 14px;
+
+  li {
+    display: block;
+    background: $lighter_gray;
+    padding: 10px 15px;
+    color: $black;
+    position: relative;
+    margin-bottom: 2px;
+
+    .toggle-cat-drop {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      transition: all 0.3s ease-in-out;
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .children {
+    display: none;
+    padding-top: 10px;    
+    
+    li {
+      background: $light_gray;
+      margin-bottom: 2px;
+
+      .children {
+
+        li {
+          background: $lighter_gray;
+        }
+      }
+    }
+  }
+}
+// ===================== //
+// /.category pages
 // ===================== //

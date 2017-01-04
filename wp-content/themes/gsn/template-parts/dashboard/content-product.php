@@ -56,6 +56,7 @@ $count_feature_product=$gsnProduct->get_feature_product_count(-1);
   </div>
   <!-- /.dashboard-summary-cntr -->
 </section>
+<!-- /.dashboard-product-summary-cntr -->
 <?php 
 		$name="";
 		$slug="";
