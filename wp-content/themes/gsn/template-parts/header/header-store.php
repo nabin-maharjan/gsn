@@ -28,6 +28,71 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
        <?php } ?>
     </script>
     <?php wp_head(); ?>
+    <script>
+	
+	<?php global $gsnProduct;
+	 $storeProducts=$gsnProduct->get_new_product_list(-1); 
+	 ?>
+	
+  $( function() {
+    var projects = [
+	<?php while( $storeProducts->have_posts() ) : $storeProducts->the_post(); 
+		$post_thumnail_url="";
+		if(has_post_thumbnail(get_the_ID())){
+				$post_thumbnail_id = get_post_thumbnail_id( get_the_ID());
+				$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'thumbnail' );
+			}
+	?>
+      {
+        value: "<?php the_title();?>",
+        label: "<?php the_title();?>",
+        img: "<?php echo $post_thumnail_url;?>",
+        link: "<?php the_permalink();?>"
+      },
+	   <?php wp_reset_postdata(); endwhile; ?>
+
+    ];
+	$('#search-parent').on('change',function(){
+		var cat_id=jQuery(this).val();
+		var data= {action: "gsn_filtered_product_list", cat_id : cat_id};
+		  var response=ajax_call_post(data,'','',function(response){
+			  projects=response.list;
+			 return false;
+		 },function(){
+			  auto_complete(projects);
+		 });
+	})
+	
+	
+	
+	function auto_complete($projects){
+		 $( "#product_search" ).autocomplete({
+		  minLength: 0,
+		  source: projects,
+		  focus: function( event, ui ) {
+			$( "#product_search" ).val( ui.item.label );
+			return false;
+		  },
+		  select: function( event, ui ) {
+		   /* $( "#project" ).val( ui.item.label );
+			$( "#project-id" ).val( ui.item.value );
+			$( "#project-description" ).html( ui.item.desc );
+			$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
+	 
+			return false;
+			*/
+			window.location.href=ui.item.link;
+		  }
+		})
+		.autocomplete( "instance" )._renderItem = function( ul, item ) {
+		  return $( "<li>" )
+			.append( "<div><img src='"+item.img+"' width='50'>" + item.label + "</div>" )
+			.appendTo( ul );
+		};	
+	}
+	auto_complete(projects);
+  });
+  </script>
 </head>
 <body <?php body_class(); ?>>
   <header class="header gsn-header">
@@ -129,8 +194,8 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                             'child_of' =>$storeParentCat->term_id,
                             'taxonomy'     => 'product_cat',
                             'hide_empty' => false,
-                            'name'               => 'parent',
-                            'id'                 => 'parent',
+                            'name'               => 'search-parent',
+                            'id'                 => 'search-parent',
                             'class'              => 'form-control form-control-sm',
                             'show_option_none'    => 'Select Category'
                           );                  
@@ -138,7 +203,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                         ?>
                       </div>
                       <div class="search-input fl">
-                        <input type="text" placeholder="Search product" class="form-control form-control-sm">
+                        <input type="text" placeholder="Search product" id="product_search" class="form-control form-control-sm">
                       </div>
                       <div class="search-button clearfix fl">
                         <button class="btn btn-submit red-btn search-btn fr">Search</button>
