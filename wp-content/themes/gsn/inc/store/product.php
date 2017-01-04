@@ -82,11 +82,58 @@ class GsnProduct{
 			add_action( 'wp_ajax_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			add_action( 'wp_ajax_nopriv_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			
+			//add ajax function for make product feature
+			add_action( 'wp_ajax_gsn_filtered_product_list', array($this,'filtered_product_list') );
+			add_action( 'wp_ajax_nopriv_gsn_filtered_product_list', array($this,'filtered_product_list') );
+			
+			
+			
+			
 			// Add filter for specification tab on product detail page
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
 			
 			
 		}
+		/*
+		*Function to retrieve product list filtered by category
+		*/
+		public function filtered_product_list(){
+			$response=array();
+			try{
+				if(!empty($_POST['cat_id'])){
+					$product_lists=$this->get_all_store_product(-1,sanitize_text_field($_POST['cat_id']));
+					$product_list=array();
+					 while( $product_lists->have_posts() ) : $product_lists->the_post();
+					 $post_thumnail_url="";
+						if(has_post_thumbnail(get_the_ID())){
+								$post_thumbnail_id = get_post_thumbnail_id( get_the_ID());
+								$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'thumbnail' );
+							}
+           				$product=array(
+							'value' =>get_the_title(),
+							'label' => get_the_title(),
+							'img'=>$post_thumnail_url,
+							'link'=>get_the_permalink()
+						);
+						$product_list[]=$product;
+						wp_reset_postdata(); 
+						endwhile;
+					$response['status']="success";
+					$response['code']='200';
+					$response['list']=$product_list;
+					
+				}else{
+					throw Exception("Invalid Request");
+				}
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+		}
+		
+		
 		/*
 		*Function to add tab on product detail page
 		*/
@@ -114,7 +161,7 @@ class GsnProduct{
 				 array_shift($att_name);
 				 $att_name=ucfirst(trim(implode(" ",$att_name)));
 				 
-				 echo "<li>". $att_name .": ". $attribute['value']."</li>";
+				 echo "<li><strong>". $att_name ."</strong><span>". $attribute['value']."</span></li>";
 			 }
 			echo "</ul>";
 		}
