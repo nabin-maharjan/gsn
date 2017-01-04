@@ -213,6 +213,20 @@ jQuery(document).ready(function(e) {
     $('.dashboard-header').removeClass('nav-open');
   });
 
+  // category collapsible list
+  function collapseCategory() {
+    var parentItem = $('.category-lists'),
+        childItem = $('ul.children').closest('.cat-item');
+    
+    if(parentItem.length > 0) {
+      childItem.append('<i class="fa fa-angle-down toggle-cat-drop"></i>');
+      $('.toggle-cat-drop').on('click', function() {
+        $(this).toggleClass('active');
+        $(this).prev('ul.children').slideToggle(300);
+      });
+    }
+  }
+  collapseCategory();
   
 
 });

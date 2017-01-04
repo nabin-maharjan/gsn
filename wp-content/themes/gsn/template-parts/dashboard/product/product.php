@@ -81,3 +81,4 @@ if($products==NULL){
   	}
   ?>
 </section>
+<!-- /.products__list-cntr -->
