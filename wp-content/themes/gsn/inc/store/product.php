@@ -82,6 +82,41 @@ class GsnProduct{
 			add_action( 'wp_ajax_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			add_action( 'wp_ajax_nopriv_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			
+			// Add filter for specification tab on product detail page
+			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
+			
+			
+		}
+		/*
+		*Function to add tab on product detail page
+		*/
+		public function new_product_tab_specification($tabs){
+			
+			/* Adds the new tab */
+			$tabs['test_tab'] = array(
+				'title' 	=> __( 'Specification', 'woocommerce' ),
+				'priority' 	=> 10,  
+				'callback' 	=> array($this,'new_product_tab_specification_content')
+			);
+			return $tabs;  /* Return all  tabs including the new New Custom Product Tab  to display */
+			
+		}
+		/*
+		*Function to print description on specification tab
+		*/
+		public function new_product_tab_specification_content(){
+			global $post;
+			$attributes=get_post_meta($post->ID,"_product_attributes",true);
+			
+			echo "<ul class='specification-list'>";
+			foreach($attributes as $attribute){
+				 $att_name=explode('_',$attribute['name']);
+				 array_shift($att_name);
+				 $att_name=ucfirst(trim(implode(" ",$att_name)));
+				 
+				 echo "<li>". $att_name .": ". $attribute['value']."</li>";
+			 }
+			echo "</ul>";
 		}
 	/*
 	* function to add product

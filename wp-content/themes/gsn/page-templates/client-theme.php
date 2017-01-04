@@ -34,6 +34,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                           <div class="cart-btn">
                             <a rel="nofollow" href="/gsn/?add-to-cart=<?php the_ID();?>" data-quantity="1" data-product_id="<?php the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>
                           </div>
+													<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
                         </div>
                       </div>
                       <!-- /.product-block -->
@@ -100,8 +101,9 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                   <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url;?>')"></a>
                   <span class="label-top label-sale">Sale</span>
                   <div class="cart-btn">
-                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php get_the_ID();?>" data-quantity="1" data-product_id="<?php get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>
+                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php get_the_ID();?>" data-quantity="1" data-product_id="<?php get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
                   </div>
+									<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
                 </div>
               </div>
               <!-- /.product-block -->
@@ -135,6 +137,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                     wc_get_template_part( 'content', 'product' );
                   endwhile;?>
                    </ul>
+									 <p class="text-xs-center load-more"><a href="<?php echo site_url("/sale/");?>" class="btn btn-primary">View More</a></p>
              </div>
         </div>
       </div>         
@@ -159,6 +162,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                     wc_get_template_part( 'content', 'product' );
                   endwhile; ?>
               </ul>
+							<p class="text-xs-center load-more"><a href="<?php echo site_url("/shop/");?>" class="btn btn-primary">View More</a></p>
             <!--/.products-->     
           </div>
         </div>

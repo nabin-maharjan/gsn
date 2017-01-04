@@ -42,6 +42,24 @@
     .woocommerce-LoopProduct-link {
       display: none;
     }
+		
+		p {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 00;
+			color: $white;
+			font-size: 13px;
+			line-height: 16px;
+			padding:5px 10px;
+			margin:0;
+			z-index:2;
+			background:rgba(0,0,0,0.5);
+			transition: all 0.3s ease;
+			&:hover{
+				background:rgba(0,0,0,0.8);
+				}
+		}
   }
 
   .product-image{
@@ -96,9 +114,9 @@
     transition: all 0.2s ease-in-out;
     visibility: hidden;
     width: 100%;  
-    z-index: 2;  
-
-    a {          
+    z-index: 2; 
+		
+    > a {          
       background-color: transparent;
       border-radius: 0;
       border-top: 3px solid transparent;
@@ -130,6 +148,7 @@
         border-color: $brick_red;
         color: $white;
       }
+			
     }
   }
 
