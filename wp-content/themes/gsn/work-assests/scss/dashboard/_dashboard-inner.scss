@@ -72,7 +72,7 @@
         }
 
         select {          
-          padding: 5px 12px;
+          padding: 6px 12px;
           width: 200px;
           border: 0;
           margin-left: 6px;
@@ -80,7 +80,7 @@
         }
 
         button {
-          padding: 7px 25px;
+          padding: 8px 25px;
           vertical-align: top;
           margin-left: 6px;
         }
@@ -94,14 +94,14 @@
         }
 
         input {
-          padding: 7px 15px;
+          padding: 8px 15px;
           border: 0;
           width: 200px;
         }
 
         button {
           margin-left: 6px;
-          padding: 7px 25px;
+          padding: 8px 25px;
           vertical-align: top;
         }
       }
@@ -116,6 +116,22 @@
 
 .product-extra-edit-cntr {
   margin-top: 30px;
+
+  .input-daterange {
+    
+    input {
+      font-size: 14px;
+
+      &:first-child, &:last-child{
+        border-radius: 0;
+      }      
+    }
+
+    .input-group-addon {
+      font-size: 14px;
+      padding: 6px 10px;      
+    }
+  }
 }
 
 .product-setting {
@@ -263,7 +279,7 @@
 
   select {
     border-color: $light_gray;
-    padding: 4px 12px;
+    padding: 5px 12px;
     font-size: 14px;
     width: 250px;
   }
@@ -271,7 +287,7 @@
   button {
     vertical-align: top;
     margin-left: 6px;
-    padding: 7px 25px;
+    padding: 8px 25px;
   }
 }
 
@@ -320,6 +336,10 @@
     position: relative;
     margin-bottom: 2px;
 
+    a:hover {
+      color: $brick_red;
+    }
+
     .toggle-cat-drop {
       position: absolute;
       right: 15px;
@@ -333,7 +353,12 @@
       transition: all 0.3s ease-in-out;
 
       &.active {
+        color: $brick_red;
         transform: rotate(180deg);
+      }
+
+      &:hover {
+        color: $brick_red;
       }
     }
   }
