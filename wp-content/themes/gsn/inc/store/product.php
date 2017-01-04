@@ -92,8 +92,19 @@ class GsnProduct{
 			// Add filter for specification tab on product detail page
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
 			
+			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
+			
 			
 		}
+		/*
+		*Function to limit store product only
+		*/
+		function set_store_id_limi_product_list($q){
+			global $store;
+			$q->set( 'author', $store->user_id );
+		}
+		
+		
 		/*
 		*Function to retrieve product list filtered by category
 		*/
@@ -101,7 +112,7 @@ class GsnProduct{
 			$response=array();
 			try{
 				if(!empty($_POST['cat_id'])){
-					$product_lists=$this->get_sale_product_list(-1,sanitize_text_field($_POST['cat_id']));
+					$product_lists=$this->get_all_store_product(-1,sanitize_text_field($_POST['cat_id']));
 					$product_list=array();
 					 while( $product_lists->have_posts() ) : $product_lists->the_post();
 					 $post_thumnail_url="";

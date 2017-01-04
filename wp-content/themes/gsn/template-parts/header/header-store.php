@@ -31,7 +31,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     <script>
 	
 	<?php global $gsnProduct;
-	 $storeProducts=$gsnProduct->get_new_product_list(-1); 
+	 $storeProducts=$gsnProduct->get_all_store_product(-1); 
 	 ?>
 	
   $( function() {
@@ -54,12 +54,14 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     ];
 	$('#search-parent').on('change',function(){
 		var cat_id=jQuery(this).val();
+     jQuery('ul.autocomple-search').html('');
 		var data= {action: "gsn_filtered_product_list", cat_id : cat_id};
 		  var response=ajax_call_post(data,'','',function(response){
 			  projects=response.list;
 			 return false;
 		 },function(){
 			  auto_complete(projects);
+			  jQuery('#product_search').val('');
 		 });
 	})
 	
@@ -68,27 +70,31 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 	function auto_complete($projects){
 		 $( "#product_search" ).autocomplete({
 		  minLength: 0,
+      position: { my : "right top", at: "right bottom" },
 		  source: projects,
 		  focus: function( event, ui ) {
-			$( "#product_search" ).val( ui.item.label );
-			return false;
+		  	$( "#product_search" ).val( ui.item.label );
+		  	return false;
 		  },
 		  select: function( event, ui ) {
-		   /* $( "#project" ).val( ui.item.label );
-			$( "#project-id" ).val( ui.item.value );
-			$( "#project-description" ).html( ui.item.desc );
-			$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
-	 
-			return false;
-			*/
-			window.location.href=ui.item.link;
-		  }
+		  	window.location.href=ui.item.link;
+		  },
+      response: function(event, ui) {
+        if (!ui.content.length) {
+            jQuery('ul.autocomple-search').html('<li class="no-result">No result found.</li>')
+        }else{
+            jQuery('ul.autocomple-search').html('');
+        }
+    }
 		})
 		.autocomplete( "instance" )._renderItem = function( ul, item ) {
 		  return $( "<li>" )
-			.append( "<div><img src='"+item.img+"' width='50'>" + item.label + "</div>" )
-			.appendTo( ul );
-		};	
+			.append( "<div class=\"autocomplete-search-item clearfix\"><img src='"+item.img+"' width='50'><span>" + item.label + "</span></div>" )
+			.appendTo(jQuery('ul.autocomple-search'));
+		};
+    // if($('.autocomple-search').length > 0) {
+    //   $('.autocomple-search').mCustomScrollbar();
+    // }	
 	}
 	auto_complete(projects);
   });
@@ -205,9 +211,10 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                       <div class="search-input fl">
                         <input type="text" placeholder="Search product" id="product_search" class="form-control form-control-sm">
                       </div>
-                      <div class="search-button clearfix fl">
-                        <button class="btn btn-submit red-btn search-btn fr">Search</button>
+                      <div class="search-auto-result-cntr">                        
+                        <ul class="autocomple-search"></ul>
                       </div>
+                      <!-- /.search-auto-result-cntr -->
                     </form>
                   </div>
                 </div>
