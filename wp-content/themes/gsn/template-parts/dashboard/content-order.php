@@ -7,13 +7,9 @@ $count_on_hold_order=$gsnOrder->get_all_order_count('wc-on-hold');
 $count_pending_order=$gsnOrder->get_all_order_count('wc-pending');
 $count_cancelled_order=$gsnOrder->get_all_order_count('wc-cancelled');
 $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
+$count_pending_order=$gsnOrder->get_all_order_count('wc-pending');
 ?>
 <section class="dashboard-product-cntr">
-  <div class="product-links-cntr clearfix">
-    <a href="<?php echo site_url("/dashboard/product/?action=add");?>" class="btn btn-primary">Add New Product</a>  
-    <a href="<?php echo site_url("/dashboard/product/");?>" class="btn btn-primary">View All Product</a>
-    <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="btn btn-primary">View All Category</a>
-  </div>
   <!-- /.product-links-cntr -->
   <div class="summary-cards-cntr clearfix">
     <div class="col-sm-3 summary__card">
@@ -39,6 +35,15 @@ $count_failed_order=$gsnOrder->get_all_order_count('wc-failed');
         <div class="">
           <span class="summary-number"><?php echo $count_processing_order;?></span>
           <h2>Processing Order(s)</h2>
+        </div>
+      </a>
+    </div>
+    <!-- /.summary__card -->
+    <div class="col-sm-3 summary__card">
+      <a href="<?php echo site_url("/dashboard/order/?action=view&status=pending");?>" class="summary-info">
+        <div class="">
+          <span class="summary-number"><?php echo $count_pending_order;?></span>
+          <h2>Pending Order(s)</h2>
         </div>
       </a>
     </div>

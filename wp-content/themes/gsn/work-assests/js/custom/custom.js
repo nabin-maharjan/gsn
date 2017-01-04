@@ -21,10 +21,15 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 						 }
 					});
 				}else{
-					if(error_load_position=="after"){
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter(error_wrap_container);
+					
+					if(jQuery("div.alert.alert-danger").length){
+						jQuery("div.alert.alert-danger").remove();
+					}
+					
+					if(error_load_position==="after"){
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter(error_wrap_container);
 					}else{
-						 jQuery('<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(error_wrap_container);
+						 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(error_wrap_container);
 					}
 					
 				}

@@ -13,7 +13,20 @@ $store_order_items=$store_order->get_items();
     	<div class="col-sm-6">
         <h4>Basic Information</h4>
         <p>Payment via <?php echo get_post_meta( $store_order->id,'_payment_method_title',true);?> on <?php echo $store_order->order_date;?> </p>
-        <p>Order Status: <?php echo $store_order->get_status();?></p>
+        <p>Order Status:</p>
+        <form name="order_status_change_form"  id="order_status_change_form">
+         	<select id="order_status" name="order_status" class="">
+            <option value="wc-pending" <?php echo ($store_order->post_status=="wc-pending")?"selected":"";?>>Pending Payment</option>
+            <option value="wc-processing" <?php echo ($store_order->post_status=="wc-processing")?"selected":"";?>>Processing</option>
+            <option value="wc-on-hold" <?php echo ($store_order->post_status=="wc-on-hold")?"selected":"";?>>On Hold</option>
+            <option value="wc-completed" <?php echo ($store_order->post_status=="wc-completed")?"selected":"";?>>Completed</option>
+            <option value="wc-cancelled" <?php echo  ($store_order->post_status=="wc-cancelled")?"selected":"";?>>Cancelled</option>
+            <option value="wc-refunded" <?php echo ($store_order->post_status=="wc-refunded")?"selected":"";?>>Refunded</option>
+            <option value="wc-failed" <?php echo  ($store_order->post_status=="wc-failed")?"selected":"";?>>Failed</option>
+          </select>
+          <input type="hidden" name="order_id" value="<?php echo $store_order->id;?>">
+          <button type="submit" class="btn btn-primary btn-sm">Update</button>
+        </form>
       </div>        
       <div class="col-sm-6">
         <h4>Billing Information</h4>
@@ -66,3 +79,24 @@ $store_order_items=$store_order->get_items();
   </div>
 </section>
 <!-- /.order-payment-info-cntr -->
+<script>
+ /* Add Stock Process */
+jQuery("#order_status_change_form").validate({
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+	   var data= {action: "gsn_update_order_status", formdata : formdata};
+	  var response=ajax_call_post(data,'#order_status_change_form','',function(response){
+			 if(jQuery("div.alert.alert-danger").length){
+					jQuery("div.alert.alert-danger").remove();
+				}
+				if(jQuery("div.alert.alert-success").length){
+					jQuery("div.alert.alert-success").remove();
+				}
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			   return false;
+	 });
+  }
+	
+});
+
+</script>

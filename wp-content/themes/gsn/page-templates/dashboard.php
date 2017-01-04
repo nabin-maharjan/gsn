@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Template Name: Dashboard
@@ -91,29 +90,5 @@ jQuery("#store_setting_form").validate({
 	 });
 	 
   }
-});
- 
-
- 
- 
-
- 
- /* Login jQuery validation Procress */
-jQuery("#category_create_form").validate({
-	rules: {
-      name:"required",
-    },
-  submitHandler: function(form) {
-	  var formdata=jQuery(form).serialize();
-	  var data= {action: "gsn_saveCategory", formdata : formdata};
-	  var response=ajax_call_post(data,"#category_create_form",'',function(response){
-			 //  window.location.href=response.redirectUrl;
-			 jQuery(form)[0].reset();
-			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
-			 
-			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
-	 });
-  }
-	
 });
  </script>

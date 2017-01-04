@@ -73,6 +73,7 @@ echo $order->billing_address_1;
     <p><span>Order by:</span> <?php echo $store_order->billing_first_name;?> <?php echo $store_order->billing_last_name;?></p>
     <p><span>Email Address:</span> <br> <?php echo $store_order->billing_email;?></p>
     <p><span>Pruchase Item(s):</span> <?php echo count($store_order->get_items());?> </p>
+    <p><span>Status:</span> <?php echo $store_order->get_status();?> </p>
     <div class="row order-detail-bottom">
       <p class="col-sm-7 order-detail-price-cntr"><span>Total:</span> <?php echo woocommerce_price($store_order->get_total());?></p>
     	<p class="col-sm-5 view-order-detail-btn"><a href="<?php echo site_url("/dashboard/order/?action=edit&id=".get_the_ID());?> " class="btn btn-primary view-order-detail">View Detail</a></p>        

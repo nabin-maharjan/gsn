@@ -34,7 +34,7 @@ $count_feature_product=$gsnProduct->get_feature_product_count(-1);
     <!-- /.summary__card -->
 
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/product/?action=view&type=feature");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_feature_product;?></span>
           <h2>Feature Product</h2>
@@ -45,7 +45,7 @@ $count_feature_product=$gsnProduct->get_feature_product_count(-1);
     
     <!-- /.summary__card -->
     <div class="col-sm-3 summary__card">
-      <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
+      <a href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_sale_product;?></span>
           <h2>Product on Sale</h2>
@@ -59,12 +59,12 @@ $count_feature_product=$gsnProduct->get_feature_product_count(-1);
 <?php 
 		$name="";
 		$slug="";
-		if(!empty($_GET['type']) && !empty($_GET['type'])=="category"){
+		if(!empty($_GET['type']) && $_GET['type']=="category"){
 			$name="category";
 		}else if(!empty($_GET['action']) && $_GET['action']=="edit" && !empty($_GET['id'])){
 			$name="edit";
 			$slug="-single";
-		}else if(!empty($_GET['action'])){
+		}else if(!empty($_GET['action']) && $_GET['action']=="add"){
 			$name="add";
 		}
 		get_template_part( 'template-parts/dashboard/product/product'.$slug,$name);  

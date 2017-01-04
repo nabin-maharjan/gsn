@@ -12,22 +12,37 @@ class GsnCategory{
 			try{
 				if(!empty($_POST['formdata'])){
 					parse_str($_POST['formdata'], $datas);
+					$edit_flag=false;
+					if(!empty($datas['action']) && $datas['action']=="edit"){
+						$edit_flag=true;
+					}
 					$v = new Valitron\Validator($datas);
 					$v->rule('required', 'name');
 					if($v->validate()) {
 						/* insert to database */
-						global $wpdb, $store;						
+						global $wpdb, $store;	
+											
 						$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
-						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);						
-						$cid = wp_insert_term(
-							sanitize_text_field($datas['name']), // the term 
-							'product_cat', // the taxonomy
-							array(
-								'description'=> sanitize_text_field($datas['description']),
-								'slug' => sanitize_title($datas['name']),
-								'parent' =>$parent_id
-							)
-						);
+						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);		if($edit_flag){
+							$cid=wp_update_term(sanitize_text_field($datas['term_id']), 'product_cat', array(
+							  'name' => sanitize_text_field($datas['name']),
+							 // 'slug' => sanitize_title($datas['name']),
+							  'description'=> sanitize_text_field($datas['description']),
+							  'parent' =>$parent_id
+							));
+						}else{
+							$cid = wp_insert_term(
+									sanitize_text_field($datas['name']), // the term 
+									'product_cat', // the taxonomy
+									array(
+										'description'=> sanitize_text_field($datas['description']),
+										'slug' => sanitize_title($datas['name']),
+										'parent' =>$parent_id
+									)
+								);
+							
+						}
+						
 						//if(empty($cid
 						if(empty($cid->errors)){
 							$args = array(
@@ -47,7 +62,11 @@ class GsnCategory{
 							
 							$response['status']="success";
 							$response['code']='200';
-							$response['msg']="Category successfully added";
+							if($edit_flag){
+								$response['msg']="Category successfully added";
+							}else{
+								$response['msg']="Category successfully updated";
+							}
 							$response['dropdown']=$dropdow_cat;
 							//$response['redirectUrl']=site_url("/dashboard/");
 						}else{
@@ -81,3 +100,75 @@ class GsnCategory{
 }
 global $gsnCategory;
 $gsnCategory=new GsnCategory();
+
+
+class gsn_category_walker_dashboard extends Walker_Category {
+
+    // copied function from /inlcude/category-template.php and edited as per requirements
+    function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
+        extract($args);
+        $cat_name = esc_attr( $category->name );
+        $cat_name = apply_filters( 'list_cats', $cat_name, $category );
+        $my_blog_link = site_url('/dashboard/product/?action=edit&type=category&id='.$category->term_id); //this is to return blog url
+
+        //here I edited the link to meet your requirments.
+        $link = '<a href="'.$my_blog_link.'" ';
+
+        if ( $use_desc_for_title == 0 || empty($category->description) )
+            $link .= 'title="' . esc_attr( sprintf(__( 'View all posts filed under %s' ), $cat_name) ) . '"';
+        else
+            $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
+        $link .= '>';
+        $link .= $cat_name . '</a>';
+
+        if ( !empty($feed_image) || !empty($feed) ) {
+            $link .= ' ';
+
+            if ( empty($feed_image) )
+                $link .= '(';
+
+            $link .= '<a href="' . esc_url( get_term_feed_link( $category->term_id, $category->taxonomy, $feed_type ) ) . '"';
+
+            if ( empty($feed) ) {
+                $alt = ' alt="' . sprintf(__( 'Feed for all posts filed under %s' ), $cat_name ) . '"';
+            } else {
+                $title = ' title="' . $feed . '"';
+                $alt = ' alt="' . $feed . '"';
+                $name = $feed;
+                $link .= $title;
+            }
+
+            $link .= '>';
+
+            if ( empty($feed_image) )
+                $link .= $name;
+            else
+                $link .= "<img src='$feed_image'$alt$title" . ' />';
+
+            $link .= '</a>';
+
+            if ( empty($feed_image) )
+                $link .= ')';
+        }
+
+        if ( !empty($show_count) )
+            $link .= ' (' . intval($category->count) . ')';
+
+        if ( 'list' == $args['style'] ) {
+            $output .= "\t<li";
+            $class = 'cat-item cat-item-' . $category->term_id;
+            if ( !empty($current_category) ) {
+                $_current_category = get_term( $current_category, $category->taxonomy );
+                if ( $category->term_id == $current_category )
+                    $class .=  ' current-cat';
+                elseif ( $category->term_id == $_current_category->parent )
+                    $class .=  ' current-cat-parent';
+            }
+            $output .=  ' class="' . $class . '"';
+            $output .= ">$link\n";
+        } else {
+            $output .= "\t$link<br />\n";
+        }
+    }
+
+}

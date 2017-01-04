@@ -440,8 +440,21 @@ class GsnProduct{
 	* Function to get feature Product
 	*/
 	
-	public function get_feature_product($count=5){
+	public function get_feature_product($count=5,$category=0){
 		global $store;
+		$cat_arg=array();
+		if($category!=0){
+			 $cat_arg=array(
+			 'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $category,
+					),
+				),
+			 );
+		}
+		
 		$meta_query   = WC()->query->get_meta_query();
 		$meta_query[] = array(
 			'key'   => '_featured',
@@ -454,7 +467,8 @@ class GsnProduct{
 			'posts_per_page'   =>$count,
 			'meta_query'  =>  $meta_query
 		);
-		return  new WP_Query( $args );
+		$combine_arg=array_merge($args,$cat_arg);
+		return  new WP_Query( $combine_arg );
 		
 	}
 	/*
@@ -469,8 +483,20 @@ class GsnProduct{
 	/*
 	*Function to return list of sale product
 	*/
-	public function get_sale_product_list($count=4){
+	public function get_sale_product_list($count=4,$category=0){
 		global $store;
+		$cat_arg=array();
+		if($category!=0){
+			 $cat_arg=array(
+			 'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $category,
+					),
+				),
+			 );
+		}
 		$args = array(
 				'post_type'      => 'product',
 				'posts_per_page' => $count,
@@ -491,7 +517,8 @@ class GsnProduct{
 					)
 				)
 			);
-			return new WP_Query( $args );
+			$combine_arg=array_merge($args,$cat_arg);
+			return new WP_Query( $combine_arg );
   }
   
   /*
@@ -505,14 +532,28 @@ class GsnProduct{
 	/*
 	*
 	*/
-	public function get_new_product_list($count=4){
+	public function get_new_product_list($count=4,$category=0){
 		global $store;
+		$cat_arg=array();
+		if($category!=0){
+			 $cat_arg=array(
+			 'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $category,
+					),
+				),
+			 );
+		}
 		$args = array(
                   'post_type' => 'product',
                   'posts_per_page' => $count,
-                  'author'=>$store->user_id
+                  'author'=>$store->user_id,
+				  'cat'=>$category
                   );
-         return new WP_Query( $args );
+				  $combine_args=array_merge($args,$cat_arg);
+         return new WP_Query( $combine_args );
 		
 	}
 	
@@ -543,15 +584,28 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
-	public function get_all_store_product(){
+	public function get_all_store_product($count=-1,$category=0){
 		
 		global $store;
+		$cat_arg=array();
+		if($category!=0){
+			 $cat_arg=array(
+			 'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $category,
+					),
+				),
+			 );
+		}
 		$args=array( 
 				'post_type' => array('product', ),
-				 'posts_per_page' => -1 ,
+				 'posts_per_page' =>$count ,
 				 'author'=>$store->user_id
 				 );
-		return new WP_Query($args);
+		$combine_arg=array_merge($args,$cat_arg);
+		return new WP_Query($combine_arg);
 	}
 	public function get_store_product(){
 		
