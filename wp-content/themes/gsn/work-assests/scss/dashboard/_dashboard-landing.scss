@@ -11,6 +11,19 @@
     padding: 15px 20px;
     margin: 0 15px 30px;
   }
+
+  input[type="text"] {
+    padding: 7px 15px;
+  }
+
+  select {
+    padding: 5px 12px;
+    height: auto !important;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
 }
 .dashboard-title {
   text-transform: uppercase;
