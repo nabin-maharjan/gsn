@@ -101,7 +101,7 @@ class GsnProduct{
 			$response=array();
 			try{
 				if(!empty($_POST['cat_id'])){
-					$product_lists=$this->get_sale_product_list(-1,sanitize_text_field($_POST['cat_id']));
+					$product_lists=$this->get_all_store_product(-1,sanitize_text_field($_POST['cat_id']));
 					$product_list=array();
 					 while( $product_lists->have_posts() ) : $product_lists->the_post();
 					 $post_thumnail_url="";

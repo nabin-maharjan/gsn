@@ -31,7 +31,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     <script>
 	
 	<?php global $gsnProduct;
-	 $storeProducts=$gsnProduct->get_new_product_list(-1); 
+	 $storeProducts=$gsnProduct->get_all_store_product(-1); 
 	 ?>
 	
   $( function() {
@@ -60,6 +60,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 			 return false;
 		 },function(){
 			  auto_complete(projects);
+			  jQuery('#product_search').val('');
 		 });
 	})
 	
@@ -204,9 +205,6 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                       </div>
                       <div class="search-input fl">
                         <input type="text" placeholder="Search product" id="product_search" class="form-control form-control-sm">
-                      </div>
-                      <div class="search-button clearfix fl">
-                        <button class="btn btn-submit red-btn search-btn fr">Search</button>
                       </div>
                     </form>
                   </div>
