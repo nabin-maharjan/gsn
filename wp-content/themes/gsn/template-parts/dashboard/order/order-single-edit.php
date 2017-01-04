@@ -10,11 +10,11 @@ $store_order_items=$store_order->get_items();
   <div class="container">
 	  <div class="row">
       <h3>Order #<?php echo $store_order->get_order_number();?> Details</h3>
-    	<div class="col-sm-6">
+    	<div class="col-sm-6 order-summary-basic-info">
         <h4>Basic Information</h4>
         <p>Payment via <?php echo get_post_meta( $store_order->id,'_payment_method_title',true);?> on <?php echo $store_order->order_date;?> </p>
         <p>Order Status:</p>
-        <form name="order_status_change_form"  id="order_status_change_form">
+        <form name="order_status_change_form" id="order_status_change_form" class="order_status_change_form">
          	<select id="order_status" name="order_status" class="">
             <option value="wc-pending" <?php echo ($store_order->post_status=="wc-pending")?"selected":"";?>>Pending Payment</option>
             <option value="wc-processing" <?php echo ($store_order->post_status=="wc-processing")?"selected":"";?>>Processing</option>
@@ -27,11 +27,14 @@ $store_order_items=$store_order->get_items();
           <input type="hidden" name="order_id" value="<?php echo $store_order->id;?>">
           <button type="submit" class="btn btn-primary btn-sm">Update</button>
         </form>
-      </div>        
-      <div class="col-sm-6">
+        <!-- /.order_status_change_form -->
+      </div> 
+      <!-- /.order-summary-basic-info -->       
+      <div class="col-sm-6 order-summary-billing-info">
         <h4>Billing Information</h4>
 		    <p><?php echo $store_order->get_formatted_billing_address();?></p>
       </div>
+      <!-- /.order-summary-billing-info -->
     </div>
   </div>
 </section>

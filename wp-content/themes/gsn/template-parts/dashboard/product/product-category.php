@@ -6,32 +6,31 @@
 		$current_cat= get_term( $selected_cat, 'product_cat' ) ;
 	}
 ?>
-<section> </section>
-<section>
+<section class="dashboard-category-cntr">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
-       <h3>Cateory List</h3>
+      <div class="col-sm-6 category__list-cntr">
+        <h3>Cateory List</h3>
         <ul class="category-lists">
           <?php 
-			$args = array(
-						//'show_count'   => 1,
-						'hierarchical' => true,
-						'child_of' =>$storeParentCat->term_id,
-						'taxonomy'     => 'product_cat',
-						'hide_empty' => false,
-						'title_li' =>'',
-						'show_count' => 1,
-						'walker' => new gsn_category_walker_dashboard()
-					);
-			wp_list_categories($args );
-			?>
+      			$args = array(
+  						//'show_count'   => 1,
+  						'hierarchical' => true,
+  						'child_of' =>$storeParentCat->term_id,
+  						'taxonomy'     => 'product_cat',
+  						'hide_empty' => false,
+  						'title_li' =>'',
+  						'show_count' => 1,
+  						'walker' => new gsn_category_walker_dashboard()
+  					);
+      			wp_list_categories($args );
+      		?>
         </ul>
       </div>
-      <div class="col-sm-6">
+      <!-- /.category__list-cntr -->
+      <div class="col-sm-6 category__add-form">
         <h3>Cateory Form</h3>
-        <!-- //////////////////Form start///////////// -->
-        <form name="category_create_form" id="category_create_form">
+        <form name="category_create_form" id="category_create_form" class="category_create_form">
           <!-- Row start -->
           <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
@@ -46,21 +45,21 @@
             <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Parent</label>
             <div class="col-sm-10 parent_dropdown_cntr" >
               <?php 
-					$args = array(
-						//'show_count'   => 1,
-						'hierarchical' => 1,
-						'child_of' =>$storeParentCat->term_id,
-						'taxonomy'     => 'product_cat',
-						'hide_empty' => false,
-						'name'               => 'parent',
-						'id'                 => 'parent',
-						'class'              => 'form-control form-control-sm',
-						'show_option_none'    => 'None',
-						'selected'           => $current_cat->parent,
-					);
-					
-					wp_dropdown_categories( $args );
-            ?>
+      					$args = array(
+      						//'show_count'   => 1,
+      						'hierarchical' => 1,
+      						'child_of' =>$storeParentCat->term_id,
+      						'taxonomy'     => 'product_cat',
+      						'hide_empty' => false,
+      						'name'               => 'parent',
+      						'id'                 => 'parent',
+      						'class'              => 'form-control form-control-sm',
+      						'show_option_none'    => 'None',
+      						'selected'           => $current_cat->parent,
+      					);
+      					
+      					wp_dropdown_categories( $args );
+              ?>
             </div>
           </div>
           <!-- Row end --> 
@@ -74,20 +73,20 @@
           </div>
           <!-- Row end -->
           <?php if(!empty($_GET['action']) &&  $_GET['action']=="edit" && !empty($_GET['id']) && !empty($current_cat->term_id)){?>
-			  <input type="hidden" value="<?php echo $current_cat->term_id;?>" id="term_id" name="term_id">
+			        <input type="hidden" value="<?php echo $current_cat->term_id;?>" id="term_id" name="term_id">
               <input type="hidden" name="action" value="edit">
               <button type="submit" class="btn btn-primary">Update</button>
-		 <?php }else{?>
-         <button type="submit" class="btn btn-primary">Submit</button>
-         <?php } ?>
-          
+		      <?php }else{?>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          <?php } ?>          
         </form>
-        <!-- //////////////////Form end///////////// --> 
-        
+        <!-- /.category_create_form -->
       </div>
+      <!-- /.category__add-form -->
     </div>
   </div>
 </section>
+<!-- /.dashboard-category-cntr -->
 <script>
  /* Category  jQuery validation Procress */
 jQuery("#category_create_form").validate({
