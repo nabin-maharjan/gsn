@@ -52,6 +52,61 @@
       }
     }
   }
+
+  .filter{
+
+    &-container {
+      margin-bottom: 30px;
+    }
+
+    &__items {
+      background: $lighter_gray;
+      padding: 10px 15px;
+
+      .product-filter-form {
+        font-size: 14px;
+
+        label {
+          line-height: 30px;
+          margin-bottom: 0;
+        }
+
+        select {          
+          padding: 5px 12px;
+          width: 200px;
+          border: 0;
+          margin-left: 6px;
+          outline: 0;
+        }
+
+        button {
+          padding: 7px 25px;
+          vertical-align: top;
+          margin-left: 6px;
+        }
+      }
+
+      .product-search-form {
+
+        input, button {
+          display: inline-block;
+          width: auto;
+        }
+
+        input {
+          padding: 7px 15px;
+          border: 0;
+          width: 200px;
+        }
+
+        button {
+          margin-left: 6px;
+          padding: 7px 25px;
+          vertical-align: top;
+        }
+      }
+    }
+  }
 }
 
 .product-feature-setting {
