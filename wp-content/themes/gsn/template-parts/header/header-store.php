@@ -88,7 +88,8 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     }
 		})
 		.autocomplete( "instance" )._renderItem = function( ul, item ) {
-		  return $( "<li>" )
+		  return $( "<li>" ).addClass('autocomplete-item')
+		  .data('link',item.link)
 			.append( "<div class=\"autocomplete-search-item clearfix\"><img src='"+item.img+"' width='50'><span>" + item.label + "</span></div>" )
 			.appendTo(jQuery('ul.autocomple-search'));
 		};
@@ -97,6 +98,9 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     // }	
 	}
 	auto_complete(projects);
+	jQuery(document).on('click','.autocomple-search li.autocomplete-item',function(){
+		window.location.href=jQuery(this).data('link');
+	})
   });
   </script>
 </head>

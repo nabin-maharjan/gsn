@@ -189,25 +189,37 @@ class GsnProduct{
 				}
 				$v = new Valitron\Validator($datas);
 				if($edit_flag){
-					$v->rule('required', array('name','description','price','image_id'));
+					$v->rule('required', array('name','price','image_id'));
 					$v->rule('numeric','price');
 				}else{
-					$v->rule('required', array('name','description','price','stock','image_id'));
+					$v->rule('required', array('name','price','stock','image_id'));
 					$v->rule('numeric',array('price','stock'));
 				}
 				$v->rule('array',array('attribute_name','attribute_value'));
 				if($v->validate()) {
 					
+					
+					
 					global $store, $wpdb;
 					if($edit_flag){
 						$post_id =$datas['product_id'];
+						// Update post 37
+						  $product_args = array(
+							  'ID'           =>$post_id,
+							  'post_title'   => sanitize_text_field($datas['name']),
+							  'post_content' =>$_POST['product_content'],
+							  'post_excerpt'=> sanitize_text_field($datas['short_description'])
+						  );
+						// Update the post into the database
+						  wp_update_post( $product_args );
 					}else{
 						$post_id = wp_insert_post( array(
 							'post_author' => $store->user_id,
 							'post_title' => sanitize_text_field($datas['name']),
-							'post_content' => sanitize_text_field($datas['description']),
+							'post_content' => $_POST['product_content'],
 							'post_status' => 'publish',
 							'post_type' => "product",
+							'post_excerpt'=> sanitize_text_field($datas['short_description'])
 						) );
 					}
 					
