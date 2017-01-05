@@ -42,6 +42,7 @@ main {
           a:hover {
             color: $brick_red;
           }
+				
         }
 
         span.price {
@@ -64,4 +65,5 @@ main {
   .product-image-cntr .product-image {
     height: 200px;
   }
+	.star-rating{ left:50%;transform: translatex(-50%);}
 }

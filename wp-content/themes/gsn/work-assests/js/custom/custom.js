@@ -233,4 +233,6 @@ jQuery(document).ready(function(e) {
     }
   }
   collapseCategory();
+	
+	
 });
