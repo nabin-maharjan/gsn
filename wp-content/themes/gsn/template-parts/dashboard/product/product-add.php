@@ -55,15 +55,6 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
         </div>
       </div>
       <!-- Row end -->
-      
-      <!-- Row start -->
-      <div class="form-group row">
-        <label for="description" class="col-sm-2 col-form-label col-form-label-sm">Description</label>
-        <div class="col-sm-10">
-          <textarea class="form-control form-control-sm" name="description" id="description"><?php echo (!empty($product->post->post_content))?$product->post->post_content:"";?></textarea>
-        </div>
-      </div>
-      <!-- Row end -->
       <!-- Row start -->
       <div class="form-group row">
         <label for="price" class="col-sm-2 col-form-label col-form-label-sm">Price</label>
@@ -101,6 +92,26 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
    		 
            
            </div>
+        </div>
+      </div>
+      <!-- Row end -->
+      <!-- Row start -->
+      <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label col-form-label-sm">Short Description</label>
+        <div class="col-sm-10">
+          <textarea class="form-control form-control-sm" name="short_description" id="short_description"><?php echo (!empty($product->post->post_excerpt))?$product->post->post_excerpt:"";?></textarea>
+        </div>
+      </div>
+      <!-- Row end -->
+      
+      <!-- Row start -->
+      <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+        <div class="col-sm-10">
+          <?php
+		  $description=(!empty($product->post->post_content))?$product->post->post_content:"";
+  	        echo wp_editor($description,'description');
+  	      ?>
         </div>
       </div>
       <!-- Row end -->
@@ -258,7 +269,8 @@ jQuery("#product_create_form").validate({
     },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
-	  var data= {action: "gsn_add_product", formdata : formdata};
+	  var product_content =tinyMCE.activeEditor.getContent();
+	  var data= {action: "gsn_add_product", formdata : formdata,product_content:product_content};
 	  var response=ajax_call_post(data,"#product_create_form",'',function(response){
 				jQuery(form)[0].reset();
 				jQuery('.image_src').attr('src','')

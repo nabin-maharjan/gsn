@@ -1,6 +1,28 @@
 <?php global $store;?>
 <section class="profile-setting-cntr">  	
   <div class="container">
+  
+  <form name="store_domain_setting_form" id="store_domain_setting_form">
+      <h3>Store Domain Settings</h3>
+      <!-- Row start -->
+      <div class="form-group clearfix">
+        <label for="domainName" class="col-sm-2 col-form-label col-form-label-sm">Domain</label>
+        <div class="col-sm-6 domainName_cntr">
+        <?php if(empty($store->domainName)){?>
+          <input type="text"  class="form-control form-control-sm" value="<?php echo (!empty($store->domainName))?$store->domainName:"";?>" name="domainName" id="domainName">
+          <?php }else{?>
+          	<label><?php echo $store->domainName;?></label>
+          <?php }?>
+        </div>
+        <div class="col-sm-4">
+			<?php if(empty($store->domainName)){?>
+                <button type="submit" class="btn btn-primary">Update</button>
+             <?php }?>
+        </div>
+      </div>
+      <!-- Row end -->
+    </form>
+  
     <form name="profile_setting_form" id="profile_setting_form">
       <h3>Profile Settings</h3>
       <!-- Row start -->
@@ -82,3 +104,65 @@
   </div>
 </section>
   <!-- /.profile-setting-cntr -->
+  
+ <script>
+ 
+/* Store Setting jQuery validation Procress */
+jQuery("#store_domain_setting_form").validate({
+	rules: {
+      domainName:{
+		required: true ,
+		remote:{
+         	url :ajaxUrl,
+			type: "post",
+			data: {action: "gsn_check_domain_name_unique", 
+				domainName : function(){
+					return jQuery('#domainName').val();
+				},
+				jquery : 'jquery'
+			}
+		}
+	  },
+	},
+	messages: { 
+    	domainName: { remote: "This domain name was already taken."}
+  },
+  submitHandler: function(form) {
+
+	  var formdata=jQuery(form).serialize();
+	  var data= {action: "gsn_update_store_domain", domainName :jQuery('#domainName').val()};
+	  var response=ajax_call_post(data,"#store_domain_setting_form",'',function(response){
+		// window.location.href=response.redirectUrl;
+			// jQuery(form)[0].reset();
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			
+			  
+	 },function(){
+		 jQuery('.domainName_cntr').html("<label>"+jQuery('#domainName').val()+"</label>");
+		jQuery('#store_domain_setting_form .btn-primary').remove();
+		jQuery('html, body').animate({
+				scrollTop: jQuery("body").offset().top
+			}, 500); 
+	 });
+
+  }
+});
+  /* Profile Setting jQuery validation Procress */
+jQuery("#profile_setting_form").validate({
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+	  var data= {action: "gsn_store_profile_setting", formdata : formdata};
+	  var response=ajax_call_post(data,"#profile_setting_form",'',function(response){
+		// window.location.href=response.redirectUrl;
+			 jQuery(form)[0].reset();
+			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			  
+	 },function(){
+		jQuery('html, body').animate({
+				scrollTop: jQuery("body").offset().top
+			}, 500); 
+	 });
+  }
+}); 
+ </script>

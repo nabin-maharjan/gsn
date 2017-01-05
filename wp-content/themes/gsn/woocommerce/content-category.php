@@ -80,7 +80,6 @@ $gsn_settings=$gsnSettingsClass->get();
 							'taxonomy'                 => 'product_cat',
 							); 
 							$child_categories = get_categories($args );
-
 						foreach($child_categories as $child){
 					?>
 						<li class="col-sm-2 col-md-3 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>

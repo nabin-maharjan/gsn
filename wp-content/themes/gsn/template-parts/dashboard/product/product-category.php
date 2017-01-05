@@ -14,13 +14,12 @@
         <ul class="category-lists">
           <?php 
       			$args = array(
-  						//'show_count'   => 1,
   						'hierarchical' => true,
   						'child_of' =>$storeParentCat->term_id,
   						'taxonomy'     => 'product_cat',
   						'hide_empty' => false,
   						'title_li' =>'',
-  						'show_count' => 1,
+  						//'show_count' => 1,
   						'walker' => new gsn_category_walker_dashboard()
   					);
       			wp_list_categories($args );
