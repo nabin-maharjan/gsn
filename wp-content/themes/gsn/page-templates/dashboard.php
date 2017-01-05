@@ -34,26 +34,7 @@
  <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
  <script> 
-  /* Store Setting jQuery validation Procress */
-jQuery("#profile_setting_form").validate({
-  submitHandler: function(form) {
-	  var formdata=jQuery(form).serialize();
-	  var data= {action: "gsn_store_profile_setting", formdata : formdata};
-	  var response=ajax_call_post(data,"#profile_setting_form",'',function(response){
-		// window.location.href=response.redirectUrl;
-			 jQuery(form)[0].reset();
-			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
-			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
-			  
-	 },function(){
-		jQuery('html, body').animate({
-				scrollTop: jQuery("body").offset().top
-			}, 500); 
-	 });
-  }
-}); 
- 
- 
+
   /* Store Setting jQuery validation Procress */
 jQuery("#store_setting_form").validate({
 	rules: {
