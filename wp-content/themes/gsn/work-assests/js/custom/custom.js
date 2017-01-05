@@ -35,9 +35,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 				}
             }
          },
-		 complete: function(){
+		 complete: function(response){
 			 if(typeof(complete_callback)!=="undefined"){
-				 complete_callback();
+				 complete_callback(response);
 			 }
 		 }
       });

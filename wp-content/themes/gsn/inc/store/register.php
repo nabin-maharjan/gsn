@@ -2,7 +2,7 @@
 require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
 	
-	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id;
+	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id,$domainName;
 	private $store_table;
 	
 	public function __construct(){
@@ -37,6 +37,12 @@ class Store{
 			//add the shortcut so you can use $wpdb->stats
 			$wpdb->tables[] = str_replace($wpdb->prefix, '', $this->store_table); 
 		}
+		
+			$store_table = $wpdb->get_row("SELECT * FROM ".$this->store_table);
+			if(!isset($store_table->domainName)){
+				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `domainName` VARCHAR(50) NULL DEFAULT NULL, ADD UNIQUE `domainName` (`domainName`);");
+			}
+		
 			// add ajax function for registration process
 			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
 			add_action( 'wp_ajax_nopriv_store_registration', array($this,'store_registration') );
@@ -46,17 +52,23 @@ class Store{
 			/* add ajax function for email address check*/
 			add_action( 'wp_ajax_email_is_exists', array($this,'email_is_exists') );
 			add_action( 'wp_ajax_nopriv_email_is_exists', array($this,'email_is_exists') );
-			/* ad ajax function for store logout */
+			/* add ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_logout', array($this,'gsn_store_logout') );
 			add_action( 'wp_ajax_nopriv_gsn_store_logout', array($this,'gsn_store_logout') );
-			/* ad ajax function for store logout */
+			/* add ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_profile_setting', array($this,'store_registration') );
 			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
 			
-			
-			/* ad ajax function for store logout */
+			/* add ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_contact_action', array($this,'store_contact_action') );
 			add_action( 'wp_ajax_nopriv_gsn_store_contact_action', array($this,'store_contact_action') );
+			
+			/* add ajax function for store domain unique check */
+			add_action( 'wp_ajax_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
+			add_action( 'wp_ajax_nopriv_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_update_store_domain', array($this,'update_store_domain') );
+			add_action( 'wp_ajax_nopriv_gsn_update_store_domain', array($this,'update_store_domain') );
 			
 			
 			/* set store properties */
@@ -66,9 +78,90 @@ class Store{
 			/* add filter only show current user media */
 			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
 			/* add media upload files */
-			 add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
+			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
 			
 	}
+	/*
+	* fUNCTION  to update store domain
+	*/
+	public function update_store_domain(){
+		$response=array();
+		try{
+			if(!empty($_POST['domainName'])){
+				$check_domain_name_unique=$this->check_domain_name_unique(sanitize_text_field($_POST['domainName']));
+				if($check_domain_name_unique['status']=="success"){
+					global $wpdb,$store;
+					/* update domain name to database */
+					$update_status=$wpdb->update($this->store_table,array(
+						'domainName' =>sanitize_text_field($_POST['domainName'])
+					), array('id'=>$store->id));
+				
+					/* set success message */
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="Domain name updated successfully.";					
+				}else{
+					throw new Exception($check_domain_name_unique['msg']);
+				}
+			}
+			
+		}catch(Exception $e){
+			$response['status']="error";
+			$response['code']=$e->getCode();
+			$response['msg']=$e->getMessage();
+		}
+		echo json_encode($response);die();
+	}
+	
+	/*
+	*Function to check domain name exists 
+	*/
+	public function check_domain_name_unique($domainName=""){
+		$response=array();
+		$jquery_flag=false;
+		try{
+			if($domainName==""){
+				if(!empty($_POST['domainName'])){
+					$domainName=sanitize_text_field($_POST['domainName']);
+					if(!empty($_POST['jquery']) && $_POST['jquery']=="jquery"){
+						$jquery_flag=true;
+					}
+				}
+				
+			}
+			if(!empty($domainName)){
+				global $wpdb;
+				$query=$wpdb->prepare("select * from ".$this->store_table." where domainName=%s",sanitize_text_field($_POST['domainName'])); // Prepare query
+				$storeobj = $wpdb->get_row($query );
+				if($storeobj>0){
+					if($jquery_flag){
+						echo "false"; die;
+					}else{
+						throw new Exception("Domain Name was already taken.");
+					}
+				}					
+			}else{
+				throw  new Exception("Domain Name must not be empty.");
+			}
+			if($jquery_flag){
+				echo "true"; die;
+			}else{
+				$response['status']="success";
+				$response['code']='200';
+				$response['msg']="Domain name is available";
+			}
+		}catch(Exception $e){
+			$response['status']="error";
+			$response['code']=$e->getCode();
+			$response['msg']=$e->getMessage();
+			
+		}
+			return $response;
+	}
+	
+	
+	
+	
 	/*
 	*Function to contact store owner 
 	*/
@@ -92,7 +185,6 @@ class Store{
 							'post_status' => 'publish',
 							'post_type' => "store_contact",
 						) );
-						
 						
 					$headers = 'From: '.$datas['fullName'].' <'.$datas['emailAddress'].'>' . "\r\n";
 					$email_subject="Store Enquiry";
@@ -128,9 +220,7 @@ class Store{
  
 	
 	/*
-	
 	*function to restrict user to media
-	
 	*/
 	public function show_current_user_attachments( $query ) {
 		$user_id = get_current_user_id();
@@ -139,8 +229,6 @@ class Store{
 		}
 		return $query;
 	}
-	
-	
 	
 	/* 
 	* function to add store role
