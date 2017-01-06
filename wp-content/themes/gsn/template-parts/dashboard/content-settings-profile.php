@@ -3,7 +3,7 @@
   <div class="container">
   
   <form name="store_domain_setting_form" id="store_domain_setting_form">
-      <h3>Store Domain Settings</h3>
+      <h3>Shop Domain Settings</h3>
       <!-- Row start -->
       <div class="form-group clearfix">
         <label for="domainName" class="col-sm-2 col-form-label col-form-label-sm">Domain</label>
@@ -22,6 +22,85 @@
       </div>
       <!-- Row end -->
     </form>
+    
+    
+    
+    <form name="store_package_setting_form" id="store_package_setting_form">
+      <h3>Shop Package Settings</h3>
+      <!-- Row start -->
+      <div class="form-group clearfix">
+        <div class="col-sm-12">
+        
+       	<ul class="gsn_shop_packages">
+        	<li class="package normal-package">
+            	<h4>Normal Package</h4>
+                <p>Can Create 5 Product</p>
+                 <p>Can upload 4 Product Image</p>
+                 <p>Can set 8 Product on sale</p>
+                 <p>GoShopNepal Ad: yes</p>
+                 <p>Can Select theme from 2 themes</p>
+                 <p>Featured shop on GoShopNepal</p>
+                 <input type="radio" name="package" value="normal" checked>
+            </li>
+            <li class="package normal-package">
+            	<h4>Bronze Package</h4>
+                <p>Can Create 5 Product</p>
+                 <p>Can upload 4 Product Image</p>
+                 <p>Can set 8 Product on sale</p>
+                 <p>GoShopNepal Ad: yes</p>
+                 <p>Can Select theme from 2 themes</p>
+                 <p>Featured shop on GoShopNepal</p>
+                 <input type="radio" name="package" value="bronze">
+            </li>
+            <li class="package normal-package">
+            	<h4>Silver Package</h4>
+                <p>Can Create 5 Product</p>
+                 <p>Can upload 4 Product Image</p>
+                 <p>Can set 8 Product on sale</p>
+                 <p>GoShopNepal Ad: yes</p>
+                 <p>Can Select theme from 2 themes</p>
+                 <p>Featured shop on GoShopNepal</p>
+                 <input type="radio" name="package" value="silver">
+            </li>
+            <li class="package normal-package">
+            	<h4>Gold Package</h4>
+                <p>Can Create 5 Product</p>
+                 <p>Can upload 4 Product Image</p>
+                 <p>Can set 8 Product on sale</p>
+                 <p>GoShopNepal Ad: yes</p>
+                 <p>Can Select theme from 2 themes</p>
+                 <p>Featured shop on GoShopNepal</p>
+                 <input type="radio" name="package" value="gold">
+            </li>
+            <li class="package normal-package">
+            	<h4>Platinium Package</h4>
+                <p>Can Create 5 Product</p>
+                 <p>Can upload 4 Product Image</p>
+                 <p>Can set 8 Product on sale</p>
+                 <p>GoShopNepal Ad: yes</p>
+                 <p>Can Select theme from 2 themes</p>
+                 <p>Featured shop on GoShopNepal</p>
+                 <input type="radio" name="package" value="platinium">
+            </li>
+        </ul>
+        
+        </div>
+        <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+      <!-- Row end -->
+    </form>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   
     <form name="profile_setting_form" id="profile_setting_form">
       <h3>Profile Settings</h3>
