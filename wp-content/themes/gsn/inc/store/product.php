@@ -86,15 +86,48 @@ class GsnProduct{
 			add_action( 'wp_ajax_gsn_filtered_product_list', array($this,'filtered_product_list') );
 			add_action( 'wp_ajax_nopriv_gsn_filtered_product_list', array($this,'filtered_product_list') );
 			
-			
-			
-			
 			// Add filter for specification tab on product detail page
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
-			
 			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
 			
+			// Add ajax function for removing product from sale
+			add_action( 'wp_ajax_gsn_remove_product_from_sale', array($this,'remove_product_from_sale') );
+			add_action( 'wp_ajax_nopriv_gsn_remove_product_from_sale', array($this,'remove_product_from_sale') );
 			
+			
+		}
+		
+		/*
+		*Function to remove product from sale
+		*/
+		public function remove_product_from_sale(){
+			$response=array();
+			try{
+				$product=new WC_product(sanitize_text_field($_POST['product_id']));
+				if(empty($product->post)){
+					throw new Exception("Error while removing product from sale");	
+				}
+				$product_meta=get_post_meta($product->id);
+				$regular_price=array_shift($product_meta['_regular_price']);
+
+				
+				update_post_meta($product->id,'_sale_price',0);
+				update_post_meta($product->id,'_price',$regular_price);
+				
+				update_post_meta($product->id,'_sale_price_dates_from',"");
+				update_post_meta($product->id,'_sale_price_dates_to',"");
+				
+				$response['status']="success";
+				$response['code']='200';
+				$response['msg']="Succesfully removed from sale";
+				
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
 		}
 		/*
 		*Function to limit store product only

@@ -1,7 +1,21 @@
 <?php
 global $gsnProduct, $store;
 $storeProducts=$gsnProduct->get_new_product_list(-1);
+$product_limit_flag=$store->get_product_limit_status();//check product add limit status
+if($product_limit_flag){
 ?>
+<section>
+	<h3>You limitation has been exceed to add product.</h3>
+	<div class="container">
+    	<div class="limit-exceed-cntr">
+        	<p>
+            	<a class="btn btn-primary" href="<?php echo site_url("/dashboard/settings/profile/");?>">Upgrade you package plan</a> Or
+                <a  class="btn btn-primary"  href="<?php echo site_url("dashboard/product/");?>">Delete product</a>
+             </p>
+        </div>
+    </div>
+</section>
+<?php }else{ ?>
 <section class="product-add-edit-cntr">
    <?php
   $product_edit=false;
@@ -141,8 +155,6 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
            
            <input  type="button" class="btn btn-info upload-button-multiple add-image-btn" value="Add Image" />
            </div>
-           
-           
         </div>
       </div>
       <!-- Row end -->
@@ -198,6 +210,8 @@ $storeProducts=$gsnProduct->get_new_product_list(-1);
     </form>
      </div>
    </section>
+   <input type="hidden" id="product_image_gallery_limit" value="<?php echo $store->get_product_image_limit();?>">
+  <?php } ?> 
 <script>
 /*
 *Function Remove image from gallery

@@ -2,7 +2,7 @@
 require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
 	
-	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id,$domainName;
+	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id,$domainName,$storePackage;
 	private $store_table;
 	
 	public function __construct(){
@@ -42,6 +42,10 @@ class Store{
 			if(!isset($store_table->domainName)){
 				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `domainName` VARCHAR(50) NULL DEFAULT NULL, ADD UNIQUE `domainName` (`domainName`);");
 			}
+			if(!isset($store_table->storePackage)){
+				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `storePackage` VARCHAR(50) NULL DEFAULT NULL;");
+			}
+			
 		
 			// add ajax function for registration process
 			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
@@ -278,7 +282,6 @@ class Store{
 		}
 		return $this;
 	}
-	
 	/*
 	* logout store function
 	
@@ -498,6 +501,51 @@ class Store{
 			}
 			echo json_encode($response);die();
 		}
+		/*
+		*Function to check product limit status
+		* Return Boolean
+		*/
+		public function get_product_limit_status(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			$storeProducts=$gsnProduct->get_new_product_list(-1);// get store products
+			if($storeProducts->found_posts<$package['product']){
+				return false;
+			}else{
+				return true;	
+			}
+		}
+		
+		/*
+		*Function to get Number of image use in product
+		* Return Boolean
+		*/
+		public function get_product_image_limit(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			return $package['product_image'];
+		}
+		
+		/*
+		*Function to check sale product limit status
+		* Return Boolean
+		*/
+		public function get_sale_product_limit_status(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			$storeProducts=$gsnProduct->get_sale_product_list(-1);// get store products
+			if($storeProducts->found_posts<$package['sale_product']){
+				return false;
+			}else{
+				return true;	
+			}
+		}
+		
+		
+		
 }
 global $store;
 $store=new Store();

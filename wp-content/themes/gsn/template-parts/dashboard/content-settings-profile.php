@@ -91,16 +91,6 @@
       </div>
       <!-- Row end -->
     </form>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   
     <form name="profile_setting_form" id="profile_setting_form">
       <h3>Profile Settings</h3>
