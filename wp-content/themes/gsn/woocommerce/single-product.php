@@ -59,3 +59,13 @@ get_header( 'shop' ); ?>
 </div>
 </main>
 <?php get_footer( 'shop' ); ?>
+<script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/slick.min.js"></script>
+<script>
+// singlw page thumbnail slider
+	if(jQuery('.woocommerce .single-product-details #content div.product .thumbnails').length > 0) {
+		jQuery('.woocommerce .single-product-details #content div.product .thumbnails').slick({
+			slidesToShow: 4,
+  		slidesToScroll: 1,
+		});	
+	}
+</script>
