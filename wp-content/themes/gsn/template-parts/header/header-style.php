@@ -131,7 +131,7 @@ border-color:<?php echo $light_color;?>;
 .woocommerce .single-product-details #content .summary.entry-summary form.cart button.button.alt,
 .woocommerce .single-product-details #content .woocommerce-tabs ul.tabs li,
 .woocommerce .single-product-details #content .woocommerce-tabs .panel .form-submit #submit,
-.woocommerce .woocommerce-message a {
+.woocommerce .woocommerce-message a, .btn-primary{
 background-color:<?php echo $primary_color;?>;
 }
 .attachment-span i:hover,
@@ -175,7 +175,7 @@ border-color:<?php echo $primary_color;?>;
 .woocommerce .single-product-details #content .woocommerce-tabs ul.tabs li.active,
 .woocommerce .single-product-details #content .woocommerce-tabs ul.tabs li:hover,
 .woocommerce .single-product-details #content .woocommerce-tabs .panel .form-submit #submit:hover,
-.woocommerce .woocommerce-message a:hover {
+.woocommerce .woocommerce-message a:hover, .btn-primary:hover {
 background-color:<?php echo $seconday_color;?>;
 }
 .woocommerce .woocommerce-message::before {

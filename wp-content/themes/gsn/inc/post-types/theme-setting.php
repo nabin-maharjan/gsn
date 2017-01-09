@@ -15,34 +15,35 @@ $setting->add_meta_box(
     array(
 	'Default theme' =>array(
 				'name'=>'default_theme',
-				'class'=>' test test',
+				'class'=>' color-picker',
 				'type'=>"radio",
 				'options'=>array(
 						'no'=>'No',
 						'yes'=>'Yes',
 					)
 				),
-	
+		'Header and footer strip' =>array(
+			'name'=>'footer_background_color',
+			'id'=>'footer_background_color',
+			'class'=>'color-picker',
+			'type'=>"text",
+			'placeholder'=>"Please select",
+			'show_in_admin_table'=>true,
+			),
+			
 		'Header Background Color' =>array(
 			'name'=>'header_background_color',
 			'id'=>'header_background_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
 			),
-		'Footer Background Color' =>array(
-			'name'=>'footer_background_color',
-			'id'=>'footer_background_color',
-			'class'=>' test test',
-			'type'=>"text",
-			'placeholder'=>"Please select",
-			'show_in_admin_table'=>true,
-			),
+		
 		'Top Footer Background Color' =>array(
 			'name'=>'top_footer_background_color',
 			'id'=>'top_footer_background_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
@@ -51,7 +52,7 @@ $setting->add_meta_box(
         'Primary Color' =>array(
 			'name'=>'primary_color',
 			'id'=>'primary_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
@@ -59,7 +60,7 @@ $setting->add_meta_box(
 		'Secondary Color' =>array(
 			'name'=>'seconday_color',
 			'id'=>'seconday_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
@@ -67,7 +68,7 @@ $setting->add_meta_box(
 		'Font Color' =>array(
 			'name'=>'font_color',
 			'id'=>'font_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
@@ -75,7 +76,7 @@ $setting->add_meta_box(
 		'Light Color' =>array(
 			'name'=>'light_color',
 			'id'=>'light_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
@@ -83,7 +84,7 @@ $setting->add_meta_box(
 		'Lighter Color' =>array(
 			'name'=>'lighter_color',
 			'id'=>'lighter_color',
-			'class'=>' test test',
+			'class'=>' color-picker',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
