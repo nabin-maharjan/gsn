@@ -136,6 +136,15 @@ function is_realy_woocommerce_page () {
 }
 
 
+/*
+*Function to restrict admin page to  non admin user
+*/
+function gsn_restrict_admin_page() {
+    if( ! current_user_can( 'manage_options' )  && strpos($_SERVER['PHP_SELF'],'/wp-admin/admin-ajax.php') == false) {
+        wp_redirect( home_url() );
+    }
+}
+add_action( 'admin_init', 'gsn_restrict_admin_page', 1 );
 
 // Encrypt Function
 function mc_encrypt($encrypt, $key){

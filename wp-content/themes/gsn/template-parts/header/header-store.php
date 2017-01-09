@@ -28,6 +28,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
        <?php } ?>
     </script>
     <?php wp_head(); ?>
+    <?php get_template_part( 'template-parts/header/header','style');   ?>
     <script>
 	
 	<?php global $gsnProduct;
@@ -178,6 +179,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                       </div>
                       <!-- /.cart__prices -->
                       <div class="cart__buttons clearfix">
+                      <a href="<?php echo site_url("/cart/");?>" class="btn btn-submit red-btn checkout-btn">Cart</a>
                         <a href="<?php echo site_url("/checkout/");?>" class="btn btn-submit red-btn checkout-btn">Checkout</a>
                       </div>
                     </div>

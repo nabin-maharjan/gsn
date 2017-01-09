@@ -39,6 +39,14 @@ $setting->add_meta_box(
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
 			),
+		'Top Footer Background Color' =>array(
+			'name'=>'top_footer_background_color',
+			'id'=>'top_footer_background_color',
+			'class'=>' test test',
+			'type'=>"text",
+			'placeholder'=>"Please select",
+			'show_in_admin_table'=>true,
+			),
 	
         'Primary Color' =>array(
 			'name'=>'primary_color',
@@ -64,29 +72,22 @@ $setting->add_meta_box(
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
 			),
-		'Font Link Color' =>array(
-			'name'=>'font_link_color',
-			'id'=>'font_link_color',
+		'Light Color' =>array(
+			'name'=>'light_color',
+			'id'=>'light_color',
 			'class'=>' test test',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
 			),
-		'Button Color' =>array(
-			'name'=>'button_color',
-			'id'=>'button_color',
+		'Lighter Color' =>array(
+			'name'=>'lighter_color',
+			'id'=>'lighter_color',
 			'class'=>' test test',
 			'type'=>"text",
 			'placeholder'=>"Please select",
 			'show_in_admin_table'=>true,
 			),
-		'Button Secondary Color' =>array(
-			'name'=>'button_secondary_color',
-			'id'=>'button_secondary_color',
-			'class'=>' test test',
-			'type'=>"text",
-			'placeholder'=>"Please select",
-			'show_in_admin_table'=>true,
-			),
+
     )
 );
