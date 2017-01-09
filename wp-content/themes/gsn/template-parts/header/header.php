@@ -190,19 +190,19 @@ border-color:$brick_red;
 .woocommerce .single-product-details #content .woocommerce-tabs ul.tabs li:hover,
 .woocommerce .single-product-details #content .woocommerce-tabs .panel .form-submit #submit:hover,
 .woocommerce .woocommerce-message a:hover {
-background-color:$$petal_green;
+background-color:$petal_green;
 }
 .woocommerce .woocommerce-message::before {
-color:$$petal_green;
+color:$petal_green;
 }
 .woocommerce .star-rating a::before,
 .woocommerce .star-rating span::before,
 .woocommerce .stars a::before,
 .woocommerce .stars span::before {
-	color: #ffae00
+	color: $petal_green;
 }
 .woocommerce .woocommerce-message {
-border-color:$$petal_green;
+border-color:$petal_green;
 }
 .modal-backdrop,
 .bottom-footer,
