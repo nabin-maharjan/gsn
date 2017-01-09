@@ -15,7 +15,7 @@ $setting->add_meta_box(
     array(
 	'Default theme' =>array(
 				'name'=>'default_theme',
-				'class'=>' color-picker',
+				//'class'=>' color-picker',
 				'type'=>"radio",
 				'options'=>array(
 						'no'=>'No',
