@@ -2,7 +2,14 @@
 global $gsnProduct, $store;
 $storeProducts=$gsnProduct->get_new_product_list(-1);
 $product_limit_flag=$store->get_product_limit_status();//check product add limit status
-if($product_limit_flag){
+
+$product_edit=false;
+  if(!empty($_GET['id']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
+  	$product= new WC_product(sanitize_text_field($_GET['id']));
+  	$product_price=get_post_meta($product->id,'_regular_price',true);
+  	$product_edit=true;
+  }
+if($product_limit_flag && !$product_edit){
 ?>
 <section>
 	<h3>You limitation has been exceed to add product.</h3>
@@ -17,16 +24,49 @@ if($product_limit_flag){
 </section>
 <?php }else{ ?>
 <section class="product-add-edit-cntr">
-   <?php
-  $product_edit=false;
-  if(!empty($_GET['id']) && !empty($_GET['action']) &&  $_GET['action']==sanitize_text_field("edit")){
-  	$product= new WC_product(sanitize_text_field($_GET['id']));
-  	$product_price=get_post_meta($product->id,'_regular_price',true);
-  	$product_edit=true;
-  }
-   ?>
     <h3>Product</h3>
      <div class="container">
+     <?php if($product_edit){ ?>
+     <div class="row">
+    	<div class="col-sm-4 float-sm-right">
+            <div>
+             <?php if(!$product->is_in_stock()){?>
+               <div class="alert alert-warning">
+                  <strong>Notice!</strong> This Product is ran out. You can delete this product or add some Stock. 
+                </div>
+               <?php }?>
+               <?php if($store->get_product_limit_status() && $product->post->post_status=="draft"){?>
+               <div class="alert alert-warning">
+                  <strong>Notice!</strong>Product publishing limitation was exceed. If you want to publish this project, you can draft another published project and publish it. Or upgrade you package plan. 
+                </div>
+               <?php }?>
+            
+           		<p>Post Status : <?php echo $product->post->post_status;?></p>
+            	<p>Stock Available : <?php echo $product->get_total_stock();?></p>
+                
+                <?php  if($product->post->post_status=="publish"){ ?>
+                <button class="btn btn-danger make_product_draft" data-product_id="<?php echo $product->id;?>">Draft</button>
+                <?php }else if($product->post->post_status=="draft" && !$store->get_product_limit_status()){?>
+				<button class="btn btn-primary make_product_publish" data-product_id="<?php echo $product->id;?>">Publish</button>
+				<?php }?>
+				
+             <!--div class="product-feature-setting"></div>-->
+             <button class="btn btn-danger trash_product" data-product_id="<?php echo $product->id;?>">Delete Product</button>
+               <?php if($product->is_featured()){?>
+               <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
+               <?php }else{ ?>
+               <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
+               <?php } ?>
+               
+               <?php if ( $product->is_on_sale() ) { ?>
+                <button class="btn btn-danger remove_product_from_sale" data-product_id="<?php echo $product->id;?>">Remove from sale</button>
+               <?php }?>
+            </div>
+        
+        </div>
+     
+     	<div class="col-sm-8">
+     <?php }?>
      <form name="product_create_form" id="product_create_form">
     <!-- Row start -->
       <div class="form-group row">
@@ -208,11 +248,52 @@ if($product_limit_flag){
       <?php }?>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    
+    <?php if($product_edit){ ?>
+    </div>
+    
+     
+        
+     </div>
+     <?php }?>
      </div>
    </section>
    <input type="hidden" id="product_image_gallery_limit" value="<?php echo $store->get_product_image_limit();?>">
   <?php } ?> 
 <script>
+/*
+*Function To make Product Publish
+*/
+jQuery('.make_product_publish').on('click',function(){
+	var r = confirm("Are you sure! ");
+	if (r == true) {
+		var product_id=jQuery(this).data('product_id');
+		var data= {action: "gsn_publish_product", product_id : product_id};
+		  var response=ajax_call_post(data,'.make_product_publish','',function(response){
+		  // window.location.href=response.redirectUrl;
+			location.reload();
+			  // return false;
+		 });
+	} 	
+});
+
+/*
+*Function To make Product Publish
+*/
+jQuery('.make_product_draft').on('click',function(){
+	var r = confirm("Are you sure! ");
+	if (r == true) {
+		var product_id=jQuery(this).data('product_id');
+		var data= {action: "gsn_draft_product", product_id : product_id};
+		  var response=ajax_call_post(data,'.make_product_publish','',function(response){
+		  // window.location.href=response.redirectUrl;
+			location.reload();
+			  // return false;
+		 });
+	} 	
+});
+
+
 /*
 *Function Remove image from gallery
 */

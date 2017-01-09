@@ -18,7 +18,7 @@
       <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
-          <h2>Products</h2>
+          <h2>Published Products</h2>
         </div>
       </a>
     </div>

@@ -5,13 +5,19 @@ $category=0;
 if(!empty($_GET['category'])){
 	$category=$_GET['category'];
 }
-
+$title="Product list";
 if(!empty($_GET['action']) && $_GET['action']=="view"){
 	if(!empty($_GET['type']) && $_GET['type']=="sale"){
+		$title="Sale Product list";
 		$products=$gsnProduct->get_sale_product_list(-1,$category);
 	}else if(!empty($_GET['type']) && $_GET['type']=="feature"){
+		$title="Featured Product list";
 		$products=$gsnProduct->get_feature_product(-1,$category);
+	}else if(!empty($_GET['type']) && $_GET['type']=="draft"){
+		$title="Draft Product list";
+		$products=$gsnProduct->get_draft_product(-1);
 	}else{
+		
 		$products=NULL;
 	}
 }
@@ -21,7 +27,7 @@ if($products==NULL){
 
 ?>
 <section class="products__list-cntr">
-  <h3>Product list</h3>
+  <h3><?php echo $title;?></h3>
   <div class="filter-container">
     <div class="container">
       <div class="filter__items clearfix">
@@ -32,7 +38,7 @@ if($products==NULL){
          <?php } ?>
             <label>Filter by:</label>
             <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
-                $selected_term= wp_get_post_terms( $product->id, 'product_cat' );
+              //  $selected_term= wp_get_post_terms( $product->id, 'product_cat' );
                 $selected_term="";
                 //var_dump($storeParentCat); die;
                 $args = array(

@@ -7,7 +7,10 @@
  */
 get_header();
 global $gsnProduct;
-$sale_product_list=$gsnProduct->get_sale_product_list(-1);
+global $gsnSettingsClass;
+$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+$package=$gsn_settings->storePackageSettings;//get store package settings
+$sale_product_list=$gsnProduct->get_sale_product_list($package['sale_product']);
 ?>
   <main class="main main-content">  
   <section class="sales-section">
@@ -24,6 +27,15 @@ $sale_product_list=$gsnProduct->get_sale_product_list(-1);
                           endwhile;?>
                            </ul>
                      </div>
+                     
+                     <?php
+						/**
+						 * woocommerce_after_main_content hook.
+						 *
+						 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+						 */
+						do_action( 'woocommerce_after_main_content' );
+					?>
             <?php  }else{?>
                 There is no product on sale.
             <?php }

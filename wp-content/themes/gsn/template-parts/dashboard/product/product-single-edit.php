@@ -15,24 +15,6 @@
  $available_stock=$product->get_stock_quantity();
  $attributes=get_post_meta($product->id,"_product_attributes",true);
  
-//echo "<pre>";
-//var_dump(get_post_meta($product->id));
- ?>
- 
- <section class="product-feature-setting">
-   <?php if($product->is_featured()){?>
-   <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
-   <?php }else{ ?>
-   <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
-   <?php } ?>
-   
-   <?php if ( $product->is_on_sale() ) { ?>
-    <button class="btn btn-danger remove_product_from_sale" data-product_id="<?php echo $product->id;?>">Remove from sale</button>
-   <?php }?>
-   
- </section>
- 
- <?php 
  /*
  * Include product edit form
  */
@@ -48,7 +30,7 @@
 	
 	<div class="container">
     	<div class="limit-exceed-cntr">
-       	 <h4>You limitation has been exceed to add product.</h4>
+       	 <h4>Add product on sale limitation has been exceed.</h4>
         	<p>
             	<a class="btn btn-primary" href="<?php echo site_url("/dashboard/settings/profile/");?>">Upgrade you package plan</a> Or
                 <a  class="btn btn-primary"  href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>">Remove previous Sale product</a>
@@ -201,23 +183,21 @@ jQuery("#set_sale_product_form").validate({
 });
 
  /*Remove product from sale */
-jQuery(".remove_product_from_sale").on('click',function(){
+jQuery(".trash_product").on('click',function(){
 	var r = confirm("Are you sure! ");
 	if (r == true) {
 		var product_id=jQuery(this).data('product_id');
-		var data= {action: "gsn_remove_product_from_sale", product_id : product_id};
+		var data= {action: "gsn_trash_product", product_id : product_id};
 		  var response=ajax_call_post(data,'.remove_product_from_sale','',function(response){
-		  // window.location.href=response.redirectUrl;
-			  location.reload();
-			   return false;
+		   window.location.href=response.redirectUrl;
+			//  location.reload();
+			  // return false;
 		 });
-		
 	} 
-
  });
 
 
-
+trash_product
 
  /* Add Stock Process */
 jQuery("#stock_add_form").validate({

@@ -6,11 +6,13 @@
  * @since GSN 1.0
  */
 get_header("store");
-global $gsnProduct;
+global $gsnProduct,$gsnSettingsClass;
+$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+$package=$gsn_settings->storePackageSettings;//get store package settings
 $feature_products=$gsnProduct->get_feature_product(5);
 $top_sale_list=$gsnProduct->get_sale_product_list(2);
 $top_new_product_list=$gsnProduct->get_new_product_list(2);
-$sale_product_list=$gsnProduct->get_sale_product_list(8);
+$sale_product_list=$gsnProduct->get_sale_product_list($package['sale_product']);
 $new_product_list=$gsnProduct->get_new_product_list(8);
 ?>
   <main class="main main-content">

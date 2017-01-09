@@ -6,7 +6,38 @@
  * @since GSN 1.0
  */
  get_header();
+ 
+ 
+//$site_url = 'http://esewademo.nilambar.com.np/';
+$esewa_url = 'http://dev.esewa.com.np/epay/main';
+$esewa_verfication_url = 'http://dev.esewa.com.np/epay/transrec';
+$merchant_id = "testmerchant";
  ?>
+ 
+ 
+ 
+ <form action = "<?php echo $esewa_url; ?>" method="POST">
+<input value="20" name="tAmt" type="hidden">
+<input value="10" name="amt" type="hidden">
+<input value="5" name="txAmt" type="hidden">
+<input value="2" name="psc" type="hidden">
+<input value="3" name="pdc" type="hidden">
+<input value="<?php echo $merchant_id; ?>" name="scd" type="hidden">
+<input value="PRD-01" name="pid" type="hidden">
+<input value="<?php echo site_url(); ?>success.php/?q=su" type="hidden" name="su">
+<input value="<?php echo site_url(); ?>failure.php/?q=fu" type="hidden" name="fu">
+<input value="Pay Now" type="submit">
+</form>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 <section class="landing">  
   <div class="container">
     <h1 class="page-title">Welcome to test</h1>

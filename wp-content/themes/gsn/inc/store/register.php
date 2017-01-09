@@ -77,6 +77,13 @@ class Store{
 			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
+			/* limit store publish product */
+			add_action('init',array($this,'limit_publish_product'),2);
+		   // add_action('init',array($this,'change_draft_topublish'),2);
+			
+			
+			
+			
 			/* add store role*/
 			add_action('init',array($this,'add_store_role'));
 			/* add filter only show current user media */
@@ -85,6 +92,57 @@ class Store{
 			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
 			
 	}
+	/*
+	*Function to limit store Product publish
+	*/
+	public function limit_publish_product(){
+		global $gsnSettingsClass,$gsnProduct,$store;
+		$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+		$package=$gsn_settings->storePackageSettings;//get store package settings
+		if(!empty($store->user_id)){
+			$store_products__=$gsnProduct->get_all_store_product(999999999,0,$package['product']);
+			
+			if($store_products__->have_posts()) {
+				while( $store_products__->have_posts() ) : $store_products__->the_post();
+					$args = array( 
+					'ID' =>get_the_ID(), 
+					'post_status' => 'draft' 
+					);
+					wp_update_post($args);
+				wp_reset_postdata(); 
+				endwhile;
+			}
+		}
+		//die;
+	}
+	
+	
+	
+	public function change_draft_topublish(){
+		global $store;
+		//var_dump($store);die;
+		$args=array( 
+				'post_type' => array('product'),
+				'posts_per_page' =>-1 ,
+				'post_status'=>array('draft'),
+				 'author'=>$store->user_id
+				 );
+		//$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
+		$store_product=new WP_Query($args);
+		var_dump($store_product->found_posts);die;
+		if($store_product->have_posts()) {
+			while( $store_product->have_posts() ) : $store_product->the_post();
+				$args = array( 'ID' =>get_the_ID(), 'post_status' => 'publish' );
+				wp_update_post($args);
+			wp_reset_postdata(); 
+			endwhile;
+		}
+		
+	}
+	
+	
 	/*
 	* fUNCTION  to update store domain
 	*/
