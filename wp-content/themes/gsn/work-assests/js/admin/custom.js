@@ -115,5 +115,13 @@ jQuery(document).ready(function($){
 			jQuery(this).hide();
 	});
 		
-		
+	/*
+* Add color picker 
+*/
+if($('.color-picker').length){
+	$('.color-picker').wpColorPicker();
+}	
 });
+
+
+		

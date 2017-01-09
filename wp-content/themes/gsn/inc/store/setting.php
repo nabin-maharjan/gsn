@@ -16,7 +16,20 @@ class GsnSetting{
 		
 		// Set page template for all dashboard page
 		add_action('template_redirect',array($this,'gsn_switch_page_template'));
+		
+		// Add action to color input 
+		add_action( 'admin_enqueue_scripts', array($this,'gsn_add_color_picker'));
 	}
+	
+	
+	
+public function gsn_add_color_picker( $hook ) {
+        // Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' ); 
+		wp_enqueue_script( 'wp-color-picker' );
+         
+}
+	
 	
 	
 function gsn_switch_page_template() {
