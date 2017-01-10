@@ -9,6 +9,10 @@ add_action('init',function(){
 	remove_post_type_support('theme_color_setting','editor');
 });
 
+add_filter('admin_custom_theme_color_setting_meta_field_table',function($value,$column){
+	echo "<span style='background-color:".$value."; width:50px; height:50px; display:block; border:1px solid #ececec;'></span>";
+},10,2);
+
 /* add meta fields to post */
 $setting->add_meta_box( 
     'Theme Collor Setting', 

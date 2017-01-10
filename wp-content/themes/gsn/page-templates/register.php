@@ -6,16 +6,12 @@
  * @since GSN 1.0
  */
  get_header();
- 
- 
 //$site_url = 'http://esewademo.nilambar.com.np/';
 $esewa_url = 'http://dev.esewa.com.np/epay/main';
 $esewa_verfication_url = 'http://dev.esewa.com.np/epay/transrec';
-$merchant_id = "testmerchant";
+$merchant_id = "UkRRTQYfBAcYCV0XEgIbChceAAE=";
  ?>
- 
- 
- 
+<?php /*?> 
  <form action = "<?php echo $esewa_url; ?>" method="POST">
 <input value="20" name="tAmt" type="hidden">
 <input value="10" name="amt" type="hidden">
@@ -24,20 +20,10 @@ $merchant_id = "testmerchant";
 <input value="3" name="pdc" type="hidden">
 <input value="<?php echo $merchant_id; ?>" name="scd" type="hidden">
 <input value="PRD-01" name="pid" type="hidden">
-<input value="<?php echo site_url(); ?>success.php/?q=su" type="hidden" name="su">
-<input value="<?php echo site_url(); ?>failure.php/?q=fu" type="hidden" name="fu">
+<input value="<?php echo site_url(); ?>/success.php/?q=su" type="hidden" name="su">
+<input value="<?php echo site_url(); ?>/failure.php/?q=fu" type="hidden" name="fu">
 <input value="Pay Now" type="submit">
-</form>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+</form><?php */?> 
 <section class="landing">  
   <div class="container">
     <h1 class="page-title">Welcome to test</h1>
@@ -155,9 +141,13 @@ $merchant_id = "testmerchant";
             </div>
             <!-- Row end -->
 			<!-- Row start -->
-			<div class="bd-example bd-example-padded-bottom col-sm-6">
-			<label for="panNumber" class="form-label">Set Your Store Location</label>
-				<button type="button" class="btn btn-primary col-sm-12 brick_red" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
+			<div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
+			<label for="location" class="form-label">Set Your Store Location</label>
+				<button type="button" class="btn btn-primary col-sm-12 brick_red" id="set_location_btn" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
+                <button type="button" style="display:none" class="btn btn-success col-sm-12"  id="change_location_btn"data-toggle="modal" data-target="#gridSystemModal">
+                	<span>Your location</span>
+                    <p class="btn_location_text"></p>
+                </button>
 			</div>
 			<!-- Row end -->
 			</div>
@@ -175,17 +165,18 @@ $merchant_id = "testmerchant";
 						  
 						  <div class="form-input">
 						   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-						   <div id="map" style="width:100%;height:500px"></div>
+						   <div id="map" style="width:100%;height:400px"></div>
 							 Selected Location :<span id="selected_location_label"></span>
 							<input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
 							<input type="hidden" class="form-control" name="latitute" id="latitute">
 							<input type="hidden" class="form-control" name="lognitute" id="lognitute">                  
 						  </div>
+                          
 						</div>
 						</div>
 						<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+                        
+						<button type="button" class="btn btn-primary btn-set-location" >Set location</button>
 						</div>
 					</div>
 				</div>
@@ -206,6 +197,24 @@ $merchant_id = "testmerchant";
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places"></script>
 <script>
+/*
+* event trigger when set location click
+*/
+jQuery('.btn-set-location').on('click',function(){
+	var location_selected=jQuery('#storeFullAddress').val().trim();
+	if(location_selected==""){
+		if(!jQuery('.alert.alert-danger').length){
+			jQuery(this).parent().prepend('<span class="alert alert-danger alert-dismissible"> Please select location</span>');
+		}
+			}else{
+				jQuery('#set_location_btn').hide();
+				jQuery('#change_location_btn').show();
+				jQuery(this).parent().find('.alert').remove();
+		$('#gridSystemModal').modal('hide');	
+	}
+});
+
+
 /* Login jQuery validation Procress */
 jQuery("#login_form").validate({
 	rules: {

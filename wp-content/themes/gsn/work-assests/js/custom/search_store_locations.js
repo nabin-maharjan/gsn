@@ -85,6 +85,7 @@ if(jQuery('#map').length){
 				  if(results[0]) {
 					  console.log(results);
 					  jQuery('#selected_location_label').html(results[0].formatted_address);
+					  jQuery('#change_location_btn .btn_location_text').html(results[0].formatted_address);
 					  	storeLocation.value=results[0].formatted_address;
 				  }
 				  else {
