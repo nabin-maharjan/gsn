@@ -116,6 +116,7 @@ section{
 				position: relative;
 				transition: all 0.2s ease-in-out;
 				white-space: nowrap;
+				overflow: hidden;
 
 				&::before {
 					content: '';
@@ -126,6 +127,10 @@ section{
 					left: 0;
 					top: 0;
 					transition: all 0.2s ease-in-out;
+				}
+
+				&:hover {
+					overflow: visible;
 				}
 
 				&:hover:before {
