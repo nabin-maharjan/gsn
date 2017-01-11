@@ -391,7 +391,7 @@ class Custom_Post_Type
 		foreach($post_types as $types){
 			$ext = pathinfo($types, PATHINFO_EXTENSION);
 			if($ext=="php"){
-				include("/post-types/".$types);
+				include(get_stylesheet_directory()."/inc//post-types/".$types);
 			};
 		}
 	}

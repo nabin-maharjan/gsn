@@ -60,7 +60,7 @@ add_action( 'init', 'gsn_register_my_menus' );
 
 
 /*  session */
-add_action('init', 'myStartSession', 1);
+//add_action('init', 'myStartSession', 1);
 function myStartSession() {
     if(!session_id()) {
         session_start();
