@@ -12,7 +12,33 @@ class GsnCart{
 		// filter to update header cart when remove item from cart
 		add_filter( 'woocommerce_add_to_cart_fragments', array($this,'woocommerce_header_add_to_cart_fragment') );
 		
+		//add filter payment gateway 
+		add_filter( 'woocommerce_available_payment_gateways', 'gsn_payment_gateway_edit');
 	}
+	
+	
+	
+	/**
+ * Only show Cash on Delivery for checkout, and only Stripe for order-pay
+ *
+ * @param   array   $available_gateways    an array of the enabled gateways
+ * @return  array                          the processed array of enabled gateways
+ */
+function gsn_payment_gateway_edit($available_gateways) {
+    global $woocommerce;
+    $endpoint = $woocommerce->query->get_current_endpoint();
+unset($available_gateways['esewa']);
+    if ($endpoint == 'order-pay') {
+        unset($available_gateways['esewa']);
+    }
+    return $available_gateways;
+}
+
+	
+	
+	
+	
+	
 	/*
 	* Function to get formated html for cart list
 	*/
