@@ -2,7 +2,8 @@
 $('#gridSystemModal').on('shown.bs.modal', function() {
     myMap();
 });
-function myMap() {	
+function myMap() {
+	var geocoder = new google.maps.Geocoder();
 if(jQuery('#map').length){
   var storeLocation=document.getElementById("storeFullAddress");
   var latittude_cntr=document.getElementById("latitute");
@@ -34,6 +35,10 @@ if(jQuery('#map').length){
 		var longitude = event.latLng.lng();
 		latittude_cntr.value = latitude;
 		lognitude_cntr.value = longitude;
+		 location_Lat=latitude;
+   		location_Lan=longitude;
+		
+		
 		// This event listener will call addMarker() when the map is clicked.
 		marker.setPosition(event.latLng);
 		// Center of map
@@ -74,9 +79,6 @@ if(jQuery('#map').length){
           });
           map.fitBounds(bounds);
         });
-		
-		 var geocoder = new google.maps.Geocoder();
-		
 	}
 	 function getAddress(latLng) {
 			geocoder.geocode( {'latLng': latLng},
