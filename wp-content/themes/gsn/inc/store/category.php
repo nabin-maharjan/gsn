@@ -5,8 +5,40 @@ class GsnCategory{
 		/* add ajax function for save category*/
 			add_action( 'wp_ajax_gsn_saveCategory', array($this,'saveCategory') );
 			add_action( 'wp_ajax_nopriv_gsn_saveCategory', array($this,'saveCategory') );
+			/* add ajax function for save category*/
+			add_action( 'wp_ajax_gsn_deleteCategory', array($this,'delete_category') );
+			add_action( 'wp_ajax_nopriv_gsn_deleteCategory', array($this,'delete_category') );
 		
 		}
+		/*
+		* Function to delete category
+		*/
+		public function delete_category(){
+			try{
+				if(!empty($_POST['id'])){
+				
+					$deletecat=wp_delete_term(sanitize_text_field($_POST['id']), 'product_cat') ;
+					if($deletecat){
+						$response['status']="success";
+						$response['code']='200';
+						$response['msg']="Category deleted successfully.";
+						
+					}else{
+						throw new Exception("Oops! can't delete category.");
+					}
+				}else{
+					throw new Exception('Error occured while deleting category');
+				}
+				
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+		}
+		
+		
 		public function saveCategory(){
 			$response=array();
 			try{
@@ -119,7 +151,7 @@ class gsn_category_walker_dashboard extends Walker_Category {
         else
             $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
         $link .= '>';
-        $link .= $cat_name . '</a>';
+        $link .= $cat_name . '</a> <a href="'.$my_blog_link.'" class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Edit</a>   <span class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Delete</span>';
 
         if ( !empty($feed_image) || !empty($feed) ) {
             $link .= ' ';
@@ -145,7 +177,7 @@ class gsn_category_walker_dashboard extends Walker_Category {
             else
                 $link .= "<img src='$feed_image'$alt$title" . ' />';
 
-            $link .= '</a>';
+            $link .= ' </a> <a href="'.esc_url( get_term_feed_link( $category->term_id, $category->taxonomy, $feed_type ) ).'" class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Edit</a> <span class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Delete</span>';
 
             if ( empty($feed_image) )
                 $link .= ')';

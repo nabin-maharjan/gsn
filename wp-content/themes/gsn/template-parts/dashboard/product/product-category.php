@@ -105,4 +105,16 @@ jQuery("#category_create_form").validate({
   }
 	
 });
+/*
+* Delete category
+*/
+jQuery('.gsn-delete-category').on('click',function(){
+	if(confirm("Are you sure?")==true){
+		var data= {action: "gsn_deleteCategory", id : jQuery(this).data('category-id')};
+		  var response=ajax_call_post(data,".category-lists",'',function(response){
+				 //  window.location.href=response.redirectUrl;
+				 location.reload();
+		 });
+	}
+});
 </script>
