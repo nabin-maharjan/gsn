@@ -10,7 +10,7 @@ class Store{
 		$this->store_table=$wpdb->prefix."store";
 		//$wpdb->show_errors(); 
 		//check if there are any tables of that name already
-		if($wpdb->get_var("show tables like '$tablename'") !== $this->store_table) 
+		if($wpdb->get_var("show tables like '".$this->store_table."'") !== $this->store_table) 
 		{
 			$sql = '
 			  CREATE TABLE '.$this->store_table.' (
