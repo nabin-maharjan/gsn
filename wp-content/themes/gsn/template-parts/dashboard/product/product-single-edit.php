@@ -196,9 +196,6 @@ jQuery(".trash_product").on('click',function(){
 	} 
  });
 
-
-trash_product
-
  /* Add Stock Process */
 jQuery("#stock_add_form").validate({
 	ignore: ['product_id'],

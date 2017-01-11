@@ -221,15 +221,15 @@ jQuery("#profile_setting_form").validate({
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
 	  var data= {action: "gsn_store_profile_setting", formdata : formdata};
-	  var response=ajax_call_post(data,"#profile_setting_form",'',function(response){
+	  var response=ajax_call_post(data,"#profile_setting_form h3",'after',function(response){
 		// window.location.href=response.redirectUrl;
 			 jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
-			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertAfter(form);
 			  
 	 },function(){
 		jQuery('html, body').animate({
-				scrollTop: jQuery("body").offset().top
+				scrollTop: jQuery("#profile_setting_form").offset().top
 			}, 500); 
 	 });
   }
