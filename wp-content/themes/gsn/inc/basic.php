@@ -145,7 +145,41 @@ function gsn_restrict_admin_page() {
     }
 }
 add_action( 'admin_init', 'gsn_restrict_admin_page', 1 );
-
+/* 
+*Function GSN Pagination 
+*/
+function gsn_pagination_link($max_num_pages,$pagerRange=20,$paged=0){
+			if($paged==0){
+				$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+			}
+			$big = 999999999; // need an unlikely integer
+			$search_for   = array( $big, '#038;' );
+			$replace_with = array( '%#%', '&' );
+			$pagination_args = array(
+				'base'            =>str_replace( $search_for, $replace_with, esc_url( get_pagenum_link( $big ) ) ),
+				'format'          => '?paged=%#%',
+				'total'           => $max_num_pages,
+				'current'         => $paged,
+				'show_all'        => False,
+				'end_size'        => 1,
+				'mid_size'        => $pagerRange,
+				'prev_next'       => True,
+				'prev_text'       => __('&laquo;'),
+				'next_text'       => __('&raquo;'),
+				'type'            => 'plain',
+				'add_args'        => false,
+				'add_fragment'    => ''
+			  );
+			
+			  $paginate_links = paginate_links($pagination_args);
+			  if ($paginate_links) {
+				echo "<nav class='custom-pagination'>";
+				  echo "<span class='page-numbers page-num'>Page " . $paged . " of " . $max_num_pages . "</span> ";
+				  echo $paginate_links;
+				echo "</nav>";
+			  }
+			
+		}
 // Encrypt Function
 function mc_encrypt($encrypt, $key){
     $encrypt = serialize($encrypt);

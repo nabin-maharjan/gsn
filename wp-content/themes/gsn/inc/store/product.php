@@ -688,6 +688,7 @@ class GsnProduct{
 	
 	public function get_feature_product($count=5,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -712,7 +713,9 @@ class GsnProduct{
 			'author'=>$store->user_id,
 			'post_status' =>array('publish'),
 			'posts_per_page'   =>$count,
-			'meta_query'  =>  $meta_query
+			'meta_query'  =>  $meta_query,
+			'paged' => $paged,
+     		'page' => $paged
 		);
 		$combine_arg=array_merge($args,$cat_arg);
 		return  new WP_Query( $combine_arg );
@@ -732,6 +735,8 @@ class GsnProduct{
 	*/
 	public function get_sale_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -749,6 +754,9 @@ class GsnProduct{
 				'posts_per_page' => $count,
 				'author'=>$store->user_id,
 				'post_status' => array('publish'),
+				'paged' => $paged,
+     			'page' => $paged,
+				
 				'meta_query'     => array(
 					'relation' => 'OR',
 					array( // Simple products type
@@ -782,6 +790,8 @@ class GsnProduct{
 	*/
 	public function get_new_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -799,7 +809,9 @@ class GsnProduct{
                   'posts_per_page' => $count,
 				  'post_status' =>array('publish'),
                   'author'=>$store->user_id,
-				  'cat'=>$category
+				  'cat'=>$category,
+				  'paged' => $paged,
+     			  'page' => $paged,
                   );
 				  $combine_args=array_merge($args,$cat_arg);
          return new WP_Query( $combine_args );
@@ -833,12 +845,46 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
+	
+	
+	
+	/*
+	* Function to get all product List
+	*/
+	
+	public function get_search_products($search,$count=-1,$offset=0){
+		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$cat_arg=$offset_arg=array();
+		if($offset!=0){
+			$offset_arg=array(
+				'offset'=>$offset
+			);
+		}
+		$args=array( 
+				's'=>$search,
+				'post_type' => array('product', ),
+				'posts_per_page' =>$count ,
+				 'author'=>$store->user_id,
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
+				 );
+		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
+		return new WP_Query($combine_arg);
+	}
+	
+	
+	
 	/*
 	* Function to get all product List
 	*/
 	
 	public function get_all_store_product($count=-1,$category=0,$offset=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$cat_arg=$offset_arg=array();
 		if($offset!=0){
 			$offset_arg=array(
@@ -860,7 +906,9 @@ class GsnProduct{
 				'post_type' => array('product', ),
 				'posts_per_page' =>$count ,
 				 'author'=>$store->user_id,
-				 'post_status'=>array('publish')
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
 				 );
 		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
 		//echo "<pre>";
@@ -924,11 +972,14 @@ class GsnProduct{
 	
 	public function get_draft_product($count=-1){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 			'post_type'   =>  'product',
 			'post_status'       =>array('draft'),
 			'author'=>$store->user_id,
 			'posts_per_page'   =>$count,
+			'paged' => $paged,
+     		'page' => $paged
 		);
 		return  new WP_Query($args);
 	}

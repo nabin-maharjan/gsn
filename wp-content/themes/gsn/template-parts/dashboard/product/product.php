@@ -1,6 +1,7 @@
 <?php
 global $gsnProduct, $store;
-$storeProducts=$gsnProduct->get_new_product_list(-1);
+$post_per_page=20;
+$storeProducts=$gsnProduct->get_new_product_list($post_per_page);
 $category=0;
 if(!empty($_GET['category'])){
 	$category=$_GET['category'];
@@ -9,20 +10,22 @@ $title="Product list";
 if(!empty($_GET['action']) && $_GET['action']=="view"){
 	if(!empty($_GET['type']) && $_GET['type']=="sale"){
 		$title="Sale Product list";
-		$products=$gsnProduct->get_sale_product_list(-1,$category);
+		$products=$gsnProduct->get_sale_product_list($post_per_page,$category);
 	}else if(!empty($_GET['type']) && $_GET['type']=="feature"){
 		$title="Featured Product list";
-		$products=$gsnProduct->get_feature_product(-1,$category);
+		$products=$gsnProduct->get_feature_product($post_per_page,$category);
 	}else if(!empty($_GET['type']) && $_GET['type']=="draft"){
 		$title="Draft Product list";
-		$products=$gsnProduct->get_draft_product(-1);
+		$products=$gsnProduct->get_draft_product($post_per_page);
 	}else{
 		
 		$products=NULL;
 	}
+}else if(!empty($_GET['search'])){
+	$products=$gsnProduct->get_search_products(sanitize_text_field($_GET['search']),$post_per_page);
 }
 if($products==NULL){
-	$products=$gsnProduct->get_all_store_product(-1,$category);
+	$products=$gsnProduct->get_all_store_product($post_per_page,$category);
 }
 
 ?>
@@ -59,9 +62,9 @@ if($products==NULL){
             <button type="submit" class="btn btn-primary product__filter-btn">Filter</button>
         </form>
         <!-- /.product-filter-form -->
-        <form action="#" class="product-search-form fr">
-          <input type="text" class="form-control form-control-sm" placeholder="Search product">
-          <button class="btn btn-primary product-search-btn">Search</button>
+        <form action="<?php echo site_url('/dashboard/product/'); ?>" class="product-search-form fr"  method="get">
+          <input type="text" name="search"  class="form-control form-control-sm" placeholder="Search product">
+          <button type="submit" class="btn btn-primary product-search-btn">Search</button>
         </form>
         <!-- /.product-search-form -->
       </div>
@@ -77,8 +80,13 @@ if($products==NULL){
              get_template_part( 'template-parts/dashboard/product/product-single','loop'); 
            ?>
           <?php wp_reset_postdata(); 
-        endwhile; ?>
+        endwhile; 
+		?>
         </ul>
+        <?php if(function_exists(gsn_pagination_link)){
+				gsn_pagination_link($products->max_num_pages,$post_per_page);
+			}
+		?>
     </div>
     <!-- /.product-list-cntr -->
   <?php  
