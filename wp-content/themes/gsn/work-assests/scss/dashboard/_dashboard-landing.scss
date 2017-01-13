@@ -89,3 +89,14 @@
     }
   }
 }
+
+
+.custom-pagination{
+		font-size: 15px;
+		span.page-numbers.page-num{background-color: $lighter_gray; padding: 7px 20px;margin-right: 20px;}
+		a.page-numbers{ border:1px solid $lighter_gray;padding: 5px 12px;
+			&:hover{ background-color:$lighter_gray;}
+		}
+		.page-numbers.current{padding: 6px 13px;}
+		
+	}
