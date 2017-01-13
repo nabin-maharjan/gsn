@@ -1,6 +1,6 @@
 <?php
 global $gsnProduct, $store;
-$post_per_page=20;
+$post_per_page=4;
 $storeProducts=$gsnProduct->get_new_product_list($post_per_page);
 $category=0;
 if(!empty($_GET['category'])){
