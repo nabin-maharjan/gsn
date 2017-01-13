@@ -103,7 +103,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                   <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url;?>')"></a>
                   <span class="label-top label-sale">Sale</span>
                   <div class="cart-btn">
-                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php get_the_ID();?>" data-quantity="1" data-product_id="<?php get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
+                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php  echo get_the_ID();?>" data-quantity="1" data-product_id="<?php echo get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
                   </div>
 									<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
                 </div>
