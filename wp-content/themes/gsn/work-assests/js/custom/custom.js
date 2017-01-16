@@ -7,6 +7,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
          data :data,
          success: function(response) {
             if(response.status == "success") {
+				if(jQuery("div.alert.alert-danger").length){
+					jQuery("div.alert.alert-danger").remove();
+				}
                callback(response);
             }else {
 				// validation error occurs
@@ -27,9 +30,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 					}
 					
 					if(error_load_position==="after"){
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter(error_wrap_container);
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong> '+response.msg+'</div>').insertAfter(error_wrap_container);
 					}else{
-						 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(error_wrap_container);
+						 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong> '+response.msg+'</div>').insertBefore(error_wrap_container);
 					}
 					
 				}
@@ -51,7 +54,7 @@ jQuery('.make_product_feature').on('click',function(){
 	var data = {action: "gsn_make_product_feature", product_id : product_id};
 	
 	 var response=ajax_call_post(data,'','',function(response){
-		 console.log(response);
+		 location.reload();
 	 });
 	 
 });
@@ -145,24 +148,37 @@ jQuery(document).ready(function(e) {
 
     // When a file is selected, grab the URL and set it as the text field's value
     mediaUploader.on('select', function() {
+
       selection = mediaUploader.state().get('selection');
-	  var ids=[];
+	  var ids;
 	  if(jQuery('#image_ids').length){
 		  var galleries_id=trigger_btn.parents('div.upload_cntr').find('#image_ids').val();
 	      ids=galleries_id.split(',');
 	  }
-	  
+	
 	  var image_html="";
+	  var count_image_section=0;
 	  selection.map( function( attachment ) {
-			var attachment1 = attachment.toJSON();			
+			var attachment1 = attachment.toJSON();
 			// Find and remove item from an array
 			var i = ids.indexOf(String(attachment1.id));
 			if(i ===-1) {
+				count_image_section++;
 				 ids.push(attachment1.id);
 				 image_html+="<span class=\"attachment-span\"><img src='"+attachment1.url+"'><i class=\"remove_attachment_gallery\" data-pic-id='"+attachment1.id+"' >remove</i></span>";
 			}
 		
 		});
+		if(jQuery('#product_image_gallery_limit').length){
+			var newArray = ids.filter(function(v){return v!=='';});
+			var limit_number=jQuery('#product_image_gallery_limit').val();
+			if(limit_number<newArray.length){
+				image_html="<div class=\"alert alert-warning\"> <strong>Warning!</strong> you can only choose up to "+limit_number+" images .</div>";
+				trigger_btn.parents('div.upload_cntr').find('.gallery_image_cntr').append(image_html);
+				return false;
+			}
+		}
+		trigger_btn.parents('div.upload_cntr').find('.gallery_image_cntr .alert-warning').remove();
 		trigger_btn.parents('div.upload_cntr').find('.gallery_image_cntr').append(image_html);
 		trigger_btn.parents('div.upload_cntr').find('#image_ids').val(ids.join());
     });
@@ -233,4 +249,8 @@ jQuery(document).ready(function(e) {
     }
   }
   collapseCategory();
+	
+	
 });
+
+

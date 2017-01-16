@@ -63,17 +63,39 @@ class GsnOrder{
 		);
 		wp_update_post( $arg );
 	}
+	
+	
+	
+	
+	
+	/*
+	* Function to get all Order
+	*/
+	public function get_search_order($search){
+		global $store;
+		$args = array(
+				'p'=>$search,
+				'post_type'      => 'shop_order',
+				//'post_status' =>$post_status,
+			    'author'=>$store->user_id,
+			);
+			return new WP_Query( $args );
+	}
+	
          
 	/*
 	* Function to get all Order
 	*/
 	public function get_all_order($count=-1,$post_status="any"){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 				'post_type'      => 'shop_order',
 				'posts_per_page' => $count,
 				'post_status' =>$post_status,
 			    'author'=>$store->user_id,
+				'paged' => $paged,
+     			  'page' => $paged,
 			);
 			return new WP_Query( $args );
 	}

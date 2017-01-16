@@ -4,7 +4,7 @@ Class GsnProduct
 
 */
 class GsnSetting{
-	public $id,$logo,$selected_theme;
+	public $id,$logo,$selected_theme,$storePackageSettings;
 	public function __construct(){
 		// add ajax function for out product stock process
 		add_action( 'wp_ajax_gsn_add_store_setting', array($this,'add_store_setting') );
@@ -16,7 +16,20 @@ class GsnSetting{
 		
 		// Set page template for all dashboard page
 		add_action('template_redirect',array($this,'gsn_switch_page_template'));
+		
+		// Add action to color input 
+		add_action( 'admin_enqueue_scripts', array($this,'gsn_add_color_picker'));
 	}
+	
+	
+	
+public function gsn_add_color_picker( $hook ) {
+        // Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' ); 
+		wp_enqueue_script( 'wp-color-picker' );
+         
+}
+	
 	
 	
 function gsn_switch_page_template() {
@@ -132,17 +145,40 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$this->twitter=array_shift($post_metas['twitter']);
 		$this->googleplus=array_shift($post_metas['googleplus']);
 		$this->aboutStore=$post->post_content;
-		$this->esewaId=array_shift($post_metas['esewaId']);
+		$this->esewaId=array_shift($post_metas['esewaId']); // esewa ID
+		$this->storePackageSettings=$this->get_store_settings(); //get store package settings
 		return $this;
+	}
+	/*
+	*Function get store package name
+	*Return package array
+	*/
+	public function get_store_settings(){
+		global $store;
+		$packageName=$store->storePackage;
+		if(empty($packageName)){
+			$packageName="normal";	
+		}
+		$package=array(
+			'product'=>get_option($packageName.'_package_product'),
+			'product_image'=>get_option($packageName.'_package_product_image'),
+			'sale_product'=>get_option($packageName.'_package_sale_product'),
+			'gsn_ad'=>get_option($packageName.'_package_gsn_ad'),
+			'theme'=>get_option($packageName.'_package_theme_number'),
+			'gsn_featured'=>get_option($packageName.'_package_gsn_feature_shop'),
+		);
+		return $package;
 	}
 	
 	/*
 	*function for get available theme 
 	*/
-	public function available_theme(){
+	public function available_theme($limit=-1){
 		$args = array(
-		  'posts_per_page' => -1,
-		  'post_type'   => 'theme_color_setting'
+		  'posts_per_page' =>$limit,
+		  'post_type'   => 'theme_color_setting',
+		  'order'=>'ASC',
+		  'orderby'=>'date'
 		);
 		return get_posts($args);
 	}

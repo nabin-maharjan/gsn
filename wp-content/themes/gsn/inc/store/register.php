@@ -2,7 +2,7 @@
 require_once ABSPATH.'wp-admin/includes/upgrade.php';
 class Store{
 	
-	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id,$domainName;
+	public $id,$firstName,$lastName,$emailAddress,$password,$mobileNumber,$storeName,$panNumber,$lognitute,$latitute,$storeFullAddress,$city,$user_id,$domainName,$storePackage;
 	private $store_table;
 	
 	public function __construct(){
@@ -10,7 +10,7 @@ class Store{
 		$this->store_table=$wpdb->prefix."store";
 		//$wpdb->show_errors(); 
 		//check if there are any tables of that name already
-		if($wpdb->get_var("show tables like '$tablename'") !== $this->store_table) 
+		if($wpdb->get_var("show tables like '".$this->store_table."'") !== $this->store_table) 
 		{
 			$sql = '
 			  CREATE TABLE '.$this->store_table.' (
@@ -42,6 +42,10 @@ class Store{
 			if(!isset($store_table->domainName)){
 				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `domainName` VARCHAR(50) NULL DEFAULT NULL, ADD UNIQUE `domainName` (`domainName`);");
 			}
+			if(!isset($store_table->storePackage)){
+				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `storePackage` VARCHAR(50) NULL DEFAULT NULL;");
+			}
+			
 		
 			// add ajax function for registration process
 			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
@@ -73,6 +77,13 @@ class Store{
 			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
+			/* limit store publish product */
+			add_action('init',array($this,'limit_publish_product'),2);
+		   // add_action('init',array($this,'change_draft_topublish'),2);
+			
+			
+			
+			
 			/* add store role*/
 			add_action('init',array($this,'add_store_role'));
 			/* add filter only show current user media */
@@ -81,6 +92,57 @@ class Store{
 			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
 			
 	}
+	/*
+	*Function to limit store Product publish
+	*/
+	public function limit_publish_product(){
+		global $gsnSettingsClass,$gsnProduct,$store;
+		$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+		$package=$gsn_settings->storePackageSettings;//get store package settings
+		if(!empty($store->user_id)){
+			$store_products__=$gsnProduct->get_all_store_product(999999999,0,$package['product']);
+			
+			if($store_products__->have_posts()) {
+				while( $store_products__->have_posts() ) : $store_products__->the_post();
+					$args = array( 
+					'ID' =>get_the_ID(), 
+					'post_status' => 'draft' 
+					);
+					wp_update_post($args);
+				wp_reset_postdata(); 
+				endwhile;
+			}
+		}
+		//die;
+	}
+	
+	
+	
+	public function change_draft_topublish(){
+		global $store;
+		//var_dump($store);die;
+		$args=array( 
+				'post_type' => array('product'),
+				'posts_per_page' =>-1 ,
+				'post_status'=>array('draft'),
+				 'author'=>$store->user_id
+				 );
+		//$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
+		$store_product=new WP_Query($args);
+		var_dump($store_product->found_posts);die;
+		if($store_product->have_posts()) {
+			while( $store_product->have_posts() ) : $store_product->the_post();
+				$args = array( 'ID' =>get_the_ID(), 'post_status' => 'publish' );
+				wp_update_post($args);
+			wp_reset_postdata(); 
+			endwhile;
+		}
+		
+	}
+	
+	
 	/*
 	* fUNCTION  to update store domain
 	*/
@@ -278,7 +340,6 @@ class Store{
 		}
 		return $this;
 	}
-	
 	/*
 	* logout store function
 	
@@ -498,6 +559,51 @@ class Store{
 			}
 			echo json_encode($response);die();
 		}
+		/*
+		*Function to check product limit status
+		* Return Boolean
+		*/
+		public function get_product_limit_status(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			$storeProducts=$gsnProduct->get_new_product_list(-1);// get store products
+			if($storeProducts->found_posts<$package['product']){
+				return false;
+			}else{
+				return true;	
+			}
+		}
+		
+		/*
+		*Function to get Number of image use in product
+		* Return Boolean
+		*/
+		public function get_product_image_limit(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			return $package['product_image'];
+		}
+		
+		/*
+		*Function to check sale product limit status
+		* Return Boolean
+		*/
+		public function get_sale_product_limit_status(){
+			global $store,$gsnSettingsClass,$gsnProduct;
+			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+			$package=$gsn_settings->storePackageSettings;//get store package settings
+			$storeProducts=$gsnProduct->get_sale_product_list(-1);// get store products
+			if($storeProducts->found_posts<$package['sale_product']){
+				return false;
+			}else{
+				return true;	
+			}
+		}
+		
+		
+		
 }
 global $store;
 $store=new Store();

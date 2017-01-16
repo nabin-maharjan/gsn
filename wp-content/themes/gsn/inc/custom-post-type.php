@@ -391,7 +391,7 @@ class Custom_Post_Type
 		foreach($post_types as $types){
 			$ext = pathinfo($types, PATHINFO_EXTENSION);
 			if($ext=="php"){
-				include("/post-types/".$types);
+				include(get_stylesheet_directory()."/inc/post-types/".$types);
 			};
 		}
 	}
@@ -426,7 +426,7 @@ class Custom_Post_Type
 							//var_dump($meta_field);
 							if(!empty($meta_field['show_in_admin_table']) && $meta_field['show_in_admin_table']==true && $column==$meta_field['name']){
 								$meta_value=get_post_meta( $post_id,$column,true );
-								echo apply_filters( 'admin_custom_'.$post->post_type.'_meta_field_table', $meta_value);
+								echo apply_filters( 'admin_custom_'.$post->post_type.'_meta_field_table', $meta_value,$column);
 							}
 						}
 					}

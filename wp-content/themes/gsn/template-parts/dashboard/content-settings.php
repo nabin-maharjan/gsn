@@ -1,7 +1,8 @@
   <?php
   	global $gsnSettingsClass;
-  	$gsn_themes=$gsnSettingsClass->available_theme();
   	$gsn_settings=$gsnSettingsClass->get();
+	$package=$gsn_settings->storePackageSettings;
+	$gsn_themes=$gsnSettingsClass->available_theme($package['theme']);
   ?>
 <section class="store-setting-cntr">
   <div class="container clearfix">

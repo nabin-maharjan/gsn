@@ -81,20 +81,163 @@ class GsnProduct{
 			//add ajax function for make product feature
 			add_action( 'wp_ajax_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
 			add_action( 'wp_ajax_nopriv_gsn_set_sale_product_price', array($this,'set_sale_product_price') );
+			// Add ajax function for removing product from sale
+			add_action( 'wp_ajax_gsn_remove_product_from_sale', array($this,'remove_product_from_sale') );
+			add_action( 'wp_ajax_nopriv_gsn_remove_product_from_sale', array($this,'remove_product_from_sale') );
+			// Add ajax function for trash product 
+			add_action( 'wp_ajax_gsn_trash_product', array($this,'trash_product') );
+			add_action( 'wp_ajax_nopriv_gsn_trash_product', array($this,'trash_product') );
+			
+			// Add ajax function for publish product
+			add_action( 'wp_ajax_gsn_publish_product', array($this,'publish_product') );
+			add_action( 'wp_ajax_nopriv_gsn_publish_product', array($this,'publish_product') );
+			// Add ajax function for drft product 
+			add_action( 'wp_ajax_gsn_draft_product', array($this,'draft_product') );
+			add_action( 'wp_ajax_nopriv_gsn_draft_product', array($this,'draft_product') );
 			
 			//add ajax function for make product feature
 			add_action( 'wp_ajax_gsn_filtered_product_list', array($this,'filtered_product_list') );
 			add_action( 'wp_ajax_nopriv_gsn_filtered_product_list', array($this,'filtered_product_list') );
 			
-			
-			
-			
 			// Add filter for specification tab on product detail page
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
-			
 			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
 			
 			
+			
+		}
+		/*
+		*Funtion to draft product
+		*/		
+		public function draft_product(){
+			$response=array();
+			try{
+				$product=new WC_product(sanitize_text_field($_POST['product_id']));
+				if(empty($product->post)){
+					throw new Exception("Error while updating product.");	
+				}
+				$args = array( 
+					'ID' =>$product->id, 
+					'post_status' => 'draft' 
+					);
+				$publish=wp_update_post($args);
+				
+				if($publish){
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="Succesfully draft product";
+					//$response['redirectUrl']=site_url("/dashboard/product/");
+				}else{
+					throw new Exception("Error while updating product");	
+				}
+				
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+		}
+		
+		/*
+		*Funtion to publish product
+		*/		
+		public function publish_product(){
+			$response=array();
+			try{
+				$product=new WC_product(sanitize_text_field($_POST['product_id']));
+				if(empty($product->post)){
+					throw new Exception("Error while updating product.");	
+				}
+				
+				global $store;
+				if($store->get_product_limit_status()){
+					throw new Exception("Error while updating product.");
+				}
+				$args = array( 
+					'ID' =>$product->id, 
+					'post_status' => 'publish' 
+					);
+				$publish=wp_update_post($args);
+				
+				if($publish){
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="Succesfully publish product";
+					//$response['redirectUrl']=site_url("/dashboard/product/");
+				}else{
+					throw new Exception("Error while updating product");	
+				}
+				
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+		}
+		/*
+		*Function to trash product
+		*/
+		public function trash_product(){
+			$response=array();
+			try{
+				$product=new WC_product(sanitize_text_field($_POST['product_id']));
+				if(empty($product->post)){
+					throw new Exception("Error while deleting.");	
+				}
+				$trash=wp_trash_post($product->id);
+				if($trash){
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="Succesfully removed from sale";
+					$response['redirectUrl']=site_url("/dashboard/product/");
+					
+				}else{
+					throw new Exception("Error while deleting.");	
+				}
+				
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
+		}
+		
+		/*
+		*Function to remove product from sale
+		*/
+		public function remove_product_from_sale(){
+			$response=array();
+			try{
+				$product=new WC_product(sanitize_text_field($_POST['product_id']));
+				if(empty($product->post)){
+					throw new Exception("Error while removing product from sale");	
+				}
+				$product_meta=get_post_meta($product->id);
+				$regular_price=array_shift($product_meta['_regular_price']);
+
+				
+				update_post_meta($product->id,'_sale_price',0);
+				update_post_meta($product->id,'_price',$regular_price);
+				
+				update_post_meta($product->id,'_sale_price_dates_from',"");
+				update_post_meta($product->id,'_sale_price_dates_to',"");
+				
+				$response['status']="success";
+				$response['code']='200';
+				$response['msg']="Succesfully removed from sale";
+				
+			
+			}catch(Exception $e){
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+			echo json_encode($response);die();
 		}
 		/*
 		*Function to limit store product only
@@ -419,8 +562,6 @@ class GsnProduct{
 	}
 	
 	
-	
-	
 	/*
 	* function for add stock
 	*/
@@ -547,6 +688,7 @@ class GsnProduct{
 	
 	public function get_feature_product($count=5,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -569,8 +711,11 @@ class GsnProduct{
 			'post_type'   =>  'product',
 			//'stock'       =>  1,
 			'author'=>$store->user_id,
+			'post_status' =>array('publish'),
 			'posts_per_page'   =>$count,
-			'meta_query'  =>  $meta_query
+			'meta_query'  =>  $meta_query,
+			'paged' => $paged,
+     		'page' => $paged
 		);
 		$combine_arg=array_merge($args,$cat_arg);
 		return  new WP_Query( $combine_arg );
@@ -590,6 +735,8 @@ class GsnProduct{
 	*/
 	public function get_sale_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -606,6 +753,10 @@ class GsnProduct{
 				'post_type'      => 'product',
 				'posts_per_page' => $count,
 				'author'=>$store->user_id,
+				'post_status' => array('publish'),
+				'paged' => $paged,
+     			'page' => $paged,
+				
 				'meta_query'     => array(
 					'relation' => 'OR',
 					array( // Simple products type
@@ -639,6 +790,8 @@ class GsnProduct{
 	*/
 	public function get_new_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -654,8 +807,11 @@ class GsnProduct{
 		$args = array(
                   'post_type' => 'product',
                   'posts_per_page' => $count,
+				  'post_status' =>array('publish'),
                   'author'=>$store->user_id,
-				  'cat'=>$category
+				  'cat'=>$category,
+				  'paged' => $paged,
+     			  'page' => $paged,
                   );
 				  $combine_args=array_merge($args,$cat_arg);
          return new WP_Query( $combine_args );
@@ -689,10 +845,52 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
-	public function get_all_store_product($count=-1,$category=0){
-		
+	
+	
+	
+	/*
+	* Function to get all product List
+	*/
+	
+	public function get_search_products($search,$count=-1,$offset=0){
 		global $store;
-		$cat_arg=array();
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$cat_arg=$offset_arg=array();
+		if($offset!=0){
+			$offset_arg=array(
+				'offset'=>$offset
+			);
+		}
+		$args=array( 
+				's'=>$search,
+				'post_type' => array('product', ),
+				'posts_per_page' =>$count ,
+				 'author'=>$store->user_id,
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
+				 );
+		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
+		return new WP_Query($combine_arg);
+	}
+	
+	
+	
+	/*
+	* Function to get all product List
+	*/
+	
+	public function get_all_store_product($count=-1,$category=0,$offset=0){
+		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$cat_arg=$offset_arg=array();
+		if($offset!=0){
+			$offset_arg=array(
+				'offset'=>$offset
+			);
+		}
 		if($category!=0){
 			 $cat_arg=array(
 			 'tax_query' => array(
@@ -706,10 +904,15 @@ class GsnProduct{
 		}
 		$args=array( 
 				'post_type' => array('product', ),
-				 'posts_per_page' =>$count ,
-				 'author'=>$store->user_id
+				'posts_per_page' =>$count ,
+				 'author'=>$store->user_id,
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
 				 );
-		$combine_arg=array_merge($args,$cat_arg);
+		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
 		return new WP_Query($combine_arg);
 	}
 	public function get_store_product(){
@@ -733,8 +936,60 @@ class GsnProduct{
 		 return false;
 	}
 	
+	/*
+	* Function to get out of stock Product
+	*/
 	
+	public function get_out_of_stock_product($count=-1){
+		global $store;
+		
+		$meta_query   = WC()->query->get_meta_query();
+		$meta_query[] = array(
+			'key'   => '_stock_status',
+			'value' => 'outofstock'
+		);
+		$args = array(
+			'post_type'   =>  'product',
+			//'stock'       =>  1,
+			'author'=>$store->user_id,
+			'posts_per_page'   =>$count,
+			'meta_query'  =>  $meta_query
+		);
+		return  new WP_Query($args);
+		
+	}
+	/*
+  * Function to get out of stock Product Count
+  */
+	 public function get_out_of_stock_product_count(){
+		 $sale_product=$this->get_out_of_stock_product(-1);
+		 return $sale_product->found_posts;
+	 }
+	 
+	 /*
+	* Function to draft Product
+	*/
 	
+	public function get_draft_product($count=-1){
+		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$args = array(
+			'post_type'   =>  'product',
+			'post_status'       =>array('draft'),
+			'author'=>$store->user_id,
+			'posts_per_page'   =>$count,
+			'paged' => $paged,
+     		'page' => $paged
+		);
+		return  new WP_Query($args);
+	}
+	/*
+  * Function to Draft Product Count
+  */
+	 public function get_draft_product_count(){
+		 $sale_product=$this->get_draft_product(-1);
+		 return $sale_product->found_posts;
+	 }
 	
 }
 global $gsnProduct;

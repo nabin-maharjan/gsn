@@ -23,9 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 // Ensure visibility
-if ( empty( $product ) || ! $product->is_visible() ) {
+if ( empty( $product )) {
 	return;
 }
+
 ?>
 
 <li <?php post_class('product-list-item dashboard-product dashboard-product-list'); ?>>

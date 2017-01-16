@@ -1,8 +1,14 @@
 <?php
 $id=$_GET['id'];
+global $store;
 $store_order=new WC_Order($id);
 if(empty($store_order->post)){
+echo "We can not found orderd which id is ".$id;	
 	return;	
+}
+if($store->user_id!=$store_order->post->post_author){
+echo "We can not found orderd which id is ".$id;	
+return;	
 }
 $store_order_items=$store_order->get_items();
 ?>

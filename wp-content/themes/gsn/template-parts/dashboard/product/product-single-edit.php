@@ -6,6 +6,7 @@
  * @since GSN 1.0
  */
  get_header();
+ global $store;
  $prodClass=new gsnProduct();
  $product=$prodClass->get_store_product();
  $attachment_ids = $product->get_gallery_attachment_ids();
@@ -14,19 +15,6 @@
  $available_stock=$product->get_stock_quantity();
  $attributes=get_post_meta($product->id,"_product_attributes",true);
  
-//echo "<pre>";
-//var_dump(get_post_meta($product->id));
- ?>
- 
- <section class="product-feature-setting">
-   <?php if($product->is_featured()){?>
-   <button class="btn btn-danger remove_product_feature" data-product_id="<?php echo $product->id;?>">Remove Feature</button>
-   <?php }else{ ?>
-   <button class="btn btn-primary make_product_feature" data-product_id="<?php echo $product->id;?>">Make Feature</button>
-   <?php } ?>
- </section>
- 
- <?php 
  /*
  * Include product edit form
  */
@@ -38,6 +26,18 @@
   <div class="col-sm-4 product-setting product-sales-setting">
     <div class="row">
       <h3>Sales Product</h3> 
+<?php if($store->get_sale_product_limit_status() && !$product->is_on_sale() ){?>
+	
+	<div class="container">
+    	<div class="limit-exceed-cntr">
+       	 <h4>Add product on sale limitation has been exceed.</h4>
+        	<p>
+            	<a class="btn btn-primary" href="<?php echo site_url("/dashboard/settings/profile/");?>">Upgrade you package plan</a> Or
+                <a  class="btn btn-primary"  href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>">Remove previous Sale product</a>
+             </p>
+        </div>
+    </div>
+    <?php }else{ ?>
       <form name="set_sale_product_form" id="set_sale_product_form">
         <!-- Row start -->
         <div class="form-group p15 clearfix">
@@ -73,6 +73,8 @@
         <input type="hidden" name="product_id" value="<?php echo $product->id;?>">
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <?php } ?>
+      
     </div>
   </div>
   <!-- /.product-sales-setting -->
@@ -173,12 +175,26 @@ jQuery("#set_sale_product_form").validate({
 	   var data= {action: "gsn_set_sale_product_price", formdata : formdata};
 	  var response=ajax_call_post(data,'#set_sale_product_form','',function(response){
 		  // window.location.href=response.redirectUrl;
-			 // location.reload();
+			location.reload();
 			   return false;
 	 });
   }
 	
 });
+
+ /*Remove product from sale */
+jQuery(".trash_product").on('click',function(){
+	var r = confirm("Are you sure! ");
+	if (r == true) {
+		var product_id=jQuery(this).data('product_id');
+		var data= {action: "gsn_trash_product", product_id : product_id};
+		  var response=ajax_call_post(data,'.remove_product_from_sale','',function(response){
+		   window.location.href=response.redirectUrl;
+			//  location.reload();
+			  // return false;
+		 });
+	} 
+ });
 
  /* Add Stock Process */
 jQuery("#stock_add_form").validate({
