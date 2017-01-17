@@ -103,9 +103,27 @@ class GsnProduct{
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
 			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
 			
-			
+			// Add filter for sharing product
+			add_action( 'woocommerce_share', array($this,'gsn_woocommerce_social_share_icons'), 10 );
 			
 		}
+		
+		
+		function gsn_woocommerce_social_share_icons() {
+			if ( function_exists( 'sharing_display' ) ) {
+			} ?>
+			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Facebook</a>
+            
+            <a target="_blank" href="https://twitter.com/home?status=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Twitter</a>
+            
+            <a target="_blank" href="https://plus.google.com/share?url=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Google+</a>
+            
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost%3A3000/gsn/product/suunto-from-outdoorgb/&title=&summary=&source=">Share on LinkedIn</a>
+		<?php }
+				
+		
+		
+		
 		/*
 		*Funtion to draft product
 		*/		

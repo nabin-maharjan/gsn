@@ -1,6 +1,8 @@
 <?php
 // Silence is golden.
+require("messenger.php");
 get_header();
+
 ?>
 <main class="main-content main">
 	<section class=" page-top">

@@ -1,4 +1,4 @@
 node_modules/
 uploads/
 assets/css/
-/wp-content/debug.log
+*.log
