@@ -1,14 +1,13 @@
 <?php
 
-$verify_token = "a811879874b57924c83e9ec150d2566c"; // Verify token
-$token = "EAAL6W0zs8lkBACRaxyalP4uxZBiRZAgvec3q7ZCLZBFaLe5fWBiFnMWTRdnXNre4zl0ERQHjojjAJWnYkxtAoWHG0R470y1btJbYlJ2Q2WDaEVHysg1Gd1dRwZCviFFXPcdQ8vbg18NZCgKsJPxYEGXuWpqetMm70XYQcQcnYA2gZDZD"; // Page token
+$verify_token = ""; // Verify token
+$token = ""; // Page token
 
-
-/*if (file_exists(__DIR__.'/config.php')) {
+if (file_exists(__DIR__.'/config.php')) {
     $config = include __DIR__.'/config.php';
     $verify_token = $config['verify_token'];
     $token = $config['token'];
-}*/
+}
 
 require_once(dirname(__FILE__) . '/vendor/autoload.php');
 
@@ -51,7 +50,6 @@ if (!empty($_REQUEST['hub_mode']) && $_REQUEST['hub_mode'] == 'subscribe' && $_R
     // Other event
 
     $data = json_decode(file_get_contents("php://input"), true, 512, JSON_BIGINT_AS_STRING);
-	
     if (!empty($data['entry'][0]['messaging'])) {
         foreach ($data['entry'][0]['messaging'] as $message) {
 
