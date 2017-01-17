@@ -1,8 +1,4 @@
 <?php 
-  global $product;
-  
-     var_dump(get_the_ID()); die;
-  
 global $store;
 global $gsnCart;
 global $gsnSettingsClass;
