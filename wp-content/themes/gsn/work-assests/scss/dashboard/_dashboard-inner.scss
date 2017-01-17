@@ -361,6 +361,17 @@
         color: $brick_red;
       }
     }
+
+    .cat-icons {
+      margin-left: 3px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease-in;
+
+      &:hover {
+        color: $brick_red;
+      }
+    }
   }
 
   .children {
