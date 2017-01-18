@@ -56,8 +56,37 @@ $gsn_settings=$gsnSettingsClass->get();?>
     <i class="fa fa-angle-up"></i>
   </a>
 </div>
+<?php if(!empty($gsn_settings->fbAppId) && !empty($gsn_settings->fbAppId)){ ?>
+<div class="fb-messengermessageus" 
+  messenger_app_id="<?php echo $gsn_settings->fbAppId;?>" 
+  page_id="<?php echo $gsn_settings->fbPageId;?>"
+  color="blue"
+  size="standard" >
+</div> 
+<?php } ?>
 <!-- /.back-to-top -->
 <?php wp_footer(); ?>
+<?php if(!empty($gsn_settings->fbAppId) && !empty($gsn_settings->fbAppId)){ ?>
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "<?php echo $gsn_settings->fbAppId;?>",
+        xfbml: true,
+        version: "v2.6"
+      });
+
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) { return; }
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+ <?php } ?>
 <script>
 function storemyMap(){
 	var mapCanvas = document.getElementById("storeMap");

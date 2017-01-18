@@ -98,12 +98,40 @@
         </div>
       </div>
       <!-- Row end -->
+      
+      
+      <!-- Row start -->
+      <div class="form-group clearfix">
+        <div class="col-sm-12"><h3>Facebook Messager Settings</h3></div>
+        
+        <div class="col-sm-12">Note : Create page on facebook and facebook App with category <strong>Apps for Messanger</strong> </div>
+      </div>
+       <!-- Row end -->
+    
+      <!-- Row start -->
+      <div class="form-group clearfix">
+        <label for="fbAppId" class="col-sm-2 col-form-label col-form-label-sm">Messenger App ID</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->fbAppId))?$gsn_settings->fbAppId:"";?>" name="fbAppId" id="fbAppId">
+        </div>
+      </div>
+       <!-- Row end -->
+       <!-- Row start -->
+      <div class="form-group clearfix">
+        <label for="fbPageId" class="col-sm-2 col-form-label col-form-label-sm">Page ID</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->fbPageId))?$gsn_settings->fbPageId:"";?>" name="fbPageId" id="fbPageId">
+        </div>
+      </div>
+       <!-- Row end -->
+      
 
-      <!-- Row end -->
+     
+       <!-- Row start -->
       <div class="form-group clearfix">
         <div class="col-sm-12"><h3>Payment Information</h3></div>
       </div>
-      <!-- Row start -->
+      <!-- Row end -->
     
       <!-- Row start -->
       <div class="form-group clearfix">
@@ -122,3 +150,42 @@
   </div>
 </section>
 <!-- /.store-setting-cntr -->
+ <script> 
+  /* Store Setting jQuery validation Procress */
+jQuery("#store_setting_form").validate({
+	rules: {
+      facebook:{
+		url: true  
+	  },
+	  googleplus:{
+		url: true  
+	  },
+	  twitter: {
+		url: true  
+	  },
+    },
+  submitHandler: function(form) {
+	  var formdata=jQuery(form).serialize();
+	 // console.log(formdata);
+
+	  var about_content =tinyMCE.activeEditor.getContent();
+//	  console.log(escaped);
+	  var data= {action: "gsn_add_store_setting", formdata : formdata, aboutStore:about_content};
+	  var response=ajax_call_post(data,"#store_setting_form",'',function(response){
+		 //  window.location.href=response.redirectUrl;
+			 jQuery(form)[0].reset();
+			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
+			 jQuery('.alert-success').remove();
+			 
+			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			 
+	 },function(){
+		 jQuery('html, body').animate({
+				scrollTop: jQuery("body").offset().top
+			}, 500);
+		 
+	 });
+	 
+  }
+});
+ </script>

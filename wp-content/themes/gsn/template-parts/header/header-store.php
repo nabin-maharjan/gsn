@@ -8,6 +8,8 @@ $gsnSettings=$gsnSettingsClass->get($store->user_id);
 $store->check_access_store();
 $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 ?>
+
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js" <?php  if(is_singular('product')) { ?>itemtype="http://schema.org/Product" <?php } ?>>
 <head profile="http://www.w3.org/2005/10/profile">
@@ -20,74 +22,35 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     
    <?php  if(is_singular('product')) { 
-   echo "afasd";
-	   global $product;
-	
+        $current_product=wc_get_product(get_the_ID()); 
    ?>
 
-<!-- Place this data between the <head> tags of your website -->
-<title>Page Title. Maximum length 60-70 characters</title>
-<meta name="description" content="Page description. No longer than 155 characters." />
-
-<!-- Schema.org markup for Google+ -->
-<meta itemprop="name" content="The Name or Title Here">
-<meta itemprop="description" content="This is the page description">
-<meta itemprop="image" content="http://www.example.com/image.jpg">
-
-<!-- Twitter Card data -->
-<meta name="twitter:card" content="product">
-<meta name="twitter:site" content="@publisher_handle">
-<meta name="twitter:title" content="Page Title">
-<meta name="twitter:description" content="Page description less than 200 characters">
-<meta name="twitter:creator" content="@author_handle">
-<meta name="twitter:image" content="http://www.example.com/image.jpg">
-<meta name="twitter:data1" content="$3">
-<meta name="twitter:label1" content="Price">
-<meta name="twitter:data2" content="Black">
-<meta name="twitter:label2" content="Color">
-
-<!-- Open Graph data -->
-<meta property="og:title" content="Title Here" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.example.com/" />
-<meta property="og:image" content="http://example.com/image.jpg" />
-<meta property="og:description" content="Description Here" />
-<meta property="og:site_name" content="Site Name, i.e. Moz" />
-<meta property="og:price:amount" content="15.00" />
-<meta property="og:price:currency" content="USD" />
-	   
-	   
-	   
- <?php }  ?>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <!-- Place this data between the <head> tags of your website -->
+    <title>Page Title. Maximum length 60-70 characters</title>
+    <meta name="description" content="<?php echo $current_product->post_excerpt;?>" />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="<?php echo $current_product->post_title;?>">
+    <meta itemprop="description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta itemprop="image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:site" content="@<?php echo $store->domainName;?>">
+    <meta name="twitter:title" content="<?php echo $current_product->post_title;?>">
+    <meta name="twitter:description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta name="twitter:creator" content="@<?php echo $store->firstName;?>_<?php echo $store->lastName;?>">
+    <meta name="twitter:image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <meta name="twitter:data1" content="<?php echo $current_product->get_price();?>">
+    <meta name="twitter:label1" content="Price">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="<?php echo $current_product->post_title;?>" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<?php the_permalink();?>" />
+    <meta property="og:image" content="<?php the_post_thumbnail_url( 'full' ); ?>" />
+    <meta property="og:description" content="<?php echo $current_product->post_excerpt;?>" />
+    <meta property="og:site_name" content="<?php echo $store->storeName;?>" />
+    <meta property="og:price:amount" content="<?php echo $current_product->get_price();?>" />
+    <meta property="og:price:currency" content="<?php echo get_woocommerce_currency(); ?>" />
+     <?php }  ?>
 	<script>
         var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
         var location_Lat=0;

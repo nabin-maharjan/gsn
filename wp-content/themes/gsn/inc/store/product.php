@@ -112,13 +112,13 @@ class GsnProduct{
 		function gsn_woocommerce_social_share_icons() {
 			if ( function_exists( 'sharing_display' ) ) {
 			} ?>
-			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Facebook</a>
+			<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink();?>">Share on Facebook</a>
             
-            <a target="_blank" href="https://twitter.com/home?status=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Twitter</a>
+            <a target="_blank" href="https://twitter.com/home?status=<?php the_permalink();?>">Share on Twitter</a>
             
-            <a target="_blank" href="https://plus.google.com/share?url=http%3A//localhost/gsn/product/suunto-from-outdoorgb">Share on Google+</a>
+            <a target="_blank" href="https://plus.google.com/share?url=<?php the_permalink();?>">Share on Google+</a>
             
-            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost%3A3000/gsn/product/suunto-from-outdoorgb/&title=&summary=&source=">Share on LinkedIn</a>
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink();?>&title=<?php the_title();?>&summary=<?php the_excerpt();?>&source=<?php echo site_url();?>">Share on LinkedIn</a>
 		<?php }
 				
 		
@@ -311,14 +311,17 @@ class GsnProduct{
 		*/
 		public function new_product_tab_specification($tabs){
 			
-			/* Adds the new tab */
-			$tabs['test_tab'] = array(
-				'title' 	=> __( 'Specification', 'woocommerce' ),
-				'priority' 	=> 10,  
-				'callback' 	=> array($this,'new_product_tab_specification_content')
-			);
+			global $post;
+			$attributes=get_post_meta($post->ID,"_product_attributes",true);
+			if(!empty($attributes)){
+				/* Adds the new tab */
+				$tabs['test_tab'] = array(
+					'title' 	=> __( 'Specification', 'woocommerce' ),
+					'priority' 	=> 10,  
+					'callback' 	=> array($this,'new_product_tab_specification_content')
+				);
+			}
 			return $tabs;  /* Return all  tabs including the new New Custom Product Tab  to display */
-			
 		}
 		/*
 		*Function to print description on specification tab
