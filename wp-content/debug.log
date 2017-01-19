@@ -4545,3 +4545,95 @@
 [17-Jan-2017 04:37:28 UTC] PHP Notice:  wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
 [17-Jan-2017 04:37:28 UTC] PHP Notice:  wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
 [17-Jan-2017 04:37:28 UTC] PHP Notice:  wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
+[19-Jan-2017 07:10:52 UTC] WordPress database error Duplicate column name 'domainName' for query ALTER TABLE `wp_store` ADD `domainName` VARCHAR(50) NULL DEFAULT NULL, ADD UNIQUE `domainName` (`domainName`); made by require_once('D:\xampp\htdocs\gsn\wp-load.php'), require_once('D:\xampp\htdocs\gsn\wp-config.php'), require_once('D:\xampp\htdocs\gsn\wp-settings.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\functions.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\store\register.php'), Store->__construct
+[19-Jan-2017 07:10:52 UTC] WordPress database error Duplicate column name 'storePackage' for query ALTER TABLE `wp_store` ADD `storePackage` VARCHAR(50) NULL DEFAULT NULL; made by require_once('D:\xampp\htdocs\gsn\wp-load.php'), require_once('D:\xampp\htdocs\gsn\wp-config.php'), require_once('D:\xampp\htdocs\gsn\wp-settings.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\functions.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\store\register.php'), Store->__construct
+[19-Jan-2017 07:10:52 UTC] PHP Fatal error:  Class 'addSettingsSection' not found in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\post-types\ad_settings.php on line 3
+[19-Jan-2017 07:13:20 UTC] WordPress database error Duplicate column name 'domainName' for query ALTER TABLE `wp_store` ADD `domainName` VARCHAR(50) NULL DEFAULT NULL, ADD UNIQUE `domainName` (`domainName`); made by require_once('D:\xampp\htdocs\gsn\wp-load.php'), require_once('D:\xampp\htdocs\gsn\wp-config.php'), require_once('D:\xampp\htdocs\gsn\wp-settings.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\functions.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\store\register.php'), Store->__construct
+[19-Jan-2017 07:13:20 UTC] WordPress database error Duplicate column name 'storePackage' for query ALTER TABLE `wp_store` ADD `storePackage` VARCHAR(50) NULL DEFAULT NULL; made by require_once('D:\xampp\htdocs\gsn\wp-load.php'), require_once('D:\xampp\htdocs\gsn\wp-config.php'), require_once('D:\xampp\htdocs\gsn\wp-settings.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\functions.php'), include('D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\store\register.php'), Store->__construct
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  Undefined index: position in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 20
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  Undefined index: position in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 20
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. Please see <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in D:\xampp\htdocs\gsn\wp-includes\functions.php on line 4091
+[19-Jan-2017 07:13:20 UTC] PHP Warning:  call_user_func_array() expects parameter 1 to be a valid callback, function 'my_general_section' not found or invalid function name in D:\xampp\htdocs\gsn\wp-includes\class-wp-hook.php on line 298
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:20 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: placeholder in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 83
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: helper in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 100
+[19-Jan-2017 07:13:21 UTC] PHP Notice:  Undefined index: supplemental in D:\xampp\htdocs\gsn\wp-content\themes\gsn\inc\settings.php on line 106
