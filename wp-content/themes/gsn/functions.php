@@ -3,6 +3,8 @@ include("vendor/autoload.php");
 include("inc/basic.php");
 include("inc/boostrap-walker.php");
 include("inc/input-fields.php");
+include("inc/settings.php");
+
 ////////////////////////////////////
 /*  Store Register pages */
 include("inc/store/register.php");

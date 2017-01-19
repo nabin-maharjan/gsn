@@ -123,5 +123,3 @@ if($('.color-picker').length){
 }	
 });
 
-
-		
