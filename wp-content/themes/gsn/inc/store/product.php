@@ -127,7 +127,7 @@ class GsnProduct{
 			<a class="gsn-in" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink();?>&title=<?php the_title();?>&summary=<?php the_excerpt();?>&source=<?php echo site_url();?>"><i class="fa fa-linkedin" aria-hidden="true"></i>
 			</a>
 		</div>	
-	
+
 		<?php }
 				
 		
