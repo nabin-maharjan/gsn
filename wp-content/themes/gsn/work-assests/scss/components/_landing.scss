@@ -1,0 +1,40 @@
+.landing{
+  padding: 80px 0 0;
+
+  &__form{
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  &__tab{
+    border-bottom: none;    
+    
+    li{
+      display: inline-block;
+      float: left;
+      text-align: center;
+      width: 50%;
+      background: $gray_bg;
+
+      &.active{
+        background: $brick_red;
+      }
+
+      &:hover{
+        background: $petal_green;
+      }
+
+      a{
+        color: white;
+        display: block;
+        font-size: 20px;        
+        padding: 15px 20px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__tab-content{
+    padding: 30px 15px;
+  }
+}

@@ -1,0 +1,16 @@
+header {
+  
+  @include max-screen($mq-tablet) {
+    
+  }
+  @include max-screen($mq-mobile) {
+    
+  }
+
+  h1 {    
+    @include max-screen($mq-mobile) {
+      color: #000000;
+    }        
+  }
+  
+}
