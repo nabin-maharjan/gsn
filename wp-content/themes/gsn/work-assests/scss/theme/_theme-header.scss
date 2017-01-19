@@ -17,6 +17,7 @@
     z-index: 4;
 
     &.stick {
+			
       box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
       left: 0;
       position: fixed;
@@ -403,7 +404,6 @@
     }
   }  
 }
-=======
 .header {
 
   &__top {
