@@ -14,6 +14,21 @@ $top_sale_list=$gsnProduct->get_sale_product_list(2);
 $top_new_product_list=$gsnProduct->get_new_product_list(2);
 $sale_product_list=$gsnProduct->get_sale_product_list($package['sale_product']);
 $new_product_list=$gsnProduct->get_new_product_list(8);
+
+//// new product section Ad
+$new_product_ad=get_option("home_page_newproduct_section_ad");
+$new_product_ad_flag=false;
+if(!empty($new_product_ad)){
+		$new_product_ad_url=wp_get_attachment_url($new_product_ad);
+		$new_product_ad_flag=true;
+}
+//// sale product section Ad
+$sale_product_ad=get_option("home_page_saleproduct_section_ad");
+$sale_product_ad_flag=false;
+if(!empty($new_product_ad)){
+		$sale_product_ad_url=wp_get_attachment_url($sale_product_ad);
+		$sale_product_ad_flag=true;
+}
 ?>
   <main class="main main-content">
     <section class="hero-section">
@@ -28,7 +43,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
 							$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'medium' );
 						}
 				   ?>
-                   <div class="half-height latest-products with-add">
+                   <div class="half-height latest-products <?php if($new_product_ad_flag){ ?>with-add<?php }?>">
                       <div class="product-block">
                         <div class="product-image-cntr">
                           <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url; ?>')"></a>
@@ -48,9 +63,9 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                 }
                 wp_reset_postdata();
               ?>
-            <div class="home-top-add">
-							Gsn left add
-						</div>
+		<?php if($new_product_ad_flag){ ?>
+            <div class="home-top-add" style="background-image:url('<?php echo $new_product_ad_url; ?>')"></div>
+                        <?php } ?>
           </div>
           <!-- /.hero__left -->
           <div class="col-sm-6 hero-part hero__middle hero-slider">
@@ -91,7 +106,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
             </div>
           </div>
           <!-- /.hero__mmiddle -->
-          <div class="col-sm-3 hero-part hero__right hero-sales with-add">
+          <div class="col-sm-3 hero-part hero__right hero-sales <?php if($sale_product_ad_flag){ ?>with-add<?php } ?>">
           <?php                
                 if ( $top_sale_list->have_posts() ) {
                   while ( $top_sale_list->have_posts() ) : $top_sale_list->the_post();
@@ -121,9 +136,9 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                 }
                 wp_reset_postdata();
               ?>
-            <div class="home-top-add">
-							Gsn right add
-						</div>
+        <?php if($sale_product_ad_flag){ ?>
+            <div class="home-top-add" style="background-image:url('<?php echo  $sale_product_ad_url;?>');"></div>
+            <?php } ?>
           </div>
           <!-- /.hero__right -->
         </div>
