@@ -29,6 +29,17 @@ $gsn_settings->fields=array(
 			//'default' => '01/01/2015'
 		),
 		array(
+			'uid' => 'home_page_newproduct_section_ad_link',
+			'label' => 'New Product section Ad Link',
+			'section' => 'home_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+		array(
 			'uid' => 'home_page_saleproduct_section_ad',
 			'label' => 'Sale Product section Ad',
 			'section' => 'home_page_ad',
@@ -37,6 +48,17 @@ $gsn_settings->fields=array(
 			//'placeholder' => 'DD/MM/YYYY',
 			//'helper' => 'Does this help?',
 			//'supplemental' => 'I am underneath!',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'home_page_saleproduct_section_ad_link',
+			'label' => 'Sale Product section Ad Link',
+			'section' => 'home_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
 			//'default' => '01/01/2015'
 		),
 

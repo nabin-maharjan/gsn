@@ -80,7 +80,7 @@ public function settings_page_content() {
 		// Check which type of field we want
 		switch( $arguments['type'] ){
 			case 'text': // If it is a text field
-				printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
+				printf( '<input name="%1$s" id="%1$s" type="%2$s" size="100" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
 				break;
 			case 'textarea': // If it is a textarea
 			printf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value );

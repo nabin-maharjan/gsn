@@ -17,16 +17,20 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
 
 //// new product section Ad
 $new_product_ad=get_option("home_page_newproduct_section_ad");
+$new_product_ad_link="";
 $new_product_ad_flag=false;
 if(!empty($new_product_ad)){
 		$new_product_ad_url=wp_get_attachment_url($new_product_ad);
+		$new_product_ad_link=get_option("home_page_newproduct_section_ad_link");
 		$new_product_ad_flag=true;
 }
 //// sale product section Ad
 $sale_product_ad=get_option("home_page_saleproduct_section_ad");
+$sale_product_ad_link="";
 $sale_product_ad_flag=false;
 if(!empty($sale_product_ad)){
 		$sale_product_ad_url=wp_get_attachment_url($sale_product_ad);
+		$sale_product_ad_link=get_option("home_page_saleproduct_section_ad_link");
 		$sale_product_ad_flag=true;
 }
 ?>
@@ -64,7 +68,7 @@ if(!empty($sale_product_ad)){
                 wp_reset_postdata();
               ?>
 		<?php if($new_product_ad_flag){ ?>
-            <div class="home-top-add" style="background-image:url('<?php echo $new_product_ad_url; ?>')"></div>
+            <a  <?php if(!empty($new_product_ad_link)){?> href="<?php echo $new_product_ad_link;?>"  target="_blank"<?php }?> class="home-top-add" style="background-image:url('<?php echo $new_product_ad_url; ?>')"></a>
                         <?php } ?>
           </div>
           <!-- /.hero__left -->
@@ -106,7 +110,7 @@ if(!empty($sale_product_ad)){
             </div>
           </div>
           <!-- /.hero__mmiddle -->
-          <div class="col-sm-3 hero-part hero__right hero-sales <?php if($sale_product_ad_flag){ ?>with-add<?php } ?>">
+          <div class="col-sm-3 hero-part hero__right hero-sales">
           <?php                
                 if ( $top_sale_list->have_posts() ) {
                   while ( $top_sale_list->have_posts() ) : $top_sale_list->the_post();
@@ -115,7 +119,7 @@ if(!empty($sale_product_ad)){
 							$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'medium' );
 						}
 				   ?>
-            <div class="half-height latest-products">
+            <div class="half-height latest-products <?php if($sale_product_ad_flag){ ?>with-add<?php } ?>">
               <div class="product-block">
                 <div class="product-image-cntr">
                   <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url;?>')"></a>
@@ -123,7 +127,7 @@ if(!empty($sale_product_ad)){
                   <div class="cart-btn">
                     <a rel="nofollow" href="/gsn/?add-to-cart=<?php  echo get_the_ID();?>" data-quantity="1" data-product_id="<?php echo get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
                   </div>
-									<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
+					<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
                 </div>
               </div>
 							
@@ -137,7 +141,7 @@ if(!empty($sale_product_ad)){
                 wp_reset_postdata();
               ?>
         <?php if($sale_product_ad_flag){ ?>
-            <div class="home-top-add" style="background-image:url('<?php echo  $sale_product_ad_url;?>');"></div>
+            <a <?php if(!empty($sale_product_ad_link)){?> href="<?php echo $sale_product_ad_link;?>" target="_blank"<?php }?> class="home-top-add" style="background-image:url('<?php echo  $sale_product_ad_url;?>');"></a>
             <?php } ?>
           </div>
           <!-- /.hero__right -->
@@ -154,7 +158,7 @@ if(!empty($sale_product_ad)){
         <div class="section-divider"></div>
         <div class="row">          
           <h3 class="section-title">On sale products</h3>
-          <div class="product-list-cntr">
+          <div class="product-list-cntr woocommerce ">
                 <ul class="products clearfix">
                   <?php while ( $sale_product_list->have_posts() ) : $sale_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );
@@ -170,6 +174,19 @@ if(!empty($sale_product_ad)){
   ?>
 
     <!-- /.sales-section -->
+    
+    
+    
+    <section class="middle_ad_cntr">
+    	<div class="container">
+            <div class="row">
+                <div class="col-sm-6">asd fasd</div>
+                <div class="col-sm-6">asdfasdfasd</div>
+            </div>
+ 	   </div>
+    </section>
+    
+    
 
     <!-- /.hero-section -->    
 <?php if ( $new_product_list->have_posts() ) { ?>
@@ -179,7 +196,7 @@ if(!empty($sale_product_ad)){
         <div class="row">          
           <h3 class="section-title">New products</h3>
           
-          <div class="product-list-cntr">
+          <div class="product-list-cntr woocommerce ">
             <ul class="products clearfix">
                  <?php  while ( $new_product_list->have_posts() ) : $new_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );
