@@ -270,4 +270,15 @@
 }
 // /.slider
 
-
+.middle_ad_cntr{
+	    margin: 20px 0;
+		.home-mid-ad{
+			display:block;
+			background-color:$lighter_gray;
+			height:70px;
+			width: 100%;
+			text-align:center;
+			vertical-align:middle;
+			background-size:contain;
+			}
+	}

@@ -180,8 +180,8 @@ if(!empty($sale_product_ad)){
     <section class="middle_ad_cntr">
     	<div class="container">
             <div class="row">
-                <div class="col-sm-6">asd fasd</div>
-                <div class="col-sm-6">asdfasdfasd</div>
+                <div class="col-sm-6"><a href="#" class="home-mid-ad"></a></div>
+                <div class="col-sm-6"><a href="#" class="home-mid-ad"></a></div>
             </div>
  	   </div>
     </section>
