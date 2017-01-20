@@ -25,7 +25,7 @@ $gsn_settings->fields=array(
 			'options' => false,
 			//'placeholder' => 'DD/MM/YYYY',
 			//'helper' => 'Does this help?',
-			//'supplemental' => 'I am underneath!',
+			'supplemental' => '*( 263px width and 95px height )',
 			//'default' => '01/01/2015'
 		),
 		array(
@@ -47,7 +47,7 @@ $gsn_settings->fields=array(
 			'options' => false,
 			//'placeholder' => 'DD/MM/YYYY',
 			//'helper' => 'Does this help?',
-			//'supplemental' => 'I am underneath!',
+			'supplemental' => '*( 263px width and 95px height )',
 			//'default' => '01/01/2015'
 		),
 		array(
@@ -70,7 +70,7 @@ $gsn_settings->fields=array(
 			'options' => false,
 			//'placeholder' => 'DD/MM/YYYY',
 			//'helper' => 'Does this help?',
-			//'supplemental' => 'I am underneath!',
+			'supplemental' => '*( 555px width and 70px height )',
 			//'default' => '01/01/2015'
 		),
 		array(
@@ -93,7 +93,7 @@ $gsn_settings->fields=array(
 			'options' => false,
 			//'placeholder' => 'DD/MM/YYYY',
 			//'helper' => 'Does this help?',
-			//'supplemental' => 'I am underneath!',
+			'supplemental' => '*( 555px width and 70px height )',
 			//'default' => '01/01/2015'
 		),
 		array(
