@@ -33,6 +33,28 @@ if(!empty($sale_product_ad)){
 		$sale_product_ad_link=get_option("home_page_saleproduct_section_ad_link");
 		$sale_product_ad_flag=true;
 }
+
+//// Middle section Left ad
+$middle_section_left_ad=get_option("home_page_middle_section_left_ad");
+$middle_section_left_ad_link="";
+$middle_section_left_ad_flag=false;
+if(!empty($middle_section_left_ad)){
+		$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
+		$middle_section_left_ad_link=get_option("home_page_middle_section_left_ad_link");
+		$middle_section_left_ad_flag=true;
+}
+
+
+//// Middle section Right ad
+$middle_section_right_ad=get_option("home_page_middle_section_right_ad");
+$middle_section_right_ad_link="";
+$middle_section_right_ad_flag=false;
+if(!empty($middle_section_right_ad)){
+		$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
+		$middle_section_right_ad_link=get_option("home_page_middle_section_right_ad_link");
+		$middle_section_right_ad_flag=true;
+}
+
 ?>
   <main class="main main-content">
     <section class="hero-section">
@@ -175,22 +197,26 @@ if(!empty($sale_product_ad)){
 
     <!-- /.sales-section -->
     
-    
+    <?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>
     
     <section class="middle_ad_cntr">
     	<div class="container">
             <div class="row">
-                <div class="col-sm-6"><a href="#" class="home-mid-ad"></a></div>
-                <div class="col-sm-6"><a href="#" class="home-mid-ad"></a></div>
+            <?php if($middle_section_left_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_left_ad_link){ ?> href="<?php echo $middle_section_left_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_left_ad_url; ?>');"></a></div>
+             <?php } ?>   
+               <?php if($middle_section_right_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_right_ad_link){ ?> href="<?php echo $middle_section_right_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_right_ad_url; ?>');"></a></div>
+             <?php } ?> 
             </div>
  	   </div>
     </section>
     
-    
+    <?php } ?>
 
     <!-- /.hero-section -->    
 <?php if ( $new_product_list->have_posts() ) { ?>
-   <section class="new-section">
+   <section class="new-section <?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>with-middle-section-ad <?php } ?>">
       <div class="container">
         <div class="section-divider"></div>
         <div class="row">          

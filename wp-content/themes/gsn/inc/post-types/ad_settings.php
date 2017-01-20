@@ -61,6 +61,52 @@ $gsn_settings->fields=array(
 			'supplemental' => 'Url of ad. It will open on new tab.',
 			//'default' => '01/01/2015'
 		),
+		
+		array(
+			'uid' => 'home_page_middle_section_left_ad',
+			'label' => 'Home page middle section left Ad',
+			'section' => 'home_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			//'supplemental' => 'I am underneath!',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'home_page_middle_section_left_ad_link',
+			'label' => 'Home page middle section left Ad link',
+			'section' => 'home_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+		
+		array(
+			'uid' => 'home_page_middle_section_right_ad',
+			'label' => 'Home page middle section right Ad',
+			'section' => 'home_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			//'supplemental' => 'I am underneath!',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'home_page_middle_section_right_ad_link',
+			'label' => 'Home page middle section right Ad link',
+			'section' => 'home_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
 
 );
 $gsn_settings->add_setting_section();
