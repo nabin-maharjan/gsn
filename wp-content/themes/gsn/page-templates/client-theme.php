@@ -25,7 +25,7 @@ if(!empty($new_product_ad)){
 //// sale product section Ad
 $sale_product_ad=get_option("home_page_saleproduct_section_ad");
 $sale_product_ad_flag=false;
-if(!empty($new_product_ad)){
+if(!empty($sale_product_ad)){
 		$sale_product_ad_url=wp_get_attachment_url($sale_product_ad);
 		$sale_product_ad_flag=true;
 }
@@ -204,8 +204,6 @@ if(!empty($new_product_ad)){
 
   <script>
     $(document).ready(function() {
-      $('.slider-cntr').slick({
-        
-      });
+      $('.slider-cntr').slick();
     });
   </script>
