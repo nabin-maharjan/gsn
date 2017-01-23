@@ -170,9 +170,7 @@ if(!empty($middle_section_right_ad)){
         </div>
       </div>
     </section>
-    <!-- /.hero-section -->    
-    
-            
+    <!-- /.hero-section -->                
   <?php
     if ( $sale_product_list->have_posts() ) {?>
     <section class="sales-section">

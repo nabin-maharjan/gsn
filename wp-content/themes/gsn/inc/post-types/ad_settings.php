@@ -167,3 +167,117 @@ $gsn_settings->fields=array(
 
 );
 $gsn_settings->add_setting_section();
+
+
+
+/*Category page AD Settings */
+$gsn_settings->id="sale_page_ad";
+$gsn_settings->setting_title="Sale Page Ad Settings";
+$gsn_settings->section="ad_settings";
+$gsn_settings->information="This is sale page ad setting.";
+$gsn_settings->fields=array(
+		array(
+			'uid' => 'sale_page_middle_section_left_ad',
+			'label' => 'Sale page middle section left Ad',
+			'section' => 'sale_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'sale_page_middle_section_left_ad_link',
+			'label' => 'Sale page middle section left Ad link',
+			'section' => 'sale_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+		
+		array(
+			'uid' => 'sale_page_middle_section_right_ad',
+			'label' => 'Sale page middle section right Ad',
+			'section' => 'sale_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'sale_page_middle_section_right_ad_link',
+			'label' => 'Sale page middle section right Ad link',
+			'section' => 'sale_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+
+);
+$gsn_settings->add_setting_section();
+
+
+
+/*Product Detail page AD Settings */
+$gsn_settings->id="product_detail_page_ad";
+$gsn_settings->setting_title="Sale Page Ad Settings";
+$gsn_settings->section="ad_settings";
+$gsn_settings->information="This is sale page ad setting.";
+$gsn_settings->fields=array(
+		array(
+			'uid' => 'product_page_middle_section_left_ad',
+			'label' => 'Product Detail page middle section left Ad',
+			'section' => 'product_detail_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'product_page_middle_section_left_ad_link',
+			'label' => 'Product Detail page middle section left Ad link',
+			'section' => 'product_detail_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+		
+		array(
+			'uid' => 'product_page_middle_section_right_ad',
+			'label' => 'Product Detail page middle section right Ad',
+			'section' => 'product_detail_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'product_page_middle_section_right_ad_link',
+			'label' => 'Product Detail page middle section right Ad link',
+			'section' => 'product_detail_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+
+);
+$gsn_settings->add_setting_section();

@@ -84,14 +84,7 @@ if(!empty($middle_section_right_ad)){
 			</div>
 		</div>
 	</section>
-	<!-- /.page-hero -->
-    
-    
-     
- 
-    
-    
-    
+	<!-- /.page-hero -->    
 	<section class="item-list-cntr">
 		<div class="container">
        		 <div class="row">

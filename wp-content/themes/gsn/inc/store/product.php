@@ -106,9 +106,61 @@ class GsnProduct{
 			// Add filter for sharing product
 			add_action( 'woocommerce_share', array($this,'gsn_woocommerce_social_share_icons'), 10 );
 			
+			// Add action for ad on product single page
+			add_action( 'woocommerce_after_single_product_summary', array($this,'gsn_single_product_ad'), 10 );
 		}
 		
+		/*
+		* Function for  ad on single product page
+		*/
+		function gsn_single_product_ad(){
+			//// Middle section Left ad
+			$middle_section_left_ad=get_option("product_page_middle_section_left_ad");
+			$middle_section_left_ad_link="";
+			$middle_section_left_ad_flag=false;
+			if(!empty($middle_section_left_ad)){
+					$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
+					$middle_section_left_ad_link=get_option("product_page_middle_section_left_ad_link");
+					$middle_section_left_ad_flag=true;
+			}
+			
+			
+			//// Middle section Right ad
+			$middle_section_right_ad=get_option("product_page_middle_section_right_ad");
+			$middle_section_right_ad_link="";
+			$middle_section_right_ad_flag=false;
+			if(!empty($middle_section_right_ad)){
+					$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
+					$middle_section_right_ad_link=get_option("product_page_middle_section_right_ad_link");
+					$middle_section_right_ad_flag=true;
+			}
+			?>
+			
+			<!-- Ad Container -->
+			<?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>
+                <section class="middle_ad_cntr">
+                        <div class="row">
+                        <?php if($middle_section_left_ad_flag){ ?>
+                            <div class="col-sm-6"><a <?php if($middle_section_left_ad_link){ ?> href="<?php echo $middle_section_left_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_left_ad_url; ?>');"></a></div>
+                         <?php } ?>   
+                           <?php if($middle_section_right_ad_flag){ ?>
+                            <div class="col-sm-6"><a <?php if($middle_section_right_ad_link){ ?> href="<?php echo $middle_section_right_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_right_ad_url; ?>');"></a></div>
+                         <?php } ?> 
+                        </div>
+                </section>
+             <?php } ?>  
+             <!-- / Ad Container -->
+			
+			
+		<?php }
 		
+		
+		
+		
+		
+		/*
+		* Function to share product
+		*/
 		function gsn_woocommerce_social_share_icons() {
 			if ( function_exists( 'sharing_display' ) ) {
 			} ?>
