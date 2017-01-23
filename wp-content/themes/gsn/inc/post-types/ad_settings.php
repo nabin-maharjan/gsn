@@ -11,7 +11,7 @@ $gsn_settings->create_settings_page(array(
 	'position = 101'
 ));
 
-/* Normal Package Settings */
+/*Home page AD  Settings */
 $gsn_settings->id="home_page_ad";
 $gsn_settings->setting_title="Home Page Ad Settings";
 $gsn_settings->section="ad_settings";
@@ -100,6 +100,63 @@ $gsn_settings->fields=array(
 			'uid' => 'home_page_middle_section_right_ad_link',
 			'label' => 'Home page middle section right Ad link',
 			'section' => 'home_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+
+);
+$gsn_settings->add_setting_section();
+
+
+
+/*Category page AD Settings */
+$gsn_settings->id="category_page_ad";
+$gsn_settings->setting_title="Category Page Ad Settings";
+$gsn_settings->section="ad_settings";
+$gsn_settings->information="This is category page ad setting.";
+$gsn_settings->fields=array(
+		array(
+			'uid' => 'category_page_middle_section_left_ad',
+			'label' => 'Category page middle section left Ad',
+			'section' => 'category_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'category_page_middle_section_left_ad_link',
+			'label' => 'Category page middle section left Ad link',
+			'section' => 'category_page_ad',
+			'type' => 'text',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Url of ad. It will open on new tab.',
+			'supplemental' => 'Url of ad. It will open on new tab.',
+			//'default' => '01/01/2015'
+		),
+		
+		array(
+			'uid' => 'category_page_middle_section_right_ad',
+			'label' => 'Category page middle section right Ad',
+			'section' => 'category_page_ad',
+			'type' => 'image',
+			'options' => false,
+			//'placeholder' => 'DD/MM/YYYY',
+			//'helper' => 'Does this help?',
+			'supplemental' => '*( 555px width and 70px height )',
+			//'default' => '01/01/2015'
+		),
+		array(
+			'uid' => 'category_page_middle_section_right_ad_link',
+			'label' => 'Category page middle section right Ad link',
+			'section' => 'category_page_ad',
 			'type' => 'text',
 			'options' => false,
 			//'placeholder' => 'DD/MM/YYYY',

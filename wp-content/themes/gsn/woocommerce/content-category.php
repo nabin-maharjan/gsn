@@ -26,23 +26,23 @@ $gsn_settings=$gsnSettingsClass->get();
 
 
 //// Middle section Left ad
-$middle_section_left_ad=get_option("home_page_middle_section_left_ad");
+$middle_section_left_ad=get_option("category_page_middle_section_left_ad");
 $middle_section_left_ad_link="";
 $middle_section_left_ad_flag=false;
 if(!empty($middle_section_left_ad)){
 		$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
-		$middle_section_left_ad_link=get_option("home_page_middle_section_left_ad_link");
+		$middle_section_left_ad_link=get_option("category_page_middle_section_left_ad_link");
 		$middle_section_left_ad_flag=true;
 }
 
 
 //// Middle section Right ad
-$middle_section_right_ad=get_option("home_page_middle_section_right_ad");
+$middle_section_right_ad=get_option("category_page_middle_section_right_ad");
 $middle_section_right_ad_link="";
 $middle_section_right_ad_flag=false;
 if(!empty($middle_section_right_ad)){
 		$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
-		$middle_section_right_ad_link=get_option("home_page_middle_section_right_ad_link");
+		$middle_section_right_ad_link=get_option("category_page_middle_section_right_ad_link");
 		$middle_section_right_ad_flag=true;
 }
 ?>
@@ -94,6 +94,7 @@ if(!empty($middle_section_right_ad)){
     
 	<section class="item-list-cntr">
 		<div class="container">
+       		 <div class="row">
 				<div class="list__items">
 					<ul>
                     <?php 
@@ -110,10 +111,11 @@ if(!empty($middle_section_right_ad)){
 							$child_categories = get_categories($args );
 						foreach($child_categories as $child){
 					?>
-						<li class="list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
+						<li class="col-sm-2 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
                         <?php } ?>
 					</ul>
 				</div>
+        	 </div>
 		</div>
 	</section>
 	<!-- /.item-list-cntr -->
