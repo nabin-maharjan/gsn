@@ -47,7 +47,7 @@ if(!empty($middle_section_right_ad)){
 }
 ?>
 
-<main class="main main-content">
+
 	<section class="page-hero page-top">
 		<div
          class="container">
@@ -129,5 +129,3 @@ if(!empty($middle_section_right_ad)){
     </section>
  <?php } ?>  
     <!-- / Ad Container -->
-</main>
-<!-- /.main -->
