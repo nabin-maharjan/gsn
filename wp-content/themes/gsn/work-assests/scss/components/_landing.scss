@@ -1,40 +1,36 @@
-.landing{
+.landing {
   padding: 80px 0 0;
 
-  &__form{
+  &__form {
     max-width: 640px;
     margin: 0 auto;
   }
+  &__tab {
+    border-bottom: none;
 
-  &__tab{
-    border-bottom: none;    
-    
-    li{
+    li {
       display: inline-block;
       float: left;
       text-align: center;
       width: 50%;
       background: $gray_bg;
 
-      &.active{
+      &.active {
         background: $brick_red;
       }
-
-      &:hover{
+      &:hover {
         background: $petal_green;
       }
-
-      a{
+      a {
         color: white;
         display: block;
-        font-size: 20px;        
+        font-size: 20px;
         padding: 15px 20px;
         text-transform: uppercase;
       }
     }
   }
-
-  &__tab-content{
+  &__tab-content {
     padding: 30px 15px;
   }
 }

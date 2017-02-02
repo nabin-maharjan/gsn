@@ -1,26 +1,27 @@
-.about-page{
-	.page-hero{
-		padding:80px 20px;
-		margin-bottom:50px;
-		}
-	img{
-		max-width:100%;
-		height:inherit;
-		}	
-	img.alignleft{
-		float:left;
-		margin:20px 20px 20px 0;
-		}
-	img.alignright{
-		float:right;
-		margin:20px 0 20px 20px;
-		}
-		img.aligncenter{
-		margin:20px auto 20px;
-		display:block;
-		}
-	h2{
-		margin-bottom:20px;
-		}			
+.inner-page {
+	.page-hero {
+		padding: 80px 20px;
+		margin-bottom: 50px;
+	}
 }
-
+.about-page {
+	img {
+		max-width: 100%;
+		height: inherit;
+	}
+	img.alignleft {
+		float: left;
+		margin: 20px 20px 20px 0;
+	}
+	img.alignright {
+		float: right;
+		margin: 20px 0 20px 20px;
+	}
+	img.aligncenter {
+		margin: 20px auto 20px;
+		display: block;
+	}
+	h2 {
+		margin-bottom: 20px;
+	}
+}

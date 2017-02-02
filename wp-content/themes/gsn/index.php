@@ -2,8 +2,33 @@
 // Silence is golden.
 get_header();
 ?>
-<main class="main-content main">
-	<section class=" page-top">
+<main class="main-content main inner-page">
+	<section class="page-hero page-top entry-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 page__top-info">
+					<?php						
+						the_title( '<h1 class="entry-title">', '</h1>' );
+					?>
+					<?php	
+						/**
+						 * woocommerce_before_main_content hook.
+						 *
+						 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+						 * @hooked woocommerce_breadcrumb - 20
+						 */
+						
+						do_action( 'woocommerce_before_main_content' );
+						
+					?>
+				</div>
+			</div>
+		</div>		
+	</section><!-- .entry-header -->
+
+
+
+	<section class="">
 		<div class="wrap container">
 		<?php if ( is_home() && ! is_front_page() ) : ?>
 			<header class="page-header">
@@ -13,7 +38,6 @@ get_header();
 	
 		<div id="primary" class="content-area">
 			<main id="main" class="site-main" role="main">
-	
 				<?php
 				if ( have_posts() ) :
 					/* Start the Loop */
