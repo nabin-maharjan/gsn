@@ -44,11 +44,8 @@ gulp.task('sass', function () {
   .pipe(plumber(plumberErrorHandler))  
   .pipe(sourcemaps.init()) 
   .pipe(sass(sassOptions))
-  .pipe(size({ gzip: true, showFiles: true }))
-  .pipe(prefix(prefixerOptions))   
-  .pipe(combineMq({
-        beautify: false
-    }))  
+  .pipe(size({ gzip: true, showFiles: true }))  
+  .pipe(prefix(prefixerOptions))
   .pipe(minifyCss())       
   .pipe(concat('style.css'))
   .pipe(rename({              //renames the concatenated CSS file
@@ -56,6 +53,7 @@ gulp.task('sass', function () {
       extname : '.min.css'      //the extension fo the renamed CSS file
     }))    
   .pipe(size({ gzip: true, showFiles: true }))  
+  .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('assets/css/'))        
   .pipe(reload({stream:true}));
 });
