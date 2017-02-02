@@ -168,7 +168,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
       <div class="container">
         <div class="row">
           <div class="col-md-3 header__logo">
-            <h1 class="logo"><img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>"></h1>
+            <h1 class="logo"><a href="<?php echo site_url();?>"><img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>"></a></h1>
           </div>
           <!-- /.header__logo -->
           <div class="col-md-9 header__main-items">
