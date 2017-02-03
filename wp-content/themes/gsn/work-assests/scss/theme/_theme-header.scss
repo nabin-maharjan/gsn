@@ -1,13 +1,11 @@
 .header {
-
   &__top {
     background: $black;
     color: $white;
     font-size: 14px;
     height: 35px;
-    line-height: 35px;    
+    line-height: 35px;
   }
-
   &__bottom {
     background: $white;
     height: 100px;
@@ -17,20 +15,18 @@
     z-index: 4;
 
     &.stick {
-			
-      box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
+      box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.3);
       left: 0;
       position: fixed;
-      top: 0; 
-      width: 100%;   
-      z-index: 4;  
+      top: 0;
+      width: 100%;
+      z-index: 4;
     }
   }
-
   &__logo {
-    text-transform: uppercase;    
+    text-transform: uppercase;
 
-    h1{
+    h1 {
       font-size: 20px;
       font-weight: bolder;
       // margin-top: 15px;
@@ -42,18 +38,16 @@
   }
   // /__logo
 }
-
 // top bar
 .top {
   color: $white;
   text-transform: uppercase;
-  
+
   a {
     &:hover {
       color: $brick_red;
     }
   }
-
   ul {
     li {
       margin-right: 15px;
@@ -63,11 +57,8 @@
       }
     }
   }
-
   &__left-icons {
-
   }
-
   &__right-icons {
     ul {
       li {
@@ -83,8 +74,8 @@
 .nav__links {
   font-size: 0;
 
-  li{  
-    font-size: 16px;    
+  li {
+    font-size: 16px;
     position: relative;
     cursor: pointer;
     float: left;
@@ -92,36 +83,33 @@
     &.active, &:hover > a {
       color: $brick_red;
     }
-
   }
-
-  a{
+  a {
     display: block;
     font-weight: bold;
     line-height: 100px;
     padding: 0 25px;
     text-transform: uppercase;
-    transition: all 0.5s ease;    
-  }  
+    transition: all 0.5s ease;
+  }
 }
-.dropdown{
+.dropdown {
   transition: all 0.3s ease;
-  
+
   &__link {
     position: relative;
 
-    &::after{
+    &::after {
       content: '\f0d7';
       font-family: FontAwesome;
     }
   }
-
-  &__menu {    
+  &__menu {
     background: $black;
-    color: $white;    
-    left: 0;    
-    min-width: 100%;
-    opacity: 0;    
+    color: $white;
+    left: 0;
+    min-width: 200px;
+    opacity: 0;
     position: absolute;
     top: 100%;
     transform: translateY(15px);
@@ -132,34 +120,34 @@
 
     li {
       display: block;
-      line-height: 1;      
+      line-height: 1;
+      float: none;
 
       a {
         display: block;
         line-height: 1;
         padding: 10px 25px;
         text-align: left;
+        font-size: 14px;
+        font-weight: normal;
 
-        &.dropdown__link::after{
+        &.dropdown__link::after {
           content: '\f0da';
           float: right;
           margin-left: 5px;
         }
-      }  
-
+      }
       .dropdown__menu {
         left: 100%;
         top: 0;
-      } 
-
-      &:hover > .dropdown__menu{
-        opacity: 1;        
+      }
+      &:hover > .dropdown__menu {
+        opacity: 1;
         transform: translateY(0);
-        visibility: visible;        
+        visibility: visible;
       }
     }
   }
-  
   &:hover > &__menu {
     opacity: 1;
     transform: translateY(0);
@@ -173,13 +161,11 @@
   position: relative;
 }
 .cart {
-
   &__icon {
-    
-    .cart-indicator{
+    .cart-indicator {
       background: $brick_red;
       border-radius: 50%;
-      color: $white;      
+      color: $white;
       height: 24px;
       line-height: 22px;
       text-align: center;
@@ -187,8 +173,8 @@
       position: absolute;
       right: 0;
       top: 50%;
-      width: 24px; 
-      z-index: 2;     
+      width: 24px;
+      z-index: 2;
     }
     a {
       padding-right: 30px;
@@ -196,13 +182,12 @@
       &:hover {
         color: $brick_red;
       }
-    }    
+    }
   }
-
   &__prices {
     border-top: 2px solid $light_gray;
     padding-top: 5px;
-    
+
     .cart-price {
       padding: 7px 0;
 
@@ -212,7 +197,6 @@
       }
     }
   }
-
   &__buttons {
     margin-top: 20px;
     text-align: right;
@@ -223,18 +207,16 @@
     }
   }
 }
-
 .cart-item {
   display: block;
   margin-bottom: 15px;
   position: relative;
-  
+
   .cart-image {
     float: left;
     margin-right: 10px;
     max-width: 80px;
   }
-
   .cart-product-info {
     overflow: hidden;
     padding-right: 30px;
@@ -246,35 +228,30 @@
       > span {
         padding-right: 5px;
       }
-
       a {
         float: left;
       }
     }
-
     .product__attributes {
       a {
         font-style: italic;
       }
-
       .product__price {
         font-weight: bold;
       }
     }
   }
-
   .cart-product-remove {
     position: absolute;
     right: 5px;
     top: 0;
   }
 }
-
 .toggle__content {
   background: $white;
-  box-shadow: 0 6px 15px 0 rgba(0,0,0,0.12);    
+  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.12);
   display: none;
-  padding: 10px; 
+  padding: 10px;
   position: absolute;
   right: 0;
   top: 100%;
@@ -296,23 +273,19 @@
 .item__search {
   margin-right: 15px;
 }
-
 .search {
   // position: relative;
-  
+
   form {
     // position: relative;
   }
-  
   a:hover {
     color: $brick_red;
   }
-
   i {
     padding-right: 15px;
     border-right: 1px solid $dark_gray;
   }
-
   &-select {
     margin-right: 10px;
     width: 190px;
@@ -321,14 +294,13 @@
       padding: 9px 11px 8px;
       height: auto !important;
       border-color: $light_gray;
-      font-size: 14px;      
+      font-size: 14px;
 
-      option { 
+      option {
         padding: 0;
       }
     }
   }
-
   &-input {
     width: 240px;
 
@@ -344,7 +316,6 @@
       line-height: 1.2;
     }
   }
-
   &-button {
     width: 130px;
 
@@ -360,7 +331,6 @@
     }
   }
 }
-
 // search product dropdown
 .search-auto-result-cntr {
   position: absolute;
@@ -368,8 +338,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.12);
-  
+  box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.12);
+
   ul {
     max-height: 405px;
     overflow-y: auto;
@@ -389,20 +359,17 @@
           width: 60px;
           float: left;
         }
-
         span {
           display: block;
           overflow: hidden;
           padding-left: 10px;
         }
       }
-
       &:hover {
         background: $petal_green;
         color: $white;
       }
     }
-  }  
+  }
 }
-
 // /.search

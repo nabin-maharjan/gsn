@@ -61,7 +61,7 @@ $gsn_settings=$gsnSettingsClass->get();?>
   messenger_app_id="<?php echo $gsn_settings->fbAppId;?>" 
   page_id="<?php echo $gsn_settings->fbPageId;?>"
   color="blue"
-  size="standard" >
+  size="large" >
 </div> 
 <?php } ?>
 <!-- /.back-to-top -->

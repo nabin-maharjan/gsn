@@ -7,7 +7,7 @@
  */
 get_header();?>
 
-<main class="main main-content about-page contact-page">
+<main class="main main-content inner-page contact-page">
 	<section class="page-hero page-top">
 		<div class="container">
 			<div class="row">

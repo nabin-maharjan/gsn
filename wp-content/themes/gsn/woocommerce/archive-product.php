@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 get_header( 'store' ); ?>
+<main class="main-content main">
 	<?php 
 		if(is_tax() || is_shop()){
 			$termid=get_queried_object()->term_id;
@@ -47,7 +48,7 @@ get_header( 'store' ); ?>
 			*/
 		?>
 
-		<div class="container">
+	<section class="container main-product-cntr">
 			<div class="row">	
 				<div class="inner-page-cntr">
 					<?php if ( have_posts() ) : ?>
@@ -77,15 +78,17 @@ get_header( 'store' ); ?>
 							<?php endwhile; // end of the loop. ?>
 
 						<?php woocommerce_product_loop_end(); ?>
-
-						<?php
-							/**
-							 * woocommerce_after_shop_loop hook.
-							 *
-							 * @hooked woocommerce_pagination - 10
-							 */
-							do_action( 'woocommerce_after_shop_loop' );
-						?>
+						
+						<div class="main-pagination-cntr">
+							<?php
+								/**
+								 * woocommerce_after_shop_loop hook.
+								 *
+								 * @hooked woocommerce_pagination - 10
+								 */
+								do_action( 'woocommerce_after_shop_loop' );
+							?>
+						</div>
 
 						<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
@@ -106,7 +109,8 @@ get_header( 'store' ); ?>
 			</div>
 			<!-- /.inner-page-cntr -->
 		</div>
-	</div>
+	</section>
+	<!-- /.main-product-cntr -->
 
 	<?php
 		/**
@@ -118,5 +122,6 @@ get_header( 'store' ); ?>
 		do_action( 'woocommerce_sidebar' );
 		*/
 	?>
-
+</main>
+<!-- /.main -->
 <?php get_footer( 'store' ); ?>

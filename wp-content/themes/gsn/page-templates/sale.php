@@ -31,7 +31,7 @@ if(!empty($middle_section_right_ad)){
 		$middle_section_right_ad_flag=true;
 }
 ?>
-  <main class="main main-content  about-page">  
+  <main class="main main-content inner-page sale-page">  
   
   <section class="page-hero page-top">
 		<div
