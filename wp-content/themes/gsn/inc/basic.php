@@ -10,7 +10,7 @@ function enquee_style_css(){
 	}
 	
 	// Enqueue custom stylesheet//
-	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all' );
+	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '', 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 
@@ -29,8 +29,14 @@ function enquee_scripts(){
 
 	wp_enqueue_script( 'bootstrap-datepicker-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap-datepicker.min.js', array('jquery'), '1.0.0', true );
     // wp_enqueue_script( 'custom-scrollbar', get_template_directory_uri() . '/assets/js/vendor/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '1.0.0', true );
-	// Enqueue custom all js//    
+	// Enqueue custom all js// 
+	
+	wp_enqueue_script( 'lazylinepainter-js', get_template_directory_uri() . '/assets/js/vendor/jquery.lazylinepainter-1.7.0.min.js', array('jquery'), '1.0.0', true );
+	   
 	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array('jquery'), '1.0.0', true );
+	
+	
+	
 	
 	
 }
@@ -41,7 +47,12 @@ add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
  * link vendor javascript file  on top
  */
 function my_enqueue($hook) {
-   wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox'), '1.0.0', true );
+   wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox'), '', true );
+   
+   
+   
+   
+   
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
