@@ -147,6 +147,8 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$this->aboutStore=$post->post_content;
 		$this->esewaId=array_shift($post_metas['esewaId']); // esewa ID
 		$this->storePackageSettings=$this->get_store_settings(); //get store package settings
+		$this->fbPageId=array_shift($post_metas['fbPageId']); //get facebook page Id
+		$this->fbAppId=array_shift($post_metas['fbAppId']); //get facebook App ID
 		return $this;
 	}
 	/*

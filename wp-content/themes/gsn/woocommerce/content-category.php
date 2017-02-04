@@ -23,9 +23,31 @@ global $store;
 global $gsnSettingsClass;
 $gsn_themes=$gsnSettingsClass->available_theme();
 $gsn_settings=$gsnSettingsClass->get();
+
+
+//// Middle section Left ad
+$middle_section_left_ad=get_option("category_page_middle_section_left_ad");
+$middle_section_left_ad_link="";
+$middle_section_left_ad_flag=false;
+if(!empty($middle_section_left_ad)){
+		$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
+		$middle_section_left_ad_link=get_option("category_page_middle_section_left_ad_link");
+		$middle_section_left_ad_flag=true;
+}
+
+
+//// Middle section Right ad
+$middle_section_right_ad=get_option("category_page_middle_section_right_ad");
+$middle_section_right_ad_link="";
+$middle_section_right_ad_flag=false;
+if(!empty($middle_section_right_ad)){
+		$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
+		$middle_section_right_ad_link=get_option("category_page_middle_section_right_ad_link");
+		$middle_section_right_ad_flag=true;
+}
 ?>
 
-<main class="main main-content">
+
 	<section class="page-hero page-top">
 		<div
          class="container">
@@ -62,10 +84,10 @@ $gsn_settings=$gsnSettingsClass->get();
 			</div>
 		</div>
 	</section>
-	<!-- /.page-hero -->
+	<!-- /.page-hero -->    
 	<section class="item-list-cntr">
 		<div class="container">
-			<div class="row">
+       		 <div class="row">
 				<div class="list__items">
 					<ul>
                     <?php 
@@ -82,14 +104,28 @@ $gsn_settings=$gsnSettingsClass->get();
 							$child_categories = get_categories($args );
 						foreach($child_categories as $child){
 					?>
-						<li class="col-sm-2 col-md-3 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
+						<li class="col-sm-2 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
                         <?php } ?>
-
 					</ul>
 				</div>
-			</div>
+        	 </div>
 		</div>
 	</section>
 	<!-- /.item-list-cntr -->
-</main>
-<!-- /.main -->
+    
+    <!-- Ad Container -->
+<?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>
+    <section class="middle_ad_cntr">
+    	<div class="container">
+            <div class="row">
+            <?php if($middle_section_left_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_left_ad_link){ ?> href="<?php echo $middle_section_left_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_left_ad_url; ?>');"></a></div>
+             <?php } ?>   
+               <?php if($middle_section_right_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_right_ad_link){ ?> href="<?php echo $middle_section_right_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_right_ad_url; ?>');"></a></div>
+             <?php } ?> 
+            </div>
+ 	   </div>
+    </section>
+ <?php } ?>  
+    <!-- / Ad Container -->

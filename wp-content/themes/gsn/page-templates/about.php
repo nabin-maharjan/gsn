@@ -9,7 +9,7 @@ get_header();
 global $gsnSettingsClass;
 $gsn_settings=$gsnSettingsClass->get();
 ?>
-<main class="main main-content about-page">
+<main class="main main-content inner-page about-page">
 <section class="page-hero page-top">
 		<div
          class="container">

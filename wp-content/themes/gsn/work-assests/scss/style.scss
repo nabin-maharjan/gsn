@@ -15,7 +15,7 @@
 
 /* ====== Font Family CSS ====== */
 
-@include font-face(welcome, '../../fonts/sweetness-webfont', 500, normal, eot woff2 woff);
+//@include font-face(welcome, '../../fonts/sweetness-webfont', 500, normal, eot woff2 woff);
 
 /* ====== Font Family CSS END ====== */
 
@@ -27,6 +27,7 @@
 @import "components/landing";
 @import "components/map";
 @import "components/alert";
+@import "components/pagination";
 /* ====== Import COMPONENT CSS END ====== */
 
 /* ====== Dashboard Styles CSS ====== */

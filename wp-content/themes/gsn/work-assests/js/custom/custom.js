@@ -7,6 +7,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
          data :data,
          success: function(response) {
             if(response.status == "success") {
+				if(jQuery("div.alert.alert-danger").length){
+					jQuery("div.alert.alert-danger").remove();
+				}
                callback(response);
             }else {
 				// validation error occurs
@@ -27,9 +30,9 @@ var ajax_call_post= function (data,error_wrap_container,error_load_position,call
 					}
 					
 					if(error_load_position==="after"){
-					 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertAfter(error_wrap_container);
+					 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong> '+response.msg+'</div>').insertAfter(error_wrap_container);
 					}else{
-						 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(error_wrap_container);
+						 jQuery('<div class="alert alert-danger alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong> '+response.msg+'</div>').insertBefore(error_wrap_container);
 					}
 					
 				}
@@ -51,7 +54,7 @@ jQuery('.make_product_feature').on('click',function(){
 	var data = {action: "gsn_make_product_feature", product_id : product_id};
 	
 	 var response=ajax_call_post(data,'','',function(response){
-		 console.log(response);
+		 location.reload();
 	 });
 	 
 });

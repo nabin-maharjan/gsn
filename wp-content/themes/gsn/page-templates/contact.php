@@ -6,48 +6,69 @@
  * @since GSN 1.0
  */
 get_header();?>
-<main class="main main-content">
+
+<main class="main main-content inner-page contact-page">
+	<section class="page-hero page-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 page__top-info">
+					<h1>Contact Us</h1>
+					<?php	
+						/**
+						 * woocommerce_before_main_content hook.
+						 *
+						 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+						 * @hooked woocommerce_breadcrumb - 20
+						 */
+						
+						do_action( 'woocommerce_before_main_content' );
+						
+					?>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section class="page-top">
-    <div class="container">
-    <h3>Contact</h3>
-    <form name="contact_store_form" id="contact_store_form">
-        <!-- Row start -->
-        <div class="form-group row">
-          <label for="fullName" class="col-sm-2 col-form-label col-form-label-sm">Full Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control form-control-sm" name="fullName" id="fullName">
-          </div>
-        </div>
-        <!-- Row end -->
-        <!-- Row start -->
-        <div class="form-group row">
-          <label for="emailAddress" class="col-sm-2 col-form-label col-form-label-sm">Email Address</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control form-control-sm" name="emailAddress" id="emailAddress">
-          </div>
-        </div>
-        <!-- Row end -->
-        
-        <!-- Row start -->
-        <div class="form-group row">
-          <label for="phoneNumber" class="col-sm-2 col-form-label col-form-label-sm">Phone Number</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control form-control-sm" name="phoneNumber" id="phoneNumber">
-          </div>
-        </div>
-        <!-- Row end -->
-         <!-- Row start -->
-        <div class="form-group row">
-          <label for="message" class="col-sm-2 col-form-label col-form-label-sm">Messsage</label>
-          <div class="col-sm-10">
-            <textarea class="form-control form-control-sm" name="message" id="message" rows="15"></textarea>
-          </div>
-        </div>
-        <!-- Row end -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-	</div>
-</section>
+		<div class="container">
+			<form name="contact_store_form" id="contact_store_form" class="col-md-8 offset-md-2">
+				<!-- Row start -->
+				<div class="form-group row">
+					<label for="fullName" class="col-sm-6 col-form-label col-form-label-sm">Full Name<abbr class="required" title="required">*</abbr></label>
+					
+					<div class="col-sm-12">
+						<input type="text" class="form-control form-control-sm" name="fullName" id="fullName">
+					</div>
+				</div>
+				<!-- Row end --> 
+				<!-- Row start -->
+				<div class="form-group row">
+					<label for="emailAddress" class="col-sm-6 col-form-label col-form-label-sm">Email Address<abbr class="required" title="required">*</abbr></label>
+					<div class="col-sm-12">
+						<input type="text" class="form-control form-control-sm" name="emailAddress" id="emailAddress">
+					</div>
+				</div>
+				<!-- Row end --> 
+				
+				<!-- Row start -->
+				<div class="form-group row">
+					<label for="phoneNumber" class="col-sm-6 col-form-label col-form-label-sm">Phone Number</label>
+					<div class="col-sm-12">
+						<input type="text" class="form-control form-control-sm" name="phoneNumber" id="phoneNumber">
+					</div>
+				</div>
+				<!-- Row end --> 
+				<!-- Row start -->
+				<div class="form-group row">
+					<label for="message" class="col-sm-6 col-form-label col-form-label-sm">Messsage<abbr class="required" title="required">*</abbr></label>
+					<div class="col-sm-12">
+						<textarea class="form-control form-control-sm" name="message" id="message" rows="15"></textarea>
+					</div>
+				</div>
+				<!-- Row end -->
+				<div class="contact-btn-wrap text-xs-right"><button type="submit" class="btn btn-primary">Submit</button></div>
+			</form>
+		</div>
+	</section>
 </main>
 <?php get_footer();?>
 <script>

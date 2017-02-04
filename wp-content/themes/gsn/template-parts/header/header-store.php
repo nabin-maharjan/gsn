@@ -8,8 +8,10 @@ $gsnSettings=$gsnSettingsClass->get($store->user_id);
 $store->check_access_store();
 $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 ?>
+
+
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js">
+<html <?php language_attributes(); ?> class="no-js" <?php  if(is_singular('product')) { ?>itemtype="http://schema.org/Product" <?php } ?>>
 <head profile="http://www.w3.org/2005/10/profile">
 	<title><?php wp_title(); ?></title>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -18,6 +20,37 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    
+   <?php  if(is_singular('product')) { 
+        $current_product=wc_get_product(get_the_ID()); 
+   ?>
+
+    <!-- Place this data between the <head> tags of your website -->
+    <title>Page Title. Maximum length 60-70 characters</title>
+    <meta name="description" content="<?php echo $current_product->post_excerpt;?>" />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="<?php echo $current_product->post_title;?>">
+    <meta itemprop="description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta itemprop="image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:site" content="@<?php echo $store->domainName;?>">
+    <meta name="twitter:title" content="<?php echo $current_product->post_title;?>">
+    <meta name="twitter:description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta name="twitter:creator" content="@<?php echo $store->firstName;?>_<?php echo $store->lastName;?>">
+    <meta name="twitter:image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <meta name="twitter:data1" content="<?php echo $current_product->get_price();?>">
+    <meta name="twitter:label1" content="Price">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="<?php echo $current_product->post_title;?>" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<?php the_permalink();?>" />
+    <meta property="og:image" content="<?php the_post_thumbnail_url( 'full' ); ?>" />
+    <meta property="og:description" content="<?php echo $current_product->post_excerpt;?>" />
+    <meta property="og:site_name" content="<?php echo $store->storeName;?>" />
+    <meta property="og:price:amount" content="<?php echo $current_product->get_price();?>" />
+    <meta property="og:price:currency" content="<?php echo get_woocommerce_currency(); ?>" />
+     <?php }  ?>
 	<script>
         var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
         var location_Lat=0;
@@ -135,7 +168,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
       <div class="container">
         <div class="row">
           <div class="col-md-3 header__logo">
-            <h1 class="logo"><img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>"></h1>
+            <h1 class="logo"><a href="<?php echo site_url();?>"><img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>"></a></h1>
           </div>
           <!-- /.header__logo -->
           <div class="col-md-9 header__main-items">

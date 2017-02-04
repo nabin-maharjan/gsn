@@ -1,16 +1,15 @@
-section{ 
-	clear:both; 
-	display:block;
+section {
+	clear: both;
+	display: block;
 }
-
 .dashboard {
 	&-header {
 		background: $dark__gray;
-		box-shadow: 0 3px 6px 0 rgba(0,0,0,0.5);
+		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5);
 		color: $white;
 		padding: 0 20px;
-		text-align: right;	
-		height: 60px;	
+		text-align: right;
+		height: 60px;
 		position: fixed;
 		z-index: 4;
 		width: 100%;
@@ -20,21 +19,18 @@ section{
 
 			a span.nav-text {
 				transform: translateX(0);
-				opacity: 1;			
+				opacity: 1;
 				transition: transform 0.3s ease-in-out, opacity 0.8s ease-in-out;
 			}
 		}
-
 		&.nav-open .dashboard-tooltip {
 			display: none;
 		}
-
 		&.nav-open .dashboard-nav-overlay {
 			opacity: 1;
 			visibility: visible;
 		}
 	}
-
 	&__header-left {
 		position: relative;
 		z-index: 4;
@@ -50,14 +46,13 @@ section{
 		}
 	}
 }
-
 .dashboard-hamburger {
 	cursor: pointer;
 	display: inline-block;
 	height: 18px;
 	width: 30px;
 	float: left;
-	margin-top: 4px;	
+	margin-top: 4px;
 
 	span {
 		display: block;
@@ -78,18 +73,15 @@ section{
 			top: -8px;
 			left: 0;
 		}
-
 		&::after {
 			top: auto;
 			bottom: -8px;
 		}
 	}
-
 	&:hover span {
 		background: $brick_red;
 	}
 }
-
 .dashboard__nav {
 	position: fixed;
 	height: 100%;
@@ -99,10 +91,10 @@ section{
 	background: $dark__gray;
 	width: 70px;
 	// overflow-x: hidden;
-	z-index: 3;	
+	z-index: 3;
 	transition: all 0.2s ease-in-out;
 
-	ul{
+	ul {
 		li {
 			display: block;
 			height: 50px;
@@ -128,30 +120,25 @@ section{
 					top: 0;
 					transition: all 0.2s ease-in-out;
 				}
-
 				&:hover {
 					overflow: visible;
 				}
-
 				&:hover:before {
 					width: 100%;
 				}
-
 				&:hover .dashboard-tooltip {
 					opacity: 1;
 					visibility: visible;
 					transform: translateY(0);
 				}
-
 				.dashboard-icons {
 					height: 50px;
 					width: 30px;
 					text-align: center;
 					line-height: 50px;
 					font-size: 18px;
-					position: relative;					
+					position: relative;
 				}
-
 				span.nav-text {
 					padding-left: 10px;
 					position: relative;
@@ -164,7 +151,6 @@ section{
 		}
 	}
 }
-
 .dashboard-nav-overlay {
 	position: fixed;
 	height: 100%;
@@ -174,10 +160,9 @@ section{
 	top: 0;
 	left: 0;
 	z-index: -1;
-	background: rgba(0,0,0,0.3);
+	background: rgba(0, 0, 0, 0.3);
 	transition: all 0.2s ease-in-out;
 }
-
 .header-profile-cntr {
 	position: relative;
 
@@ -188,15 +173,13 @@ section{
 		span {
 			margin-left: 5px;
 		}
-
 		&:hover {
 			background: $brick_red;
 		}
 	}
-
 	.profile__links {
 		background: $dark__gray;
-		box-shadow: 0 3px 6px 0 rgba(0,0,0,.5);
+		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .5);
 		position: absolute;
 		right: 0;
 		white-space: nowrap;
@@ -217,13 +200,11 @@ section{
 			}
 		}
 	}
-
 	&:hover .profile__links {
 		opacity: 1;
 		visibility: visible;
 	}
 }
-
 .dashboard-tooltip {
 	position: absolute;
 	left: 100%;
@@ -233,7 +214,7 @@ section{
 	transition: all 0.2s ease-in-out;
 
 	span {
-		background: rgba(0,0,0,0.5);
+		background: rgba(0, 0, 0, 0.5);
 		padding: 5px 15px;
 		font-size: 14px;
 		margin-left: 8px;
@@ -249,7 +230,7 @@ section{
 			top: 10px;
 			border-style: solid;
 			border-width: 5px 8px 5px 0;
-			border-color: transparent rgba(0,0,0,0.5) transparent transparent;
+			border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
 		}
 	}
 }

@@ -14,6 +14,47 @@ $top_sale_list=$gsnProduct->get_sale_product_list(2);
 $top_new_product_list=$gsnProduct->get_new_product_list(2);
 $sale_product_list=$gsnProduct->get_sale_product_list($package['sale_product']);
 $new_product_list=$gsnProduct->get_new_product_list(8);
+
+//// new product section Ad
+$new_product_ad=get_option("home_page_newproduct_section_ad");
+$new_product_ad_link="";
+$new_product_ad_flag=false;
+if(!empty($new_product_ad)){
+		$new_product_ad_url=wp_get_attachment_url($new_product_ad);
+		$new_product_ad_link=get_option("home_page_newproduct_section_ad_link");
+		$new_product_ad_flag=true;
+}
+//// sale product section Ad
+$sale_product_ad=get_option("home_page_saleproduct_section_ad");
+$sale_product_ad_link="";
+$sale_product_ad_flag=false;
+if(!empty($sale_product_ad)){
+		$sale_product_ad_url=wp_get_attachment_url($sale_product_ad);
+		$sale_product_ad_link=get_option("home_page_saleproduct_section_ad_link");
+		$sale_product_ad_flag=true;
+}
+
+//// Middle section Left ad
+$middle_section_left_ad=get_option("home_page_middle_section_left_ad");
+$middle_section_left_ad_link="";
+$middle_section_left_ad_flag=false;
+if(!empty($middle_section_left_ad)){
+		$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
+		$middle_section_left_ad_link=get_option("home_page_middle_section_left_ad_link");
+		$middle_section_left_ad_flag=true;
+}
+
+
+//// Middle section Right ad
+$middle_section_right_ad=get_option("home_page_middle_section_right_ad");
+$middle_section_right_ad_link="";
+$middle_section_right_ad_flag=false;
+if(!empty($middle_section_right_ad)){
+		$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
+		$middle_section_right_ad_link=get_option("home_page_middle_section_right_ad_link");
+		$middle_section_right_ad_flag=true;
+}
+
 ?>
   <main class="main main-content">
     <section class="hero-section">
@@ -28,7 +69,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
 							$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'medium' );
 						}
 				   ?>
-                   <div class="half-height latest-products">
+                   <div class="half-height latest-products <?php if($new_product_ad_flag){ ?>with-add<?php }?>">
                       <div class="product-block">
                         <div class="product-image-cntr">
                           <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url; ?>')"></a>
@@ -40,6 +81,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                         </div>
                       </div>
                       <!-- /.product-block -->
+											
                     </div>                   
                 <?php   endwhile;
                 } else {
@@ -47,7 +89,9 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                 }
                 wp_reset_postdata();
               ?>
-            
+		<?php if($new_product_ad_flag){ ?>
+            <a  <?php if(!empty($new_product_ad_link)){?> href="<?php echo $new_product_ad_link;?>"  target="_blank"<?php }?> class="home-top-add" style="background-image:url('<?php echo $new_product_ad_url; ?>')"></a>
+                        <?php } ?>
           </div>
           <!-- /.hero__left -->
           <div class="col-sm-6 hero-part hero__middle hero-slider">
@@ -97,17 +141,18 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
 							$post_thumnail_url=get_the_post_thumbnail_url(get_the_ID(), 'medium' );
 						}
 				   ?>
-            <div class="half-height latest-products">
+            <div class="half-height latest-products <?php if($sale_product_ad_flag){ ?>with-add<?php } ?>">
               <div class="product-block">
                 <div class="product-image-cntr">
                   <a class="half-image product-image" href="<?php the_permalink();?>" style="background-image: url('<?php echo $post_thumnail_url;?>')"></a>
                   <span class="label-top label-sale">Sale</span>
                   <div class="cart-btn">
-                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php get_the_ID();?>" data-quantity="1" data-product_id="<?php get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
+                    <a rel="nofollow" href="/gsn/?add-to-cart=<?php  echo get_the_ID();?>" data-quantity="1" data-product_id="<?php echo get_the_ID();?>" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart">Add to cart</a>										
                   </div>
-									<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
+					<p class="h-p-name"><a href="<?php the_permalink();?>"><?php the_title();?></a></p>
                 </div>
               </div>
+							
               <!-- /.product-block -->
             </div>
             
@@ -117,15 +162,15 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
                 }
                 wp_reset_postdata();
               ?>
-            
+        <?php if($sale_product_ad_flag){ ?>
+            <a <?php if(!empty($sale_product_ad_link)){?> href="<?php echo $sale_product_ad_link;?>" target="_blank"<?php }?> class="home-top-add" style="background-image:url('<?php echo  $sale_product_ad_url;?>');"></a>
+            <?php } ?>
           </div>
           <!-- /.hero__right -->
         </div>
       </div>
     </section>
-    <!-- /.hero-section -->    
-    
-            
+    <!-- /.hero-section -->                
   <?php
     if ( $sale_product_list->have_posts() ) {?>
     <section class="sales-section">
@@ -133,7 +178,7 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
         <div class="section-divider"></div>
         <div class="row">          
           <h3 class="section-title">On sale products</h3>
-          <div class="product-list-cntr">
+          <div class="product-list-cntr woocommerce ">
                 <ul class="products clearfix">
                   <?php while ( $sale_product_list->have_posts() ) : $sale_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );
@@ -149,16 +194,33 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
   ?>
 
     <!-- /.sales-section -->
+    
+    <?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>
+    
+    <section class="middle_ad_cntr">
+    	<div class="container">
+            <div class="row">
+            <?php if($middle_section_left_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_left_ad_link){ ?> href="<?php echo $middle_section_left_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_left_ad_url; ?>');"></a></div>
+             <?php } ?>   
+               <?php if($middle_section_right_ad_flag){ ?>
+                <div class="col-sm-6"><a <?php if($middle_section_right_ad_link){ ?> href="<?php echo $middle_section_right_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_right_ad_url; ?>');"></a></div>
+             <?php } ?> 
+            </div>
+ 	   </div>
+    </section>
+    
+    <?php } ?>
 
     <!-- /.hero-section -->    
 <?php if ( $new_product_list->have_posts() ) { ?>
-   <section class="new-section">
+   <section class="new-section <?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>with-middle-section-ad <?php } ?>">
       <div class="container">
         <div class="section-divider"></div>
         <div class="row">          
           <h3 class="section-title">New products</h3>
           
-          <div class="product-list-cntr">
+          <div class="product-list-cntr woocommerce ">
             <ul class="products clearfix">
                  <?php  while ( $new_product_list->have_posts() ) : $new_product_list->the_post();
                     wc_get_template_part( 'content', 'product' );
@@ -183,8 +245,6 @@ $new_product_list=$gsnProduct->get_new_product_list(8);
 
   <script>
     $(document).ready(function() {
-      $('.slider-cntr').slick({
-        
-      });
+      $('.slider-cntr').slick();
     });
   </script>

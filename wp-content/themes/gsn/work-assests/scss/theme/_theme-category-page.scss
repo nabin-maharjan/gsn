@@ -1,28 +1,23 @@
 .page {
-  
   &-hero {
-    background: $light_gray;    
-    padding: 80px 0 30px;    
+    background: $light_gray;
+    padding: 80px 0 30px;
     width: 100%;
   }
-
   &__top-info {
-
     h1 {
       color: $black;
       font-weight: bolder;
-      text-transform: uppercase;      
+      text-transform: uppercase;
     }
   }
-
   &__top-desc {
     margin-top: 10px;
     color: $dark_gray;
   }
 }
-
 .woocommerce-page .woocommerce-breadcrumb {
-  color: $dark_gray;  
+  color: $dark_gray;
   margin-bottom: 0;
   margin-top: 10px;
 
@@ -30,26 +25,22 @@
     color: $brick_red;
   }
 }
-
 .inner-page-cntr {
   margin-top: 30px;
 
   p.woocommerce-result-count, form.woocommerce-ordering {
     margin-bottom: 0;
   }
-
   .form-top-info {
     background: $dark_gray;
     color: $white;
     margin-bottom: 20px;
     padding: 15px 20px;
   }
-
   p.woocommerce-result-count {
     font-style: italic;
     margin-top: 6px;
   }
-
   form select {
     border: none;
     cursor: pointer;
@@ -58,14 +49,18 @@
     padding: 8px 12px;
   }
 }
-
 .item-list-cntr {
   background: $light_gray;
   padding-bottom: 60px;
+  
+  ul {
+    margin: 0 5px;
+  }
 
   li {
-    text-align: center;  
-    margin-bottom: 20px;  
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
 
     a {
       background: $brick_red;

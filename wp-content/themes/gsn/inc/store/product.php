@@ -103,9 +103,88 @@ class GsnProduct{
 			add_filter( 'woocommerce_product_tabs', array($this,'new_product_tab_specification') );
 			add_action( 'woocommerce_product_query',array($this,'set_store_id_limi_product_list'));
 			
+			// Add filter for sharing product
+			add_action( 'woocommerce_share', array($this,'gsn_woocommerce_social_share_icons'), 10 );
 			
-			
+			// Add action for ad on product single page
+			add_action( 'woocommerce_after_single_product_summary', array($this,'gsn_single_product_ad'), 10 );
 		}
+		
+		/*
+		* Function for  ad on single product page
+		*/
+		function gsn_single_product_ad(){
+			//// Middle section Left ad
+			$middle_section_left_ad=get_option("product_page_middle_section_left_ad");
+			$middle_section_left_ad_link="";
+			$middle_section_left_ad_flag=false;
+			if(!empty($middle_section_left_ad)){
+					$middle_section_left_ad_url=wp_get_attachment_url($middle_section_left_ad);
+					$middle_section_left_ad_link=get_option("product_page_middle_section_left_ad_link");
+					$middle_section_left_ad_flag=true;
+			}
+			
+			
+			//// Middle section Right ad
+			$middle_section_right_ad=get_option("product_page_middle_section_right_ad");
+			$middle_section_right_ad_link="";
+			$middle_section_right_ad_flag=false;
+			if(!empty($middle_section_right_ad)){
+					$middle_section_right_ad_url=wp_get_attachment_url($middle_section_right_ad);
+					$middle_section_right_ad_link=get_option("product_page_middle_section_right_ad_link");
+					$middle_section_right_ad_flag=true;
+			}
+			?>
+			
+			<!-- Ad Container -->
+			<?php if($middle_section_left_ad_flag || $middle_section_right_ad_flag){ ?>
+                <section class="middle_ad_cntr">
+                        <div class="row">
+                        <?php if($middle_section_left_ad_flag){ ?>
+                            <div class="col-sm-6"><a <?php if($middle_section_left_ad_link){ ?> href="<?php echo $middle_section_left_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_left_ad_url; ?>');"></a></div>
+                         <?php } ?>   
+                           <?php if($middle_section_right_ad_flag){ ?>
+                            <div class="col-sm-6"><a <?php if($middle_section_right_ad_link){ ?> href="<?php echo $middle_section_right_ad_link;?>" <?php } ?> class="home-mid-ad" style="background-image:url('<?php echo  $middle_section_right_ad_url; ?>');"></a></div>
+                         <?php } ?> 
+                        </div>
+                </section>
+             <?php } ?>  
+             <!-- / Ad Container -->
+			
+			
+		<?php }
+		
+		
+		
+		
+		
+		/*
+		* Function to share product
+		*/
+		function gsn_woocommerce_social_share_icons() {
+			if ( function_exists( 'sharing_display' ) ) {
+			} ?>
+			<div class="gsn-social">	
+			<p><strong>Share on:</strong></p>	
+			<a class="gsn-fb" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink();?>"><i class="fa fa-facebook fb-icon icon-social" aria-hidden="true"></i>
+			</a>
+            
+			<a class="gsn-tw" target="_blank" href="https://twitter.com/home?status=<?php the_permalink();?>">
+<i class="fa fa-twitter" aria-hidden="true"></i>
+			</a>
+            
+			<a class="gsn-g" target="_blank" href="https://plus.google.com/share?url=<?php the_permalink();?>"><i class="fa fa-google-plus" aria-hidden="true"></i>
+			</a>
+            
+			<a class="gsn-in" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink();?>&title=<?php the_title();?>&summary=<?php the_excerpt();?>&source=<?php echo site_url();?>"><i class="fa fa-linkedin" aria-hidden="true"></i>
+			</a>
+		</div>	
+
+		<?php }
+				
+		
+		
+		
 		/*
 		*Funtion to draft product
 		*/		
@@ -293,14 +372,17 @@ class GsnProduct{
 		*/
 		public function new_product_tab_specification($tabs){
 			
-			/* Adds the new tab */
-			$tabs['test_tab'] = array(
-				'title' 	=> __( 'Specification', 'woocommerce' ),
-				'priority' 	=> 10,  
-				'callback' 	=> array($this,'new_product_tab_specification_content')
-			);
+			global $post;
+			$attributes=get_post_meta($post->ID,"_product_attributes",true);
+			if(!empty($attributes)){
+				/* Adds the new tab */
+				$tabs['test_tab'] = array(
+					'title' 	=> __( 'Specification', 'woocommerce' ),
+					'priority' 	=> 10,  
+					'callback' 	=> array($this,'new_product_tab_specification_content')
+				);
+			}
 			return $tabs;  /* Return all  tabs including the new New Custom Product Tab  to display */
-			
 		}
 		/*
 		*Function to print description on specification tab
@@ -688,6 +770,7 @@ class GsnProduct{
 	
 	public function get_feature_product($count=5,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -712,7 +795,9 @@ class GsnProduct{
 			'author'=>$store->user_id,
 			'post_status' =>array('publish'),
 			'posts_per_page'   =>$count,
-			'meta_query'  =>  $meta_query
+			'meta_query'  =>  $meta_query,
+			'paged' => $paged,
+     		'page' => $paged
 		);
 		$combine_arg=array_merge($args,$cat_arg);
 		return  new WP_Query( $combine_arg );
@@ -732,6 +817,8 @@ class GsnProduct{
 	*/
 	public function get_sale_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -749,6 +836,9 @@ class GsnProduct{
 				'posts_per_page' => $count,
 				'author'=>$store->user_id,
 				'post_status' => array('publish'),
+				'paged' => $paged,
+     			'page' => $paged,
+				
 				'meta_query'     => array(
 					'relation' => 'OR',
 					array( // Simple products type
@@ -782,6 +872,8 @@ class GsnProduct{
 	*/
 	public function get_new_product_list($count=4,$category=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
 		$cat_arg=array();
 		if($category!=0){
 			 $cat_arg=array(
@@ -799,7 +891,9 @@ class GsnProduct{
                   'posts_per_page' => $count,
 				  'post_status' =>array('publish'),
                   'author'=>$store->user_id,
-				  'cat'=>$category
+				  'cat'=>$category,
+				  'paged' => $paged,
+     			  'page' => $paged,
                   );
 				  $combine_args=array_merge($args,$cat_arg);
          return new WP_Query( $combine_args );
@@ -833,12 +927,46 @@ class GsnProduct{
 		$query=$wpdb->prepare("select * from ".$wpdb->stock_out ." where productID=%s and user_id=%s order by ID desc",$product_id,$user_id); // Prepare query
 		return $wpdb->get_results($query );	
 	}
+	
+	
+	
+	/*
+	* Function to get all product List
+	*/
+	
+	public function get_search_products($search,$count=-1,$offset=0){
+		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$cat_arg=$offset_arg=array();
+		if($offset!=0){
+			$offset_arg=array(
+				'offset'=>$offset
+			);
+		}
+		$args=array( 
+				's'=>$search,
+				'post_type' => array('product', ),
+				'posts_per_page' =>$count ,
+				 'author'=>$store->user_id,
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
+				 );
+		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
+		//echo "<pre>";
+		//var_dump($combine_arg);die;
+		return new WP_Query($combine_arg);
+	}
+	
+	
+	
 	/*
 	* Function to get all product List
 	*/
 	
 	public function get_all_store_product($count=-1,$category=0,$offset=0){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$cat_arg=$offset_arg=array();
 		if($offset!=0){
 			$offset_arg=array(
@@ -860,7 +988,9 @@ class GsnProduct{
 				'post_type' => array('product', ),
 				'posts_per_page' =>$count ,
 				 'author'=>$store->user_id,
-				 'post_status'=>array('publish')
+				 'post_status'=>array('publish'),
+				 'paged' => $paged,
+     			 'page' => $paged
 				 );
 		$combine_arg=array_merge($args,$cat_arg,$offset_arg);
 		//echo "<pre>";
@@ -924,11 +1054,14 @@ class GsnProduct{
 	
 	public function get_draft_product($count=-1){
 		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 			'post_type'   =>  'product',
 			'post_status'       =>array('draft'),
 			'author'=>$store->user_id,
 			'posts_per_page'   =>$count,
+			'paged' => $paged,
+     		'page' => $paged
 		);
 		return  new WP_Query($args);
 	}
