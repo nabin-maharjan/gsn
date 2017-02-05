@@ -7,15 +7,11 @@
  */
  get_header();
  ?> 
- <style>
- #logo_svg svg{ margin:15px 23px 15px;}
- #img_cntr svg{ box-sizing:border-box; padding:15px; overflow:auto;}
- </style>
- 
- <div style="width:100%; height:100vh; background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg'); padding-top:100px;">
-<div class="logo-wrap" style="width:840px; margin:0 auto; position:relative">
-		    	<div id="logo_svg" style="width:100%; position:relative"></div>
-                <div  id="img_cntr" style="position: absolute; top:0; overflow:hidden; left:0; width:0; height:0;"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+ <div class="landing-hero-cntr" style="background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg'); padding-top:100px;">
+<div class="logo-wrap">
+		    	<div id="logo_svg"></div>
+                <div  id="img_cntr"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="840px" height="521px" viewBox="0 0 839.381 520.478" enable-background="new 0 0 839.381 520.478"
 	 xml:space="preserve">
      <filter id="dropshadow" height="130%">
@@ -34,12 +30,20 @@
         <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
       </feMerge>
     </filter>
+
+    <filter id="logo-shadow" x="" y="" width="300%" height="300%" color-interpolation-filters="sRGB">
+        <feOffset result="offOut" in="SourceGraphic" dx="0" dy=""></feOffset>
+        <feGaussianBlur result="blurOut" in="offOut" stdDeviation="6"></feGaussianBlur>
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.9"></feFuncA>
+        </feComponentTransfer>
+      </filter>
      
      
      
      
      
-<g id="O-circle" style="filter:url(#dropshadow)">
+<g id="O-circle">
 	<path fill="#3BB54A" d="M624.029,110.055c32.739,0,63.519,12.749,86.669,35.9c23.15,23.15,35.9,53.93,35.9,86.669
 		s-12.749,63.519-35.9,86.669c-23.15,23.15-53.93,35.9-86.669,35.9s-63.519-12.749-86.669-35.9c-23.15-23.15-35.9-53.93-35.9-86.669
 		s12.749-63.519,35.9-86.669C560.51,122.804,591.29,110.055,624.029,110.055 M624.029,78.055
@@ -167,7 +171,7 @@
 		c1.033-2.263,1.869-4.601,2.509-7.012c0.64-2.41,1.107-4.81,1.403-7.197C768.373,442.471,768.521,440.293,768.521,438.325z"/>
 	<path fill="#414042" d="M839.381,481.136h-24.949V356.615h9.596l15.354,25.908v98.613H839.381z"/>
 </g>
-<path id="g-letter" style="filter: url(#dropshadow)" fill="#ED1C24" d="M276.646,256.167c44.277,64.957,70.167,141.826-51.822,141.827
+<path id="g-letter" fill="#ED1C24" d="M276.646,256.167c44.277,64.957,70.167,141.826-51.822,141.827
 	c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.678,0,138.41,46.951,163.478,113.019l49.227-8.079
 	C407.351,63.674,323.49,0.001,224.752,0.001C100.625,0.001,0,100.626,0,224.753s100.625,224.752,224.752,224.752
 	c105.168,0,193.454-72.238,217.973-169.799L276.646,256.167z"/>
