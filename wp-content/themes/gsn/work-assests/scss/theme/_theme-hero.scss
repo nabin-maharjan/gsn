@@ -1,36 +1,42 @@
 .hero-section {
   margin-bottom: 50px;
 }
-.hero-part {  
+.hero-part {
   height: 600px;
 
   .half-height {
     height: 50%;
     padding-bottom: 15px;
-		clear:both;
+    clear: both;
 
     &:last-child {
       padding-bottom: 0;
       padding-top: 15px;
     }
-	&.with-add{ height:42%;}
-	
+    &.with-add {
+      height: 42%;
+    }
   }
-	.home-top-add{ background-color:$space_gray; width:100%; height:15.8%; display:block;background-size: cover;}
+  .home-top-add {
+    background-color: $space_gray;
+    width: 100%;
+    height: 15.8%;
+    display: block;
+    background-size: cover;
+  }
 }
-
 .product-block {
   position: relative;
   height: 100%;
   overflow: hidden;
 
-  > .product-image-cntr {    
+  > .product-image-cntr {
     height: 100%;
     overflow: hidden;
     position: relative;
 
     &::after {
-      background: rgba(0,0,0,0.4);
+      background: rgba(0, 0, 0, 0.4);
       content: '';
       height: 100%;
       opacity: 0;
@@ -42,31 +48,29 @@
       z-index: 1;
       transition: all 0.3s ease;
     }
-
     .woocommerce-LoopProduct-link {
       display: none;
     }
-		
-		p {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 00;
-			color: $white;
-			font-size: 13px;
-			line-height: 16px;
-			padding:5px 10px;
-			margin:0;
-			z-index:2;
-			background:rgba(0,0,0,0.5);
-			transition: all 0.3s ease;
-			&:hover{
-				background:rgba(0,0,0,0.8);
-				}
-		}
-  }
+    p {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 00;
+      color: $white;
+      font-size: 13px;
+      line-height: 16px;
+      padding: 5px 10px;
+      margin: 0;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
 
-  .product-image{
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
+  .product-image {
     background-color: #ececec;
     background-position: center center;
     background-repeat: no-repeat;
@@ -76,10 +80,9 @@
     position: relative;
     transition: all 0.3s ease;
   }
-
   .label-top {
     background: $petal_green;
-    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
     color: $white;
     display: block;
     font-size: 12px;
@@ -93,8 +96,8 @@
     top: -6px;
     transform: rotate(315deg);
     -webkit-transform-origin: 50% 53%;
-    -webkit-font-smoothing: antialiased;    
-    width: 100px; 
+    -webkit-font-smoothing: antialiased;
+    width: 100px;
     z-index: 2;
 
     &.label-sale {
@@ -104,10 +107,9 @@
       transform: rotate(-315deg);
     }
   }
-
-  .cart-btn {         
+  .cart-btn {
     color: $white;
-    font-size: 11px;    
+    font-size: 11px;
     left: 0;
     opacity: 0;
     position: absolute;
@@ -117,58 +119,51 @@
     transform: translateY(-50%);
     transition: all 0.2s ease-in-out;
     visibility: hidden;
-    width: 100%;  
-    z-index: 2; 
-		
-    > a {          
+    width: 100%;
+    z-index: 2;
+
+    > a {
       background-color: transparent;
       border-radius: 0;
       border-top: 3px solid transparent;
-      color: $white;      
+      color: $white;
       display: inline-block;
       font-weight: normal;
       line-height: 1.5;
       padding: 5px 10px 10px;
       transition: all 0.2s ease-in-out;
-      text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 
-      &::before {        
+      &::before {
         content: '\f05a';
         display: block;
         font-family: FontAwesome;
-        font-size: 24px;        
+        font-size: 24px;
       }
-
       &.add_to_cart_button::before {
         content: '\f217';
       }
-
       &.added_to_cart::before {
         content: '\f06e';
       }
-
-      &:hover {        
+      &:hover {
         background: $petal_green;
         border-color: $brick_red;
         color: $white;
       }
-			
     }
   }
-
   &:hover .product-image-cntr::after {
     opacity: 1;
     visibility: visible;
   }
-
   &:hover .product-image-cntr .cart-btn {
     opacity: 1;
-    visibility: visible;    
+    visibility: visible;
   }
-
   &:hover .product-image-cntr a.product-image {
     transform: scale(1.1);
-  } 
+  }
 }
 // /.product-block
 
@@ -182,7 +177,6 @@
   background-size: cover;
 }
 .slick-slider {
-
   .slick-arrow {
     background: $dark_gray;
     border: none;
@@ -191,20 +185,19 @@
     height: 50px;
     left: 0;
     outline: 0;
-    position: absolute;    
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transition: all 0.3s ease;
     width: 35px;
-    z-index: 1; 
+    z-index: 1;
 
-    &::before {      
+    &::before {
       content: '\f104';
       font-family: FontAwesome;
       font-size: 24px;
       font-weight: bold;
     }
-
     &.slick-next {
       left: auto;
       right: 0;
@@ -213,12 +206,10 @@
         content: '\f105';
       }
     }
-
     &:hover {
       background: $brick_red;
     }
   }
-
   .slider__slides {
     position: relative;
     overflow: hidden;
@@ -230,9 +221,8 @@
     }
   }
 }
-
-.slider-content {  
-  background-color: rgba(0,0,0,0.6);
+.slider-content {
+  background-color: rgba(0, 0, 0, 0.6);
   bottom: 0;
   color: $white;
   left: 0;
@@ -252,16 +242,14 @@
     font-weight: bolder;
     margin-bottom: 10px;
   }
-
   span {
     color: $light_gray;
     display: block;
     font-style: italic;
-    margin-bottom: 10px;    
+    margin-bottom: 10px;
   }
-
-  .slider-btn a{
-    background: $brick_red;    
+  .slider-btn a {
+    background: $brick_red;
 
     &:hover {
       background: $petal_green;
@@ -270,15 +258,16 @@
 }
 // /.slider
 
-.middle_ad_cntr{
-	    margin: 20px 0;
-		.home-mid-ad{
-			display:block;
-			background-color:$lighter_gray;
-			height:70px;
-			width: 100%;
-			text-align:center;
-			vertical-align:middle;
-			background-size:cover;
-			}
-	}
+.middle_ad_cntr {
+  margin: 20px 0;
+
+  .home-mid-ad {
+    display: block;
+    background-color: $lighter_gray;
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    background-size: cover;
+  }
+}

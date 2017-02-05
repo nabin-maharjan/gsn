@@ -1,135 +1,145 @@
-h2.entry-title{ margin-bottom:20px; text-transform: uppercase;}
-
-.entry-content{
-	.woocommerce-info{
+h2.entry-title {
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+.entry-content {
+	.woocommerce-info {
 		font-weight: 700;
 		padding: 15px 20px 15px 60px !important;
-		a{ 
-			color:$mid_gray;
+
+		a {
+			color: $mid_gray;
 			margin-left: 5px;
-				&:hover{
-				color:$brick_red;
-				}
-		} 
+
+			&:hover {
+				color: $brick_red;
+			}
+		}
 	}
 }
-
-.woocommerce-checkout{
-	.col2-set{ margin-bottom:20px;}
-	h3{
+.woocommerce-checkout {
+	.col2-set {
+		margin-bottom: 20px;
+	}
+	h3 {
 		background: $dark_gray;
-		color:$white;
+		color: $white;
 		font-style: italic;
 		font-size: 1rem;
 		line-height: 1.5;
 		font-weight: normal;
 		padding: 15px 20px;
-		margin-bottom:15px;
+		margin-bottom: 15px;
 	}
-	form .form-row label{ 
-			abbr.required{
-				text-decoration:none;
-				line-height:normal;
-			}
+	form .form-row label {
+		abbr.required {
+			text-decoration: none;
+			line-height: normal;
+		}
 	}
-	input, textarea{ 
-		padding:10px 15px;
-		border:1px solid $light_gray;
+	input, textarea {
+		padding: 10px 15px;
+		border: 1px solid $light_gray;
 	}
-	textarea{ min-height:400px; resize:none;}	
+	textarea {
+		min-height: 400px;
+		resize: none;
+	}
 }
+.woocommerce-checkout-review-order {
+	table.shop_table {
+		border-radius: 0;
 
+		thead {
+			background: $light_gray;
+		}
+	}
+}
+.woocommerce-checkout #payment {
+	background: $light_gray;
 
-.woocommerce-checkout-review-order{
-	table.shop_table{
-		border-radius:0;
-		thead{
-				background:$light_gray;
+	input.button.alt {
+		background: $brick_red;
+		font-weight: normal;
+		text-transform: uppercase;
+		border-radius: 0;
+
+		&:hover {
+			background: $petal_green;
+		}
+	}
+}
+.cart-wrap {
+	table.shop_table {
+		border-radius: 0;
+
+		thead {
+			background: $light_gray;
+		}
+		a.remove {
+			line-height: 18px;
+			color: $brick_red;
+
+			&:hover {
+				background: $brick_red;
 			}
 		}
-}
+		td {
+			padding: 15px 10px;
+		}
+		td.actions {
+			padding: 10px 15px;
+			background: $dark_gray;
 
-
-.woocommerce-checkout #payment{
-	background:$light_gray;
-	input.button.alt{
-		background:$brick_red;
-		font-weight:normal;
-		text-transform:uppercase;
-		border-radius:0;
-			&:hover{
-				background:$petal_green;
+			.coupon .input-text {
+				width: 300px;
+				padding: 11px 15px;
 			}
-	
-	}
-}
+		}
+		.button {
+			background: $brick_red;
+			color: $white;
+			border-radius: 0;
+			padding: 14px 15px 15px 15px;
 
-
-
-
-.cart-wrap{
-	table.shop_table{
-					border-radius:0;
-						thead{
-							background:$light_gray;
-						}
-						a.remove{
-							line-height:18px;
-							color:$brick_red;
-								&:hover{
-									background:$brick_red;
-								}
-						}
-						td{
-							padding:15px 10px;
-						 		
-						}
-						td.actions{
-							padding:10px 15px;
-							background:$dark_gray;
-							.coupon .input-text{ 
-						 			width:300px; 
-									padding: 11px 15px;
-								}
-							}
-						.button{
-							background:$brick_red;
-							color:$white;
-							border-radius:0;
-							padding: 14px 15px 15px 15px;
-								&:hover{
-									background:$petal_green;
-									}
-							}	
-					}
-	.cart-collaterals{
-			h2{ 
-				text-transform:uppercase; 
-				margin-bottom:10px;
-			}
-			.cart_totals tr td{ text-align:right;}
-			a.wc-forward{
-				background:$brick_red;
-					color:$white;
-					border-radius:0;
-					&:hover{
-							background:$petal_green;
-							}
-				}
-	}	
-}
-
-
-.woocommerce-checkout-payment{
-		&#payment ul.payment_methods{
-			li{ 
-			display:block;
-				label{
-					font-weight: 700;
-					}
-				input[type=radio]{ outline:none;}
-				p{ margin-left:25px;}
+			&:hover {
+				background: $petal_green;
 			}
 		}
 	}
+	.cart-collaterals {
+		h2 {
+			text-transform: uppercase;
+			margin-bottom: 10px;
+		}
+		.cart_totals tr td {
+			text-align: right;
+		}
+		a.wc-forward {
+			background: $brick_red;
+			color: $white;
+			border-radius: 0;
 
+			&:hover {
+				background: $petal_green;
+			}
+		}
+	}
+}
+.woocommerce-checkout-payment {
+	&#payment ul.payment_methods {
+		li {
+			display: block;
+
+			label {
+				font-weight: 700;
+			}
+			input[type=radio] {
+				outline: none;
+			}
+			p {
+				margin-left: 25px;
+			}
+		}
+	}
+}

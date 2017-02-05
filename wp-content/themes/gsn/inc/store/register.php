@@ -80,10 +80,7 @@ class Store{
 			/* limit store publish product */
 			add_action('init',array($this,'limit_publish_product'),2);
 		   // add_action('init',array($this,'change_draft_topublish'),2);
-			
-			
-			
-			
+
 			/* add store role*/
 			add_action('init',array($this,'add_store_role'));
 			/* add filter only show current user media */
@@ -311,8 +308,9 @@ class Store{
 	
 	public function check_access_store(){
 		global $store;
-		//var_dump($store);die;
-		if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
+		if(!empty($store->id) && $store->is_shop==true){
+			
+		}else if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
 			wp_redirect( site_url("/register/"));
 			exit;
 		}else if($store->id!=NULL && is_page_template( 'page-templates/register.php')){
@@ -325,19 +323,38 @@ class Store{
 	public function get($id=0){
 		//session_destroy();
 		if($id==0){
-			$id=get_current_user_id();
-		}
-		//var_dump($id);
-		if($id!=0){
+			preg_match('/([^.]+)\.goshopnepal\.com/', $_SERVER['SERVER_NAME'], $matches);
+			if(isset($matches[1])) {
+				$subdomain = $matches[1];
+			}
 			global $wpdb;
-			$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$id); // Prepare query
-			$storeobj = $wpdb->get_row($query );
-			if($storeobj){
-				foreach($storeobj as $key=>$value){
-					$this->$key=$value;
+			if(!empty($subdomain) && strtolower($subdomain)!=="www"){
+				$query=$wpdb->prepare("select * from ".$this->store_table." where domainName=%s",$subdomain); // Prepare query
+					$storeobj = $wpdb->get_row($query );
+					if($storeobj){
+						foreach($storeobj as $key=>$value){
+							$this->$key=$value;
+						}
+					}
+					$this->is_shop=true;
+				
+				
+			}else{
+				$id=get_current_user_id();
+				//var_dump($id);
+				if($id!=0){
+					
+					$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$id); // Prepare query
+					$storeobj = $wpdb->get_row($query );
+					if($storeobj){
+						foreach($storeobj as $key=>$value){
+							$this->$key=$value;
+						}
+					}
 				}
 			}
 		}
+		
 		return $this;
 	}
 	/*

@@ -1,12 +1,14 @@
-body{ font-size:14px;}
+body {
+  font-size: 14px;
+}
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 a {
   display: inline-block;
 }
-a, a:hover, a:focus{
-  color: inherit;  
+a, a:hover, a:focus {
+  color: inherit;
   outline: none;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -22,54 +24,56 @@ li {
 select {
   outline: 0;
 }
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
   outline: none;
 }
-.page-title{
+.page-title {
   font-weight: bolder;
   margin: 0 0 25px;
   text-align: center;
   text-transform: uppercase;
 }
-.form-label{
+.form-label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
-.form-control{
+.form-control {
   border-radius: 0;
 
-  &.error{
+  &.error {
     border-color: red;
   }
 }
-.btn-submit{
+.btn-submit {
   background: $dark_gray;
   border-radius: 0;
   color: white;
   font-weight: bold;
   padding: 10px 30px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
 
-  &:hover{
+  &:hover {
     background: $gray_bg;
   }
 }
-label.error{
+label.error {
   color: red;
   display: block;
   font-size: 12px;
   margin-top: 3px;
 }
-.btn{border-radius: 0; border:none;}
-
-.p15{
+.btn {
+  border-radius: 0;
+  border: none;
+}
+.p15 {
   padding: 0 15px;
 }
-.fl{
+.fl {
   float: left;
 }
-.fr{
+.fr {
   float: right;
 }
 .fn {
@@ -78,6 +82,6 @@ label.error{
 .hidden {
   display: none;
 }
-.wp-editor-container{
-	border:1px solid $light_gray;
+.wp-editor-container {
+  border: 1px solid $light_gray;
 }

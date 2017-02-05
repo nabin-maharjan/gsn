@@ -40,23 +40,21 @@ var prefixerOptions = {
 ////// Styles TASK ///////
 
 gulp.task('sass', function () {
- return gulp.src('work-assests/scss/**/*.scss')
-  .pipe(plumber(plumberErrorHandler))
-  
+ return gulp.src('work-assests/scss/**/*.scss', { base: 'work-assests/scss/' })
+  .pipe(plumber(plumberErrorHandler))  
   .pipe(sourcemaps.init()) 
   .pipe(sass(sassOptions))
+  .pipe(size({ gzip: true, showFiles: true }))  
   .pipe(prefix(prefixerOptions))
-  .pipe(combineMq({
-        beautify: false
-    }))
-  .pipe(minifyCss())
+  .pipe(minifyCss())       
   .pipe(concat('style.css'))
   .pipe(rename({              //renames the concatenated CSS file
       basename : 'style',       //the base name of the renamed CSS file
       extname : '.min.css'      //the extension fo the renamed CSS file
-    }))
-  .pipe(gulp.dest('assets/css/'))
+    }))    
   .pipe(size({ gzip: true, showFiles: true }))  
+  .pipe(sourcemaps.write('./'))
+  .pipe(gulp.dest('assets/css/'))        
   .pipe(reload({stream:true}));
 });
 
