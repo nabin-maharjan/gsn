@@ -10,7 +10,7 @@ $gsn_settings->create_settings_page(array(
 	'icon' => 'dashicons-admin-plugins',
 	'position = 100'
 ));
-var_dump($gsn_settings);die;
+//var_dump($gsn_settings);die;
 
 /* Normal Package Settings */
 $package_slug="normal";
