@@ -22,7 +22,7 @@ if(!empty($_GET['action']) && $_GET['action']=="view"){
 <h3>Orders list</h3>    
   <div class="filter-container">
     <div class="container">
-      <div class="filter__items clearfix">
+      <div class="filter__items filter__orders clearfix">
         <form action="<?php echo site_url('/dashboard/order/'); ?>" class="order-search-form fr"  method="get">
           <input type="text" name="id"  class="form-control form-control-sm" placeholder="Search order">
           <input type="hidden" name="action"  class="form-control form-control-sm" value="edit">
