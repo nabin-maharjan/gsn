@@ -76,15 +76,15 @@ var pathObj = {
  jQuery('#logo_svg').lazylinepainter( 
 	 {
 		 "svgData": pathObj,
-		"strokeWidth": 3,
+		"strokeWidth": 2,
 		"strokeColor": "rgba(255,255,255,0.5)",
 		'drawSequential': true,
          'ease': 'easeInOutQuad',
 		 "onComplete": function() {
 			  $('#img_cntr').animate({
-				 "width":"840px",
-				 "height":"521px",
-				"overflow":"auto"
+				 "opacity":"1",
+/*				 "height":"521px",
+				"overflow":"auto"*/
 			  },1000,function(){
 				 $('#logo_svg').animate({'opacity':0},500);
 				 $('#img_cntr g#O-circle').css({'filter': 'url(#dropshadow)'});
