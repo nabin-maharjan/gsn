@@ -155,6 +155,72 @@
   margin-left: 15px;
   margin-top: 20px;
 }
+
+// PACKAGE TYPES
+
+.package {
+  &-types-cntr {
+    font-size: 0;
+    margin:0 -15px;
+  }
+  &__type {    
+    display: inline-block;
+    padding: 0 15px;
+    vertical-align: top;
+    width: 25%;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  &__detail-cntr {
+    border: 1px solid $lighter_gray;
+    .package__top {
+      background: $lighter_gray;
+      padding: 10px 10px;
+      h4 {
+        font-size: 15px;        
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+    .package__info {      
+
+      li {
+        padding: 5px 10px;
+        display: block;
+        border-bottom: 1px solid $lighter_gray;
+        font-size: 0;
+
+        span {
+          display: inline-block;
+          font-size: 14px;
+        }
+
+        .package__info-left {
+          width: 60%;
+        }
+        .package__info-right {
+          width: 40%;
+          font-weight: bold;
+          text-align: right;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .package__update {
+      padding: 10px;
+      text-align: center;
+
+      input {
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+}
+
+// PACKAGE TYPES END
+
 // ===================== //
 // /.profile setting pages
 // ===================== //
@@ -178,6 +244,18 @@
 // ===================== //
 // order pages
 // ===================== //
+.filter__orders {
+  margin-bottom: 20px;
+  form {
+    width: 330px;
+
+    input {
+      width: 250px;
+      float: left;
+      margin-right: 6px;
+    }    
+  } 
+}
 .orders {
   font-size: 0;
 

@@ -30,63 +30,326 @@
       <!-- Row start -->
       <div class="form-group clearfix">
         <div class="col-sm-12">
-        
-       	<ul class="gsn_shop_packages">
-        	<li class="package normal-package">
-            	<h4>Normal Package</h4>
-                <p>Can Create 5 Product</p>
-                 <p>Can upload 4 Product Image</p>
-                 <p>Can set 8 Product on sale</p>
-                 <p>GoShopNepal Ad: yes</p>
-                 <p>Can Select theme from 2 themes</p>
-                 <p>Featured shop on GoShopNepal</p>
-                 <input type="radio" name="package" value="normal" checked>
-            </li>
-            <li class="package normal-package">
-            	<h4>Bronze Package</h4>
-                <p>Can Create 5 Product</p>
-                 <p>Can upload 4 Product Image</p>
-                 <p>Can set 8 Product on sale</p>
-                 <p>GoShopNepal Ad: yes</p>
-                 <p>Can Select theme from 2 themes</p>
-                 <p>Featured shop on GoShopNepal</p>
-                 <input type="radio" name="package" value="bronze">
-            </li>
-            <li class="package normal-package">
-            	<h4>Silver Package</h4>
-                <p>Can Create 5 Product</p>
-                 <p>Can upload 4 Product Image</p>
-                 <p>Can set 8 Product on sale</p>
-                 <p>GoShopNepal Ad: yes</p>
-                 <p>Can Select theme from 2 themes</p>
-                 <p>Featured shop on GoShopNepal</p>
-                 <input type="radio" name="package" value="silver">
-            </li>
-            <li class="package normal-package">
-            	<h4>Gold Package</h4>
-                <p>Can Create 5 Product</p>
-                 <p>Can upload 4 Product Image</p>
-                 <p>Can set 8 Product on sale</p>
-                 <p>GoShopNepal Ad: yes</p>
-                 <p>Can Select theme from 2 themes</p>
-                 <p>Featured shop on GoShopNepal</p>
-                 <input type="radio" name="package" value="gold">
-            </li>
-            <li class="package normal-package">
-            	<h4>Platinium Package</h4>
-                <p>Can Create 5 Product</p>
-                 <p>Can upload 4 Product Image</p>
-                 <p>Can set 8 Product on sale</p>
-                 <p>GoShopNepal Ad: yes</p>
-                 <p>Can Select theme from 2 themes</p>
-                 <p>Featured shop on GoShopNepal</p>
-                 <input type="radio" name="package" value="platinium">
-            </li>
-        </ul>
-        
+          <div class="package-types-cntr">
+           	<div class="package__type package__type-normal">
+              <div class="package__detail-cntr">
+                <div class="package__top">
+                  <h4>Normal Package</h4>
+                </div>
+                <div class="package__info">
+                  <ul>                
+                    <li>
+                      <span class="package__info-left">
+                        Products
+                      </span>
+                      <span class="package__info-right">
+                        5
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product Image No.
+                      </span>
+                      <span class="package__info-right">
+                        4
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product on SALE
+                      </span>
+                      <span class="package__info-right">
+                        8
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        GSN ADV
+                      </span>
+                      <span class="package__info-right">
+                        Yes
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Theme selection
+                      </span>
+                      <span class="package__info-right">
+                        2
+                      </span>
+                    </li>                 
+                    <li>
+                      <span class="package__info-left">
+                        Feature on GSN
+                      </span>
+                      <span class="package__info-right">
+                        yes
+                      </span>
+                    </li>                
+                  </ul>
+                </div>
+                <div class="package__update">
+                  <input type="radio" name="package" value="normal" checked>  
+                </div>              	
+              </div>
+            </div>
+            <!-- ./package__type normal -->
+            <div class="package__type package__type-bronze">
+              <div class="package__detail-cntr">
+                <div class="package__top">
+                  <h4>Bronze Package</h4>
+                </div>
+                <div class="package__info">
+                  <ul>                
+                    <li>
+                      <span class="package__info-left">
+                        Products
+                      </span>
+                      <span class="package__info-right">
+                        5
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product Image No.
+                      </span>
+                      <span class="package__info-right">
+                        4
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product on SALE
+                      </span>
+                      <span class="package__info-right">
+                        8
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        GSN ADV
+                      </span>
+                      <span class="package__info-right">
+                        Yes
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Theme selection
+                      </span>
+                      <span class="package__info-right">
+                        2
+                      </span>
+                    </li>                 
+                    <li>
+                      <span class="package__info-left">
+                        Feature on GSN
+                      </span>
+                      <span class="package__info-right">
+                        yes
+                      </span>
+                    </li>                
+                  </ul>
+                </div>
+                <div class="package__update">
+                  <input type="radio" name="package" value="normal">  
+                </div>                
+              </div>
+            </div>
+            <!-- ./package__type bronze -->
+            <div class="package__type package__type-silver">
+              <div class="package__detail-cntr">
+                <div class="package__top">
+                  <h4>Silver Package</h4>
+                </div>
+                <div class="package__info">
+                  <ul>                
+                    <li>
+                      <span class="package__info-left">
+                        Products
+                      </span>
+                      <span class="package__info-right">
+                        5
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product Image No.
+                      </span>
+                      <span class="package__info-right">
+                        4
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product on SALE
+                      </span>
+                      <span class="package__info-right">
+                        8
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        GSN ADV
+                      </span>
+                      <span class="package__info-right">
+                        Yes
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Theme selection
+                      </span>
+                      <span class="package__info-right">
+                        2
+                      </span>
+                    </li>                 
+                    <li>
+                      <span class="package__info-left">
+                        Feature on GSN
+                      </span>
+                      <span class="package__info-right">
+                        yes
+                      </span>
+                    </li>                
+                  </ul>
+                </div>
+                <div class="package__update">
+                  <input type="radio" name="package" value="normal">  
+                </div>                
+              </div>
+            </div>
+            <!-- ./package__type silver -->
+            <div class="package__type package__type-gold">
+              <div class="package__detail-cntr">
+                <div class="package__top">
+                  <h4>Gold Package</h4>
+                </div>
+                <div class="package__info">
+                  <ul>                
+                    <li>
+                      <span class="package__info-left">
+                        Products
+                      </span>
+                      <span class="package__info-right">
+                        5
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product Image No.
+                      </span>
+                      <span class="package__info-right">
+                        4
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product on SALE
+                      </span>
+                      <span class="package__info-right">
+                        8
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        GSN ADV
+                      </span>
+                      <span class="package__info-right">
+                        Yes
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Theme selection
+                      </span>
+                      <span class="package__info-right">
+                        2
+                      </span>
+                    </li>                 
+                    <li>
+                      <span class="package__info-left">
+                        Feature on GSN
+                      </span>
+                      <span class="package__info-right">
+                        yes
+                      </span>
+                    </li>                
+                  </ul>
+                </div>
+                <div class="package__update">
+                  <input type="radio" name="package" value="normal">  
+                </div>                
+              </div>
+            </div>
+            <!-- ./package__type gold -->
+            <div class="package__type package__type-platinum">
+              <div class="package__detail-cntr">
+                <div class="package__top">
+                  <h4>Platinum Package</h4>
+                </div>
+                <div class="package__info">
+                  <ul>                
+                    <li>
+                      <span class="package__info-left">
+                        Products
+                      </span>
+                      <span class="package__info-right">
+                        5
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product Image No.
+                      </span>
+                      <span class="package__info-right">
+                        4
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Product on SALE
+                      </span>
+                      <span class="package__info-right">
+                        8
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        GSN ADV
+                      </span>
+                      <span class="package__info-right">
+                        Yes
+                      </span>
+                    </li>
+                    <li>
+                      <span class="package__info-left">
+                        Theme selection
+                      </span>
+                      <span class="package__info-right">
+                        2
+                      </span>
+                    </li>                 
+                    <li>
+                      <span class="package__info-left">
+                        Feature on GSN
+                      </span>
+                      <span class="package__info-right">
+                        yes
+                      </span>
+                    </li>                
+                  </ul>
+                </div>
+                <div class="package__update">
+                  <input type="radio" name="package" value="normal">  
+                </div>                
+              </div>
+            </div>
+            <!-- ./package__type platinum -->
+          </div>
         </div>
         <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </div>
       <!-- Row end -->
