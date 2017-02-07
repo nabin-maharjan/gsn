@@ -249,6 +249,11 @@ jQuery(document).ready(function(e) {
     }
   }
   collapseCategory();
+
+  // dock logo on scroll
+  function dockLogo(){
+    var minScale = 0.4;
+  }
 	
 	
 });

@@ -7,69 +7,12 @@
  */
  get_header();
  ?>
-<style>
-#logo_svg svg {
-	margin: 15px 23px 15px;
-}
-#img_cntr svg {
-	box-sizing: border-box;
-	padding: 15px;
-	overflow: auto;
-}
-.anim-shape {
-	-webkit-transform-origin: 0 150px;
-	-ms-transform-origin: 0 150px;
-	transform-origin: 0 150px;
-	-webkit-transform: scale(1, 2) rotate(270deg) translate(0, 0);
-	-ms-transform: scale(1, 2) rotate(270deg) translate(0, 0);
-	transform: scale(1, 2) rotate(270deg) translate(0, 0);
-	-webkit-animation: moving-panel 5s infinite alternate;
-	animation: moving-panel 5s infinite alternate;
-	opacity: 0.2
-}
-.colortext .anim-shape:nth-child(1) {
-	fill: #F2385A;
-}
-.colortext .anim-shape:nth-child(2) {
-	fill: #F5A503;
-}
-.colortext .anim-shape:nth-child(3) {
-	fill: #E9F1DF;
-}
-.colortext .anim-shape:nth-child(4) {
-	fill: #56D9CD;
-}
-.colortext .anim-shape:nth-child(5) {
-	fill: #3AA1BF;
-}
-.shadow {
-	-webkit-transform: translate(10px, 10px);
-	-ms-transform: translate(10px, 10px);
-	transform: translate(10px, 10px);
-}
-.anim-shape--shadow {
-	fill: #000;
-	fill-opacity: .2;
-}
- @-webkit-keyframes moving-panel {
- 100% {
- -webkit-transform: scale(1, 1) translate(20px, 0);
- transform: scale(1, 1) translate(20px, 0);
-}
-}
-@keyframes moving-panel {
- 100% {
- -webkit-transform: scale(1, 1) translate(20px, 0);
- transform: scale(1, 1) translate(20px, 0);
-}
-</style>
-
-<div class="landing-hero-cntr"  style=" background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg'); padding-top:100px;">
-  <div class="logo-wrap" style="width:840px; max-width:80%; margin:0 auto; position:relative">
-    <div id="logo_svg" style="width:100%; position:relative"></div>
-    <div  id="img_cntr" style="position: absolute; top:0; right:0; left:0; bottom:0; overflow:hidden;opacity:0;">
+<div class="landing-hero-cntr"  style=" background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg');">
+  <div class="logo-wrap">
+    <div id="logo_svg"></div>
+    <div  id="img_cntr">
       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="100%" height="100%" viewBox="0 0 839.381 520.478" enable-background="new 0 0 839.381 520.478"
+	 width="100%" height="100%" viewBox="0 0 840 521" enable-background="new 0 0 840 521"
 	 xml:space="preserve">
         <filter id="dropshadow" height="130%">
           <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
@@ -380,7 +323,37 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 		
       </svg>
     </div>
+    <!-- /#img-cntr -->
   </div>
+  <div class="stick-navigation-cntr">
+    	<div class="container">
+    		<div class="navigation__content clearfix">
+    			<div class="stick__logo fl"></div>
+    			<!-- /.stick__logo -->
+    			<nav class="stick__nav fr">
+	    			<ul>
+	    				<li>
+	    					<a href="#">About</a>
+	    				</li>
+	    				<li>
+	    					<a href="#">About</a>
+	    				</li>
+	    				<li>
+	    					<a href="#">About</a>
+	    				</li>
+	    				<li>
+	    					<a href="#">About</a>
+	    				</li>
+	    				<li>
+	    					<a href="#">About</a>
+	    				</li>
+	    			</ul>
+	    		</nav>
+	    		<!-- /.stick-nav -->
+    		</div>    		
+    	</div>
+    </div>
+    <!-- /.stick-navigation-cntr -->
 </div>
 <section class="landing">
   <div class="container">
