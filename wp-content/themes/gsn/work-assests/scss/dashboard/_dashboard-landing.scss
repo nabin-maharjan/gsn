@@ -144,6 +144,7 @@
     max-width: 80%; 
     margin:0 auto; 
     position:relative;
+    perspective: 1000px; 
   }
 }
 #logo_svg {
@@ -162,11 +163,32 @@
   left:0; 
   bottom: 0;
   right: 0;
+    will-change: transform;
   svg{ 
     box-sizing:border-box; 
     padding:19px; 
     overflow:auto;
   }
+}
+#logo-shadow {
+  opacity: 0;
+}
+#main-logo-svg, #logo-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  will-change: transform;
+}
+#logo-shadow {
+  background: url(../images/main-logo.svg) center center no-repeat;
+  background-size: 90% 100%;
+  -webkit-filter: url(#logo-shadow);
+  filter: url(#logo-shadow);
+  opacity: 0;
+  will-change: transform;
+  transform: translateZ(-40px) translateY(10px);
 }
 
 .anim-shape {

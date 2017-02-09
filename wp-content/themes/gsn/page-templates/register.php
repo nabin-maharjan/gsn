@@ -10,10 +10,12 @@
 <div class="landing-hero-cntr"  style=" background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg');">
   <div class="logo-wrap">
     <div id="logo_svg"></div>
+    <div id="main-logo-svg">
     <div  id="img_cntr">
       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" height="100%" viewBox="0 0 840 521" enable-background="new 0 0 840 521"
 	 xml:space="preserve">
+	 	<?php /*
         <filter id="dropshadow" height="130%">
           <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
           <!-- stdDeviation is how much to blur -->
@@ -32,6 +34,15 @@
             <!-- this contains the element that the filter is applied to --> 
           </feMerge>
         </filter>
+		<?php */ ?>
+        <filter id="logo-shadow" x="-150%" y="-150%" width="300%" height="300%" color-interpolation-filters="sRGB">
+        	<feOffset result="offOut" in="SourceGraphic" dx="0" dy="5"></feOffset>
+        	<feGaussianBlur result="blurOut" in="offOut" stdDeviation="6"></feGaussianBlur>
+	        <feComponentTransfer>
+	          <feFuncA type="linear" slope="0.5"></feFuncA>
+	        </feComponentTransfer>
+        </filter>
+
         <clipPath id="clipping">
           <path d="M624.029,110.055c32.739,0,63.519,12.749,86.669,35.9c23.15,23.15,35.9,53.93,35.9,86.669
 			s-12.749,63.519-35.9,86.669c-23.15,23.15-53.93,35.9-86.669,35.9s-63.519-12.749-86.669-35.9c-23.15-23.15-35.9-53.93-35.9-86.669
@@ -163,7 +174,7 @@
 		</clipPath>
         <!-- Group for shadow-->
         
-        <g id="O-circle" fill="#3BB54A" style="filter:url(#dropshadow)">
+        <g id="O-circle" fill="#3BB54A">
           <path d="M624.029,110.055c32.739,0,63.519,12.749,86.669,35.9c23.15,23.15,35.9,53.93,35.9,86.669
 s-12.749,63.519-35.9,86.669c-23.15,23.15-53.93,35.9-86.669,35.9s-63.519-12.749-86.669-35.9c-23.15-23.15-35.9-53.93-35.9-86.669
 		s12.749-63.519,35.9-86.669C560.51,122.804,591.29,110.055,624.029,110.055 M624.029,78.055
@@ -292,7 +303,7 @@ s-12.749,63.519-35.9,86.669c-23.15,23.15-53.93,35.9-86.669,35.9s-63.519-12.749-8
 
           <path  fill="#414042" d="M839.381,481.136h-24.949V356.615h9.596l15.354,25.908v98.613H839.381z"/>
         </g>
-        <g  id="g-letter" style="filter: url(#dropshadow)" fill="#ED1C24" fill-opacity="0.9">
+        <g  id="g-letter" fill="#ED1C24" fill-opacity="0.9">
           <path d="M276.646,256.167c44.277,64.957,70.167,141.826-51.822,141.827
 c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.678,0,138.41,46.951,163.478,113.019l49.227-8.079
 	C407.351,63.674,323.49,0.001,224.752,0.001C100.625,0.001,0,100.626,0,224.753s100.625,224.752,224.752,224.752
@@ -322,8 +333,13 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 		
 		
       </svg>
+
     </div>
     <!-- /#img-cntr -->
+    <div id="logo-shadow"></div>
+    <!-- /#logo-shadow -->
+    </div>    
+    
   </div>
   <div class="stick-navigation-cntr">
     	<div class="container">
@@ -357,7 +373,7 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 </div>
 <section class="landing">
   <div class="container">
-    <h1 class="page-title"><img src="<?php echo get_template_directory_uri();?>/assets/images/gsn-ob.svg" width="200px"></h1>
+    <h1 class="page-title"><img src="<?php echo get_template_directory_uri();?>/assets/images/main-logo.svg" width="200px"></h1>
     <!-- LOGIN and REGISTER Form -->
     <div class="landing__form"> 
       <!-- TAB NAV -->

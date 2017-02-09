@@ -71,8 +71,6 @@ var pathObj = {
     }
 }; 
  
- 
- 
  jQuery('#logo_svg').lazylinepainter( 
 	 {
 		 "svgData": pathObj,
@@ -81,19 +79,34 @@ var pathObj = {
 		'drawSequential': true,
          'ease': 'easeInOutQuad',
 		 "onComplete": function() {
-			  $('#img_cntr').animate({
+			  $('#img_cntr, #logo-shadow').animate({
 				 "opacity":"1",
-/*				 "height":"521px",
-				"overflow":"auto"*/
 			  },1000,function(){
 				 $('#logo_svg').animate({'opacity':0},500);
-				 $('#img_cntr g#O-circle').css({'filter': 'url(#dropshadow)'});
-				  $('#img_cntr path#g-letter').css({'filter': 'url(#dropshadow)'});
-				 
-				 
 			  });
+        initLogo();
 			  
 			}
 		
 	}).lazylinepainter('paint'); 
+
+  function initLogo() {
+    var _LOGO = document.querySelector('#main-logo-svg'),
+        _LOGO_GRAPHIC = _LOGO.querySelector('#img_cntr'),
+        _LOGO_SHADOW = _LOGO.querySelector('#logo-shadow');
+
+    if(!('ontouchstart' in window)){
+      document.body.addEventListener('mousemove',function(e){
+        var _x = (e.clientX/this.clientWidth - 0.5) * 15,
+            _y = (e.clientY/this.clientHeight - 0.5) * 15;
+
+        _LOGO_GRAPHIC.style.transform = 'translateX(' + -_x*2 + 'px) translateY(' + (-_y*2) + 'px)';
+        _LOGO_SHADOW.style.transform = 'translateZ(-40px) translateX(' + _x + 'px) translateY(' + (-_y + 10) + 'px)';
+        _LOGO.style.transform = 'rotateX(' + -_y*2 + 'deg) rotateY(' + -_x*2 + 'deg)';
+
+      });
+    }
+  }
+  
+
  }) ;
