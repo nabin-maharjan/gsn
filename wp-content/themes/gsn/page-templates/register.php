@@ -323,7 +323,7 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 	</div>
 	<!-- /.landing-buttons-cntr -->
 
-	<div class="landing-form-cntr clearfix" id="landing-form-cntr"> 
+	<div class="landing-form-cntr clearfix close-form" id="landing-form-cntr"> 
     <!-- Login Form -->
     <div id="login" class="landing__tab-content tab-content__login">
       <form name="login_form" id="login_form">

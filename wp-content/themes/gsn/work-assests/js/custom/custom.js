@@ -268,9 +268,9 @@ jQuery(document).ready(function(e) {
         e.preventDefault();
         // addClass on landingContainer for wipe effects
         landingWipeBlock.toggleClass('close-form open-form');
-        setTimeout (function() {
-          landingFormContainer.toggleClass('open-form');          
-        }, 1000);
+        landingFormContainer.toggleClass('open-form');          
+        // display form according to button
+        
       });
     }
     btnClick();

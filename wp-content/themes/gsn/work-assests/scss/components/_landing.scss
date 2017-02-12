@@ -117,7 +117,7 @@
 .landing-buttons-cntr {
   position: fixed;
   bottom: 20px;
-  width: 400px;
+  width: 350px;
   z-index: 9999;
 }
 
@@ -134,13 +134,15 @@
     visibility: hidden;
     z-index: 999;
     transition: all 0s 0.5s;
-    animation: hide 1s ease-in-out;
-    animation-fill-mode: forwards;
 
     &.open-form {
-      // opacity: 1;
-      // visibility: visible;
-      animation: reveal 1s ease-in-out;
+      opacity: 1;
+      visibility: visible;      
+      z-index: 99;
+      animation-name: reveal;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+      animation-delay: 0s;      
       animation-fill-mode: forwards;
     }
   }
@@ -171,8 +173,8 @@
       a {
         color: white;
         display: block;
-        font-size: 20px;
-        padding: 15px 20px;
+        font-size: 16px;
+        padding: 15px 15px;
         text-transform: uppercase;        
       }
     }
@@ -194,13 +196,19 @@
   &.close-form {
     opacity: 1;
     visibility: visible;
-    animation: hide 1s ease-in-out;
+    animation-name: hide;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;      
     animation-fill-mode: forwards;
   }
   &.open-form {
     opacity: 1;
     visibility: visible;
-    animation: cover 1s ease-in-out;
+    animation-name: cover;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;      
     animation-fill-mode: forwards;
   }
 }
