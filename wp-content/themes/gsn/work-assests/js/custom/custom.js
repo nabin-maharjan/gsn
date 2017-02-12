@@ -254,6 +254,27 @@ jQuery(document).ready(function(e) {
   function dockLogo(){
     var minScale = 0.4;
   }
+
+  // landing button open forms
+  if($('.landing-hero-cntr').length > 0) {
+    var landingContainer = $('.landing-hero-cntr'),
+        landingButtons = landingContainer.find('#landing__tab li a'),
+        landingFormContainer = landingContainer.find('#landing-form-cntr'),
+        landingWipeBlock = landingContainer.find('#wipe-block');
+
+    //addClass on button click
+    function btnClick() {
+      $(landingButtons).on('click', function(e) {
+        e.preventDefault();
+        // addClass on landingContainer for wipe effects
+        landingWipeBlock.toggleClass('close-form open-form');
+        setTimeout (function() {
+          landingFormContainer.toggleClass('open-form');          
+        }, 1000);
+      });
+    }
+    btnClick();
+  }
 	
 	
 });

@@ -95,6 +95,7 @@ var pathObj = {
         _LOGO_GRAPHIC = _LOGO.querySelector('#img_cntr'),
         _LOGO_SHADOW = _LOGO.querySelector('#logo-shadow');
 
+
     if(!('ontouchstart' in window)){
       document.body.addEventListener('mousemove',function(e){
         var _x = (e.clientX/this.clientWidth - 0.5) * 15,

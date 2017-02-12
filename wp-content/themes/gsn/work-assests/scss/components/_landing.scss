@@ -1,9 +1,155 @@
-.landing {
-  padding: 80px 0 0;
+// HERO SECTION WITH LOGO
 
-  &__form {
+.landing-hero-cntr {
+  width:100%; 
+  height:100vh;
+  // position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .logo-wrap {
+    width:40%;
+    max-width: 80%; 
+    margin:0 auto; 
+    position:relative;
+    perspective: 1000px; 
+  }
+}
+#logo_svg {
+  width:100%; 
+  position:relative;
+  svg {
+    padding: 16px 0;
+    margin:0 23px;
+  }    
+}
+#img_cntr {
+  position: absolute; 
+  overflow:hidden; 
+  opacity: 0;
+  top:-2px;   
+  left:0; 
+  bottom: 0;
+  right: 0;
+    will-change: transform;
+  svg{ 
+    box-sizing:border-box; 
+    padding:19px; 
+    overflow:auto;
+  }
+}
+#logo-shadow {
+  opacity: 0;
+}
+#main-logo-svg, #logo-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  will-change: transform;
+}
+#logo-shadow {
+  background: url(../images/main-logo.svg) center center no-repeat;
+  background-size: 90% 100%;
+  -webkit-filter: url(#shadow);
+  filter: url(#shadow);
+  opacity: 0;
+  will-change: transform;
+  transform: translateZ(-40px) translateY(10px);
+}
+
+.anim-shape {
+  -webkit-transform-origin: 0 150px;
+  -ms-transform-origin: 0 150px;
+  transform-origin: 0 150px;
+  -webkit-transform: scale(1, 2) rotate(270deg) translate(0, 0);
+  -ms-transform: scale(1, 2) rotate(270deg) translate(0, 0);
+  transform: scale(1, 2) rotate(270deg) translate(0, 0);
+  -webkit-animation: moving-panel 5s infinite alternate;
+  animation: moving-panel 5s infinite alternate;
+  opacity: 0.2
+}
+.colortext .anim-shape:nth-child(1) {
+  fill: #F2385A;
+}
+.colortext .anim-shape:nth-child(2) {
+  fill: #F5A503;
+}
+.colortext .anim-shape:nth-child(3) {
+  fill: #E9F1DF;
+}
+.colortext .anim-shape:nth-child(4) {
+  fill: #56D9CD;
+}
+.colortext .anim-shape:nth-child(5) {
+  fill: #3AA1BF;
+}
+.shadow {
+  -webkit-transform: translate(10px, 10px);
+  -ms-transform: translate(10px, 10px);
+  transform: translate(10px, 10px);
+}
+.anim-shape--shadow {
+  fill: #000;
+  fill-opacity: .2;
+}
+ @-webkit-keyframes moving-panel {
+ 100% {
+   -webkit-transform: scale(1, 1) translate(20px, 0);
+   transform: scale(1, 1) translate(20px, 0);
+  }
+}
+@keyframes moving-panel {
+ 100% {
+   -webkit-transform: scale(1, 1) translate(20px, 0);
+   transform: scale(1, 1) translate(20px, 0);
+  }
+}
+// HERO SECTION WITH LOGO END
+
+
+// Landing buttons 
+.landing-buttons-cntr {
+  position: fixed;
+  bottom: 20px;
+  width: 400px;
+  z-index: 9999;
+}
+
+.landing {
+  &-form-cntr {
+    background: $brick_red;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    transition: all 0s 0.5s;
+    animation: hide 1s ease-in-out;
+    animation-fill-mode: forwards;
+
+    &.open-form {
+      // opacity: 1;
+      // visibility: visible;
+      animation: reveal 1s ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &__tab-content {
     max-width: 640px;
     margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
   }
   &__tab {
     border-bottom: none;
@@ -14,6 +160,7 @@
       text-align: center;
       width: 50%;
       background: $gray_bg;
+      transition: all 0.3s ease-in;
 
       &.active {
         background: $brick_red;
@@ -26,11 +173,53 @@
         display: block;
         font-size: 20px;
         padding: 15px 20px;
-        text-transform: uppercase;
+        text-transform: uppercase;        
       }
     }
   }
   &__tab-content {
     padding: 30px 15px;
   }
+}
+
+.wipe-block {  
+  background: $petal_green;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+
+  &.close-form {
+    opacity: 1;
+    visibility: visible;
+    animation: hide 1s ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  &.open-form {
+    opacity: 1;
+    visibility: visible;
+    animation: cover 1s ease-in-out;
+    animation-fill-mode: forwards;
+  }
+}
+
+// animations
+@keyframes reveal {
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes cover {
+  0% { transform: translateY(100%); }
+  50%{ transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes hide {
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
