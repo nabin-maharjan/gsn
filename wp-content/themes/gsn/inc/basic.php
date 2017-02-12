@@ -70,14 +70,6 @@ function gsn_register_my_menus() {
 add_action( 'init', 'gsn_register_my_menus' );
 
 
-/*  session */
-//add_action('init', 'myStartSession', 1);
-function myStartSession() {
-    if(!session_id()) {
-        session_start();
-    }
-}
-
 
 // Add custom query variables
 add_action('init',function(){
@@ -151,7 +143,7 @@ function is_realy_woocommerce_page () {
 *Function to restrict admin page to  non admin user
 */
 function gsn_restrict_admin_page() {
-    if( ! current_user_can( 'manage_options' )  && strpos($_SERVER['PHP_SELF'],'/wp-admin/admin-ajax.php') == false) {
+    if( ! current_user_can( 'manage_options' )  && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
         wp_redirect( home_url() );
     }
 }

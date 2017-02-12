@@ -40,23 +40,27 @@ if($products==NULL){
          <input type="hidden" name="type" value="<?php echo sanitize_text_field($_GET['type']);?>">
          <?php } ?>
             <label>Filter by:</label>
-            <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
+            <?php
+			$storeParentCatName=$store->storeName." ".$store->user_id;
+			 $storeParentCat=get_term_by( 'name',$storeParentCatName,'product_cat'); 
               //  $selected_term= wp_get_post_terms( $product->id, 'product_cat' );
                 $selected_term="";
                 //var_dump($storeParentCat); die;
-                $args = array(
-                    //'show_count'   => 1,
-                    'hierarchical' => 1,
-                    'child_of' =>$storeParentCat->term_id,
-                    'taxonomy'     => 'product_cat',
-                    'hide_empty' => false,
-                    'name'               => 'category',
-                    'id'                 => 'category',
-                    'class'              => '',
-                    'show_option_none'    => 'Category',
-                    'selected'           => $selected_term->term_id,
-                );
-                wp_dropdown_categories( $args );
+				if($storeParentCat){
+					$args = array(
+						//'show_count'   => 1,
+						'hierarchical' => 1,
+						'child_of' =>$storeParentCat->term_id,
+						'taxonomy'     => 'product_cat',
+						'hide_empty' => false,
+						'name'               => 'category',
+						'id'                 => 'category',
+						'class'              => '',
+						'show_option_none'    => 'Category',
+						'selected'           => $selected_term->term_id,
+					);
+					wp_dropdown_categories( $args );
+				}
             ?>
            
             <button type="submit" class="btn btn-primary product__filter-btn">Filter</button>

@@ -1,6 +1,7 @@
 <?php
 	global $store;
-	$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+	$storeParentCatName=$store->storeName." ".$store->user_id;
+	$storeParentCat=get_term_by( 'name',$storeParentCatName ,'product_cat');
 	if(!empty($_GET['action']) &&  $_GET['action']=="edit" && !empty($_GET['id'])){
 		$selected_cat=sanitize_text_field($_GET['id']);
 		$current_cat= get_term( $selected_cat, 'product_cat' ) ;
@@ -13,16 +14,18 @@
         <h3>Cateory List</h3>
         <ul class="category-lists">
           <?php 
-      			$args = array(
-  						'hierarchical' => true,
-  						'child_of' =>$storeParentCat->term_id,
-  						'taxonomy'     => 'product_cat',
-  						'hide_empty' => false,
-  						'title_li' =>'',
-  						//'show_count' => 1,
-  						'walker' => new gsn_category_walker_dashboard()
-  					);
-      			wp_list_categories($args );
+			  if($storeParentCat){
+					$args = array(
+							'hierarchical' => true,
+							'child_of' =>$storeParentCat->term_id,
+							'taxonomy'     => 'product_cat',
+							'hide_empty' => false,
+							'title_li' =>'',
+							//'show_count' => 1,
+							'walker' => new gsn_category_walker_dashboard()
+						);
+					wp_list_categories($args );
+			  }
       		?>
         </ul>
       </div>
@@ -44,6 +47,7 @@
             <label for="login_password" class="col-sm-2 col-form-label col-form-label-sm">Parent</label>
             <div class="col-sm-10 parent_dropdown_cntr" >
               <?php 
+			  		if($storeParentCat){
       					$args = array(
       						//'show_count'   => 1,
       						'hierarchical' => 1,
@@ -58,6 +62,7 @@
       					);
       					
       					wp_dropdown_categories( $args );
+			 		 }
               ?>
             </div>
           </div>

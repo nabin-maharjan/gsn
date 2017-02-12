@@ -6,6 +6,69 @@ class Store{
 	private $store_table;
 	
 	public function __construct(){
+		
+			// create tables
+			$this->store_table();
+			$this->create_activate_code_table();
+			// add ajax function for registration process
+			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
+			add_action( 'wp_ajax_nopriv_store_registration', array($this,'store_registration') );
+			// add ajax function for login process
+			add_action( 'wp_ajax_store_login', array($this,'store_login') );
+			add_action( 'wp_ajax_nopriv_store_login', array($this,'store_login') );
+			/* add ajax function for email address check*/
+			add_action( 'wp_ajax_email_is_exists', array($this,'email_is_exists') );
+			add_action( 'wp_ajax_nopriv_email_is_exists', array($this,'email_is_exists') );
+			/* add ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_logout', array($this,'gsn_store_logout') );
+			add_action( 'wp_ajax_nopriv_gsn_store_logout', array($this,'gsn_store_logout') );
+			/* add ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_profile_setting', array($this,'store_registration') );
+			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
+			
+			/* add ajax function for store logout */
+			add_action( 'wp_ajax_gsn_store_contact_action', array($this,'store_contact_action') );
+			add_action( 'wp_ajax_nopriv_gsn_store_contact_action', array($this,'store_contact_action') );
+			
+			/* add ajax function for store domain unique check */
+			add_action( 'wp_ajax_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
+			add_action( 'wp_ajax_nopriv_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_update_store_domain', array($this,'update_store_domain') );
+			add_action( 'wp_ajax_nopriv_gsn_update_store_domain', array($this,'update_store_domain') );
+			
+			
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_check_mobile_exists', array($this,'check_mobile_exists') );
+			add_action( 'wp_ajax_nopriv_gsn_check_mobile_exists', array($this,'check_mobile_exists') );
+			
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_send_activation_code', array($this,'send_activation_code') );
+			add_action( 'wp_ajax_nopriv_gsn_send_activation_code', array($this,'send_activation_code') );
+			
+			/* set store properties */
+			add_action('init',array($this,'get'),1);
+			/* limit store publish product */
+			add_action('init',array($this,'limit_publish_product'),2);
+		   // add_action('init',array($this,'change_draft_topublish'),2);
+
+			/* add store role*/
+			add_action('init',array($this,'add_store_role'));
+			/* add filter only show current user media */
+			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
+			/* add media upload files */
+			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
+			
+			
+			
+	}
+	
+	/*
+	* Function regarding store table  database
+	
+	*/
+	public function store_table(){
+		
 		global $wpdb;
 		$this->store_table=$wpdb->prefix."store";
 		//$wpdb->show_errors(); 
@@ -45,49 +108,111 @@ class Store{
 			if(!isset($store_table->storePackage)){
 				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `storePackage` VARCHAR(50) NULL DEFAULT NULL;");
 			}
-			
+			if(!isset($store_table->activated)){
+				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `activated` INT NULL DEFAULT 0;");
+			}
+	}
+	
+	
+	
+	/*
+	*create activation table
+	*/
+	
+	public function create_activate_code_table(){
 		
-			// add ajax function for registration process
-			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
-			add_action( 'wp_ajax_nopriv_store_registration', array($this,'store_registration') );
-			// add ajax function for login process
-			add_action( 'wp_ajax_store_login', array($this,'store_login') );
-			add_action( 'wp_ajax_nopriv_store_login', array($this,'store_login') );
-			/* add ajax function for email address check*/
-			add_action( 'wp_ajax_email_is_exists', array($this,'email_is_exists') );
-			add_action( 'wp_ajax_nopriv_email_is_exists', array($this,'email_is_exists') );
-			/* add ajax function for store logout */
-			add_action( 'wp_ajax_gsn_store_logout', array($this,'gsn_store_logout') );
-			add_action( 'wp_ajax_nopriv_gsn_store_logout', array($this,'gsn_store_logout') );
-			/* add ajax function for store logout */
-			add_action( 'wp_ajax_gsn_store_profile_setting', array($this,'store_registration') );
-			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
+		global $wpdb;
+		$this->activate_code_table=$wpdb->prefix."activate_code";
+		//$wpdb->show_errors(); 
+		//check if there are any tables of that name already
+		if($wpdb->get_var("show tables like '".$this->activate_code_table."'") !== $this->activate_code_table) 
+		{
+			$sql = '
+			  CREATE TABLE '.$this->activate_code_table.' (
+				id int NOT NULL auto_increment,
+				user_id bigint,
+				code varchar(255) NOT NULL,
+				code_used int NOT NULL DEFAULT 0,
+				PRIMARY KEY  (id)
+			  )';
+			dbDelta($sql);
+		}
+		//register the new table with the wpdb object
+		if (!isset($wpdb->activate_code)) 
+		{
+			$wpdb->activate_code = $this->activate_code_table; 
+			//add the shortcut so you can use $wpdb->stats
+			$wpdb->tables[] = str_replace($wpdb->prefix, '', $this->activate_code_table); 
+		}
+		
+		
+		
+	}
+	/*
+	*Function generate RAndom cod
+	*/
+	public function generateRandomString($length = 30) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+	
+	/*
+	*Function to send activatin code
+	*/
+	public function send_activation_code($user_id=0,$emailAddress=""){
+		global $store, $wpdb;
+		if($user_id==0){
+			$user_id=$store->user_id;
+		}
+		if($emailAddress==""){
+			$emailAddress=$store->emailAddress;
+		}
+		$request_ajax=false;
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+			$request_ajax=true;
+			$response=array();
+		}
+		try{
+			$randomGenCode=$store->generateRandomString();	
+			$insert = $wpdb->insert(
+							$wpdb->activate_code,
+							array(
+								'user_id'=>$user_id,
+								'code' =>$randomGenCode,
+								'code_used' =>0
+								)
+							);							
+			$to = sanitize_text_field($emailAddress);
+			$subject = 'Email Verification!';
+			$body = 'The email body content';
+			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal<support@goshopnepal.com>');
+			$mail_sent=wp_mail( $to, $subject, $body, $headers );
 			
-			/* add ajax function for store logout */
-			add_action( 'wp_ajax_gsn_store_contact_action', array($this,'store_contact_action') );
-			add_action( 'wp_ajax_nopriv_gsn_store_contact_action', array($this,'store_contact_action') );
+			if($mail_sent){
+				/* set success message */
+				$response['status']="success";
+				$response['code']='200';
+				$response['msg']="Activation link sent to you email.";	
+			}else{
+				
+				throw new Exception("Something wrong with mailing system. Please try again later.",'406');
+			}
 			
-			/* add ajax function for store domain unique check */
-			add_action( 'wp_ajax_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
-			add_action( 'wp_ajax_nopriv_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
-			/*  add ajax function  for uodate domain name */
-			add_action( 'wp_ajax_gsn_update_store_domain', array($this,'update_store_domain') );
-			add_action( 'wp_ajax_nopriv_gsn_update_store_domain', array($this,'update_store_domain') );
-			
-			
-			/* set store properties */
-			add_action('init',array($this,'get'),1);
-			/* limit store publish product */
-			add_action('init',array($this,'limit_publish_product'),2);
-		   // add_action('init',array($this,'change_draft_topublish'),2);
-
-			/* add store role*/
-			add_action('init',array($this,'add_store_role'));
-			/* add filter only show current user media */
-			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
-			/* add media upload files */
-			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
-			
+		}catch(Exception $e){
+			$response['status']="error";
+			$response['code']=$e->getCode();
+			$response['msg']=$e->getMessage();
+		}
+		if($request_ajax){
+			echo json_encode($response); die;
+		}else{
+			return $response;
+		}
 	}
 	/*
 	*Function to limit store Product publish
@@ -305,11 +430,76 @@ class Store{
 		);
 	}
 	
+	/*
+	& Function to activate store with link
+	*/
+	
+	public function activate_store_with_link(){
+		
+		$activated="";
+		try{
+			$user_id=trim(sanitize_text_field($_GET['shop_id']));
+			$code=trim(sanitize_text_field($_GET['activate_code']));
+				global $wpdb;
+				/* get Activate code object */
+				$query=$wpdb->prepare("select * from ".$wpdb->activate_code." where user_id=%s and code=%s",$user_id,$code); // Prepare query
+				$activateObj = $wpdb->get_row($query );
+				if($activateObj){
+					if($activateObj->code_used!=0){
+						throw new Exception("already_activated");
+					}
+
+					
+					/*get  store object of user*/
+					$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$user_id); // Prepare query
+					$storeobj = $wpdb->get_row($query );
+					$store_cat_name=$storeobj->storeName." ".$user_id; // name of shop parent category
+					/*Add shop  parent Category*/
+					$cid = wp_insert_term(
+								$store_cat_name, // the term 
+									'product_cat', // the taxonomy
+									array(
+										'description'=>"Store Parent  Category ",
+										'slug' => sanitize_title($store_cat_name),
+										'parent' =>0
+									)
+								);
+								
+					// Update code used status
+					$wpdb->update(
+								$wpdb->activate_code,
+								 array(
+										'code_used'=>1
+								),
+								array('id'=>$activateObj->id)
+						);
+								
+					// Update store activated status
+					$wpdb->update(
+								$this->store_table,
+								 array(
+										'activated'=>1
+								),
+								array('id'=>$storeobj->id)
+						);	
+						
+						$activated="activated";
+				}else{
+					throw new Exception("not_found");
+				}
+		}catch(Exception $e){
+			$activated=$e->getMessage();
+		}
+		return $activated;
+	}
+	
+	
 	
 	public function check_access_store(){
+		
 		global $store;
-		if(!empty($store->id) && $store->is_shop==true){
-			
+		if(is_page("activate")){			
+		}else if(!empty($store->id) && $store->is_shop==true){
 		}else if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
 			wp_redirect( site_url("/register/"));
 			exit;
@@ -385,6 +575,9 @@ class Store{
 		try{
 			 if($request_ajax) {
 				 if(!empty($_POST)){
+					 if(!empty($_POST['jquery']) && $_POST['jquery']=="jquery"){
+						$jquery_flag=true;
+					}
 					 $v = new Valitron\Validator($_POST);
 					 $v->rule('required', 'email');
 					$v->rule('email','email');
@@ -399,16 +592,21 @@ class Store{
 			 }
 
 		 $exists = email_exists($email);
-		
-		if($request_ajax) {
-		
-			if($exists>0){
-				$msg=json_encode(array('emailAddress'=>array("Email Address Already Exists")));
-				throw new Exception($msg,'406');
+		if($jquery_flag){
+			if($exists){
+					echo "false"; die;
+			}else{
+				echo "true"; die;
+			}
+		}
+		if($request_ajax) {		
+			if($exists){
+					$msg=json_encode(array('emailAddress'=>array("Email Address Already Exists")));
+					throw new Exception($msg,'406');
 			}else{
 				$response['status']="success";
 				$response['code']='200';
-				$response['msg']=$store;
+				$response['msg']="Email Address is not used.";
 			}
 			
 		}
@@ -424,13 +622,81 @@ class Store{
 		 if($request_ajax) {
 			 echo json_encode($response);die();
 		 }else{
-			 return ($store>0)?true:false;
+			 return $exists;
 		 }
 	}
 	
-		/*
-			* Store registration
-		*/
+	
+	
+	/*
+	
+	* funciton to check mobile number is already already used 
+	
+	*/
+	public function check_mobile_exists($mobile=""){
+		global $wpdb;
+		$request_ajax=false;
+		if(empty($mobile) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+			$request_ajax=true;
+			$response=array();
+		}
+		try{
+			 if($request_ajax) {
+				 if(!empty($_POST)){
+					 if(!empty($_POST['jquery']) && $_POST['jquery']=="jquery"){
+						$jquery_flag=true;
+					}
+					 $v = new Valitron\Validator($_POST);
+					 $v->rule('required', 'mobileNumber');
+					$v->rule('lengthMin','mobileNumber',9);
+					$v->rule('lengthMax','mobileNumber',10);
+					$v->rule('numeric','mobileNumber');
+					if($v->validate()) {
+						$mobile=sanitize_text_field($_POST['mobileNumber']);
+					}else{
+						// Errors
+							$err_msg=json_encode($v->errors());
+							throw new Exception($err_msg,'406');
+					}
+				 }
+			 }
+				global $wpdb;
+				$query=$wpdb->prepare("select * from ".$this->store_table." where mobileNumber=%s",$mobile); // Prepare query
+				$storeobj = $wpdb->get_row($query );
+			if($request_ajax) {
+				if($storeobj>0){
+					if($jquery_flag){
+						echo "false"; die;
+					}else{
+						$msg=json_encode(array('mobileNumber'=>array("Mobile Number is already used.")));
+						throw new Exception($msg,'406');
+					}
+				}else{
+					if($jquery_flag){
+						echo "true"; die;
+					}
+					$response['status']="success";
+					$response['code']='200';
+					$response['msg']="Mobile Number is not used.";
+				}
+			}
+		}catch(Exception $e){
+			if($request_ajax) {
+				$response['status']="error";
+				$response['code']=$e->getCode();
+				$response['msg']=$e->getMessage();
+			}
+		 }
+		 /// return or echo output
+		 if($request_ajax) {
+			 echo json_encode($response);die();
+		 }else{
+			 return $storeobj;
+		 }
+	}
+	/*
+	* Store registration
+	*/
 		public function store_registration(){
 			$response=array();
 			try{
@@ -473,7 +739,22 @@ class Store{
 							}
 							
 						}else{
-							$user_id=wp_create_user($datas['emailAddress'], $datas['password'], $datas['emailAddress'] );
+							/* check email unique */
+							$email_exists=email_exists(sanitize_text_field($datas['emailAddress']));
+							if($email_exists) {
+								$msg=json_encode(array('emailAddress'=>array("This email is already used.")));
+								throw new Exception($msg,'406');
+							 }
+							 
+							 /* check mobile number unique */
+							 $mob_check=$this->check_mobile_exists(sanitize_text_field($datas['mobileNumber']));
+							 if($mob_check>0){
+								$msg=json_encode(array('mobileNumber'=>array("This email is already used.")));
+								throw new Exception($msg,'406');
+								
+							 }
+							
+							$user_id=wp_create_user(sanitize_text_field($datas['emailAddress']), sanitize_text_field($datas['password']), sanitize_text_field($datas['emailAddress']));
 							if($user_id){
 								unset($datas['cpassword']);// remove cpassword field
 								unset($datas['password']); // remove password field
@@ -485,18 +766,9 @@ class Store{
 								$user->set_role( 'store_contributor' );
 								//set_user_role($user_id,'store_contributor');
 								if($insert){
-								/* ADD Store parent category based on store name */
-								$cid = wp_insert_term(
-									sanitize_text_field($datas['storeName']), // the term 
-										'product_cat', // the taxonomy
-										array(
-											'description'=>"Store Parent  Category ",
-											'slug' => sanitize_title($datas['storeName']),
-											'parent' =>0
-										)
-									);
+									/* Send activation code */
+									$this->send_activation_code($user_id, sanitize_text_field($datas['emailAddress']));
 								}
-								
 								/* login user */
 								wp_set_current_user($user_id);
 								wp_set_auth_cookie($user_id);

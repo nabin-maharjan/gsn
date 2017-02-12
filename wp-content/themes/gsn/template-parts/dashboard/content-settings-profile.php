@@ -378,8 +378,7 @@
       <!-- Row start -->
       <div class="form-group clearfix">
         <label for="emailAddress" class="col-sm-2 col-form-label col-form-label-sm">Email Address</label>
-        <div class="col-sm-10">
-          <input type="text" readonly class="form-control form-control-sm" value="<?php echo (!empty($store->emailAddress))?$store->emailAddress:"";?>" name="emailAddress" id="emailAddress">
+        <div class="col-sm-10"><?php echo (!empty($store->emailAddress))?$store->emailAddress:"";?>
         </div>
       </div>
       <!-- Row end -->
@@ -396,8 +395,7 @@
        <!-- Row start -->
       <div class="form-group clearfix">
         <label for="storeName" class="col-sm-2 col-form-label col-form-label-sm">Store Name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($store->storeName))?$store->storeName:"";?>" name="storeName" id="storeName">
+        <div class="col-sm-10"><?php echo (!empty($store->storeName))?$store->storeName:""; ?>
         </div>
       </div>
       <!-- Row end -->

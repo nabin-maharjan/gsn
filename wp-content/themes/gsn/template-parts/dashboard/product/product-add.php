@@ -81,30 +81,31 @@ if($product_limit_flag && !$product_edit){
       <div class="form-group row">
         <label for="category" class="col-sm-2 col-form-label col-form-label-sm">Category</label>
         <div class="col-sm-10 parent_dropdown_cntr" >
-        <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); 
+        <?php 
+		$storeParentCatName=$store->storeName." ".$store->user_id;
+		$storeParentCat=get_term_by( 'name', $storeParentCatName,'product_cat'); 
   	  		$selected_term= wp_get_post_terms( $product->id, 'product_cat' );
   			if(is_array($selected_term)){
   				$selected_term=array_shift($selected_term);
   			}
   	  ?>
-          
           <?php 
-  		//var_dump($storeParentCat); die;
-  		$args = array(
-  			//'show_count'   => 1,
-  			'hierarchical' => 1,
-  			'child_of' =>$storeParentCat->term_id,
-  			'taxonomy'     => 'product_cat',
-  			'hide_empty' => false,
-  			'name'               => 'category',
-  			'id'                 => 'category',
-  			'class'              => 'form-control form-control-sm',
-  			'show_option_none'    => 'None',
-  			'selected'           => $selected_term->term_id,
-  		);
-  		
-  		wp_dropdown_categories( $args );
-  		
+			//var_dump($storeParentCat); die;
+			if($storeParentCat){
+				$args = array(
+					//'show_count'   => 1,
+					'hierarchical' => 1,
+					'child_of' =>$storeParentCat->term_id,
+					'taxonomy'     => 'product_cat',
+					'hide_empty' => false,
+					'name'               => 'category',
+					'id'                 => 'category',
+					'class'              => 'form-control form-control-sm',
+					'show_option_none'    => 'None',
+					'selected'           => $selected_term->term_id,
+				);
+				wp_dropdown_categories( $args );
+			}
   		?>
         </div>
       </div>

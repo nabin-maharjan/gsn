@@ -232,19 +232,25 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                   <div class="search__block">
                     <form action="" type="search" name="search" class="clearfix">
                       <div class="search-select fl">                        
-                        <?php $storeParentCat=get_term_by( 'name', $store->storeName,'product_cat'); ?>          
                         <?php 
-                          $args = array(
-                            'hierarchical' => 1,
-                            'child_of' =>$storeParentCat->term_id,
-                            'taxonomy'     => 'product_cat',
-                            'hide_empty' => false,
-                            'name'               => 'search-parent',
-                            'id'                 => 'search-parent',
-                            'class'              => 'form-control form-control-sm',
-                            'show_option_none'    => 'Select Category'
-                          );                  
-                          wp_dropdown_categories( $args );                  
+						$storeParentCatName=$store->storeName." ". $store->user_id;
+						$storeParentCat=get_term_by( 'name',$storeParentCatName ,'product_cat');
+						
+						 ?>          
+                        <?php 
+							if($storeParentCat){
+							  $args = array(
+								'hierarchical' => 1,
+								'child_of' =>$storeParentCat->term_id,
+								'taxonomy'     => 'product_cat',
+								'hide_empty' => false,
+								'name'               => 'search-parent',
+								'id'                 => 'search-parent',
+								'class'              => 'form-control form-control-sm',
+								'show_option_none'    => 'Select Category'
+							  );                  
+							  wp_dropdown_categories( $args );  
+							}
                         ?>
                       </div>
                       <div class="search-input fl">

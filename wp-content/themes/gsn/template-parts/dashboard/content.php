@@ -20,6 +20,16 @@
 ?>
 <section class="dashboard-landing-cntr">
   <div class="container">
+  <?php if(empty( $store->domainName)){ ?>
+  <div class="alert alert-info">
+  	Domain name is not set yet. you can set it from <a class="btn btn-sm btn-primary" href="<?php echo site_url("/dashboard/profile");?>" >profile setting.</a>
+  </div>
+  
+  <?php }?>
+  
+  
+  
+  
     <div class="row">
       <div class="dashboard-top">
         <h1 class="dashboard-title">Summary of your store.</h1>

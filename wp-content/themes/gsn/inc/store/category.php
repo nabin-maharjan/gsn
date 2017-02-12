@@ -53,8 +53,9 @@ class GsnCategory{
 					if($v->validate()) {
 						/* insert to database */
 						global $wpdb, $store;	
-											
-						$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+						
+						$storeParentCatName=$store->storeName." ".$store->user_id;									
+						$storeParentCat=get_term_by( 'name',$storeParentCatName ,'product_cat');
 						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);		if($edit_flag){
 							$cid=wp_update_term(sanitize_text_field($datas['term_id']), 'product_cat', array(
 							  'name' => sanitize_text_field($datas['name']),
@@ -119,8 +120,9 @@ class GsnCategory{
 			
 		}
 		public function get_count_store_category($user_id){
-			global $store;
-			$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+			global $store;			
+			$storeParentCatName=$store->storeName." ".$store->user_id;
+			$storeParentCat=get_term_by( 'name', $storeParentCatName,'product_cat');
 			$args = array(
 				'child_of' =>$storeParentCat->term_id,
 				'taxonomy'     => 'product_cat',

@@ -342,7 +342,8 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
     
   </div>
   <div class="stick-navigation-cntr">
-    	<div class="container">
+  <div style="color:#fff; font:size:28px; background:#000; padding:10px;">This site is in under testing phase. All data will be wiped out before we go live.</div>
+    	<div class="container"  style="display:none;">
     		<div class="navigation__content clearfix">
     			<div class="stick__logo fl"></div>
     			<!-- /.stick__logo -->
@@ -373,7 +374,7 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 </div>
 <section class="landing">
   <div class="container">
-    <h1 class="page-title"><img src="<?php echo get_template_directory_uri();?>/assets/images/main-logo.svg" width="200px"></h1>
+    <h1 class="page-title"></h1>
     <!-- LOGIN and REGISTER Form -->
     <div class="landing__form"> 
       <!-- TAB NAV -->
@@ -437,7 +438,7 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
                 </div>
               </div>
               <!-- Row end --> 
-              
+               <div class="clearfix">
               <!-- Row start -->
               <div class="form-group col-sm-6">
                 <label for="password" class="form-label">Password</label>
@@ -447,41 +448,43 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
               </div>
               <!-- Row end --> 
               
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="cpassword" class="form-label">Confirm Password</label>
-                <div class="form-input">
-                  <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
-                </div>
+                  <!-- Row start -->
+                  <div class="form-group col-sm-6">
+                    <label for="cpassword" class="form-label">Confirm Password</label>
+                    <div class="form-input">
+                      <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
+                    </div>
+                  </div>
+                  <!-- Row end --> 
               </div>
-              <!-- Row end --> 
+                  <!-- Row start -->
+                  <div class="form-group col-sm-6">
+                    <label for="mobileNumber" class="form-label">Mobile Number</label>
+                    <div class="form-input">
+                      <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
+                    </div>
+                  </div>
+                  <!-- Row end -->
+               
               
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="mobileNumber" class="form-label">Mobile Number</label>
-                <div class="form-input">
-                  <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
-                </div>
-              </div>
-              <!-- Row end --> 
-              
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="storeName" class="form-label">Store Name</label>
-                <div class="form-input">
-                  <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
-                </div>
-              </div>
-              <!-- Row end --> 
-              
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="panNumber" class="form-label">Pan Number</label>
-                <div class="form-input">
-                  <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
-                </div>
-              </div>
-              <!-- Row end --> 
+                  <!-- Row start -->
+                  <div class="form-group col-sm-6">
+                    <label for="storeName" class="form-label">Store Name</label>
+                    <div class="form-input">
+                      <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
+                    </div>
+                  </div>
+                  <!-- Row end --> 
+                  
+                  <!-- Row start -->
+                  <div class="form-group col-sm-6">
+                    <label for="panNumber" class="form-label">Pan Number</label>
+                    <div class="form-input">
+                      <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
+                    </div>
+                  </div>
+                  <!-- Row end --> 
+
               <!-- Row start -->
               <div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
                 <label for="location" class="form-label">Set Your Store Location</label>
@@ -489,6 +492,9 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
                 <button type="button" style="display:none" class="btn btn-success col-sm-12"  id="change_location_btn"data-toggle="modal" data-target="#gridSystemModal"> <span>Your location</span>
                 <p class="btn_location_text"></p>
                 </button>
+                <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
+                        <input type="hidden" class="form-control" name="latitute" id="latitute">
+                        <input type="hidden" class="form-control" name="lognitute" id="lognitute">
               </div>
               <!-- Row end --> 
             </div>
@@ -507,9 +513,7 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
                         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                         <div id="map" style="width:100%;height:400px"></div>
                         Selected Location :<span id="selected_location_label"></span>
-                        <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
-                        <input type="hidden" class="form-control" name="latitute" id="latitute">
-                        <input type="hidden" class="form-control" name="lognitute" id="lognitute">
+                        
                       </div>
                     </div>
                   </div>
@@ -548,7 +552,7 @@ jQuery('.btn-set-location').on('click',function(){
 				jQuery('#set_location_btn').hide();
 				jQuery('#change_location_btn').show();
 				jQuery(this).parent().find('.alert').remove();
-		$('#gridSystemModal').modal('hide');	
+				jQuery('#gridSystemModal').modal('hide');	
 	}
 });
 
@@ -597,7 +601,18 @@ jQuery("#register_form").validate({
       lastName: "required",
       emailAddress: {
         required: true,
-        email: true
+        email: true,
+		remote:{
+         	url :ajaxUrl,
+			type: "post",
+			data: {
+				action: "email_is_exists", 
+				email : function(){
+					return jQuery('#emailAddress').val();
+				},
+				jquery : 'jquery'
+			}
+		}
       },
       password: {
         required: true,
@@ -612,7 +627,18 @@ jQuery("#register_form").validate({
 		required: true,
 		minlength:9,
 		maxlength:10,
-		number: true
+		number: true,
+		remote:{
+         	url :ajaxUrl,
+			type: "post",
+			data: {
+				action: "gsn_check_mobile_exists", 
+				mobileNumber : function(){
+					return jQuery('#mobileNumber').val();
+				},
+				jquery : 'jquery'
+			}
+		}
       },
 	  storeName : "required",
 	  panNumber : "required",
@@ -631,16 +657,17 @@ jQuery("#register_form").validate({
 	  cpassword: {
 		  equalTo : "Comfirm password and password must be same."
 	  },
-      email: "Please enter a valid email address",
+      emailAddress: {
+        required: "Please enter a valid email address",
+        email:"Please enter a valid email address",
+		remote: "This email is already registered.",
+
+	  },
+	  mobileNumber: {
+		  remote: "This mobile number is already registered.",
+	  },
 	  storeLocation : "Please mark your location on map",
     },
-	onfocusout: function(element){
-		if(jQuery(element).attr('name')==="emailAddress"){
-			 if(jQuery(element).valid()){
-				 check_email_exists(jQuery(element).val());
-			 }
-		}
-	},
 	
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
