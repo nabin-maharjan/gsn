@@ -30,7 +30,7 @@ var_dump($store); die;*/
 </head>
 
 <body <?php body_class(); ?>>
-<?php if(!is_page("Register")){ ?>
+<?php if(!is_page("Register") && !is_page("Activate") && $store->activated!=0){ ?>
 <header class="dashboard-header clearfix">
 	<div class="dashboard__header-right fr">
 		<div class="header-profile-cntr"> <a href="#" class="profile-info"> <i class="fa fa-user"></i> <span><?php echo $store->firstName ." " . $store->lastName;?></span> </a>
@@ -49,7 +49,8 @@ var_dump($store); die;*/
 	<!-- /.dashboard__header-right -->
 	<div class="dashboard__header-left fl">
 		<div class="dashboard-hamburger"> <span></span> </div>
-		<h1><a href="<?php echo site_url(); ?>/dashboard">Dashboard</a> <a target="_blank" href="http://<?php echo $store->domainName;?>.goshopnepal.com">Veiw my shop</a></h1>
+		<h1><a href="<?php echo site_url(); ?>/dashboard">Dashboard</a> 
+        <?php if(!empty($store->domainName)){ ?><a target="_blank" href="http://<?php echo $store->domainName;?>.goshopnepal.com">Veiw my shop</a><?php }?></h1>
 	</div>
 	<!-- /.dashboard__header-left -->
 	

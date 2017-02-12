@@ -55,7 +55,8 @@ if(!empty($middle_section_right_ad)){
 				<div class="col-sm-12 page__top-info">
                 <?php 
 				if(is_shop()){
-					$terms=get_term_by( 'name', $store->storeName,'product_cat');	?>
+					$termsParentName=$store->storeName." ".$store->user_id;
+					$terms=get_term_by( 'name',$termsParentName,'product_cat');	?>
                     <h1><?php echo $store->storeName;?></h1>
 					<div class="page__top-desc"></div>
                     <?php 
@@ -91,7 +92,7 @@ if(!empty($middle_section_right_ad)){
 				<div class="list__items">
 					<ul>
                     <?php 
-					
+					if($terms){
 						$args = array(
 							'type'                     => 'post',
 							'parent'                 => $terms->term_id,
@@ -105,6 +106,7 @@ if(!empty($middle_section_right_ad)){
 						foreach($child_categories as $child){
 					?>
 						<li class="col-sm-2 list-item"><a href="<?php echo get_term_link($child->term_id);?>"><?php echo $child->name;?></a></li>
+                        <?php } ?>
                         <?php } ?>
 					</ul>
 				</div>
