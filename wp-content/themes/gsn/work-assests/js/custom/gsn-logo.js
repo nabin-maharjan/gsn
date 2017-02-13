@@ -5,7 +5,7 @@
  Setup and Paint your lazyline! 
  */ 
  
- $(document).ready(function(){ 
+ $(window).on('load', function(){ 
  
  /* 
  * Lazy Line Painter - Path Object 
@@ -98,11 +98,11 @@ var pathObj = {
 
     if(!('ontouchstart' in window)){
       document.body.addEventListener('mousemove',function(e){
-        var _x = (e.clientX/this.clientWidth - 0.5) * 15,
-            _y = (e.clientY/this.clientHeight - 0.5) * 15;
+        var _x = (e.clientX/this.clientWidth - 0.5) * 10,
+            _y = (e.clientY/this.clientHeight - 0.5) * 10;
 
         _LOGO_GRAPHIC.style.transform = 'translateX(' + -_x*2 + 'px) translateY(' + (-_y*2) + 'px)';
-        _LOGO_SHADOW.style.transform = 'translateZ(-40px) translateX(' + _x + 'px) translateY(' + (-_y + 10) + 'px)';
+        _LOGO_SHADOW.style.transform = 'translateZ(-40px) translateX(' + _x + 'px) translateY(' + (-_y + 5) + 'px)';
         _LOGO.style.transform = 'rotateX(' + -_y*2 + 'deg) rotateY(' + -_x*2 + 'deg)';
 
       });
