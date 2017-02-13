@@ -1,3 +1,7 @@
+body.page-template-register {
+  overflow: hidden;
+}
+
 // HERO SECTION WITH LOGO
 
 .landing-hero-cntr {
@@ -11,12 +15,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
   .logo-wrap {
     width:40%;
     max-width: 80%; 
     margin:0 auto; 
     position:relative;
-    perspective: 1000px; 
+    perspective: 1000px;
   }
 }
 #logo_svg {
@@ -35,7 +44,8 @@
   left:0; 
   bottom: 0;
   right: 0;
-    will-change: transform;
+  z-index: 9;
+  will-change: transform;
   svg{ 
     box-sizing:border-box; 
     padding:19px; 
@@ -54,13 +64,14 @@
   will-change: transform;
 }
 #logo-shadow {
-  background: url(../images/main-logo.svg) center center no-repeat;
+  background: url(../images/main-logo-plain.svg) center center no-repeat;
   background-size: 90% 100%;
   -webkit-filter: url(#shadow);
   filter: url(#shadow);
   opacity: 0;
   will-change: transform;
   transform: translateZ(-40px) translateY(10px);
+  z-index: -1;
 }
 
 .anim-shape {
@@ -118,12 +129,12 @@
   position: fixed;
   bottom: 20px;
   width: 350px;
-  z-index: 9999;
+  z-index: 9;
 }
 
 .landing {
   &-form-cntr {
-    background: $brick_red;
+    background: $petal_green;
     position: fixed;
     top: 0;
     left: 0;
@@ -141,17 +152,95 @@
       z-index: 99;
       animation-name: reveal;
       animation-duration: 1s;
-      animation-timing-function: ease-in-out;
+      animation-timing-function: cubic-bezier(.77, 0, .175, 1);
       animation-delay: 0s;      
-      animation-fill-mode: forwards;
+      animation-fill-mode: forwards;      
+    }
+
+    .landingform__logo {
+      position: fixed;
+      width: 100%;
+      text-align: center;
+      top: 20px;
+
+      svg {
+        width: 150px;
+        height: 80px;
+        fill: $white;
+        transition: all 0.3s ease;
+      }
     }
   }
 
   &__tab-content {
     max-width: 640px;
+    min-width: 640px;
     margin: 0 auto;
     opacity: 0;
     visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-40%);    
+    transition: all 0.5s ease-in-out;
+    transition-delay: 0.5s;
+    color: $white;
+
+    &.forms-active {
+      transition-delay: 0s;
+      transition: all .2s ease-in-out;
+    }
+
+    &.opened {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    &.closing {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-60%);
+      transition: all 0.5s ease-in;
+      transition-delay: 0s;
+    }
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-label {
+      margin-bottom: 2px;
+      font-weight: normal;
+    }
+    
+    label.error {
+      position: absolute;
+      margin: 0;
+      top: 100%;
+    }
+    .form__message {
+      margin-top: 15px;
+      font-size: 16px;
+      text-align: center;
+
+      a {
+        text-transform: uppercase;
+        color: yellow;
+
+        &:hover {
+          color: $black;
+        }
+      }
+    }
   }
   &__tab {
     border-bottom: none;
@@ -179,13 +268,10 @@
       }
     }
   }
-  &__tab-content {
-    padding: 30px 15px;
-  }
 }
 
 .wipe-block {  
-  background: $petal_green;
+  background: $brick_red;
   height: 100%;
   position: absolute;
   width: 100%;
@@ -193,23 +279,57 @@
   opacity: 0;
   visibility: hidden;
 
-  &.close-form {
-    opacity: 1;
-    visibility: visible;
+  &.close-form {    
     animation-name: hide;
     animation-duration: 1s;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
     animation-delay: 0s;      
     animation-fill-mode: forwards;
   }
   &.open-form {
-    opacity: 1;
-    visibility: visible;
     animation-name: cover;
     animation-duration: 1s;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
     animation-delay: 0s;      
     animation-fill-mode: forwards;
+  }
+}
+
+.close-form-cntr {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+
+  .close__btn {  
+
+    svg {
+      height: 20px;
+      width: 20px;
+      fill: $white;
+      vertical-align: middle;
+      transition: all 0.3s ease-in;
+    }
+    span {
+      display: inline-block;
+      line-height: 24px;
+      vertical-align: top;
+      color: $white;
+      text-transform: uppercase;
+      margin-left: 5px;
+      font-size: 20px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease-in;
+    }
+
+    &:hover {
+      svg {
+        fill: $black;
+      }
+      span {
+        color: $black;
+      }
+    }
   }
 }
 

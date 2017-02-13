@@ -30,6 +30,19 @@ var_dump($store); die;*/
 </head>
 
 <body <?php body_class(); ?>>
+<svg class="hidden">
+	<filter id="shadow" x="-150%" y="-150%" width="300%" height="300%" color-interpolation-filters="sRGB">
+    	<feOffset result="offOut" in="SourceGraphic" dx="0" dy="5"></feOffset>
+    	<feGaussianBlur result="blurOut" in="offOut" stdDeviation="6"></feGaussianBlur>
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.1"></feFuncA>
+        </feComponentTransfer>
+    </filter>
+	<symbol id="icon-cross" viewBox="0 0 10.2 10.2">
+		<title>cross</title>
+		<path d="M5.8,5.1l4.4,4.4l-0.7,0.7L5.1,5.8l-4.4,4.4L0,9.5l4.4-4.4L0,0.7L0.7,0l4.4,4.4L9.5,0l0.7,0.7L5.8,5.1z"></path>
+	</symbol>
+</svg>
 <?php if(!is_page("Register") && !is_page("Activate") && $store->activated!=0){ ?>
 <header class="dashboard-header clearfix">
 	<div class="dashboard__header-right fr">

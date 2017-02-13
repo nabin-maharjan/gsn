@@ -111,12 +111,13 @@ jQuery('#logoutBtn').on('click',function(e){
 	});
 	
 });
+
 jQuery(document).ready(function(e) {
     var mediaUploader;
 
   jQuery('.upload-image-button').click(function(e) {
     e.preventDefault();
-	var trigger_btn=jQuery(this);
+	 var trigger_btn=jQuery(this);
     // Extend the wp.media object
     mediaUploader = wp.media.frames.file_frame = wp.media({
       title: 'Choose Image',
@@ -132,13 +133,11 @@ jQuery(document).ready(function(e) {
     });
     // Open the uploader dialog
     mediaUploader.open();
-  });
-  
-  
-  
+  }); 
+
   jQuery('.upload-button-multiple').click(function(e) {
     e.preventDefault();
-	var trigger_btn=jQuery(this);
+	  var trigger_btn=jQuery(this);
     // Extend the wp.media object
     mediaUploader = wp.media.frames.file_frame = wp.media({
       title: 'Choose Image',
@@ -250,33 +249,71 @@ jQuery(document).ready(function(e) {
   }
   collapseCategory();
 
-  // dock logo on scroll
-  function dockLogo(){
-    var minScale = 0.4;
-  }
-
   // landing button open forms
   if($('.landing-hero-cntr').length > 0) {
     var landingContainer = $('.landing-hero-cntr'),
         landingButtons = landingContainer.find('#landing__tab li a'),
         landingFormContainer = landingContainer.find('#landing-form-cntr'),
-        landingWipeBlock = landingContainer.find('#wipe-block');
+        landingWipeBlock = landingContainer.find('#wipe-block'),
+        landingCloseBtn = landingContainer.find('.close-form-cntr a'),
+        landingForms = landingContainer.find('.landing__tab-content'),
+        landingChangeLinks = landingForms.find('.form__message a');
 
-    //addClass on button click
-    function btnClick() {
+    // login / register button click
+    function openForm() {
       $(landingButtons).on('click', function(e) {
         e.preventDefault();
         // addClass on landingContainer for wipe effects
         landingWipeBlock.toggleClass('close-form open-form');
-        landingFormContainer.toggleClass('open-form');          
+        landingFormContainer.toggleClass('open-form');
         // display form according to button
-        
+        var target = $(this.hash);
+        if(target.length) {
+          setTimeout(function() {
+            landingForms.addClass('forms-active');
+          }, 300);          
+          target.addClass('opened');
+        }
       });
     }
-    btnClick();
+    openForm();
+
+    // close button click
+    function closeForm() {
+      $(landingCloseBtn).on('click', function(e) {
+        e.preventDefault();
+        landingWipeBlock.addClass('close-form').removeClass('open-form');
+        landingFormContainer.removeClass('open-form');      
+        landingForms.removeClass('forms-active');  
+        if($(landingForms).hasClass('opened')) {
+          $('.landing__tab-content').removeClass('opened');                    
+        }
+      });
+    }
+    closeForm();
+
+    // change form 
+    function changeForm() {
+      $(landingChangeLinks).on('click', function(e) {
+        e.preventDefault();
+        var targetForm = $(this.hash);
+        if(targetForm.length) {
+          if($('.landing__tab-content').hasClass('opened')) {
+            $('.landing__tab-content.opened').removeClass('opened');
+            targetForm.addClass('opened');
+          }
+        }
+      });
+    }
+    changeForm();
   }
-	
 	
 });
 
-
+// on window load 
+jQuery(window).on('load', function() {
+  $('#wipe-block').css({
+    'opacity': 1,
+    'visibility': 'visible'
+  });
+});
