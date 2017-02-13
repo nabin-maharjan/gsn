@@ -5,6 +5,11 @@
  * @package GSN
  * @since GSN 1.0
  */
+ if(is_user_logged_in()){?>
+	<script>
+	location.href="<?php echo site_url('/dashboard');?>";
+	</script>
+<?php }
 get_header("store");
 global $gsnProduct,$gsnSettingsClass;
 $gsn_settings=$gsnSettingsClass->get(); // get store Settings

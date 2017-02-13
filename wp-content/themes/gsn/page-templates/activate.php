@@ -19,7 +19,7 @@ get_header();
     <?php }else{ ?>
         Something wrong with activation code. May be this activation code is already been used. 
         <br>
-       <a class="btn btn-primary" href="<?php echo site_url();?>">Go to website</a>
+       <a class="btn btn-primary" href="<?php echo site_ur();?>">Go to website</a>
     <?php } ?>
     </div>
 </section>
