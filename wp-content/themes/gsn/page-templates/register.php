@@ -14,27 +14,7 @@
     <div  id="img_cntr">
       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" height="100%" viewBox="0 0 840 521" enable-background="new 0 0 840 521"
-	 xml:space="preserve">
-	 	<?php /*
-        <filter id="dropshadow" height="130%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
-          <!-- stdDeviation is how much to blur -->
-          
-          <feOffset dx="2" dy="2" result="offsetblur"/>
-          <!-- how much to offset -->
-          
-          <feFlood flood-color="black" flood-opacity="0.8">
-            <animate id="gray-filter-anim-in"  attributeName="flood-opacity" attributeType="XML" dur="10s" from="0.8" to="0.5"  fill="freeze"/>
-          </feFlood>
-          <feComposite in2="offsetblur" operator="in"/>
-          <feMerge>
-            <feMergeNode/>
-            <!-- this contains the offset blurred image -->
-            <feMergeNode in="SourceGraphic"/>
-            <!-- this contains the element that the filter is applied to --> 
-          </feMerge>
-        </filter>
-		<?php */ ?>
+	 xml:space="preserve">	 	
         <filter id="logo-shadow" x="-150%" y="-150%" width="300%" height="300%" color-interpolation-filters="sRGB">
         	<feOffset result="offOut" in="SourceGraphic" dx="0" dy="5"></feOffset>
         	<feGaussianBlur result="blurOut" in="offOut" stdDeviation="6"></feGaussianBlur>
@@ -341,7 +321,6 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
     </div>    
     
   </div>
-<<<<<<< HEAD
   <!-- /.logo-wrap -->
 
 
@@ -359,223 +338,150 @@ c-96.576,0.001-174.866-78.516-174.866-175.369s78.29-175.368,174.866-175.368c74.6
 	<!-- /.landing-buttons-cntr -->
 
 	<div class="landing-form-cntr clearfix close-form" id="landing-form-cntr"> 
-    <!-- Login Form -->
-    <div id="login" class="landing__tab-content tab-content__login">
-      <form name="login_form" id="login_form">
-        <!-- Row start -->
-        <div class="form-group">
-          <label for="loginEmailAddress" class="form-label">Email Address</label>
-          <div class="form-input">
-            <input type="text" class="form-control" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
-          </div>
-        </div>
-        <!-- Row end --> 
-        <!-- Row start -->
-        <div class="form-group">
-          <label for="login_password" class="form-label" type="password">Password</label>
-          <div class="form-input">
-            <input type="text" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
-          </div>
-        </div>
-        <!-- Row end -->
-        <button type="submit" class="btn btn-submit">Login</button>
-      </form>
-=======
-  <div class="stick-navigation-cntr">
-  <div style="color:#fff; font:size:28px; background:#000; padding:10px;">This site is in under testing phase. All data will be wiped out before we go live.</div>
-    	<div class="container"  style="display:none;">
-    		<div class="navigation__content clearfix">
-    			<div class="stick__logo fl"></div>
-    			<!-- /.stick__logo -->
-    			<nav class="stick__nav fr">
-	    			<ul>
-	    				<li>
-	    					<a href="#">About</a>
-	    				</li>
-	    				<li>
-	    					<a href="#">About</a>
-	    				</li>
-	    				<li>
-	    					<a href="#">About</a>
-	    				</li>
-	    				<li>
-	    					<a href="#">About</a>
-	    				</li>
-	    				<li>
-	    					<a href="#">About</a>
-	    				</li>
-	    			</ul>
-	    		</nav>
-	    		<!-- /.stick-nav -->
-    		</div>    		
-    	</div>
->>>>>>> 4511ff9b5dc0c834fece07837f847c02f56f1e0a
-    </div>
-    <!-- /.stick-navigation-cntr -->
-</div>
-<section class="landing">
-  <div class="container">
-    <h1 class="page-title"></h1>
-    <!-- LOGIN and REGISTER Form -->
-    <div class="landing__form"> 
-      <!-- TAB NAV -->
-      <div class="landing__nav">
-        <ul id="landing__tab" class="nav nav-tabs clearfix landing__tab" role="tablist">
-          <li class="active" role="presentation"> <a href="#login" role="tab" data-toggle="tab">Login</a> </li>
-          <li role="presentation"> <a href="#register" role="tab" data-toggle="tab">Register</a> </li>
-        </ul>
-      </div>
-      <!-- TAB NAV End --> 
-      <!-- TAB CONTENT -->
-      <div class="landing__tab-content tab-content clearfix"> 
-        <!-- Login Form -->
-        <div id="login" class="tab-pane active tab-content__login" role="tabpanel">
-          <form name="login_form" id="login_form">
-            <!-- Row start -->
-            <div class="form-group">
-              <label for="loginEmailAddress" class="form-label">Email Address</label>
-              <div class="form-input">
-                <input type="text" class="form-control" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
-              </div>
-            </div>
-            <!-- Row end --> 
-            <!-- Row start -->
-            <div class="form-group">
-              <label for="login_password" class="form-label" type="password">Password</label>
-              <div class="form-input">
-                <input type="text" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
-              </div>
-            </div>
-            <!-- Row end -->
-            <button type="submit" class="btn btn-submit">Login</button>
-          </form>
-        </div>
-        <!-- Login Form End --> 
-        <!-- Register Form -->
-        <div id="register" class="tab-pane tab-content__register" role="tabpanel">
-          <form name="register_form" id="register_form">
-            <div class="row"> 
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="firstName" class="form-label">First Name</label>
-                <div class="form-input">
-                  <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name">
-                </div>
-              </div>
-              <!-- Row end --> 
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="lastName" class="form-label">Last Name</label>
-                <div class="form-input">
-                  <input type="text" class="form-control"  name="lastName"  id="lastName"  placeholder="Enter your last name">
-                </div>
-              </div>
-              <!-- Row end --> 
-              <!-- Row start -->
-              <div class="form-group col-sm-12">
-                <label for="emailAddress" class="form-label">Email Address</label>
-                <div class="form-input">
-                  <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
-                </div>
-              </div>
-              <!-- Row end --> 
-               <div class="clearfix">
-              <!-- Row start -->
-              <div class="form-group col-sm-6">
-                <label for="password" class="form-label">Password</label>
-                <div class="form-input">
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
-                </div>
-              </div>
-              <!-- Row end --> 
-              
-                  <!-- Row start -->
-                  <div class="form-group col-sm-6">
-                    <label for="cpassword" class="form-label">Confirm Password</label>
-                    <div class="form-input">
-                      <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
-                    </div>
-                  </div>
-                  <!-- Row end --> 
-              </div>
-                  <!-- Row start -->
-                  <div class="form-group col-sm-6">
-                    <label for="mobileNumber" class="form-label">Mobile Number</label>
-                    <div class="form-input">
-                      <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
-                    </div>
-                  </div>
-                  <!-- Row end -->
-               
-              
-                  <!-- Row start -->
-                  <div class="form-group col-sm-6">
-                    <label for="storeName" class="form-label">Store Name</label>
-                    <div class="form-input">
-                      <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
-                    </div>
-                  </div>
-                  <!-- Row end --> 
-                  
-                  <!-- Row start -->
-                  <div class="form-group col-sm-6">
-                    <label for="panNumber" class="form-label">Pan Number</label>
-                    <div class="form-input">
-                      <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
-                    </div>
-                  </div>
-                  <!-- Row end --> 
+	    <!-- Login Form -->
+	    <div id="login" class="landing__tab-content tab-content__login">
+	      <form name="login_form" id="login_form">
+	        <!-- Row start -->
+	        <div class="form-group">
+	          <label for="loginEmailAddress" class="form-label">Email Address</label>
+	          <div class="form-input">
+	            <input type="text" class="form-control" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
+	          </div>
+	        </div>
+	        <!-- Row end --> 
+	        <!-- Row start -->
+	        <div class="form-group">
+	          <label for="login_password" class="form-label" type="password">Password</label>
+	          <div class="form-input">
+	            <input type="text" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
+	          </div>
+	        </div>
+	        <!-- Row end -->
+	        <button type="submit" class="btn btn-submit">Login</button>
+	      </form>
+		</div>
 
-              <!-- Row start -->
-              <div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
-                <label for="location" class="form-label">Set Your Store Location</label>
-                <button type="button" class="btn btn-primary col-sm-12 brick_red" id="set_location_btn" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
-                <button type="button" style="display:none" class="btn btn-success col-sm-12"  id="change_location_btn"data-toggle="modal" data-target="#gridSystemModal"> <span>Your location</span>
-                <p class="btn_location_text"></p>
-                </button>
-                <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
-                        <input type="hidden" class="form-control" name="latitute" id="latitute">
-                        <input type="hidden" class="form-control" name="lognitute" id="lognitute">
-              </div>
-              <!-- Row end --> 
-            </div>
-            <!-- Row start -->
-            
-            <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridModalLabel">Find Your Store Location</h4>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group clearfix">
-                      <div class="form-input">
-                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                        <div id="map" style="width:100%;height:400px"></div>
-                        Selected Location :<span id="selected_location_label"></span>
-                        
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-set-location" >Set location</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Row end -->
-            <button type="submit" class="btn btn-submit">Register</button>
-          </form>
-        </div>
-        <!-- Register Form End --> 
-      </div>
-      <!-- TAB CONTENT End --> 
-    </div>
-    <!-- LOGIN and REGISTER Form End --> 
-  </div>
-</section>
-<!-- LANDING FORM End -->
+		<!-- Register Form -->
+		<div id="register" class="tab-pane tab-content__register" role="tabpanel">
+		  <form name="register_form" id="register_form">
+		    <div class="row"> 
+		      <!-- Row start -->
+		      <div class="form-group col-sm-6">
+		        <label for="firstName" class="form-label">First Name</label>
+		        <div class="form-input">
+		          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name">
+		        </div>
+		      </div>
+		      <!-- Row end --> 
+		      <!-- Row start -->
+		      <div class="form-group col-sm-6">
+		        <label for="lastName" class="form-label">Last Name</label>
+		        <div class="form-input">
+		          <input type="text" class="form-control"  name="lastName"  id="lastName"  placeholder="Enter your last name">
+		        </div>
+		      </div>
+		      <!-- Row end --> 
+		      <!-- Row start -->
+		      <div class="form-group col-sm-12">
+		        <label for="emailAddress" class="form-label">Email Address</label>
+		        <div class="form-input">
+		          <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
+		        </div>
+		      </div>
+		      <!-- Row end --> 
+		       <div class="clearfix">
+		      <!-- Row start -->
+		      <div class="form-group col-sm-6">
+		        <label for="password" class="form-label">Password</label>
+		        <div class="form-input">
+		          <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+		        </div>
+		      </div>
+		      <!-- Row end --> 
+		      
+		          <!-- Row start -->
+		          <div class="form-group col-sm-6">
+		            <label for="cpassword" class="form-label">Confirm Password</label>
+		            <div class="form-input">
+		              <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
+		            </div>
+		          </div>
+		          <!-- Row end --> 
+		      </div>
+		          <!-- Row start -->
+		          <div class="form-group col-sm-6">
+		            <label for="mobileNumber" class="form-label">Mobile Number</label>
+		            <div class="form-input">
+		              <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
+		            </div>
+		          </div>
+		          <!-- Row end -->
+		       
+		      
+		          <!-- Row start -->
+		          <div class="form-group col-sm-6">
+		            <label for="storeName" class="form-label">Store Name</label>
+		            <div class="form-input">
+		              <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
+		            </div>
+		          </div>
+		          <!-- Row end --> 
+		          
+		          <!-- Row start -->
+		          <div class="form-group col-sm-6">
+		            <label for="panNumber" class="form-label">Pan Number</label>
+		            <div class="form-input">
+		              <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
+		            </div>
+		          </div>
+		          <!-- Row end --> 
+
+		      <!-- Row start -->
+		      <div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
+		        <label for="location" class="form-label">Set Your Store Location</label>
+		        <button type="button" class="btn btn-primary col-sm-12 brick_red" id="set_location_btn" data-toggle="modal" data-target="#gridSystemModal"> Location </button>
+		        <button type="button" style="display:none" class="btn btn-success col-sm-12"  id="change_location_btn"data-toggle="modal" data-target="#gridSystemModal"> <span>Your location</span>
+		        <p class="btn_location_text"></p>
+		        </button>
+		        <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
+		                <input type="hidden" class="form-control" name="latitute" id="latitute">
+		                <input type="hidden" class="form-control" name="lognitute" id="lognitute">
+		      </div>
+		      <!-- Row end --> 
+		    </div>
+		    <!-- Row start -->
+		    
+		    <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true">
+		      <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		          <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		            <h4 class="modal-title" id="gridModalLabel">Find Your Store Location</h4>
+		          </div>
+		          <div class="modal-body">
+		            <div class="form-group clearfix">
+		              <div class="form-input">
+		                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+		                <div id="map" style="width:100%;height:400px"></div>
+		                Selected Location :<span id="selected_location_label"></span>
+		                
+		              </div>
+		            </div>
+		          </div>
+		          <div class="modal-footer">
+		            <button type="button" class="btn btn-primary btn-set-location" >Set location</button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		    <!-- Row end -->
+		    <button type="submit" class="btn btn-submit">Register</button>
+		  </form>
+		</div>
+		<!-- Register Form End --> 
+	</div>
+</div>
+</div>
 
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places"></script> 
