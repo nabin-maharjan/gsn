@@ -325,12 +325,11 @@ jQuery(document).ready(function(e) {
       });
     };
     closeLocationModal();
-    
   }	
 });
 
 // on window load 
-jQuery(window).on('load', function() {
+$(window).on('load', function() {
   $('#wipe-block').css({
     'opacity': 1,
     'visibility': 'visible'

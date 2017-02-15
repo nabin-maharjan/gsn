@@ -84,9 +84,11 @@ var pathObj = {
 			  },1000,function(){
 				 $('#logo_svg').animate({'opacity':0},500);
 			  });
-        initLogo();
-			  
-			}
+            initLogo();	
+            setTimeout (function()	{
+                $('.landing-buttons-cntr').addClass('move-up');
+            }, 300);
+		}
 		
 	}).lazylinepainter('paint'); 
 
@@ -102,7 +104,7 @@ var pathObj = {
             _y = (e.clientY/this.clientHeight - 0.5) * 10;
 
         _LOGO_GRAPHIC.style.transform = 'translateX(' + -_x*2 + 'px) translateY(' + (-_y*2) + 'px)';
-        _LOGO_SHADOW.style.transform = 'translateZ(-40px) translateX(' + _x + 'px) translateY(' + (-_y + 5) + 'px)';
+        _LOGO_SHADOW.style.transform = 'translateZ(-40px) translateX(' + _x + 'px) translateY(' + (-_y + 10) + 'px)';
         _LOGO.style.transform = 'rotateX(' + -_y*2 + 'deg) rotateY(' + -_x*2 + 'deg)';
 
       });

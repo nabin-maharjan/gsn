@@ -7,7 +7,6 @@ body.page-template-register {
 .landing-hero-cntr {
   width:100%; 
   height:100vh;
-  // position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -26,6 +25,19 @@ body.page-template-register {
     margin:0 auto; 
     position:relative;
     perspective: 1000px;
+
+    @include max-screen($mq-tablet) {
+      max-width: 95%;
+      width: 60%;
+    }
+
+    @include max-screen($mq-mobile) {
+      width: 80%;
+    }
+
+    @include max-screen($mq-sm-mobile) {
+      width: 90%;
+    }
   }
 }
 #logo_svg {
@@ -34,6 +46,11 @@ body.page-template-register {
   svg {
     padding: 16px 0;
     margin:0 23px;
+
+    @include max-screen($mq-tablet) {
+      padding: 0;
+      margin: 0;
+    }
   }    
 }
 #img_cntr {
@@ -50,6 +67,10 @@ body.page-template-register {
     box-sizing:border-box; 
     padding:19px; 
     overflow:auto;
+
+    @include max-screen($mq-tablet) {
+      padding: 0;
+    }
   }
 }
 #logo-shadow {
@@ -70,7 +91,7 @@ body.page-template-register {
   filter: url(#shadow);
   opacity: 0;
   will-change: transform;
-  transform: translateZ(-40px) translateY(10px);
+  transform: translateZ(-10px) translateY(5px);
   z-index: -1;
 }
 
@@ -127,9 +148,18 @@ body.page-template-register {
 // Landing buttons 
 .landing-buttons-cntr {
   position: fixed;
-  bottom: 20px;
+  bottom: -100%;
   width: 350px;
   z-index: 9;
+  transition: all 350ms cubic-bezier(.77, 0, .175, 1);
+
+  @include max-screen($mq-sm-mobile) {
+    width: 280px;
+  }
+  
+  &.move-up {        
+    bottom: 20px;
+  }
 }
 
 .landing {
@@ -186,6 +216,18 @@ body.page-template-register {
     transition-delay: 0.5s;
     color: $white;
 
+    @include max-screen($mq-sm-mobile) {
+      min-width: inherit;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 60px;
+      padding: 20px 20px 0;
+      overflow: hidden;
+      overflow-y: auto;
+      transform: translateX(0) translateY(40%);
+    }
+
     &.forms-active {
       transition-delay: 0s;
       transition: all .2s ease-in-out;
@@ -195,6 +237,10 @@ body.page-template-register {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(-50%);
+
+      @include max-screen($mq-sm-mobile) {
+        transform: translateX(0) translateY(0);
+      }
     }
 
     &.closing {
@@ -435,6 +481,19 @@ body.page-template-register {
       background: rgba(255, 0, 0, 0.16);
       padding: 7px 20px;
       float: left;
+    }
+  }
+}
+
+
+@include max-screen($mq-sm-mobile) {
+  .location_cntr {
+    margin-bottom: 20px;
+
+    button.btn {
+      display: block;
+      width: 100%;
+      padding: 9px;
     }
   }
 }
