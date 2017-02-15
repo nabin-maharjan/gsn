@@ -324,12 +324,35 @@ jQuery(document).ready(function(e) {
 	});
     // close map modal
     var closeLocationModal = function() {
-      $('#close-map-modal').on('click', function(e) {
-        e.preventDefault();
-        landingModalContainer.removeClass('open-modal');
-      });
+      
+	  landingModalContainer.removeClass('open-modal');
     };
-    closeLocationModal();
+    
+	$('#close-map-modal').on('click', function(e) {
+        e.preventDefault();
+        closeLocationModal();
+      });
+	  
+	  
+	   /*
+		* event trigger when set location click
+		*/
+		jQuery('.btn-set-location').on('click',function(){
+			var location_selected=jQuery('#storeFullAddress').val().trim();
+			if(location_selected===""){
+				if(!jQuery('.alert.alert-danger').length){
+					jQuery(this).parent().prepend('<span class="map--error fl"> Please select location</span>');
+				}
+			} else {
+				jQuery('#set_location_btn').hide();
+				jQuery('#change_location_btn').show();
+				jQuery(this).parent().find('.alert').remove();
+				//jQuery('#gridSystemModal').modal('hide');	
+				 closeLocationModal();
+			}
+		});
+	
+	
   }	
 });
 

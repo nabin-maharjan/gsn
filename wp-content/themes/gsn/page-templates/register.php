@@ -503,24 +503,6 @@
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places"></script> 
 <script>
-/*
-* event trigger when set location click
-*/
-jQuery('.btn-set-location').on('click',function(){
-	var location_selected=jQuery('#storeFullAddress').val().trim();
-	if(location_selected==""){
-		if(!jQuery('.alert.alert-danger').length){
-			jQuery(this).parent().prepend('<span class="map--error fl"> Please select location</span>');
-		}
-	} else {
-		jQuery('#set_location_btn').hide();
-		jQuery('#change_location_btn').show();
-		jQuery(this).parent().find('.alert').remove();
-		jQuery('#gridSystemModal').modal('hide');	
-	}
-});
-
-
 /* Login jQuery validation Procress */
 jQuery("#login_form").validate({
 	rules: {
