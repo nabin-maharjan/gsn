@@ -1,6 +1,6 @@
 // JavaScript Document
-$('#gridSystemModal').on('shown.bs.modal', function() {
-    myMap();
+jQuery(document).ready(function(e){
+	  myMap();
 });
 function myMap() {
 	var geocoder = new google.maps.Geocoder();

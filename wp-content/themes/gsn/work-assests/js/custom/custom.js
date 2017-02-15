@@ -310,13 +310,18 @@ jQuery(document).ready(function(e) {
 
     // open map modal
     var openLocationModal = function() {
-      $('#set_location_btn').on('click', function(e) {
-        e.preventDefault();        
         landingModalContainer.addClass('open-modal');
-      });
     };
-    openLocationModal();
-
+	
+	$('#set_location_btn').on('click', function(e) {
+         e.preventDefault();
+		  openLocationModal();
+	});
+	
+	$('#change_location_btn').on('click', function(e) {
+		 e.preventDefault();
+		openLocationModal();
+	});
     // close map modal
     var closeLocationModal = function() {
       $('#close-map-modal').on('click', function(e) {
