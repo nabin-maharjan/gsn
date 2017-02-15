@@ -257,7 +257,8 @@ jQuery(document).ready(function(e) {
         landingWipeBlock = landingContainer.find('#wipe-block'),
         landingCloseBtn = landingContainer.find('.close-form-cntr a'),
         landingForms = landingContainer.find('.landing__tab-content'),
-        landingChangeLinks = landingForms.find('.form__message a');
+        landingChangeLinks = landingForms.find('.form__message a'),
+        landingModalContainer = landingContainer.find('#gridSystemModal');
 
     // login / register button click
     var openForm = function() {
@@ -306,6 +307,25 @@ jQuery(document).ready(function(e) {
       });
     };
     changeForm();
+
+    // open map modal
+    var openLocationModal = function() {
+      $('#set_location_btn').on('click', function(e) {
+        e.preventDefault();        
+        landingModalContainer.addClass('open-modal');
+      });
+    };
+    openLocationModal();
+
+    // close map modal
+    var closeLocationModal = function() {
+      $('#close-map-modal').on('click', function(e) {
+        e.preventDefault();
+        landingModalContainer.removeClass('open-modal');
+      });
+    };
+    closeLocationModal();
+    
   }	
 });
 
