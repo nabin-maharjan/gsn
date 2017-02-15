@@ -260,7 +260,7 @@ jQuery(document).ready(function(e) {
         landingChangeLinks = landingForms.find('.form__message a');
 
     // login / register button click
-    function openForm() {
+    var openForm = function() {
       $(landingButtons).on('click', function(e) {
         e.preventDefault();
         // addClass on landingContainer for wipe effects
@@ -275,11 +275,11 @@ jQuery(document).ready(function(e) {
           target.addClass('opened');
         }
       });
-    }
+    };
     openForm();
 
     // close button click
-    function closeForm() {
+    var closeForm = function() {
       $(landingCloseBtn).on('click', function(e) {
         e.preventDefault();
         landingWipeBlock.addClass('close-form').removeClass('open-form');
@@ -289,11 +289,11 @@ jQuery(document).ready(function(e) {
           $('.landing__tab-content').removeClass('opened');                    
         }
       });
-    }
+    };
     closeForm();
 
     // change form 
-    function changeForm() {
+    var changeForm = function() {
       $(landingChangeLinks).on('click', function(e) {
         e.preventDefault();
         var targetForm = $(this.hash);
@@ -304,10 +304,9 @@ jQuery(document).ready(function(e) {
           }
         }
       });
-    }
+    };
     changeForm();
-  }
-	
+  }	
 });
 
 // on window load 
