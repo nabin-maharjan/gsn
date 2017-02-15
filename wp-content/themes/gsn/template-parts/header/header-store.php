@@ -31,21 +31,21 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="<?php echo $current_product->post_title;?>">
     <meta itemprop="description" content="<?php echo $current_product->post_excerpt;?>">
-    <meta itemprop="image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <meta itemprop="image" content="<?php the_post_thumbnail_url( 'medium' ); ?>">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@<?php echo $store->domainName;?>">
     <meta name="twitter:title" content="<?php echo $current_product->post_title;?>">
     <meta name="twitter:description" content="<?php echo $current_product->post_excerpt;?>">
     <meta name="twitter:creator" content="@<?php echo $store->firstName;?>_<?php echo $store->lastName;?>">
-    <meta name="twitter:image" content="<?php the_post_thumbnail_url( 'full' ); ?>">
+    <meta name="twitter:image" content="<?php the_post_thumbnail_url( 'medium' ); ?>">
     <meta name="twitter:data1" content="<?php echo $current_product->get_price();?>">
     <meta name="twitter:label1" content="Price">
     <!-- Open Graph data -->
     <meta property="og:title" content="<?php echo $current_product->post_title;?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?php the_permalink();?>" />
-    <meta property="og:image" content="<?php the_post_thumbnail_url( 'full' ); ?>" />
+    <meta property="og:image" content="<?php the_post_thumbnail_url( 'medium' ); ?>" />
     <meta property="og:description" content="<?php echo $current_product->post_excerpt;?>" />
     <meta property="og:site_name" content="<?php echo $store->storeName;?>" />
     <meta property="og:price:amount" content="<?php echo $current_product->get_price();?>" />
