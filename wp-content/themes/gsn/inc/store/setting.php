@@ -22,6 +22,50 @@ class GsnSetting{
 	}
 	
 	
+	/* 
+	* Store package list
+	*/
+	public function store_packages(){
+		
+		$packages=array();
+		
+		/* Normal Package */
+		$packages[]=array(
+				'slug'=>'normal',
+				'name'=>'Normal',
+				'backend_info'=>'This is normal package information.'
+		);
+		
+		/* Bronze Package */
+		$packages[]=array(
+				'slug'=>'bronze',
+				'name'=>'Bronze',
+				'backend_info'=>'This is bronze package information.'
+		);
+		
+		/* Silver Package */
+		$packages[]=array(
+				'slug'=>'silver',
+				'name'=>'Silver',
+				'backend_info'=>'This is silver package information.'
+		);
+		
+		/* Gold Package */
+		$packages[]=array(
+				'slug'=>'gold',
+				'name'=>'Gold',
+				'backend_info'=>'This is gold package information.'
+		);
+		/* Platinium Package */
+		$packages[]=array(
+				'slug'=>'platinium',
+				'name'=>'Platinium',
+				'backend_info'=>'This is platinium package information.'
+		);
+		
+		return $packages;
+	}
+	
 	
 public function gsn_add_color_picker( $hook ) {
         // Add the color picker css file       
