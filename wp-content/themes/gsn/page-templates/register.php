@@ -436,8 +436,8 @@
 		      <!-- Row start -->
 		      <div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
 		        <label for="location" class="form-label">Set Your Store Location</label>
-		        <button type="button" class="btn btn-primary col-sm-12 brick_red" id="set_location_btn"> Location </button>
-		        <button type="button" style="display:none" class="btn btn-success col-sm-12"  id="change_location_btn"> <span>Your location</span>
+		        <button type="button" class="btn btn-primary col-sm-12 brick_red location-btn" id="set_location_btn"> Location </button>
+		        <button type="button" style="display:none" class="btn btn-success col-sm-12 location-btn"  id="change_location_btn"> <span>Your location</span>
 		        <p class="btn_location_text"></p>
 		        </button>
 		        <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
