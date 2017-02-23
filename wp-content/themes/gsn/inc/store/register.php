@@ -444,7 +444,6 @@ class Store{
 				/* get Activate code object */
 				$query=$wpdb->prepare("select * from ".$wpdb->activate_code." where user_id=%s and code=%s",$user_id,$code); // Prepare query
 				$activateObj = $wpdb->get_row($query );
-				var_dump($activateObj);die;
 				if($activateObj){
 					if($activateObj->code_used!=0){
 						throw new Exception("already_activated");
