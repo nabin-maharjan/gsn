@@ -314,21 +314,6 @@
   </div>
   <!-- /.logo-wrap -->
 
-
-
-	<div class="landing-buttons-cntr">
-		<ul class="nav nav-tabs clearfix landing__tab" id="landing__tab">
-	      <li> 
-	      	<a href="#login">Login</a> 
-	      </li>
-	      <li> 
-	      	<a href="#register">Register</a> 
-	      </li>
-	    </ul>
-        <div style="color:#fff; margin-top:5px">This site is in under testing phase. All data will be wiped out before we go live.</div>
-	</div>
-	<!-- /.landing-buttons-cntr -->
-
 	<div class="landing-form-cntr clearfix close-form" id="landing-form-cntr"> 
 	    <div id="login" class="landing__tab-content tab-content__login">
 	      <h2>Login</h2>
@@ -455,6 +440,16 @@
 		</div>
 		<!-- Register Form End --> 
 
+		<div id="about" class="landing__tab-content tab-content__register">
+			<h2>About Us</h2>
+			<div class="about-content">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+				<br>
+				<br>
+				Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+			</div>
+		</div>
+
 		<div class="close-form-cntr">
 			<a href="#" class="close__btn">
 				<svg>
@@ -495,8 +490,26 @@
 	</div>
 	<!-- /.landing-form-cntr -->
 
-	<div class="wipe-block close-form" id="wipe-block"></div>
-	<!-- /.wipe-block -->	
+	<div class="landing-about-link">
+		<a id="about-btn" class="about-section" href="#about">About us?</a>
+	</div>
+	<!-- /.landing-about-link -->
+
+	<div class="landing-buttons-cntr">
+		<ul class="nav nav-tabs clearfix landing__tab" id="landing__tab">
+	      <li> 
+	      	<a href="#login">Login</a> 
+	      </li>
+	      <li> 
+	      	<a href="#register">Register</a> 
+	      </li>	      
+	    </ul>
+        <div style="color:#fff; margin-top:5px">This site is in under testing phase. All data will be wiped out before we go live.</div>
+	</div>
+	<!-- /.landing-buttons-cntr -->
+
+	<div class="wipe-block" id="wipe-block"></div>
+	<!-- /.wipe-block -->
 </div>
 <!-- /.landing-hero-cntr -->
 

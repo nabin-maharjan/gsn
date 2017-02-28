@@ -26,7 +26,9 @@ var_dump($store); die;*/
     <?php } ?>
   </script>
 <?php wp_head(); ?>
-<?php get_template_part( 'template-parts/header/header','style');   ?>
+<?php if(!is_page("Register")){
+	get_template_part( 'template-parts/header/header','style');
+	}   ?>
 </head>
 
 <body <?php body_class(); ?>>

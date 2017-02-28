@@ -5,8 +5,7 @@ body.page-template-register {
 // HERO SECTION WITH LOGO
 
 .landing-hero-cntr {
-  width:100%; 
-  height:100vh;
+  width:100%;   
   top: 0;
   bottom: 0;
   left: 0;
@@ -22,7 +21,7 @@ body.page-template-register {
   .logo-wrap {
     width:40%;
     max-width: 550px;
-	min-width: 280px;
+	  min-width: 280px;
     margin:0 auto; 
     position:relative;
     perspective: 1000px;
@@ -178,6 +177,20 @@ body.page-template-register {
     z-index: 999;
     transition: all 0s 0.5s;
 
+    &.about-section {
+      background:$brick_red;
+
+      .about-content {   
+        margin-top: 20px;     
+        line-height: 26px;
+        font-size: 18px;
+
+        @include max-screen($mq-sm-mobile) {
+          font-size: 16px;
+        }
+      }
+    }
+
     &.open-form {
       opacity: 1;
       visibility: visible;      
@@ -224,7 +237,7 @@ body.page-template-register {
       left: 0;
       right: 0;
       bottom: 60px;
-      padding: 20px 20px 0;
+      padding: 60px 20px 0;
       overflow: hidden;
       overflow-y: auto;
       transform: translateX(0) translateY(40%);
@@ -289,6 +302,13 @@ body.page-template-register {
         }
       }
     }
+    .location-btn {
+      white-space: normal;
+
+      .btn_location_text {
+        margin-bottom: 0;
+      }
+    }
   }
   &__tab {
     border-bottom: none;
@@ -298,7 +318,7 @@ body.page-template-register {
       float: left;
       text-align: center;
       width: 50%;
-      background: $gray_bg;
+      background: $darker__gray;
       transition: all 0.3s ease-in;
 
       &.active {
@@ -312,7 +332,27 @@ body.page-template-register {
         display: block;
         font-size: 16px;
         padding: 15px 15px;
-        text-transform: uppercase;        
+        text-transform: uppercase;
+      }
+      &.about-btn {
+        position: fixed;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+  &-about-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    a {
+      text-transform: uppercase;
+      color: $white;
+      font-size: 16px;            
+
+      &:hover {
+        color: $petal_green;
       }
     }
   }
@@ -325,21 +365,22 @@ body.page-template-register {
   width: 100%;
   z-index: 998;
   opacity: 0;
-  visibility: hidden;
-
-  &.close-form {    
-    animation-name: hide;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
-    animation-delay: 0s;      
-    animation-fill-mode: forwards;
-  }
+  visibility: hidden; 
+  animation-name: hide; 
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(.77, 0, .175, 1);
+  animation-delay: 0s;      
+  animation-fill-mode: forwards;  
   &.open-form {
     animation-name: cover;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
-    animation-delay: 0s;      
-    animation-fill-mode: forwards;
+  }
+  &.wipeRight {
+    background: $petal_green;
+    animation-name: wipeRight;
+  }
+  &.wipeSlide {
+    background: $petal_green;
+    animation-name: wipeSlide;
   }
 }
 
@@ -349,8 +390,14 @@ body.page-template-register {
   width: 100%;
   text-align: center;
 
-  .close__btn {  
+  .about-section & {
+    bottom: auto;
+    top: 20px;
+    right: 20px;
+    width: auto;
+  }
 
+  .close__btn {  
     svg {
       height: 20px;
       width: 20px;
@@ -398,6 +445,18 @@ body.page-template-register {
   0% { transform: translateY(100%); }
   50% { transform: translateY(0); }
   100% { transform: translateY(-100%); }
+}
+
+@keyframes wipeSlide {
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes wipeRight {
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 // Location Modal
@@ -474,7 +533,8 @@ body.page-template-register {
     }
 
     #pac-input {
-      margin: 0;
+      margin-left: 0;
+      margin-top: 10px;
     }
   }
 
