@@ -233,11 +233,11 @@ body.page-template-register {
 
     @include max-screen($mq-sm-mobile) {
       min-width: inherit;
-      top: 0;
+      top: 60px;
       left: 0;
       right: 0;
       bottom: 60px;
-      padding: 60px 20px 0;
+      padding: 0 20px 0;
       overflow: hidden;
       overflow-y: auto;
       transform: translateX(0) translateY(40%);
@@ -344,7 +344,12 @@ body.page-template-register {
   &-about-link {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: -100%;
+    transition: all 350ms cubic-bezier(.77,0,.175,1);
+
+    &.move-right {
+      right: 20px;
+    }
 
     a {
       text-transform: uppercase;

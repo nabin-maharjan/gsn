@@ -300,7 +300,8 @@ jQuery(document).ready(function(e) {
           landingWipeBlock.removeClass('wipeSlide').addClass('wipeRight');
         }      
         landingWipeBlock.addClass('wipeRight');
-        landingFormContainer.toggleClass('about-section open-form');
+        landingFormContainer.addClass('about-section');
+        landingFormContainer.toggleClass('open-form');
         // display form according to button
         var target = $(this.hash);
         if(target.length) {

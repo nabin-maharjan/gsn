@@ -87,6 +87,7 @@ var pathObj = {
             initLogo();	
             setTimeout (function()	{
                 $('.landing-buttons-cntr').addClass('move-up');
+                $('.landing-about-link').addClass('move-right');
             }, 300);
 		}
 		
