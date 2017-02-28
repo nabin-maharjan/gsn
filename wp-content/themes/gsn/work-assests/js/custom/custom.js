@@ -326,7 +326,7 @@ jQuery(document).ready(function(e) {
         if($(landingFormContainer).hasClass('about-section')) {
           setTimeout(function() {
             landingFormContainer.removeClass('about-section');
-          }, 2000);          
+          }, 800);          
         }
         landingFormContainer.removeClass('open-form');      
         landingForms.removeClass('forms-active');  
