@@ -234,3 +234,15 @@ section {
 		}
 	}
 }
+
+.go-to-shop-link {
+	background: $brick_red;
+	padding: 10px 15px;
+	margin-top: 10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+
+    &:hover {
+    	background: $petal_green;
+    }
+}
