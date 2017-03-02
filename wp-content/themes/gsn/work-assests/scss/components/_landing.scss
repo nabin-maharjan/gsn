@@ -18,6 +18,11 @@ body.page-template-register {
   background-position: center center;
   background-size: cover;
 
+  @include max-screen($mq-tablet) {
+     position: fixed;
+     height: auto !important;
+  }
+
   .logo-wrap {
     width:40%;
     max-width: 550px;
