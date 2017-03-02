@@ -186,10 +186,15 @@ class Store{
 								'code' =>$randomGenCode,
 								'code_used' =>0
 								)
-							);							
+							);	
+			
+				
 			$to = sanitize_text_field($emailAddress);
 			$subject = 'Email Verification!';
-			$body = 'The email body content';
+			
+			$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
+			$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
+			
 			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal<support@goshopnepal.com>');
 			$mail_sent=wp_mail( $to, $subject, $body, $headers );
 			
