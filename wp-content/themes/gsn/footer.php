@@ -1,4 +1,5 @@
 <?php 
+global $store;
 $footer_name="";
 if((is_page()|| is_archive() || is_tax() || is_shop() || is_product()) &&  $store->is_shop==true){
 	global $post;
@@ -7,4 +8,4 @@ if((is_page()|| is_archive() || is_tax() || is_shop() || is_product()) &&  $stor
 		$footer_name="store";
 	}
 }
-get_template_part( 'template-parts/footer/footer',$footer_name); 
+get_template_part( 'template-parts/footer/footer',$footer_name);

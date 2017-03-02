@@ -149,6 +149,33 @@ class Store{
 		
 	}
 	/*
+	* Function sent activation link mail
+	*/
+	public function send_activation_mail($user_id,$emailAddress){
+		global $store, $wpdb;
+		$randomGenCode=$store->generateRandomString();	
+			$insert = $wpdb->insert(
+							$wpdb->activate_code,
+							array(
+								'user_id'=>$user_id,
+								'code' =>$randomGenCode,
+								'code_used' =>0
+								)
+							);	
+			
+				
+			$to = sanitize_text_field($emailAddress);
+			$subject = 'Email Verification!';
+			
+			$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
+			$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
+			
+			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal<support@goshopnepal.com>');
+			return wp_mail( $to, $subject, $body, $headers );
+		
+	}
+	
+	/*
 	*Function generate RAndom cod
 	*/
 	public function generateRandomString($length = 30) {
@@ -178,26 +205,8 @@ class Store{
 			$response=array();
 		}
 		try{
-			$randomGenCode=$store->generateRandomString();	
-			$insert = $wpdb->insert(
-							$wpdb->activate_code,
-							array(
-								'user_id'=>$user_id,
-								'code' =>$randomGenCode,
-								'code_used' =>0
-								)
-							);	
 			
-				
-			$to = sanitize_text_field($emailAddress);
-			$subject = 'Email Verification!';
-			
-			$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
-			$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
-			
-			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal<support@goshopnepal.com>');
-			$mail_sent=wp_mail( $to, $subject, $body, $headers );
-			
+			$mail_sent=$this->send_activation_mail($user_id,$emailAddress);
 			if($mail_sent){
 				/* set success message */
 				$response['status']="success";
@@ -773,7 +782,7 @@ class Store{
 								//set_user_role($user_id,'store_contributor');
 								if($insert){
 									/* Send activation code */
-									$this->send_activation_code($user_id, sanitize_text_field($datas['emailAddress']));
+									$send_activation_code=$this->send_activation_mail($user_id, sanitize_text_field($datas['emailAddress']));
 								}
 								/* login user */
 								wp_set_current_user($user_id);
