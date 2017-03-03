@@ -90,3 +90,35 @@ label.error {
   justify-content: cener;
   align-items: center;
 }
+
+.desktop {
+  display: block;
+
+  @include max-screen($mq-mobile) {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+
+  @include max-screen($mq-mobile) {
+    display: block;
+  }
+}
+
+@include max-screen($mq-tablet) {
+  .container {
+    width: 100%;
+    padding: 0 20px;
+  }
+  [class*='col-'] {
+    padding: 0 20px;
+  }
+  .row {
+    margin: 0 -20px;
+  }
+  .p15 {
+    padding: 0 15px;
+  }
+}

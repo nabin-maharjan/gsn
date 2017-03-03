@@ -140,7 +140,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 </head>
 <body <?php body_class(); ?>>
   <header class="header gsn-header">
-    <div class="header__top">
+    <div class="header__top desktop">
       <div class="container">
         <div class="row">
           <div class="top top-icons clearfix p15">
@@ -173,9 +173,13 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
           <!-- /.header__logo -->
           <div class="col-md-9 header__main-items">
             <div class="item__nav fl">
-              <!-- <div class="navbar-toggle nav__mobile-trigger">
-                <button></button>
-              </div> -->
+              <div class="navbar-toggle nav__mobile-trigger mobile theme-hamburger">
+                <a id="hamburger-icon" class="hamburger-icon" href="#" title="Menu">
+                  <span class="line line-1"></span>
+                  <span class="line line-2"></span>
+                  <span class="line line-3"></span>
+                </a>
+              </div>
               <nav class="main-nav">
                 <?php wp_nav_menu( array( 
           				'theme_location' => 'store-header-menu',
