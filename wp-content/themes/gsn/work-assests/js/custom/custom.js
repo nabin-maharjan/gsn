@@ -196,7 +196,7 @@ jQuery(document).ready(function(e) {
     jQuery(this).parents('.search-cntr').find('.search__content').slideToggle();
   });
 
-  $('.main-content').css({'margin-top': $('.header__bottom').height()});
+  //$('.main-content').css({'margin-top': $('.header__bottom').height()});
   
   $(document).on('scroll', function() {
     // backToTop Display

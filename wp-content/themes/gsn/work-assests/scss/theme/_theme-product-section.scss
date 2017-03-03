@@ -27,6 +27,10 @@ main {
       vertical-align: top;
       width: 25%;
 
+      @include max-screen($mq-tablet) {
+        padding: 0 20px;
+      }
+
       .product-info-cntr {
         margin-top: 20px;
         padding: 0 10px;

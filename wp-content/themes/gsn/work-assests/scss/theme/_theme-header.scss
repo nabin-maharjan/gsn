@@ -5,6 +5,10 @@
     font-size: 14px;
     height: 35px;
     line-height: 35px;
+
+    @include max-screen($mq-mobile) {
+      height: 1px;
+    }
   }
   &__bottom {
     background: $white;
@@ -13,6 +17,10 @@
     position: absolute;
     width: 100%;
     z-index: 4;
+
+    @include max-screen($mq-mobile) {
+      top: 0;
+    }
 
     &.stick {
       box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.3);
@@ -80,6 +88,11 @@
     cursor: pointer;
     float: left;
 
+    @include max-screen($mq-mobile) {
+      float: none;
+      display: block;
+    }
+
     &.active, &:hover > a {
       color: $brick_red;
     }
@@ -91,6 +104,16 @@
     padding: 0 25px;
     text-transform: uppercase;
     transition: all 0.5s ease;
+
+    @include max-screen($mq-tablet) {
+      padding: 0 15px;
+    }
+
+    @include max-screen($mq-mobile) {
+      padding: 15px 20px;
+      line-height: 1;
+      color: $white;      
+    }
   }
 }
 .dropdown {
@@ -154,11 +177,33 @@
     visibility: visible;
   }
 }
+
+// navigation responsive
+@include max-screen($mq-mobile) {
+  .header__main-items {
+    position: static;
+  }
+  .main-nav {
+    position: absolute;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    width: 100%;
+    background: $black;
+    z-index: 11;
+    display: none;
+  }
+}
+
 // /.navigation
 
 // cart
 .item__cart {
   position: relative;
+
+  @include max-screen($mq-mobile) {
+    margin-right: 60px;
+  }
 }
 .cart {
   &__icon {
@@ -227,9 +272,14 @@
 
       > span {
         padding-right: 5px;
+        float: right;
       }
-      a {
-        float: left;
+      a {        
+        text-overflow: ellipsis;
+        width: 230px;
+        overflow: hidden;
+        padding-right: 15px;
+        text-align: left;
       }
     }
     .product__attributes {
@@ -373,3 +423,53 @@
   }
 }
 // /.search
+
+
+// theme hamburger
+.hamburger-icon {
+  width: 45px;
+  height: 22px;
+  position: relative;
+  display: block;  
+
+  .line {
+    display: block;
+    background: $black;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    left: 0;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+
+    &.line-1 {
+      top: 0;
+    }
+    &.line-2 {
+      top: 50%;
+    }
+    &.line-3 {
+      top: 100%;
+    }
+  }
+
+  &.active {
+    .line-1 {
+      transform: translateY(13px) translateX(0) rotate(45deg);
+    }
+    .line-2 {
+      opacity: 0;
+    }
+    .line-3 {
+      transform: translateY(-13px) translateX(0) rotate(-45deg);
+    }
+  }
+}
+
+.theme-hamburger {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  margin-top: -12px;
+}
