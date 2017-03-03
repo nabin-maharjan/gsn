@@ -143,3 +143,16 @@ h2.entry-title {
 		}
 	}
 }
+
+.woocommerce-page .cart_totals #shipping_method, .woocommerce-page #order_review #shipping_method{
+	li {
+		display: block;
+		text-align: left;
+		background: $lighter_gray;
+		margin-bottom: 5px;
+		padding: 10px 30px;
+	}
+	.flat_rate_note {
+	  padding-left: 25px;
+	}
+}
