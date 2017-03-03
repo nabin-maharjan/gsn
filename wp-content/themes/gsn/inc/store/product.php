@@ -467,15 +467,15 @@ class GsnProduct{
 					update_post_meta( $post_id, '_stock_status', 'instock');
 					update_post_meta( $post_id, 'total_sales', '0' );
 					update_post_meta( $post_id, '_downloadable', 'no' );
-					update_post_meta( $post_id, '_virtual', 'yes' );
+					update_post_meta( $post_id, '_virtual', 'no' );
 					update_post_meta( $post_id, '_regular_price', $datas['price']  );
 					update_post_meta( $post_id, '_sale_price','');
 					update_post_meta( $post_id, '_purchase_note', '' );
 					//update_post_meta( $post_id, '_featured', 'no' );
-					/*update_post_meta( $post_id, '_weight', '' );
+					update_post_meta( $post_id, '_weight', '' );
 					update_post_meta( $post_id, '_length', '' );
 					update_post_meta( $post_id, '_width', '' );
-					update_post_meta( $post_id, '_height', '' );*/
+					update_post_meta( $post_id, '_height', '' );
 					update_post_meta( $post_id, '_sku', '' );
 					update_post_meta( $post_id, '_product_attributes', array() );
 					update_post_meta( $post_id, '_sale_price_dates_from', '' );

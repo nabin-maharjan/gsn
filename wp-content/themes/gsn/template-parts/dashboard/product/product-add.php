@@ -368,11 +368,13 @@ jQuery("#product_create_form").validate({
 	  var product_content =tinyMCE.activeEditor.getContent();
 	  var data= {action: "gsn_add_product", formdata : formdata,product_content:product_content};
 	  var response=ajax_call_post(data,"#product_create_form",'',function(response){
-				jQuery(form)[0].reset();
+		  
+		  window.location.reload();
+				/*jQuery(form)[0].reset();
 				jQuery('.image_src').attr('src','')
 				jQuery('.gallery_image_cntr').html('');
 				jQuery('.product_attribute').html('');
-				jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+				/*jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);*/
 	 },function(){
 		  jQuery('html, body').animate({
 				scrollTop: jQuery("body").offset().top

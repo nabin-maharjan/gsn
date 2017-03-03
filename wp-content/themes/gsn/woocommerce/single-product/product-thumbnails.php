@@ -24,6 +24,9 @@ global $post, $product, $woocommerce,$gsnSettingsClass;
 $gsn_settings=$gsnSettingsClass->get(); // get store Settings
 $package=$gsn_settings->storePackageSettings;//get store package settings
 $attachment_ids = $product->get_gallery_attachment_ids();
+//echo "<pre>";
+//$post_metas=get_post_meta($product->id);
+//var_dump($post_metas); die;
 
 if ( $attachment_ids ) {
 	$loop 		= 0;

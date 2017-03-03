@@ -4,11 +4,6 @@
  *link vendor css file  on top
  */
 function enquee_style_css(){
-	
-	if( is_page_template('page-templates/store-product-single.php') ){
-		wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all' );
-	}
-	
 	// Enqueue custom stylesheet//
 	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '', 'all' );
 }

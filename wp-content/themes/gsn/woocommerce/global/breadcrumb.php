@@ -26,7 +26,7 @@ if ( ! empty( $breadcrumb ) ) {
 	echo $wrap_before;
 
 	foreach ( $breadcrumb as $key => $crumb ) {
-	if($crumb[0]==$store->storeName){
+	if($crumb[0]==$store->storeName." ".$store->user_id){
 		continue;
 	}
 		echo $before;

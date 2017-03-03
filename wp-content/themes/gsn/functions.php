@@ -36,3 +36,44 @@ function modify_merchant_id($merchant_id){
 	}
 	return  $merchant_id;
 };
+
+
+/**
+ * Hide shipping rates when free shipping is available.
+ * Updated to support WooCommerce 2.6 Shipping Zones.
+ *
+ * @param array $rates Array of rates found for the package.
+ * @return array
+ */
+function change_flat_shipping_rate_based_ongsn( $rates ) {
+	foreach ( $rates as $rate_id => $rate ) {
+		if ( 'flat_rate' === $rate->method_id ) {
+			global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get();
+			$flat_rate=$gsn_settings->flat_rate;
+			if(empty($flat_rate)){
+				unset($rates[$rate_id]);
+			}else{
+				$rate->cost=$flat_rate;
+			}
+			break;
+		}
+	}
+	return  $rates;
+}
+add_filter( 'woocommerce_package_rates', 'change_flat_shipping_rate_based_ongsn', 100 );
+/*
+*Add note to flate rate
+*@param Object of shipping method
+*/
+function add_note_under_flat_rate($method){
+	if($method->method_id=="flat_rate"){
+		global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get();		
+		echo "<div class='flat_rate_note'>".$gsn_settings->flat_rate_note."</div>";
+	}
+}
+add_filter( 'woocommerce_after_shipping_rate', 'add_note_under_flat_rate', 100 );
+
+
+

@@ -13,7 +13,9 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js" <?php  if(is_singular('product')) { ?>itemtype="http://schema.org/Product" <?php } ?>>
 <head profile="http://www.w3.org/2005/10/profile">
-	<title><?php wp_title(); ?></title>
+ <?php  if(!is_singular('product')) { ?>
+	<title><?php echo $store->storeName; ?></title>
+	<?php } ?>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
 	<link rel="profile" href="http://gmpg.org/xfn/11">
@@ -26,7 +28,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
    ?>
 
     <!-- Place this data between the <head> tags of your website -->
-    <title>Page Title. Maximum length 60-70 characters</title>
+    <title><?php echo $current_product->post_excerpt;?></title>
     <meta name="description" content="<?php echo $current_product->post_excerpt;?>" />
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="<?php echo $current_product->post_title;?>">

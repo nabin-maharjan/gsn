@@ -98,6 +98,40 @@
       </div>
       <!-- Row end -->      
         <div class="form-group clearfix">
+           <div class="col-sm-6">
+                 <h3>Payment Information</h3>
+                 
+			   <h6>Shipping information</h6>
+                <!-- Row start -->
+                  <div class="form-group clearfix">
+                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm">Shipping Charge (Rs)</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->flat_rate))?$gsn_settings->flat_rate:"";?>" name="flat_rate" id="flat_rate">
+                    </div>
+                  </div>
+               <!-- Row start -->
+                  <div class="form-group clearfix">
+                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm">Shipping Note</label>
+                    <div class="col-sm-8">
+						<textarea class="form-control form-control-sm" name="flat_rate_note" id="esewaId"><?php echo (!empty($gsn_settings->flat_rate_note))?$gsn_settings->flat_rate_note:"";?></textarea>
+                    </div>
+                  </div>
+                
+                
+                
+                 
+                  <!-- Row start -->
+                  <!--div class="form-group clearfix">
+                    <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">eSewa ID</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
+                    </div>
+                  </div-->
+              </div>
+           
+           
+           
+           
             <div class="col-sm-6">
              <h3>Social Links</h3>
         
@@ -128,16 +162,7 @@
               </div>
               <!-- Row end -->
               </div>
-            <div class="col-sm-6">
-                 <h3>Payment Information</h3>
-                  <!-- Row start -->
-                  <div class="form-group clearfix">
-                    <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">eSewa ID</label>
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
-                    </div>
-                  </div>
-              </div>
+            
       </div>
       <!-- Row end -->   
       <?php if($gsn_settings->id!=NULL){?>

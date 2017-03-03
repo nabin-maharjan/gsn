@@ -193,6 +193,9 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$this->storePackageSettings=$this->get_store_settings(); //get store package settings
 		$this->fbPageId=array_shift($post_metas['fbPageId']); //get facebook page Id
 		$this->fbAppId=array_shift($post_metas['fbAppId']); //get facebook App ID
+		$this->flat_rate=array_shift($post_metas['flat_rate']); //get shipping flat rate
+		$this->flat_rate_note=array_shift($post_metas['flat_rate_note']); //get shipping flat rate note
+		
 		return $this;
 	}
 	/*

@@ -86,9 +86,11 @@ jQuery(document).on('click','.repeater_remove',function(e){
 ///////////////////////////////////////////////////////////////////////////////////////
 
 jQuery(document).ready(function($){
-		var _custom_media = true,
-		_orig_send_attachment = wp.media.editor.send.attachment;
+		
+		
 		$(document).on('click','.upload_img_cntr_admin .upload_img_cntr_btn',function(e) {
+			var _custom_media = true,
+				_orig_send_attachment = wp.media.editor.send.attachment;
 			var send_attachment_bkp = wp.media.editor.send.attachment;
 			var button = $(this);
 			_custom_media = true;

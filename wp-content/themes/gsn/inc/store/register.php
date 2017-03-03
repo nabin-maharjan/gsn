@@ -513,7 +513,14 @@ class Store{
 	public function check_access_store(){
 		
 		global $store;
-		if(is_page("activate")){			
+		if(is_page("activate")){
+		}else if(!empty($store->id) && $store->is_shop==true && is_page_template( 'page-templates/register.php')){
+			  global $wp_query;
+			  $wp_query->set_404();
+			  status_header( 404 );
+			  get_template_part( 404 ); exit();
+			
+			
 		}else if(!empty($store->id) && $store->is_shop==true){
 		}else if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
 			wp_redirect( site_url("/register/"));
