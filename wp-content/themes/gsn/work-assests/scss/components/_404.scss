@@ -15,10 +15,18 @@
     z-index: -1;
     font-weight: bold;
 
+    @include max-screen(mq-mobile) {
+      font-size: 100px;
+    }
+
     span {
       display: inline-block;
       position: relative;
       top: -20px;
+
+      @include max-screen(mq-mobile) {
+        font-size: 18px;
+      }
     }
   }
 
