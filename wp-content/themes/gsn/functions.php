@@ -24,7 +24,7 @@ $custom_post_types->agile_admin_scripts();
 add_theme_support( 'post-thumbnails' );
 show_admin_bar( false);
 /*  image quality */
-add_filter('jpeg_quality', function($arg){return 75;});
+add_filter('jpeg_quality', function($arg){return 60;});
 
 /* modify esewa merchant id */
 add_filter('esewa_merchant_id_filter','modify_merchant_id',10,1);
@@ -36,3 +36,15 @@ function modify_merchant_id($merchant_id){
 	}
 	return  $merchant_id;
 };
+/*
+*Limit upload file size 
+*/
+add_action('init',function(){
+	if(!is_admin()){
+		add_filter('upload_size_limit',function(){
+			return "5242880";
+		});
+	}
+	
+});
+
