@@ -8,7 +8,7 @@
 <body <?php body_class('main-error') ?>>
   <div class="error-content">
     <h1>404 <span>:(</span></h1>
-    <p>Oops! to tried to search what you are looking for. <br> Please try something else.</p>
+    <p>Oops! too tried to search what you are looking for. <br> Please try something else.</p>
     <div class="go-to-home-link">
       <a href="<?php echo site_url(); ?>">Go to home</a>
     </div>

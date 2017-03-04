@@ -126,7 +126,7 @@ public function _custom_nav_menu_item( $title, $url, $order, $parent = 0 ){
 */
 public function filter_customize_nav_menu_available_items( $items, $menu, $arg ) {
 	global $store;
-	$storeParentCat=get_term_by( 'name', $store->storeName,'product_cat');
+	$storeParentCat=get_term_by( 'name', $store->storeName." ".$store->user_id,'product_cat');
 		$sub_term=get_term_children($storeParentCat->term_id, 'product_cat'); 
 		if(count($sub_term)>0){
 			$term_args = array(
@@ -260,7 +260,7 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 					}else{
 						$post_id = wp_insert_post( array(
 							'post_author' => $store->user_id,
-							'post_title' => $store->storeName,
+							'post_title' => $store->storeName." ".$store->user_id,
 							'post_status' => 'publish',
 							'post_type' => "store_setting",
 							 'post_content' =>$_POST['aboutStore']

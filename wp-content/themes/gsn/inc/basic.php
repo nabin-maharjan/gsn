@@ -16,7 +16,7 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 function enquee_scripts(){
     wp_enqueue_script( 'jquery-min', get_template_directory_uri() . '/assets/js/vendor/jquery-3.1.1.min.js', array('jquery'), '1.0.0', false ); 
 	
-	 wp_enqueue_script( 'jquery-ui','https://code.jquery.com/ui/1.12.1/jquery-ui.js', array('jquery'), '1.0.0', false ); 
+	 wp_enqueue_script( 'jquery-ui',get_template_directory_uri() . '/assets/js/vendor/jquery-ui.js', array('jquery'), '1.0.0', false ); 
     wp_enqueue_script( 'jquery-validate-min', get_template_directory_uri() . '/assets/js/vendor/jquery.validate.min.js', array('jquery'), '1.0.0', false );
     wp_enqueue_script( 'tether-js', get_template_directory_uri() . '/assets/js/vendor/tether.min.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js', array('jquery'), '1.0.0', true );
@@ -24,15 +24,13 @@ function enquee_scripts(){
 
 	wp_enqueue_script( 'bootstrap-datepicker-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap-datepicker.min.js', array('jquery'), '1.0.0', true );
     // wp_enqueue_script( 'custom-scrollbar', get_template_directory_uri() . '/assets/js/vendor/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '1.0.0', true );
-	// Enqueue custom all js// 
 	
-	wp_enqueue_script( 'lazylinepainter-js', get_template_directory_uri() . '/assets/js/vendor/jquery.lazylinepainter-1.7.0.min.js', array('jquery'), '1.0.0', true );
-	   
+	if(is_page_template( 'page-templates/register.php')){
+		wp_enqueue_script( 'lazylinepainter-js', get_template_directory_uri() . '/assets/js/vendor/jquery.lazylinepainter-1.7.0.min.js', array('jquery'), '1.0.0', true );
+	}
+	
+	 // Enqueue custom all js//   
 	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array('jquery'), '1.0.0', true );
-	
-	
-	
-	
 	
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
@@ -43,10 +41,6 @@ add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
  */
 function my_enqueue($hook) {
    wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox'), '', true );
-   
-   
-   
-   
    
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
@@ -85,7 +79,9 @@ add_action('init', 'gsn_rewrite_basic');
 add_filter('term_link', 'term_link_filter', 10, 3);
 function term_link_filter( $url, $term, $taxonomy ) {
 	$top_level_category=get_term_top_most_parent($term->term_id,$taxonomy);
-    return str_replace($top_level_category->slug."/","",$url );
+	$exploded_slug=explode(' ',$top_level_category->name);
+	$id=$exploded_slug[count($exploded_slug)-1];
+    return str_replace($top_level_category->slug."/",$id."/",$url );
 }
 
 
@@ -178,6 +174,63 @@ function gsn_pagination_link($max_num_pages,$pagerRange=20,$paged=0){
 			  }
 			
 		}
+
+
+
+/**
+ * Hide shipping rates when free shipping is available.
+ * Updated to support WooCommerce 2.6 Shipping Zones.
+ *
+ * @param array $rates Array of rates found for the package.
+ * @return array
+ */
+function change_flat_shipping_rate_based_ongsn( $rates ) {
+	foreach ( $rates as $rate_id => $rate ) {
+		if ( 'flat_rate' === $rate->method_id ) {
+			global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get();
+			$flat_rate=$gsn_settings->flat_rate;
+			if(empty($flat_rate)){
+				unset($rates[$rate_id]);
+			}else{
+				$rate->cost=$flat_rate;
+			}
+			break;
+		}
+	}
+	return  $rates;
+}
+add_filter( 'woocommerce_package_rates', 'change_flat_shipping_rate_based_ongsn', 100 );
+/*
+*Add note to flate rate
+*@param Object of shipping method
+*/
+function add_note_under_flat_rate($method){
+	if($method->method_id=="flat_rate"){
+		global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get();		
+		echo "<div class='flat_rate_note'>".$gsn_settings->flat_rate_note."</div>";
+	}
+}
+add_filter( 'woocommerce_after_shipping_rate', 'add_note_under_flat_rate', 100 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Encrypt Function
 function mc_encrypt($encrypt, $key){
     $encrypt = serialize($encrypt);

@@ -52,8 +52,6 @@ var_dump($store); die;*/
 		<div class="fr header-profile-cntr"> <a href="#" class="profile-info"> <i class="fa fa-user"></i> <span><?php echo $store->firstName ." " . $store->lastName;?></span> </a>
 			<div class="profile__links">
 				<ul>
-					<li><a href="#">Your account</a></li>
-					<li><a href="#">Account setting</a></li>
 					<li><a href="javascript:void(0)"  id="logoutBtn">Log out</a></li>
 				</ul>
 			</div>

@@ -196,12 +196,13 @@ jQuery("#store_setting_form").validate({
 //	  console.log(escaped);
 	  var data= {action: "gsn_add_store_setting", formdata : formdata, aboutStore:about_content};
 	  var response=ajax_call_post(data,"#store_setting_form",'',function(response){
-		 //  window.location.href=response.redirectUrl;
-			 jQuery(form)[0].reset();
+		  window.location.reload();
+			/* jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
 			 jQuery('.alert-success').remove();
 			 
 			 jQuery('<div class="alert alert-success alert-dismissible"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> '+response.msg+'</div>').insertBefore(form);
+			 */
 			 
 	 },function(){
 		 jQuery('html, body').animate({

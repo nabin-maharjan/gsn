@@ -16,8 +16,7 @@
  */
 //exit if accessed directly
 if(!defined('ABSPATH')) exit;
-
-class wp_bootstrap_navwalker extends Walker_Nav_Menu {
+class Wp_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
 	/**
 	 * @see Walker::start_lvl()
@@ -29,6 +28,11 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat( "\t", $depth );
 		$output .= "\n$indent<div class=\" dropdown__menu\"> <ul role=\"menu\" class=\" \">\n";
+		
+		
+		
+		
+		
 	}
 
 	/**
@@ -105,8 +109,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			// If item has_children add atts to a.
 			// if ( $args->has_children && $depth === 0 ) {
 			if ( $args->has_children ) {
-				$atts['href']   		= '#';
-				$atts['data-toggle']	= 'dropdown';
+				//$atts['href']   		= '#';
+				
+				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
+				//$atts['data-toggle']	= 'dropdown';
 				$atts['class']			= 'dropdown__link';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';

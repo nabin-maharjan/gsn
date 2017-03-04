@@ -530,6 +530,16 @@ class Store{
 			wp_redirect( site_url("/dashboard/"));
 			exit;
 		}
+
+		if($store->id!=NULL && is_page_template( 'page-templates/dashboard.php') && $store->is_shop==true && !is_user_logged_in()){
+			global $wp_query;
+			  $wp_query->set_404();
+			  status_header( 404 );
+			  get_template_part( 404 ); exit();
+			
+		}
+		
+		
 	}
 	
 	public function get($id=0){

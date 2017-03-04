@@ -148,7 +148,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
           <div class="top top-icons clearfix p15">
             <div class="top__left-icons fl">
               <ul>
-                <li><a href="tel:014444444"><i class="fa fa-phone"></i> <?php echo $store->mobileNumber;?></a></li>
+                <li><a href="tel:<?php echo $store->mobileNumber;?>"><i class="fa fa-phone"></i> <?php echo $store->mobileNumber;?></a></li>
                 <li><i class="fa fa-map-marker"></i><?php echo $store->storeFullAddress;?></li>
               </ul>
             </div>
@@ -186,7 +186,7 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
                 <?php wp_nav_menu( array( 
           				'theme_location' => 'store-header-menu',
           				'menu_class' => 'nav navbar-nav nav__links',
-          				'walker'=>new wp_bootstrap_navwalker ()
+          				'walker' => new Wp_Bootstrap_Navwalker ()
           				 ) ); 
                 ?>
               </nav>

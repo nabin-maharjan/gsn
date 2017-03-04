@@ -351,7 +351,7 @@ jQuery("#product_create_form").validate({
 	rules: {
       name:"required",
 	  category:"required",
-	  description: "required",
+	 // description: "required",
 	  price:{
 		  required: true,
 		  number :true
