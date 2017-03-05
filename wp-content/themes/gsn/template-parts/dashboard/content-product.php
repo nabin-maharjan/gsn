@@ -18,18 +18,18 @@ $count_draft_products=$gsnProduct->get_draft_product_count();
     <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="btn btn-primary">View All Category</a>
   </div>
   <!-- /.product-links-cntr -->
-  <div class="summary-cards-cntr clearfix">
-    <div class="col-sm-2 summary__card">
+  <div class="summary-cards-cntr clearfix products-landing--cards">
+    <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
         <div class="">
-          <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
+          <span class="summary-number"><?php echo $storeProducts->found_posts;?></span> 
           <h2>Published Products</h2>
         </div>
       </a>
     </div>
     <!-- /.summary__card -->
     
-    <div class="col-sm-2 summary__card">
+    <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?action=view&type=draft");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_draft_products;?></span>
@@ -39,7 +39,7 @@ $count_draft_products=$gsnProduct->get_draft_product_count();
     </div>
     <!-- /.summary__card -->
     
-    <div class="col-sm-2 summary__card">
+    <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_category;?></span>
@@ -49,7 +49,7 @@ $count_draft_products=$gsnProduct->get_draft_product_count();
     </div>
     <!-- /.summary__card -->
 
-    <div class="col-sm-2 summary__card">
+    <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?action=view&type=feature");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_feature_product;?></span>
@@ -60,7 +60,7 @@ $count_draft_products=$gsnProduct->get_draft_product_count();
     <!-- /.summary__card -->
     
     <!-- /.summary__card -->
-    <div class="col-sm-2 summary__card">
+    <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_sale_product;?></span>
@@ -71,7 +71,7 @@ $count_draft_products=$gsnProduct->get_draft_product_count();
     <!-- /.summary__card -->
 
 
-<div class="col-sm-2 summary__card">
+<div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_out_of_stock;?></span>

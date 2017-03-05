@@ -36,7 +36,7 @@
       </div>
       <!-- /.dashboard-top -->
       <div class="summary-cards-cntr clearfix">
-        <div class="col-sm-3 summary__card">
+        <div class="col-sm-3 summary__card card--big">
       <a href="<?php echo site_url("/dashboard/product/");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $storeProducts->found_posts;?></span>
@@ -46,7 +46,7 @@
     </div>
         <!-- /.summary__card -->
         
-        <div class="col-sm-3 summary__card">
+        <div class="col-sm-3 summary__card card--big">
           <a href="<?php echo site_url("/dashboard/product/?type=category");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $count_category;?></span>
@@ -56,7 +56,7 @@
         </div>
         <!-- /.summary__card -->
     
-        <div class="col-sm-3 summary__card">
+        <div class="col-sm-3 summary__card card--big">
           <a href="<?php echo site_url("/dashboard/product/?action=view&type=feature");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $count_feature_product;?></span>
@@ -67,7 +67,7 @@
         <!-- /.summary__card -->
         
         <!-- /.summary__card -->
-        <div class="col-sm-3 summary__card">
+        <div class="col-sm-3 summary__card card--big">
           <a href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $count_sale_product;?></span>
@@ -76,7 +76,7 @@
           </a>
         </div>
         <!-- /.summary__card -->
-        <div class="col-sm-2 summary__card">
+        <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/product/?action=view&type=sale");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_out_of_stock;?></span>
@@ -85,7 +85,7 @@
       </a>
     </div>
    		 <!-- /.summary__card --> 
-         <div class="col-sm-2 summary__card">
+         <div class="col-sm-2 summary__card card--small">
           <a href="<?php echo site_url("/dashboard/product/?action=view&type=draft");?>" class="summary-info">
             <div class="">
               <span class="summary-number"><?php echo $count_draft_products;?></span>
@@ -97,7 +97,7 @@
          
          
          
-             <div class="col-sm-2 summary__card">
+             <div class="col-sm-2 summary__card card--small">
       <a href="<?php echo site_url("/dashboard/order/");?>" class="summary-info">
         <div class="">
           <span class="summary-number"><?php echo $count_all_order;?></span>
@@ -106,7 +106,7 @@
       </a>
     </div>
             <!-- /.summary__card -->
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=completed");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_completed_order;?></span>
@@ -115,7 +115,7 @@
               </a>
             </div>
             <!-- /.summary__card -->
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=processing");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_processing_order;?></span>
@@ -124,7 +124,7 @@
               </a>
             </div>
             <!-- /.summary__card -->
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=pending");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_pending_order;?></span>
@@ -134,7 +134,7 @@
             </div>
             <!-- /.summary__card -->
             
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=on-hold");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_on_hold_order;?></span>
@@ -143,7 +143,7 @@
               </a>
             </div>
             <!-- /.summary__card -->
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=cancelled");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_cancelled_order;?></span>
@@ -152,7 +152,7 @@
               </a>
             </div>
             <!-- /.summary__card -->
-            <div class="col-sm-2 summary__card">
+            <div class="col-sm-2 summary__card card--small">
               <a href="<?php echo site_url("/dashboard/order/?action=view&status=failed");?>" class="summary-info">
                 <div class="">
                   <span class="summary-number"><?php echo $count_failed_order;?></span>

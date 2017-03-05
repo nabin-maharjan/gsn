@@ -6,14 +6,14 @@
   ?>
 <section class="store-setting-cntr">
   <div class="container clearfix">
-    <form name="store_setting_form" id="store_setting_form">
+    <form name="store_setting_form" id="store_setting_form" class="dashboard-forms-main-cntr">
       <div class="form-group clearfix">
       	<div class="col-sm-6">
              <h3>Shop Settings</h3>
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="upload-button" class="col-sm-4 col-form-label col-form-label-sm">Logo</label>
-                <div class="col-sm-8">
+                <label for="upload-button" class="col-sm-4 col-form-label col-form-label-sm pl0">Logo</label>
+                <div class="col-sm-8 pr0">
                   <div class="upload_cntr">
                     <?php
                       if($gsn_settings->logo!=NULL){
@@ -30,8 +30,8 @@
              
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label  class="col-sm-4 col-form-label col-form-label-sm">Themes</label>
-                <div class="col-sm-8">
+                <label  class="col-sm-4 col-form-label col-form-label-sm pl0">Themes</label>
+                <div class="col-sm-8 pr0">
                   <?php   	  
                     $selected_theme_id=($gsn_settings->selected_theme!=NULL)?$gsn_settings->selected_theme:"";
                     foreach($gsn_themes as $gsn_theme){
@@ -56,24 +56,24 @@
           <div class="col-sm-6">
               <!-- Row start -->
               <div class="form-group clearfix">
-                <div class="col-sm-12"><h3>Facebook Messager Settings</h3></div>
+                <div><h3>Facebook Messager Settings</h3></div>
                 
-                <div class="col-sm-12">Note : Create page on facebook and facebook App with category <strong>Apps for Messanger</strong> </div>
+                <div>Note : Create page on facebook and facebook App with category <strong>Apps for Messanger</strong> </div>
               </div>
                <!-- Row end -->
             
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="fbAppId" class="col-sm-4 col-form-label col-form-label-sm">Messenger App ID</label>
-                <div class="col-sm-8">
+                <label for="fbAppId" class="col-sm-4 col-form-label col-form-label-sm pl0">Messenger App ID</label>
+                <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->fbAppId))?$gsn_settings->fbAppId:"";?>" name="fbAppId" id="fbAppId">
                 </div>
               </div>
                <!-- Row end -->
                <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="fbPageId" class="col-sm-4 col-form-label col-form-label-sm">Page ID</label>
-                <div class="col-sm-8">
+                <label for="fbPageId" class="col-sm-4 col-form-label col-form-label-sm pl0">Page ID</label>
+                <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->fbPageId))?$gsn_settings->fbPageId:"";?>" name="fbPageId" id="fbPageId">
                 </div>
               </div>
@@ -101,18 +101,18 @@
            <div class="col-sm-6">
                  <h3>Payment Information</h3>
                  
-			   <h6>Shipping information</h6>
+			           <h6 class="mb15">Shipping information</h6>
                 <!-- Row start -->
                   <div class="form-group clearfix">
-                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm">Shipping Charge (Rs)</label>
-                    <div class="col-sm-8">
+                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm pl0">Shipping Charge (Rs)</label>
+                    <div class="col-sm-8 pr0">
                       <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->flat_rate))?$gsn_settings->flat_rate:"";?>" name="flat_rate" id="flat_rate">
                     </div>
                   </div>
                <!-- Row start -->
                   <div class="form-group clearfix">
-                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm">Shipping Note</label>
-                    <div class="col-sm-8">
+                    <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm pl0">Shipping Note</label>
+                    <div class="col-sm-8 pr0">
 						<textarea class="form-control form-control-sm" name="flat_rate_note" id="esewaId"><?php echo (!empty($gsn_settings->flat_rate_note))?$gsn_settings->flat_rate_note:"";?></textarea>
                     </div>
                   </div>
@@ -122,8 +122,8 @@
                  
                   <!-- Row start -->
                   <!--div class="form-group clearfix">
-                    <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">eSewa ID</label>
-                    <div class="col-sm-8">
+                    <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm pl0">eSewa ID</label>
+                    <div class="col-sm-8 pr0">
                       <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->esewaId))?$gsn_settings->esewaId:"";?>" name="esewaId" id="esewaId">
                     </div>
                   </div-->
@@ -137,8 +137,8 @@
         
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">Facebook Url</label>
-                <div class="col-sm-8">
+                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm pl0">Facebook Url</label>
+                <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->facebook))?$gsn_settings->facebook:"";?>" name="facebook" id="facebook">
                 </div>
               </div>
@@ -146,8 +146,8 @@
         
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">Twitter Url</label>
-                <div class="col-sm-8">
+                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm pl0">Twitter Url</label>
+                <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->twitter))?$gsn_settings->twitter:"";?>" name="twitter" id="twitter">
                 </div>
               </div>
@@ -155,8 +155,8 @@
         
               <!-- Row start -->
               <div class="form-group clearfix">
-                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm">Google+ Url</label>
-                <div class="col-sm-8">
+                <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm pl0">Google+ Url</label>
+                <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->googleplus))?$gsn_settings->googleplus:"";?>" name="googleplus" id="googleplus">
                 </div>
               </div>

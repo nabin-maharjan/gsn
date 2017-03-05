@@ -17,6 +17,10 @@ section {
 		&.nav-open .dashboard__nav {
 			width: 250px;
 
+			@include max-screen($mq-tablet) {
+				transform: translateX(0);
+			}
+
 			a span.nav-text {
 				transform: translateX(0);
 				opacity: 1;
@@ -42,7 +46,7 @@ section {
 			font-weight: bold;
 			line-height: 1;
 			margin-left: 20px;
-			text-transform: uppercase;
+			text-transform: uppercase;			
 		}
 	}
 }
@@ -86,13 +90,16 @@ section {
 	position: fixed;
 	height: 100%;
 	top: 60px;
-	left: 0;
-	// padding-top: 59px;
+	left: 0;	
 	background: $dark__gray;
-	width: 70px;
-	// overflow-x: hidden;
+	width: 70px;	
 	z-index: 3;
 	transition: all 0.2s ease-in-out;
+
+	@include max-screen($mq-tablet) {
+		width: 0;
+		transform: translateX(-70px);
+	}
 
 	ul {
 		li {
@@ -165,6 +172,10 @@ section {
 }
 .header-profile-cntr {
 	position: relative;
+
+	@include max-screen($mq-mobile) {
+		font-size: 26px;
+	}
 
 	.profile-info {
 		line-height: 60px;
@@ -239,10 +250,15 @@ section {
 	background: $brick_red;
 	padding: 10px 15px;
 	margin-top: 10px;
-    margin-right: 10px;
-    text-transform: uppercase;
+  margin-right: 10px;
+  text-transform: uppercase;
 
-    &:hover {
-    	background: $petal_green;
-    }
+  @include max-screen($mq-mobile) {
+  	font-size: 12px;
+  	margin-top: 11px;
+  }
+
+  &:hover {
+  	background: $petal_green;
+  }
 }

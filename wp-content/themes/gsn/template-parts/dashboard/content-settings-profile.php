@@ -2,7 +2,7 @@
 <section class="profile-setting-cntr">  	
   <div class="container">
   
-  <form name="store_domain_setting_form" id="store_domain_setting_form">
+  <form name="store_domain_setting_form" id="store_domain_setting_form" class="dashboard-forms-main-cntr">
       <h3>Shop Domain Settings</h3>
       <!-- Row start -->
       <div class="form-group clearfix">
@@ -27,7 +27,7 @@
     
     <?php //get_template_part( 'template-parts/dashboard/content','package-form'); ?>
   
-    <form name="profile_setting_form" id="profile_setting_form">
+    <form name="profile_setting_form" id="profile_setting_form" class="dashboard-forms-main-cntr">
       <h3>Profile Settings</h3>
       <!-- Row start -->
       <div class="form-group clearfix">

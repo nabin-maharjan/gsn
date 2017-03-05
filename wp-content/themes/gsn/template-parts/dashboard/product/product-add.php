@@ -24,7 +24,7 @@ if($product_limit_flag && !$product_edit){
 </section>
 <?php }else{ ?>
 <section class="product-add-edit-cntr">
-    <h3>Product</h3>
+    <h3 class="heading20">Product</h3>
      <div class="container">
      <?php if($product_edit){ ?>
      <div class="row">
@@ -67,7 +67,7 @@ if($product_limit_flag && !$product_edit){
      
      	<div class="col-sm-8">
      <?php }?>
-     <form name="product_create_form" id="product_create_form">
+     <form name="product_create_form" id="product_create_form" class="dashboard__product-add--form">
     <!-- Row start -->
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>

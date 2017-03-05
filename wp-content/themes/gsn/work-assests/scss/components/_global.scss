@@ -70,6 +70,15 @@ label.error {
 .p15 {
   padding: 0 15px;
 }
+.pl0 {
+  padding-left: 0
+}
+.pr0 {
+  padding-right: 0
+}
+.mb15 {
+  margin-bottom: 15px;
+}
 .fl {
   float: left;
 }
@@ -87,12 +96,21 @@ label.error {
 }
 .flex-center {
   display: flex;
-  justify-content: cener;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .desktop {
   display: block;
+
+  @include max-screen($mq-mobile) {
+    display: none;
+  }
+}
+
+.desktop-inline {
+  display: inline-block;
 
   @include max-screen($mq-mobile) {
     display: none;
@@ -119,6 +137,38 @@ label.error {
     margin: 0 -20px;
   }
   .p15 {
-    padding: 0 15px;
+    padding: 0 20px;
+  }
+  .dashboard-forms-main-cntr {
+    margin: 0 -10px;
+
+    [class*='col-'] {
+      padding: 0 10px;
+    }
+    .pl0 {
+      padding-left: 0;
+    }
+    .pr0 {
+      padding-right: 0;
+    }
+  } 
+}
+
+@include max-screen($mq-mobile) {
+  .dashboard-forms-main-cntr {
+    margin: 0 -10px;
+
+    [class*='col-'] {
+      display: block;
+      width: auto;
+      float: none;
+    }
+    .col-form-label-sm {
+      padding-right: 0;
+      margin-bottom: 10px;
+    }
+    .pl0, .pr0 {
+      padding: 0;
+    }
   }
 }

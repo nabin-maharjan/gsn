@@ -5,16 +5,42 @@
   padding: 0 15px;
   font-size: 0;
 
+  @include max-screen($mq-tablet) {
+    padding: 0 20px;
+
+    a {
+      margin-bottom: 10px;
+    }
+  }
+
   a {
     font-size: 14px;
     margin-right: 10px;
   }
 }
 .products__list-cntr {
+  &.product__landing--list {    
+  }
   .product-list-cntr {
     ul.products {
+      @include max-screen($mq-tablet) {
+        padding: 0 10px;
+      }
       li.product-list-item {
         width: 20%;
+
+        @include max-screen($mq-tablet) {
+          width: 25%; 
+          padding: 0 10px;
+        }
+
+        @include max-screen($mq-mobile) {
+          width: 33.333333%;           
+        }
+
+        @include max-screen($mq-sm-mobile) {
+          width: 50%;           
+        }
 
         .product-info-cntr {
           h4 {
@@ -47,10 +73,17 @@
   .filter {
     &-container {
       margin-bottom: 30px;
+      @include max-screen($mq-mobile) {
+        margin-bottom: 20px;
+      }
     }
     &__items {
       background: $lighter_gray;
       padding: 10px 15px;
+
+      @include max-screen($mq-mobile) {
+        padding-bottom: 20px;
+      }
 
       .product-filter-form {
         font-size: 14px;
@@ -58,6 +91,10 @@
         label {
           line-height: 30px;
           margin-bottom: 0;
+
+          @include max-screen($mq-mobile) {
+            display: block;
+          }
         }
         select {
           padding: 6px 12px;
@@ -71,8 +108,27 @@
           vertical-align: top;
           margin-left: 6px;
         }
+
+        @include max-screen($mq-mobile) {
+          float: none;
+          font-size: 0;
+
+          label {
+            display: block;
+            font-size: 14px;
+          }
+          select {
+            width: 70%;
+            margin-left: 0;
+            font-size: 14px;
+          }
+          button {
+            width: 30%;
+            margin-left: 0;
+          }
+        }
       }
-      .product-search-form {
+      .product-search-form {        
         input, button {
           display: inline-block;
           width: auto;
@@ -86,6 +142,21 @@
           margin-left: 6px;
           padding: 8px 25px;
           vertical-align: top;
+        }
+
+        @include max-screen($mq-mobile) {            
+          float: none;
+          margin-top: 15px;
+          font-size: 0;
+
+          input {
+            width: 70%;
+            margin-left: 0;
+          }          
+          button {
+            width: 30%;
+            margin-left: 0;
+          }
         }
       }
     }
@@ -144,6 +215,14 @@
     }
   }
 }
+
+@include max-screen($mq-tablet) {
+  .dashboard__product-add--form {
+    .form-group.row {
+      margin-bottom: 15px;
+    }
+  }
+}
 // ===================== //
 // /.product setting pages
 // ===================== //
@@ -154,6 +233,10 @@
 .profile-setting-cntr .profile-update-btn {
   margin-left: 15px;
   margin-top: 20px;
+
+  @include max-screen($mq-tablet) {
+    margin-left: 10px;
+  }
 }
 
 // PACKAGE TYPES
@@ -231,10 +314,18 @@
 .store-setting-cntr {
   .form-group h3 {
     margin: 0 0 30px;
+
+    @include max-screen($mq-mobile) {
+      margin-bottom: 15px;
+    }
   }
   .store-update-btn {
     margin-left: 15px;
     margin-top: 20px;
+
+    @include max-screen($mq-tablet) {
+      margin-left: 10px;
+    }
   }
 }
 // ===================== //

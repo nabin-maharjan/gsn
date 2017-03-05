@@ -29,8 +29,8 @@ if($products==NULL){
 }
 
 ?>
-<section class="products__list-cntr">
-  <h3><?php echo $title;?></h3>
+<section class="products__list-cntr product__landing--list">
+  <h3 class="heading20"><?php echo $title;?></h3>
   <div class="filter-container">
     <div class="container">
       <div class="filter__items clearfix">

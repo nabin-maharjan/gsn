@@ -49,12 +49,12 @@ var_dump($store); die;*/
 <header class="dashboard-header clearfix">
 	<div class="dashboard__header-right fr">
 		<?php if(!empty($store->domainName)){ ?><a target="_blank" class="go-to-shop-link" href="http://<?php echo $store->domainName;?>.goshopnepal.com">Veiw my shop</a><?php }?>
-		<div class="fr header-profile-cntr"> <a href="#" class="profile-info"> <i class="fa fa-user"></i> <span><?php echo $store->firstName ." " . $store->lastName;?></span> </a>
-			<div class="profile__links">
+		<div class="fr header-profile-cntr"> <a href="#" class="profile-info"> <i class="fa fa-user"></i> <span class="desktop-inline"><?php echo $store->firstName ." " . $store->lastName;?></span> </a>
+			<!-- <div class="profile__links">
 				<ul>
 					<li><a href="javascript:void(0)"  id="logoutBtn">Log out</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 		<?php /* if($store->id!=NULL){?>  
         <button type="button" id="logoutBtn" class="btn btn-secondary btn-sm">Logout<i class="fa fa-sign-out" aria-hidden="true"></i></button>
@@ -63,7 +63,7 @@ var_dump($store); die;*/
 	<!-- /.dashboard__header-right -->
 	<div class="dashboard__header-left fl">
 		<div class="dashboard-hamburger"> <span></span> </div>
-		<h1><a href="<?php echo site_url(); ?>/dashboard">Dashboard</a> </h1>
+		<h1><a href="<?php echo site_url(); ?>/dashboard"> <span class="fa fa-home mobile"></span> <span class="desktop">Dashboard</span></a> </h1>
 	</div>
 	<!-- /.dashboard__header-left -->
 	
@@ -81,6 +81,9 @@ var_dump($store); die;*/
 			<li> <a href="<?php echo site_url("/dashboard/order/");?>">
 				<div class="dashboard-tooltip"><span>Order</span></div>
 				<i class="fa fa-dashboard dashboard-icons"></i> <span class="nav-text">Order</span> </a> </li>
+      <li> <a href="javascript:void(0)" id="logoutBtn">
+        <div class="dashboard-tooltip"><span>Log Out</span></div>
+        <i class="fa fa-sign-out dashboard-icons"></i> <span class="nav-text">Log Out</span> </a> </li>
 		</ul>
 	</nav>
 	<!-- /.dashboard__nav -->
