@@ -364,13 +364,31 @@
 		      </div>
 		      <!-- Row end --> 
 		      <!-- Row start -->
-		      <div class="form-group col-sm-12">
+		      <div class="form-group col-sm-6">
 		        <label for="emailAddress" class="form-label">Email Address</label>
 		        <div class="form-input">
 		          <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
 		        </div>
 		      </div>
 		      <!-- Row end --> 
+		      <!-- Row start -->
+		      <div class="form-group col-sm-6">
+		        <label for="shopType" class="form-label">Shop Type</label>
+		        <div class="form-input">
+	          <?php global $store;
+				  $shop_types=$store->shop_types();
+				  ?>
+		          <select class="form-control" name="shopType" id="shopType">
+					  <option value="">Choose shop type</option>
+		          	<?php foreach($shop_types as $type){ ?>
+					  <option value="<?php echo $type->term_id;?>"><?php echo $type->name;?></option>
+					<?php }?>
+					</select>
+		        </div>
+		      </div>
+		      <!-- Row end --> 
+		      
+		      
 		       <div class="clearfix">
 		      <!-- Row start -->
 		      <div class="form-group col-sm-6">
@@ -554,6 +572,7 @@ jQuery("#register_form").validate({
       // on the right side
       firstName: "required",
       lastName: "required",
+	  shopType:"required",
       emailAddress: {
         required: true,
         email: true,
@@ -605,6 +624,7 @@ jQuery("#register_form").validate({
     messages: {
       firstname: "Please enter your firstname",
       lastname: "Please enter your lastname",
+	  shopType:"Please select shop type",
       password: {
         required: "Please provide a password",
         minlength: "Your password must be at least 5 characters long"

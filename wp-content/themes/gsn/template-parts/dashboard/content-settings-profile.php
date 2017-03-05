@@ -54,6 +54,25 @@
         </div>
       </div>
       <!-- Row end -->
+      
+      <!-- Row start -->
+      <div class="form-group clearfix">
+        <label for="emailAddress" class="col-sm-2 col-form-label col-form-label-sm">Shop Type</label>
+        <div class="col-sm-10">
+		<?php
+		  $shop_types=$store->shop_types();
+		  ?>
+		  <select class="form-control" name="shopType" id="shopType">
+			  <option value="">Choose shop type</option>
+			<?php foreach($shop_types as $type){ ?>
+			  <option value="<?php echo $type->term_id;?>" <?php echo ($store->shopType==$type->term_id)?'selected':'';?>><?php echo $type->name;?></option>
+			<?php }?>
+			</select>
+        </div>
+      </div>
+      <!-- Row end -->
+      
+     
 
       <!-- Row start -->
       <div class="form-group clearfix">
@@ -151,6 +170,9 @@ jQuery("#store_domain_setting_form").validate({
 });
   /* Profile Setting jQuery validation Procress */
 jQuery("#profile_setting_form").validate({
+	 rules: {
+	  shopType:"required",
+	 },
   submitHandler: function(form) {
 	  var formdata=jQuery(form).serialize();
 	  var data= {action: "gsn_store_profile_setting", formdata : formdata};
