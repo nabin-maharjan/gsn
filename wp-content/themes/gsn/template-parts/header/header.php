@@ -8,7 +8,8 @@ var_dump($store); die;*/
 <html <?php language_attributes(); ?> class="no-js">
 <head profile="http://www.w3.org/2005/10/profile">
 <title>
-<?php wp_title(); ?>
+<?php //wp_title(); ?>
+Goshopnepal :: Boost your sale with your own website.
 </title>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,6 +17,29 @@ var_dump($store); die;*/
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<!-- Place this data between the <head> tags of your website -->
+<meta name="description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale." />
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="Goshopnepal :: Boost your sale with your own website.">
+<meta itemprop="description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale.">
+<meta itemprop="image" content="<?php echo get_template_directory_uri(); ?>/assets/images/goshopnepal_banner.png">
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="product">
+<meta name="twitter:site" content="@goshopnepal">
+<meta name="twitter:title" content="Goshopnepal :: Boost your sale with your own website.">
+<meta name="twitter:description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale.">
+<meta name="twitter:creator" content="@goshopnepal">
+<meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/goshopnepal_banner.png">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Goshopnepal :: Boost your sale with your own website." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="<?php echo site_url();?>" />
+<meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/goshopnepal_banner.png" />
+<meta property="og:description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale." />
+<meta property="og:site_name" content="GoShopNepal" />
+
 <script>
     var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
     var location_Lat=0;

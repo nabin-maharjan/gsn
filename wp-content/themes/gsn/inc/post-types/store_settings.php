@@ -13,6 +13,8 @@ foreach($gsn_themes as $theme){
 	$available_themes_options[$theme->ID]=$theme->post_title;
 	
 }
+$store_setting->add_taxonomy( 'Shop Type' );
+
 /* add meta fields to post */
 $store_setting->add_meta_box( 
     'Store Setting Info', 

@@ -111,6 +111,22 @@ class Store{
 			if(!isset($store_table->activated)){
 				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `activated` INT NULL DEFAULT 0;");
 			}
+		
+		if(!isset($store_table->shop_type)){
+				$wpdb->query("ALTER TABLE `".$this->store_table."` ADD `shopType` INT NULL DEFAULT 0;");
+			}
+	}
+	
+	/*
+	* Function to get shop type
+	*@return 
+	*/
+	public function shop_types(){
+		return get_terms( array(
+					'taxonomy' => 'shop_type',
+					'hide_empty' => false,
+				) );
+
 	}
 	
 	
@@ -741,15 +757,16 @@ class Store{
 					}
 					$v = new Valitron\Validator($datas);
 					if($edit_flag){
-						$v->rule('required', array('firstName','lastName','emailAddress','mobileNumber','storeName','panNumber','storeFullAddress'));
+						$v->rule('required', array('firstName','lastName','mobileNumber','panNumber','storeFullAddress','shopType'));
 					}else{
-						$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress'));
+						$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress','shopType'));
 					}
 					$v->rule('email','emailAddress');
 					$v->rule('lengthMin','password',5);
 					$v->rule('numeric','mobileNumber');
 					$v->rule('lengthMin','mobileNumber',9);
-					$v->rule('lengthMax','mobileNumber',10);
+					$v->rule('lengthMax','mobileNumber',10);					
+					$v->rule('numeric','shopType');
 					if(!$edit_flag){
 						$v->rule('equals','cpassword','password');
 					}
