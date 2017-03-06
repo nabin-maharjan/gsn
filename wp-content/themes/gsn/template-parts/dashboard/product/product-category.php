@@ -10,7 +10,7 @@
 <section class="dashboard-category-cntr">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 category__list-cntr">
+      <div class="col-sm-6 category__section category__list-cntr">
         <h3>Cateory List</h3>
         <ul class="category-lists">
           <?php 
@@ -30,7 +30,7 @@
         </ul>
       </div>
       <!-- /.category__list-cntr -->
-      <div class="col-sm-6 category__add-form">
+      <div class="col-sm-6 category__section category__add-form">
         <h3>Cateory Form</h3>
         <form name="category_create_form" id="category_create_form" class="category_create_form">
           <!-- Row start -->

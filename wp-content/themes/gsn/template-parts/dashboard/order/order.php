@@ -19,7 +19,7 @@ if(!empty($_GET['action']) && $_GET['action']=="view"){
 }
 ?>
 <section class="products__order-cntr">
-<h3>Orders list</h3>    
+<h3 class="heading20">Orders list</h3>    
   <div class="filter-container">
     <div class="container">
       <div class="filter__items filter__orders clearfix">
