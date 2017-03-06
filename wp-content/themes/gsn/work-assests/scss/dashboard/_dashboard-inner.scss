@@ -246,6 +246,12 @@
   }
 }
 
+.product__edit-right {
+  button {
+    margin-bottom: 10px;    
+  } 
+}
+
 @include max-screen($mq-tablet) {
   .dashboard__product-add--form {
     .form-group.row {
@@ -253,8 +259,7 @@
     }
   }
   .product__edit-right {
-    button {
-      margin-bottom: 10px;
+    button {      
       margin-right: 6px;
     } 
   }

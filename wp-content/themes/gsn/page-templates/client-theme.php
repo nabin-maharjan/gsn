@@ -7,7 +7,7 @@
  */
  if(is_user_logged_in()){?>
 	<script>
-	//location.href="<?php echo site_url('/dashboard');?>";
+	location.href="<?php echo site_url('/dashboard');?>";
 	</script>
 <?php }
 get_header("store");
