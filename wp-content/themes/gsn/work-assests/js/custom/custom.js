@@ -226,11 +226,14 @@ jQuery(document).ready(function(e) {
   });
 
   // dashboard hamburger click
-  $('.dashboard-hamburger').on('click', function() {
+  $('.dashboard__hamburger--icon').on('click', function(e) {
+    e.preventDefault();
+    $(this).toggleClass('active');
     $(this).parents('.dashboard-header').toggleClass('nav-open');
   });
 
   $('.dashboard-nav-overlay').on('click', function() {
+    $('.dashboard__hamburger--icon').removeClass('active');
     $('.dashboard-header').removeClass('nav-open');
   });
 

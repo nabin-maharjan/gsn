@@ -86,7 +86,14 @@ Goshopnepal :: Boost your sale with your own website.
 	</div>
 	<!-- /.dashboard__header-right -->
 	<div class="dashboard__header-left fl">
-		<div class="dashboard-hamburger"> <span></span> </div>
+		<!-- <div class="dashboard-hamburger"> <span></span> </div> -->
+    <div class="navbar-toggle nav__mobile-trigger dashboard-hamburger">
+      <a id="hamburger-icon" class="hamburger-icon dashboard__hamburger--icon" href="#" title="Menu">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </a>
+    </div>
 		<h1><a href="<?php echo site_url(); ?>/dashboard"> <span class="fa fa-home mobile"></span> <span class="desktop">Dashboard</span></a> </h1>
 	</div>
 	<!-- /.dashboard__header-left -->

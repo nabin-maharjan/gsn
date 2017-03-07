@@ -69,11 +69,11 @@ main {
   @include max-screen($mq-tablet) {
     ul.products {
       padding: 0 10px;
-    }
-    li.product-list-item{
-      padding: 0 10px;
-      margin-bottom: 20px;
-    }
+      li.product-list-item{
+        padding: 0 10px;
+        margin-bottom: 20px;
+      }
+    }    
   }
 
   @include max-screen($mq-mobile) {
