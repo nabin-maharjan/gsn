@@ -257,6 +257,7 @@
       display: none;
       background: $white;
       border-top: 2px solid $black;
+      overflow-y: scroll;
     }
   }
   .nav__links {

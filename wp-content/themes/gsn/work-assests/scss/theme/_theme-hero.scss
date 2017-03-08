@@ -11,6 +11,10 @@
 .hero-part {
   height: 600px;
 
+  @media max-screen($mq-mobile) {
+    height: 500px;
+  }
+
   .half-height {
     height: 50%;
     padding-bottom: 15px;
@@ -248,6 +252,10 @@
     text-transform: uppercase;
     font-weight: bolder;
     margin-bottom: 10px;
+
+    @include max-screen($mq-mobile) {
+      font-size: 24px;
+    }
   }
   span {
     color: $light_gray;

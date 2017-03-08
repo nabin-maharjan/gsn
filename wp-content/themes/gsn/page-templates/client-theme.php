@@ -65,7 +65,7 @@ if(!empty($middle_section_right_ad)){
     <section class="hero-section">
       <div class="container">
         <div class="row">
-          <div class="col-sm-3 hero-part hero__left hero-latest">
+          <div class="col-sm-3 hero-part hero__left hero-latest desktop">
 		   <?php                
                 if ( $top_new_product_list->have_posts() ) {
                   while ( $top_new_product_list->have_posts() ) : $top_new_product_list->the_post();
@@ -137,7 +137,7 @@ if(!empty($middle_section_right_ad)){
             </div>
           </div>
           <!-- /.hero__mmiddle -->
-          <div class="col-sm-3 hero-part hero__right hero-sales">
+          <div class="col-sm-3 hero-part hero__right hero-sales desktop">
           <?php                
                 if ( $top_sale_list->have_posts() ) {
                   while ( $top_sale_list->have_posts() ) : $top_sale_list->the_post();
