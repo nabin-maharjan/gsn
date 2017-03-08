@@ -902,6 +902,53 @@ class GsnProduct{
 	
 	
 	
+	
+	
+	
+	/*
+	*
+	*/
+	public function get_product_list($count=4,$category=0){
+		global $store;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		
+		$cat_arg=array();
+		if($category!=0){
+			 $cat_arg=array(
+			 'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $category,
+					),
+				),
+			 );
+		}
+		$args = array(
+                  'post_type' => 'product',
+                  'posts_per_page' => $count,
+				  'post_status' =>array('publish'),
+					'orderby'=> 'rand',
+                  'author'=>$store->user_id,
+				  'cat'=>$category,
+				  'paged' => $paged,
+     			  'page' => $paged,
+                  );
+				  $combine_args=array_merge($args,$cat_arg);
+         return new WP_Query( $combine_args );
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	* list of all stock in of specifi product
 	* @param : product id

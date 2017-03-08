@@ -186,7 +186,7 @@ class Store{
 			$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
 			$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
 			
-			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal<support@goshopnepal.com>');
+			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal <support@goshopnepal.com>');
 			return wp_mail( $to, $subject, $body, $headers );
 		
 	}

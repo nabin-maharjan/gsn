@@ -153,7 +153,7 @@ class gsn_category_walker_dashboard extends Walker_Category {
         else
             $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
         $link .= '>';
-        $link .= $cat_name . '</a> <a href="'.$my_blog_link.'" class="cat-icons edit-icon gsn-delete-category fa fa-pencil" data-category-id="'.$category->term_id.'"></a>   <span class="cat-icons delete-icon gsn-delete-category fa fa-trash" data-category-id="'.$category->term_id.'"></span>';
+        $link .= $cat_name . '</a> <a href="'.$my_blog_link.'" class="cat-icons edit-icon fa fa-pencil" data-category-id="'.$category->term_id.'"></a>   <span class="cat-icons delete-icon gsn-delete-category fa fa-trash" data-category-id="'.$category->term_id.'"></span>';
 
         if ( !empty($feed_image) || !empty($feed) ) {
             $link .= ' ';
@@ -179,7 +179,7 @@ class gsn_category_walker_dashboard extends Walker_Category {
             else
                 $link .= "<img src='$feed_image'$alt$title" . ' />';
 
-            $link .= ' </a> <a href="'.esc_url( get_term_feed_link( $category->term_id, $category->taxonomy, $feed_type ) ).'" class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Edit</a> <span class="delete-icon gsn-delete-category" data-category-id="'.$category->term_id.'">Delete</span>';
+            $link .= ' </a> <a href="'.esc_url( get_term_feed_link( $category->term_id, $category->taxonomy, $feed_type ) ).'" class="cat-icons edit-icon fa fa-pencil" data-category-id="'.$category->term_id.'">Edit</a> <span class="cat-icons delete-icon gsn-delete-category fa fa-trash" data-category-id="'.$category->term_id.'">Delete</span>';
 
             if ( empty($feed_image) )
                 $link .= ')';
