@@ -11,8 +11,13 @@
 .hero-part {
   height: 600px;
 
-  @media max-screen($mq-mobile) {
-    height: 500px;
+  @include max-screen($mq-mobile) {
+    &.hero__middle.hero-slider{
+      height: 500px;
+      width: auto;
+      display: block;
+      float: none;
+    }    
   }
 
   .half-height {

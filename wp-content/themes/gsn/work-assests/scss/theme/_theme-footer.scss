@@ -102,3 +102,12 @@
   right: 0;
   text-align: right;
 }
+
+@include max-screen($mq-mobile) {
+  .footer__items {
+    float: none;
+    display: block;
+    margin-bottom: 30px;
+    width: auto;
+  }
+}

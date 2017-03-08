@@ -36,7 +36,7 @@ $gsn_settings=$gsnSettingsClass->get();?>
     </div>
   </div>
   <!-- /.top-footer -->
-  <div class="bottom-footer">
+  <!-- <div class="bottom-footer">
     <div class="container">
       <div class="bottom-links">
         <ul class="footer-links clearfix">
@@ -47,7 +47,7 @@ $gsn_settings=$gsnSettingsClass->get();?>
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- /.bottom-footer -->
 </footer>
 <!-- /.footer -->
