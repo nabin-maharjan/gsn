@@ -56,6 +56,11 @@ $gsn_settings=$gsnSettingsClass->get();?>
     <i class="fa fa-angle-up"></i>
   </a>
 </div>
+<!-- /.back-to-top -->
+
+<div class="theme-nav-overlay"></div>
+<!-- /.nav-overlay -->
+
 <?php if(!empty($gsn_settings->fbAppId) && !empty($gsn_settings->fbAppId)){ ?>
 <div class="fb-messengermessageus" 
   messenger_app_id="<?php echo $gsn_settings->fbAppId;?>" 

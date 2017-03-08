@@ -170,19 +170,24 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
       <div class="container">
         <div class="row">
           <div class="col-md-3 header__logo">
-            <h1 class="logo"><a href="<?php echo site_url();?>"><img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>"></a></h1>
+            <h1 class="logo">
+              <a href="<?php echo site_url();?>">
+                <div class="logo__image" style="background-image: url(<?php echo $logo_img; ?>);"></div>
+                <img src="<?php echo $logo_img; ?>" alt="<?php echo $store->storeName;?>">
+              </a>
+            </h1>
           </div>
           <!-- /.header__logo -->
           <div class="col-md-9 header__main-items">
             <div class="item__nav fl">
               <div class="navbar-toggle nav__mobile-trigger mobile theme-hamburger">
-                <a id="hamburger-icon" class="hamburger-icon" href="#" title="Menu">
+                <a id="hamburger-icon" class="hamburger-icon theme__hamburger--icon" href="#" title="Menu">
                   <span class="line line-1"></span>
                   <span class="line line-2"></span>
                   <span class="line line-3"></span>
                 </a>
               </div>
-              <nav class="main-nav">
+              <nav class="main-nav" id="theme-main-nav">
                 <?php wp_nav_menu( array( 
           				'theme_location' => 'store-header-menu',
           				'menu_class' => 'nav navbar-nav nav__links',

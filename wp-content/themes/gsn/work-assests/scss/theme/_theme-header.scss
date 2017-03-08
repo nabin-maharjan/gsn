@@ -40,11 +40,31 @@
 
     h1 {
       font-size: 20px;
-      font-weight: bolder;      
+      font-weight: bolder; 
+
+      .logo__image {
+        width: 150px;
+        height: 80px;
+        margin-top: 10px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        @include max-screen($mq-mobile) {
+          height: 60px;
+        }
+
+        @include max-screen($mq-sm-mobile) {
+          width: 120px;
+        }
+      }
 
       img {
-        max-width: 100px; 
+        max-width: 150px; 
         margin-top:10px;
+        height: 1px;
+        width: 1px;
+        opacity: 0;
       }
     }
   }
@@ -83,6 +103,11 @@
 // /.top bar
 
 // navigation
+@include min-screen($mq-min-mobile) {
+  .main-nav .menu-store-header-menu-container{
+    display: block !important;
+  }          
+}
 .nav__links {
   font-size: 0;
 
@@ -95,6 +120,22 @@
     @include max-screen($mq-mobile) {
       float: none;
       display: block;
+      position: relative;
+
+      i {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 7px;
+        right: 20px;
+        font-size: 30px;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+
+        &.nav-active {
+          transform: rotate(180deg);
+        }
+      }
     }
 
     &.active, &:hover > a {
@@ -115,8 +156,7 @@
 
     @include max-screen($mq-mobile) {
       padding: 15px 20px;
-      line-height: 1;
-      color: $white;      
+      line-height: 1;          
     }
   }
 }
@@ -129,6 +169,10 @@
     &::after {
       content: '\f0d7';
       font-family: FontAwesome;
+
+      @include max-screen($mq-mobile) {
+        display: none;
+      }
     }
   }
   &__menu {
@@ -144,6 +188,10 @@
     visibility: hidden;
     white-space: nowrap;
     z-index: 2;
+
+    @include min-screen($mq-min-mobile) {
+      display: block !important;
+    }
 
     li {
       display: block;
@@ -167,6 +215,11 @@
       .dropdown__menu {
         left: 100%;
         top: 0;
+        @include min-screen($mq-min-mobile) {
+          ul{
+            display: block !important;
+          }          
+        }
       }
       &:hover > .dropdown__menu {
         opacity: 1;
@@ -184,6 +237,10 @@
 
 // navigation responsive
 @include max-screen($mq-mobile) {
+  .header__bottom {
+    height: 80px;
+    line-height: 80px;
+  }
   .header__main-items {
     position: static;
     float: right;
@@ -191,12 +248,47 @@
   .main-nav {
     position: absolute;
     right: 0;
-    top: 100px;
+    top:  100%;
     bottom: 0;
+    width: 100%;    
+    z-index: 11;    
+
+    .menu-store-header-menu-container {
+      display: none;
+      background: $white;
+      border-top: 2px solid $black;
+    }
+  }
+  .nav__links {
+    padding: 15px 0;
+  }
+  .dropdown__menu {
+    position: relative;
+    display: block;
     width: 100%;
-    background: $black;
-    z-index: 11;
-    display: none;
+    left: 0;
+    top: 0;
+    transform: none;
+    visibility: visible;
+    opacity: 1;    
+
+    > ul {
+      display: none;
+    }
+
+    li{
+      a {
+        font-size: 16px;
+        padding: 15px 30px;
+      }
+      .dropdown__menu {
+        left: 0;
+
+        li a {
+          padding: 15px 45px;
+        }
+      }
+    }     
   }
 }
 
@@ -205,6 +297,18 @@
 // cart
 .item__cart {
   position: relative;
+  transition: all 0.3s ease-in-out;
+
+  &.nav-active {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  @include min-screen($mq-min-mobile) {
+    display: block !important;        
+    opacity: 1!important;
+    visibility: visible!important;
+  }
 
   @include max-screen($mq-mobile) {
     margin-right: 60px;
@@ -327,6 +431,18 @@
 // search
 .item__search {
   margin-right: 15px;
+  transition: all 0.3s ease-in-out;
+
+  &.nav-active {
+    opacity: 0;
+    visibility: hidden;    
+  }
+
+  @include min-screen($mq-min-mobile) {
+    display: block !important; 
+    opacity: 1 !important;       
+    visibility: visible !important;
+  }
 }
 .search {
   // position: relative;
@@ -457,7 +573,7 @@
     }
   }
 
-  &.active {
+  &.nav-active {
     .line-1 {
       transform: translateY(9px) translateX(0) rotate(45deg);
     }
@@ -478,5 +594,28 @@
 
   .line {
     background: $black;
+  }
+}
+
+.theme-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(87, 88, 90, 0.7);
+  opacity: 0;
+  visibility: hidden;  
+  transition: all 0.3s ease-in-out;
+  
+  &.nav-active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @include min-screen($mq-min-mobile) { 
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
 }

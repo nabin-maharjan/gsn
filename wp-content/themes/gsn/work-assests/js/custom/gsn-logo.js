@@ -71,27 +71,29 @@ var pathObj = {
     }
 }; 
  
- jQuery('#logo_svg').lazylinepainter( 
-	 {
-		 "svgData": pathObj,
-		"strokeWidth": 2,
-		"strokeColor": "rgba(255,255,255,0.5)",
-		'drawSequential': true,
-         'ease': 'easeInOutQuad',
-		 "onComplete": function() {
-			  $('#img_cntr, #logo-shadow').animate({
-				 "opacity":"1",
-			  },1000,function(){
-				 $('#logo_svg').animate({'opacity':0},500);
-			  });
-            initLogo();	
-            setTimeout (function()	{
-                $('.landing-buttons-cntr').addClass('move-up');
-                $('.landing-about-link').addClass('move-right');
-            }, 300);
-		}
-		
-	}).lazylinepainter('paint'); 
+    if($('#logo_svg').length > 0){
+     jQuery('#logo_svg').lazylinepainter( 
+    	 {
+    		 "svgData": pathObj,
+    		"strokeWidth": 2,
+    		"strokeColor": "rgba(255,255,255,0.5)",
+    		'drawSequential': true,
+             'ease': 'easeInOutQuad',
+    		 "onComplete": function() {
+    			  $('#img_cntr, #logo-shadow').animate({
+    				 "opacity":"1",
+    			  },1000,function(){
+    				 $('#logo_svg').animate({'opacity':0},500);
+    			  });
+                initLogo();	
+                setTimeout (function()	{
+                    $('.landing-buttons-cntr').addClass('move-up');
+                    $('.landing-about-link').addClass('move-right');
+                }, 300);
+    		}
+    		
+    	}).lazylinepainter('paint'); 
+ }
 
   function initLogo() {
     var _LOGO = document.querySelector('#main-logo-svg'),
