@@ -226,11 +226,14 @@ jQuery(document).ready(function(e) {
   });
 
   // dashboard hamburger click
-  $('.dashboard-hamburger').on('click', function() {
+  $('.dashboard__hamburger--icon').on('click', function(e) {
+    e.preventDefault();
+    $(this).toggleClass('nav-active');
     $(this).parents('.dashboard-header').toggleClass('nav-open');
   });
 
   $('.dashboard-nav-overlay').on('click', function() {
+    $('.dashboard__hamburger--icon').removeClass('active');
     $('.dashboard-header').removeClass('nav-open');
   });
 
@@ -372,21 +375,94 @@ jQuery(document).ready(function(e) {
     });	  
 	  
 	  //event trigger when set location click
-		jQuery('.btn-set-location').on('click',function(){
-			var location_selected=jQuery('#storeFullAddress').val().trim();
+		$('.btn-set-location').on('click',function(){
+			var location_selected=$('#storeFullAddress').val().trim();
 			if(location_selected===""){
-				if(!jQuery('.alert.alert-danger').length){
-					jQuery(this).parent().prepend('<span class="map--error fl"> Please select location</span>');
+				if(!$('.alert.alert-danger').length){
+					$(this).parent().prepend('<span class="map--error fl"> Please select location</span>');
 				}
 			} else {
-				jQuery('#set_location_btn').hide();
-				jQuery('#change_location_btn').show();
-				jQuery(this).parent().find('.alert').remove();
-				//jQuery('#gridSystemModal').modal('hide');	
+				$('#set_location_btn').hide();
+				$('#change_location_btn').show();
+				$(this).parent().find('.alert').remove();
+				//$('#gridSystemModal').modal('hide');	
 				closeLocationModal();
 			}
 		});
   }
+  // landing button open forms end
+  
+  // Theme header scripts
+  if($('.gsn-header').length > 0) {
+    var themeHeader = $('.gsn-header'),
+        themeHeaderBottom = $('.header__bottom'),
+        themeHamburger = $('.theme__hamburger--icon'),
+        themeMainNav = $('.menu-store-header-menu-container'),
+        themeMainNavHasChild = themeMainNav.find('#menu-store-header-menu li.has__dropdown'),
+        themeSearch = $('.item__search'),
+        themeCart = $('.item__cart'),
+        themeNavOverlay = $('.theme-nav-overlay'),        
+        navActive = 'nav-active';
+
+    // toggle navigation on hamburger tap
+    var toggleMainNav = function() {
+      themeHamburger.on('click', function(e) {
+        e.preventDefault();
+        themeSearch.toggleClass(navActive);
+        themeCart.toggleClass(navActive);
+        themeNavOverlay.toggleClass(navActive);
+        $(this).toggleClass(navActive);
+        themeMainNav.slideToggle();
+      });
+    };
+    toggleMainNav();
+
+    // navClose on overlay tap
+    var navClose = function() {
+      themeNavOverlay.on('click', function() {
+        themeMainNav.slideUp();
+        themeSearch.removeClass(navActive);
+        themeCart.removeClass(navActive);
+        themeNavOverlay.removeClass(navActive);
+        themeHamburger.removeClass(navActive);
+      });
+    };
+    navClose();
+
+    // set maxHeight for navigation in mobile
+    var navMaxHeight = function() {
+      if($(window).innerWidth() <= 800 ) {
+        themeMainNav.css({
+          'max-height': $(window).innerHeight() - themeHeaderBottom.innerHeight()
+        });
+      } else {
+        themeMainNav.css({
+          'max-height': 'inherit'
+        });
+      }
+    };
+    navMaxHeight();
+    window.addEventListener('resize', navMaxHeight);
+
+    // add toggle icon for sub menu in mobile
+    var addToggleIcon = function() {      
+      if(themeMainNavHasChild) {        
+        $('<i class="fa fa-angle-down toggle-sub-nav mobile"></i>').insertAfter(themeMainNavHasChild.find('.dropdown__link'));
+      }      
+    };
+    addToggleIcon();
+
+    // toggle sub menu
+    var toggleSubNav = function() {
+      $('.toggle-sub-nav').on('click', function() {        
+        $(this).toggleClass(navActive);
+        $(this).next().children('ul').slideToggle();
+      });
+    };
+    toggleSubNav();
+    
+  }
+  // Theme header scripts End
 });
 
 // on window load 

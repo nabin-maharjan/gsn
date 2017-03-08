@@ -15,8 +15,8 @@ $store_order_items=$store_order->get_items();
 <section class="order-summary-detail-cntr">
   <div class="container">
 	  <div class="row">
-      <h3>Order #<?php echo $store_order->get_order_number();?> Details</h3>
-    	<div class="col-sm-6 order-summary-basic-info">
+      <h3 class="heading20">Order #<?php echo $store_order->get_order_number();?> Details</h3>
+    	<div class="col-sm-6 order__summary order-summary-basic-info">
         <h4>Basic Information</h4>
         <p>Payment via <?php echo get_post_meta( $store_order->id,'_payment_method_title',true);?> on <?php echo $store_order->order_date;?> </p>
         <p>Order Status:</p>
@@ -36,7 +36,7 @@ $store_order_items=$store_order->get_items();
         <!-- /.order_status_change_form -->
       </div> 
       <!-- /.order-summary-basic-info -->       
-      <div class="col-sm-6 order-summary-billing-info">
+      <div class="col-sm-6 order__summary order-summary-billing-info">
         <h4>Billing Information</h4>
 		    <p><?php echo $store_order->get_formatted_billing_address();?></p>
       </div>
@@ -46,7 +46,7 @@ $store_order_items=$store_order->get_items();
 </section>
 <!-- /.order-summary-detail-cntr -->
 <section class="products__list-cntr order-purchased-items-cntr">
-  <h3>Purchased Item(s)</h3>
+  <h3 class="heading20">Purchased Item(s)</h3>
   <div class="product-list-cntr">
     <ul class="products clearfix">
       <?php foreach($store_order_items as $item){
@@ -80,7 +80,7 @@ $store_order_items=$store_order->get_items();
 </section>
 <!-- /.order-purchased-items-cntr -->
 <section class="order-payment-info-cntr">
-	<h3>Payment Information</h3>
+	<h3 class="heading20">Payment Information</h3>
   <div class="container">
     <p>Discount: <?php echo woocommerce_price($store_order->get_total_discount());?></p>
     <p>Shipping: <?php echo woocommerce_price($store_order->get_total_shipping());?></p>

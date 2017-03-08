@@ -36,7 +36,7 @@ $gsn_settings=$gsnSettingsClass->get();?>
     </div>
   </div>
   <!-- /.top-footer -->
-  <div class="bottom-footer">
+  <!-- <div class="bottom-footer">
     <div class="container">
       <div class="bottom-links">
         <ul class="footer-links clearfix">
@@ -47,7 +47,7 @@ $gsn_settings=$gsnSettingsClass->get();?>
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- /.bottom-footer -->
 </footer>
 <!-- /.footer -->
@@ -56,6 +56,11 @@ $gsn_settings=$gsnSettingsClass->get();?>
     <i class="fa fa-angle-up"></i>
   </a>
 </div>
+<!-- /.back-to-top -->
+
+<div class="theme-nav-overlay"></div>
+<!-- /.nav-overlay -->
+
 <?php if(!empty($gsn_settings->fbAppId) && !empty($gsn_settings->fbAppId)){ ?>
 <div class="fb-messengermessageus" 
   messenger_app_id="<?php echo $gsn_settings->fbAppId;?>" 

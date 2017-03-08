@@ -11,12 +11,12 @@ $product_edit=false;
   }
 if($product_limit_flag && !$product_edit){
 ?>
-<section>
-	<h3>You limitation has been exceed to add product.</h3>
+<section class="limit-exceed-main-cntr">
+	<h3 class="heading20">You limitation has been exceed to add product.</h3>
 	<div class="container">
     	<div class="limit-exceed-cntr">
         	<p>
-            	<a class="btn btn-primary" href="<?php echo site_url("/dashboard/settings/profile/");?>">Upgrade you package plan</a> Or
+            	<a class="btn btn-primary" href="<?php echo site_url("/dashboard/settings/profile/");?>">Upgrade you package plan</a> <span>OR</span>
                 <a  class="btn btn-primary"  href="<?php echo site_url("dashboard/product/");?>">Delete product</a>
              </p>
         </div>
@@ -28,7 +28,7 @@ if($product_limit_flag && !$product_edit){
      <div class="container">
      <?php if($product_edit){ ?>
      <div class="row">
-    	<div class="col-sm-4 float-sm-right">
+    	<div class="col-sm-4 push-sm-8 product__edit-right">
             <div>
              <?php if(!$product->is_in_stock()){?>
                <div class="alert alert-warning">
@@ -65,7 +65,7 @@ if($product_limit_flag && !$product_edit){
         
         </div>
      
-     	<div class="col-sm-8">
+     	<div class="col-sm-8 pull-sm-4 product__edit-left">
      <?php }?>
      <form name="product_create_form" id="product_create_form" class="dashboard__product-add--form">
     <!-- Row start -->
@@ -218,15 +218,15 @@ if($product_limit_flag && !$product_edit){
   	 ?>
       	<!-- Row start -->
       	<div class="form-group row attribute-row">
-              <div class="col-sm-4">
+              <div class="col-sm-4 add--name">
                   <label class="col-form-label col-form-label-sm">Name</label>
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($att_name))?$att_name:"";?>" name="attribute_name[]">
               </div>
-              <div class="col-sm-7">
+              <div class="col-sm-6 add--value">
                   <label class=" col-form-label col-form-label-sm">Value</label>
                   <textarea class="form-control form-control-sm" name="attribute_value[]"><?php echo (!empty($attribute['value']))?$attribute['value']:"";?></textarea>
               </div>
-              <div class="col-sm-1">
+              <div class="col-sm-2 add--remove">
                   <label class=" col-form-label col-form-label-sm">&nbsp;</label>
                   <button class="btn btn-danger remove-attribute-row">Remove</button>
               </div>
@@ -325,16 +325,16 @@ jQuery('.make_product_draft').on('click',function(){
  jQuery('#add_product_attributes').on('click',function(){
 	var attribute_html= "";
 	attribute_html+="<div class=\"form-group row attribute-row\">";
-		attribute_html+="<div class=\"col-sm-4\">";
+		attribute_html+="<div class=\"col-sm-4 add--name\">";
 			attribute_html+="<label class=\"col-form-label col-form-label-sm\">Name</label>";
 			attribute_html+="<input type=\"text\" class=\"form-control form-control-sm\" name=\"attribute_name[]\">";
 		attribute_html+="</div>";
 		
-		attribute_html+="<div class=\"col-sm-7\">";
+		attribute_html+="<div class=\"col-sm-6 add--value\">";
 			attribute_html+="<label class=\" col-form-label col-form-label-sm\">Value</label>";
 			attribute_html+="<textarea class=\"form-control form-control-sm\" name=\"attribute_value[]\"></textarea>";
 		attribute_html+="</div>";
-		attribute_html+="<div class=\"col-sm-1\">";
+		attribute_html+="<div class=\"col-sm-2 add--remove\">";
 			attribute_html+="<label class=\" col-form-label col-form-label-sm\">&nbsp;</label>";
 			attribute_html+="<button class=\"btn btn-danger remove-attribute-row\">Remove</button>";
 		attribute_html+="</div>";

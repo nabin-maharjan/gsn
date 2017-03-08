@@ -1,11 +1,24 @@
 .main-content {
   margin-top: 100px;
+
+  @include max-screen($mq-mobile) {
+    margin-top: 80px;
+  }
 }
 .hero-section {
   margin-bottom: 50px;
 }
 .hero-part {
   height: 600px;
+
+  @include max-screen($mq-mobile) {
+    &.hero__middle.hero-slider{
+      height: 500px;
+      width: auto;
+      display: block;
+      float: none;
+    }    
+  }
 
   .half-height {
     height: 50%;
@@ -244,6 +257,10 @@
     text-transform: uppercase;
     font-weight: bolder;
     margin-bottom: 10px;
+
+    @include max-screen($mq-mobile) {
+      font-size: 24px;
+    }
   }
   span {
     color: $light_gray;

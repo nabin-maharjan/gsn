@@ -78,7 +78,7 @@ class Wp_Bootstrap_Navwalker extends Walker_Nav_Menu {
 				$class_names .= ' dropdown';
 			*/
 
-			if($args->has_children && $depth === 0) { $class_names .= ' dropdown nav__dropdown'; } elseif($args->has_children && $depth > 0) { $class_names .= ' '; }
+			if($args->has_children && $depth === 0) { $class_names .= ' dropdown has__dropdown'; } elseif($args->has_children && $depth > 0) { $class_names .= ' dropdown has__dropdown'; }
 
 			if ( in_array( 'current-menu-item', $classes ) )
 				$class_names .= ' active';

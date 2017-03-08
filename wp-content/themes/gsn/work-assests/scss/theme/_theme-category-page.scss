@@ -55,12 +55,20 @@
   
   ul {
     margin: 0 5px;
+
+    @include max-screen($mq-tablet) {
+      margin: 0 10px;
+    }
   }
 
   li {
     text-align: center;
     margin-bottom: 20px;
     padding: 0 10px;
+
+    @include max-screen($mq-tablet) {
+      width: 25%;
+    }
 
     a {
       background: $brick_red;
