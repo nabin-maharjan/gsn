@@ -93,6 +93,10 @@
       background: $petal_green;
     }
   }
+
+  @include max-screen($mq-mobile) {
+    right: 20px;
+  }
 }
 
 .fb-messengermessageus.fb_iframe_widget {

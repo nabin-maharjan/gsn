@@ -90,6 +90,9 @@ if(!empty($middle_section_right_ad)){
 		<div class="container">
        		 <div class="row">
 				<div class="list__items">
+          <div class="list__item--toggle mobile">
+            <h2>Categories <span class="fa fa-angle-down"></span></h2>
+          </div>
 					<ul>
                     <?php 
 					if($terms){

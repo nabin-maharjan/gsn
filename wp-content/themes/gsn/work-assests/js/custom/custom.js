@@ -492,6 +492,15 @@ jQuery(document).ready(function(e) {
     
   }
   // Theme header scripts End
+  
+  if($('.list__item--toggle').length) {
+    $('.list__item--toggle').on('click', function(e) {
+      e.preventDefault();
+      $(this).toggleClass('toggle-cat');
+      $(this).next().slideToggle();
+    });    
+  }
+
 });
 
 // on window load 
