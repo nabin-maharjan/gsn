@@ -135,7 +135,7 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 							'pad_counts'   => false,
 							'hierarchical' => true,
 							'title_li'     => false,
-							'hide_empty' => false,
+							'hide_empty' => true,
 							'child_of' =>$storeParentCat->term_id,
 							'echo' =>false,
 			);

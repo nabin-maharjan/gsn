@@ -35,9 +35,33 @@ $store_setting->add_meta_box(
 		
 	);
 	
+
+$packages=$gsnSettingsClass->store_packages();
+$available_packages=array();
+foreach($packages as $package){
+	$available_packages[$package['slug']]=$package['name'];
 	
+}
+
 /* add meta fields to post */
 $store_setting->add_meta_box( 
+    'Store Package Setting', 
+    array(
+		'Package' =>array(
+				'name'=>'selected_theme',
+				'class'=>' test test',
+				'type'=>"radio",
+				'options'=>$available_packages
+				),
+		)
+		
+	);
+
+
+
+	
+/* add meta fields to post */
+/*$store_setting->add_meta_box( 
     'Payment Setting', 
     array(
 		'esewa Id' =>array(
@@ -50,5 +74,5 @@ $store_setting->add_meta_box(
 		)
 		
 	);
-	
+	*/
 	
