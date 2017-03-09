@@ -18,7 +18,7 @@ $feature_products=$gsnProduct->get_feature_product(5);
 $top_sale_list=$gsnProduct->get_sale_product_list(2);
 $top_new_product_list=$gsnProduct->get_new_product_list(2);
 $sale_product_list=$gsnProduct->get_sale_product_list($package['sale_product']);
-$new_product_list=$gsnProduct->get_new_product_list(8);
+$new_product_list=$gsnProduct->get_product_list(8);
 
 //// new product section Ad
 $new_product_ad=get_option("home_page_newproduct_section_ad");
@@ -223,7 +223,7 @@ if(!empty($middle_section_right_ad)){
       <div class="container">
         <div class="section-divider"></div>
         <div class="row">          
-          <h3 class="section-title">New products</h3>
+          <h3 class="section-title">Our Products</h3>
           
           <div class="product-list-cntr woocommerce ">
             <ul class="products clearfix">
