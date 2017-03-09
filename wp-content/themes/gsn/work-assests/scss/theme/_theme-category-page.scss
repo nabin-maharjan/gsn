@@ -3,12 +3,20 @@
     background: $light_gray;
     padding: 80px 0 30px;
     width: 100%;
+
+    @include max-screen($mq-mobile) {
+      padding: 50px 0 20px;
+    }
   }
   &__top-info {
     h1 {
       color: $black;
       font-weight: bolder;
       text-transform: uppercase;
+
+      @include max-screen($mq-mobile) {
+        font-size: 30px;
+      }
     }
   }
   &__top-desc {
@@ -40,24 +48,49 @@
   p.woocommerce-result-count {
     font-style: italic;
     margin-top: 6px;
+
+    @include max-screen($mq-sm-mobile) {
+      display: block;
+      float: none;
+      margin-bottom: 15px;
+      margin-top: 0;
+    }
   }
-  form select {
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    outline: none;
-    padding: 8px 12px;
+  form {    
+    @include max-screen($mq-sm-mobile) {
+      float: none !important;
+    }
+    select {
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      outline: none;
+      padding: 8px 12px;
+
+      @include max-screen($mq-sm-mobile) {
+        background: $white;      
+        display: block;
+        width: 100%;
+      }
+    }
   }
 }
 .item-list-cntr {
   background: $light_gray;
   padding-bottom: 60px;
+
+  @include max-screen($mq-mobile) {
+    padding-bottom: 50px;
+  }
   
   ul {
     margin: 0 5px;
 
     @include max-screen($mq-tablet) {
       margin: 0 10px;
+    }
+    @include max-screen($mq-tablet) {
+      display: none;
     }
   }
 
@@ -70,6 +103,13 @@
       width: 25%;
     }
 
+    @include max-screen($mq-mobile) {
+      float: none;
+      display: block;
+      width: auto;
+      margin-bottom: 0;
+    }
+
     a {
       background: $brick_red;
       color: $white;
@@ -80,6 +120,33 @@
       &:hover {
         background: $petal_green;
       }
+    }
+  }
+}
+
+.list__item--toggle {
+  text-align: center;  
+  color: $white;
+  background: $brick_red;
+  font-size: 18px;
+  padding: 15px;
+  margin: 0 20px;
+  transition: all 0.3s ease-in-out;
+
+  h2 {
+    font-size: 18px;
+  }
+
+  span {
+    display: inline-block;
+    margin-left: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.toggle-cat {
+    background: $dark_gray;
+    span {
+      transform: rotate(180deg);
     }
   }
 }

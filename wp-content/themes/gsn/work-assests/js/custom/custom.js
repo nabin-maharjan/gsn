@@ -80,13 +80,15 @@ jQuery(document).on('click','.cart-product-remove .remove-link',function(e){
 jQuery(document).click(function(event) { 
     if(!jQuery(event.target).closest('.item__cart  .cart.cart-cntr').length) {
         if(jQuery('.item__cart .cart__content').is(":visible")) {
-          jQuery('.item__cart .cart__content').slideUp();		    
+          jQuery('.item__cart .cart__content').slideUp();
+          $('.theme-toggle__content--cart-overlay').removeClass('nav-active');
         }
     } 
 
       if(!jQuery(event.target).closest('.item__search  .search.search-cntr').length) {
         if(jQuery('.item__search .search__content').is(":visible")) {
-          jQuery('.item__search .search__content').slideUp();       
+          jQuery('.item__search .search__content').slideUp();   
+          $('.theme-toggle__content--search-overlay').removeClass('nav-active');    
         }
     }        
 });
@@ -186,14 +188,41 @@ jQuery(document).ready(function(e) {
   });
   
   // cart slideToggle
+  
+  function toggleSearchOverlay() {
+    if($(window).innerWidth() <= 600) {
+      $('.theme-toggle__content--search-overlay').toggleClass('nav-active');
+    }
+  }
+
+  function toggleCartOverlay() {
+    if($(window).innerWidth() <= 600) {
+      $('.theme-toggle__content--cart-overlay').toggleClass('nav-active');
+    }
+  }
+
+  $(window).on('resize', function() {
+    if($(window).innerWidth() <= 600) {
+      if(jQuery('.item__cart .cart__content').is(":visible")) {
+        $('.theme-toggle__content--cart-overlay').addClass('nav-active');
+      }
+
+      if(jQuery('.item__search .search__content').is(":visible")) {
+        $('.theme-toggle__content--search-overlay').addClass('nav-active');
+      }
+    }
+  });
+
   jQuery('.item__cart  .cart__icon a').on('click', function(e) {
     e.preventDefault();  
     jQuery(this).parents('.cart-cntr').find('.cart__content').slideToggle();
+     toggleCartOverlay();
   });
 
   jQuery('.item__search  .search-icon a').on('click', function(e) {
     e.preventDefault();  
     jQuery(this).parents('.search-cntr').find('.search__content').slideToggle();
+     toggleSearchOverlay();
   });
 
   //$('.main-content').css({'margin-top': $('.header__bottom').height()});
@@ -463,6 +492,15 @@ jQuery(document).ready(function(e) {
     
   }
   // Theme header scripts End
+  
+  if($('.list__item--toggle').length) {
+    $('.list__item--toggle').on('click', function(e) {
+      e.preventDefault();
+      $(this).toggleClass('toggle-cat');
+      $(this).next().slideToggle();
+    });    
+  }
+
 });
 
 // on window load 

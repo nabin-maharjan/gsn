@@ -57,6 +57,10 @@
         @include max-screen($mq-sm-mobile) {
           width: 120px;
         }
+
+        @include max-screen(340px) {
+          width: 100px;
+        }
       }
 
       img {
@@ -135,6 +139,11 @@
         &.nav-active {
           transform: rotate(180deg);
         }
+      }
+
+      .dropdown__menu li i {
+        font-size: 24px;
+        top: 10px;
       }
     }
 
@@ -313,10 +322,19 @@
 
   @include max-screen($mq-mobile) {
     margin-right: 60px;
+    position: static;
+  }
+
+  @include max-screen(340px) {
+    margin-right: 45px;
+   
   }
 }
 .cart {
   &__icon {
+    @include max-screen($mq-mobile) {
+      position: relative;
+    }
     .cart-indicator {
       background: $brick_red;
       border-radius: 50%;
@@ -362,6 +380,15 @@
     }
   }
 }
+
+@include max-screen($mq-mobile) {
+  .cart__list {
+    max-height: 255px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}
+
 .cart-item {
   display: block;
   margin-bottom: 15px;
@@ -380,9 +407,17 @@
       text-align: right;
       margin-bottom: 5px;
 
+      @include max-screen($mq-sm-mobile) {
+        display: flex;
+      }
+
       > span {
         padding-right: 5px;
         float: right;
+
+        @include max-screen($mq-sm-mobile) {
+          order: 2;
+        }
       }
       a {        
         text-overflow: ellipsis;
@@ -390,6 +425,10 @@
         overflow: hidden;
         padding-right: 15px;
         text-align: left;
+
+        @include max-screen($mq-sm-mobile) {
+          flex-grow: 1;
+        }
       }
     }
     .product__attributes {
@@ -409,7 +448,7 @@
 }
 .toggle__content {
   background: $white;
-  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.12);
   display: none;
   padding: 10px;
   position: absolute;
@@ -419,6 +458,18 @@
   width: 380px;
   z-index: 3;
 
+  @include max-screen($mq-mobile) {
+    right: 20px;
+    border-top: 2px solid $black;
+  }
+
+  @include max-screen($mq-sm-mobile) {
+    width: 100%;
+    right: 0;
+    left: 0;
+    padding: 20px;
+  }
+
   > * {
     line-height: 1;
   }
@@ -426,6 +477,17 @@
 .search__content.toggle__content {
   width: 460px;
   right: 15px;
+
+  @include max-screen($mq-mobile) {
+    right: 20px;
+  }
+
+  @include max-screen($mq-sm-mobile) {
+    width: 100%;
+    right: 0;
+    left: 0;
+    border-top: 2px solid $black;
+  }
 }
 // /.cart
 
@@ -446,10 +508,8 @@
   }
 }
 .search {
-  // position: relative;
-
   form {
-    // position: relative;
+    
   }
   a:hover {
     color: $brick_red;
@@ -461,6 +521,11 @@
   &-select {
     margin-right: 10px;
     width: 190px;
+
+    @include max-screen($mq-sm-mobile) {
+      width: 100%;
+      margin-right: 0;
+    }
 
     select {
       padding: 9px 11px 8px;
@@ -475,6 +540,11 @@
   }
   &-input {
     width: 240px;
+
+    @include max-screen($mq-sm-mobile) {
+      width: 100%;
+      margin-top: 10px;
+    }
 
     input {
       width: 100%;
@@ -505,16 +575,19 @@
 }
 // search product dropdown
 .search-auto-result-cntr {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  left: 0;
-  right: 0;
-  box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.12);
+  position: relative;  
+  clear: both;
+  padding-top: 10px;
+  margin: 0 -10px -10px;
 
   ul {
     max-height: 405px;
     overflow-y: auto;
+    width: 100%;
+
+    @include max-screen($mq-mobile) {
+      max-height: 240px;
+    }
 
     li {
       display: block;
@@ -598,7 +671,7 @@
   }
 }
 
-.theme-nav-overlay {
+.theme-nav-overlay, .theme-toggle__content--search-overlay, .theme-toggle__content--cart-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -616,6 +689,11 @@
   }
 
   @include min-screen($mq-min-mobile) { 
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  @include min-screen($mq-min-sm-mobile) { 
     visibility: hidden !important;
     opacity: 0 !important;
   }
