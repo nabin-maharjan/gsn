@@ -61,6 +61,12 @@ $gsn_settings=$gsnSettingsClass->get();?>
 <div class="theme-nav-overlay"></div>
 <!-- /.nav-overlay -->
 
+<div class="theme-toggle__content--search-overlay"></div>
+<!-- /."theme-toggle__content--search-overlay -->
+
+<div class="theme-toggle__content--cart-overlay"></div>
+<!-- /."theme-toggle__content--search-overlay -->
+
 <?php if(!empty($gsn_settings->fbAppId) && !empty($gsn_settings->fbAppId)){ ?>
 <div class="fb-messengermessageus" 
   messenger_app_id="<?php echo $gsn_settings->fbAppId;?>" 
