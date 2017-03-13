@@ -122,6 +122,11 @@ jQuery(document).ready(function($){
 */
 if($('.color-picker').length){
 	$('.color-picker').wpColorPicker();
-}	
+}
+	
+if($('.admin_datepicker').length){
+	jQuery('.admin_datepicker').datepicker();	
+}
+
 });
 

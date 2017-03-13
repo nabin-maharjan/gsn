@@ -10,6 +10,7 @@ class Store{
 			// create tables
 			$this->store_table();
 			$this->create_activate_code_table();
+			$this->create_table_package_log();
 			// add ajax function for registration process
 			add_action( 'wp_ajax_store_registration', array($this,'store_registration') );
 			add_action( 'wp_ajax_nopriv_store_registration', array($this,'store_registration') );
@@ -62,6 +63,42 @@ class Store{
 			
 			
 	}
+	
+	/*
+	* Function to create package track table
+	*/
+	
+	function create_table_package_log(){
+		global $wpdb;
+		$this->package_log=$wpdb->prefix."package_log";
+		//$wpdb->show_errors(); 
+		//check if there are any tables of that name already
+		if($wpdb->get_var("show tables like '".$this->package_log."'") !== $this->package_log) 
+		{
+			$sql = '
+			  CREATE TABLE '.$this->package_log.' (
+				id bigint UNSIGNED NOT NULL auto_increment,
+				package varchar(50) NOT NULL,
+				start_date date NOT NULL,
+				end_date date NOT NULL,
+				update_date datetime NOT NULL,
+				user_id bigint,
+				PRIMARY KEY  (id)
+			  )';
+			dbDelta($sql);
+			
+		}
+		
+		//register the new table with the wpdb object
+		if (!isset($wpdb->package_log)) 
+		{
+			$wpdb->package_log = $this->package_log; 
+			//add the shortcut so you can use $wpdb->stats
+			$wpdb->tables[] = str_replace($wpdb->prefix, '', $this->package_log); 
+		}
+		
+	}
+
 	
 	/*
 	* Function regarding store table  database

@@ -293,6 +293,9 @@ class Custom_Post_Type
 										case "password":
 											echo $ag_input_fields->input_password_html($data['id'] ,$label,$arg);
 											break;
+										case "datepicker":
+											echo $ag_input_fields->input_datepicker_html($data['id'] ,$label,$arg);											
+											break;
 									};
 
 								}
