@@ -31,7 +31,7 @@
   </script>
 <?php } else { ?>
 <main class="dashboard-main-cntr">
-  <div class="container">
+  <div class="container dashboard__main-content">
   	<div class="row">
 			<?php 
 				$dashboard_page=get_page_by_path('dashboard');
@@ -51,6 +51,84 @@
 				get_template_part( 'template-parts/dashboard/content'.$slug,$name);  
 			?>
 		</div>
+  </div>
+  <div class="dashboard__info-content">
+    <h3>Plans &amp; Limits</h3>
+    <div class="plan__user">
+      <h5>Your current plan is <span>Free</span></h5>
+      <div class="plan-info--user">
+        <ul>
+          <li><span>50 </span> Products</li>
+          <li><span>50 </span> Ads</li>
+          <li><span>50 </span> Text</li>
+          <li><span>50 </span> Text</li>
+        </ul>
+      </div>
+    </div>
+    <!-- /.plan__user -->
+    <div class="plan__upgrade-wrapper">
+      <h5>Upgrade your plan to:</h5>
+      <div class="plan__upgrade plan--basic">
+        <h5><a href="#">Basic (Rs. 1500 / Year)</a></h5>
+        <div class="plan-info--user">
+          <ul>
+            <li><span>50 </span> Products</li>
+            <li><span>50 </span> Ads</li>
+            <li><span>50 </span> Text</li>
+            <li><span>50 </span> Text</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.plan__upgrade.plan--basic -->
+      <div class="plan__upgrade plan--bronze">
+        <h5><a href="#">Bronze (Rs. 1500 / Year)</a></h5>
+        <div class="plan-info--user">
+          <ul>
+            <li><span>50 </span> Products</li>
+            <li><span>50 </span> Ads</li>
+            <li><span>50 </span> Text</li>
+            <li><span>50 </span> Text</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.plan__upgrade.plan--bronze -->
+      <div class="plan__upgrade plan--silver">
+        <h5><a href="#">Silver (Rs. 1500 / Year)</a></h5>
+        <div class="plan-info--user">
+          <ul>
+            <li><span>50 </span> Products</li>
+            <li><span>50 </span> Ads</li>
+            <li><span>50 </span> Text</li>
+            <li><span>50 </span> Text</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.plan__upgrade.plan--silver -->
+      <div class="plan__upgrade plan--gold">
+        <h5><a href="#">Gold (Rs. 1500 / Year)</a></h5>
+        <div class="plan-info--user">
+          <ul>
+            <li><span>50 </span> Products</li>
+            <li><span>50 </span> Ads</li>
+            <li><span>50 </span> Text</li>
+            <li><span>50 </span> Text</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.plan__upgrade.plan--gold -->
+      <div class="plan__upgrade plan--platinum">
+        <h5><a href="#">Platinum (Rs. 1500 / Year)</a></h5>
+        <div class="plan-info--user">
+          <ul>
+            <li><span>50 </span> Products</li>
+            <li><span>50 </span> Ads</li>
+            <li><span>50 </span> Text</li>
+            <li><span>50 </span> Text</li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.plan__upgrade.plan--platinum -->
+    </div>
   </div>
 </main>
 <?php get_footer(); ?>
