@@ -32,7 +32,7 @@ if(!empty($store->storePackage)){
         </ul>
       </div>
       <?php if($selected_package!=="platinum"){ ?>
-		<div><a href="#" class="btn  btn-primary">Upgrade your plan!</a></div>
+		<div class="user__upgrade--btn"><a href="#" class="btn  btn-primary">Upgrade your plan!</a></div>
 	<?php } ?>
 		
       

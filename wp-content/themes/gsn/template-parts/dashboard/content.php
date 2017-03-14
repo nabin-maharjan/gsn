@@ -27,7 +27,7 @@
   
   <?php }?>
   
-  
+  <?php get_template_part( 'template-parts/dashboard/content-right','sidebar');  ?>
   
   
     <div class="row">

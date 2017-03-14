@@ -32,7 +32,7 @@
 <?php } else { ?>
 <main class="dashboard-main-cntr">
   <div class="container dashboard__main-content">
-  	<div class="row">
+  	<div class="row">      
 			<?php 
 				$dashboard_page=get_page_by_path('dashboard');
 				$name="";
@@ -51,8 +51,7 @@
 				get_template_part( 'template-parts/dashboard/content'.$slug,$name);  
 			?>
 		</div>
-  </div>
- <?php get_template_part( 'template-parts/dashboard/content-right','sidebar');  ?>
+  </div> 
 </main>
 <?php get_footer(); ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=myMap"></script>
