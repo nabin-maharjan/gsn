@@ -24,34 +24,56 @@ $logo_img=array_shift(wp_get_attachment_image_src($gsnSettings->logo,"full"));
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     
    <?php  if(is_singular('product')) { 
-        $current_product=wc_get_product(get_the_ID()); 
+        $current_product=wc_get_product(get_the_ID());
    ?>
 
     <!-- Place this data between the <head> tags of your website -->
-    <title><?php echo $current_product->post_excerpt;?></title>
-    <meta name="description" content="<?php echo $current_product->post_excerpt;?>" />
+    <title><?php echo get_the_title();?></title>
+    <meta name="description" content="<?php echo strip_tags(get_the_excerpt());?>" />
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="<?php echo $current_product->post_title;?>">
-    <meta itemprop="description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta itemprop="name" content="<?php echo get_the_title();?>">
+    <meta itemprop="description" content="<?php echo strip_tags(get_the_excerpt());?>">
     <meta itemprop="image" content="<?php the_post_thumbnail_url( 'medium' ); ?>">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@<?php echo $store->domainName;?>">
-    <meta name="twitter:title" content="<?php echo $current_product->post_title;?>">
-    <meta name="twitter:description" content="<?php echo $current_product->post_excerpt;?>">
+    <meta name="twitter:title" content="<?php echo get_the_title();?>">
+    <meta name="twitter:description" content="<?php echo strip_tags(get_the_excerpt());?>">
     <meta name="twitter:creator" content="@<?php echo $store->firstName;?>_<?php echo $store->lastName;?>">
     <meta name="twitter:image" content="<?php the_post_thumbnail_url( 'medium' ); ?>">
     <meta name="twitter:data1" content="<?php echo $current_product->get_price();?>">
     <meta name="twitter:label1" content="Price">
     <!-- Open Graph data -->
-    <meta property="og:title" content="<?php echo $current_product->post_title;?>" />
-    <meta property="og:type" content="article" />
+    <meta property="og:title" content="<?php echo get_the_title();?>" />
+    <meta property="og:type" content="product" />
     <meta property="og:url" content="<?php the_permalink();?>" />
     <meta property="og:image" content="<?php the_post_thumbnail_url( 'medium' ); ?>" />
-    <meta property="og:description" content="<?php echo $current_product->post_excerpt;?>" />
+    <meta property="og:description" content="<?php echo strip_tags(get_the_excerpt());?>" />
     <meta property="og:site_name" content="<?php echo $store->storeName;?>" />
     <meta property="og:price:amount" content="<?php echo $current_product->get_price();?>" />
     <meta property="og:price:currency" content="<?php echo get_woocommerce_currency(); ?>" />
+    <!--meta property="og:retailer_item_id" content="<?php echo get_the_ID(); ?>" /-->
+    <meta property="og:availability" content="instock" />
+    <meta property="og:condition" content="new" />
+    <?php 
+	$cate =  get_the_terms( get_the_ID(), 'product_cat' );
+		$parent = get_term_by('id', $cate[0]->term_id, 'product_cat');
+            // climb up the hierarchy until we reach a term with parent = '0'
+            $term_parent[] = $parent->name;
+		
+            if (isset($parent->parent) && sizeof($parent->parent) > 0) {
+                while ($parent->parent != '0') {
+                    $parent = get_term_by('id', $parent->parent, 'product_cat');
+					if($parent->parent!=0){					
+						$term_parent[] = $parent->name;
+					}
+                }
+                $term_parent = array_reverse($term_parent);
+			}
+                ?>
+    <meta property="og:category" content="<?php echo implode(' > ',$term_parent) ?>" />
+    
+    
      <?php }  ?>
 	<script>
         var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
