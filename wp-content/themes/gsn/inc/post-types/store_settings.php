@@ -55,7 +55,7 @@ $store_setting->add_meta_box(
     array(
 	
 		'Package' =>array(
-				'name'=>'selected_theme',
+				'name'=>'selected_package',
 				'class'=>' test test',
 				'type'=>"radio",
 				'show_in_admin_table'=>true,
@@ -109,12 +109,12 @@ function save_book_meta( $post_id, $post, $update ) {
     if ( "store_setting" != $post_type ) return;
 	
 	// get previous post instance
-	$prev_post_package=get_post_meta($post_id,'selected_theme',true);
+	$prev_post_package=get_post_meta($post_id,'selected_package',true);
 	$prev_post_package_start=get_post_meta($post_id,'package_start_date',true);
 	$prev_post_package_end=get_post_meta($post_id,'package_end_date',true);
 	
 	// get current post instance
-	$curr_post_package=$_POST['selected_theme'];
+	$curr_post_package=$_POST['selected_package'];
 	$curr_post_package_start=$_POST['package_start_date'];
 	$curr_post_package_end=$_POST['package_end_date'];
 

@@ -854,6 +854,42 @@ class Store{
 								if($insert){
 									/* Send activation code */
 									$send_activation_code=$this->send_activation_mail($user_id, sanitize_text_field($datas['emailAddress']));
+									$post_id = wp_insert_post( array(
+										'post_author' => $user_id,
+										'post_title' => $datas['storeName']." ".$user_id,
+										'post_status' => 'publish',
+										'post_type' => "store_setting"
+									) );
+									
+									$count_users=count_users();
+									$start_year=date('F d, Y');
+									$end_year=date('F d, Y', strtotime('+1 years'));
+									$package='normal';
+									if($count_users['store_contributor']<109){
+										$package='bronze';
+									}
+									update_post_meta($post_id,'selected_package',$package);
+									update_post_meta($post_id,'package_start_date',$start_year);
+									update_post_meta($post_id,'package_end_date',$end_year);
+									
+									$wpdb->update(
+											$wpdb->store,
+											 array(
+													'storePackage'=>$package
+											),
+											array('user_id'=>$user_id)
+										);
+									$insert = $wpdb->insert(
+											$wpdb->package_log,
+											array(
+												'package'=>$package,
+												'start_date' =>normal_date_to_db_date($start_year),
+												'end_date' =>normal_date_to_db_date($end_year),
+												'update_date' =>date('Y-m-d h:m:s'),
+												'user_id'=>$user_id,
+												)
+											);
+										
 								}
 								/* login user */
 								wp_set_current_user($user_id);

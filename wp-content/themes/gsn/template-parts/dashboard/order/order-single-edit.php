@@ -36,11 +36,17 @@ $store_order_items=$store_order->get_items();
         <!-- /.order_status_change_form -->
       </div> 
       <!-- /.order-summary-basic-info -->       
-      <div class="col-sm-6 order__summary order-summary-billing-info">
+      <div class="col-sm-3 order__summary order-summary-billing-info">
         <h4>Billing Information</h4>
 		    <p><?php echo $store_order->get_formatted_billing_address();?></p>
       </div>
       <!-- /.order-summary-billing-info -->
+      <div class="col-sm-3 order__summary order-summary-billing-info">
+        <h4>Shipping Information</h4>
+		    <p><?php echo $store_order->get_formatted_shipping_address();?></p>
+      </div>
+      <!-- /.order-summary-billing-info -->
+      
     </div>
   </div>
 </section>
@@ -82,9 +88,9 @@ $store_order_items=$store_order->get_items();
 <section class="order-payment-info-cntr">
 	<h3 class="heading20">Payment Information</h3>
   <div class="container">
-    <p>Discount: <?php echo woocommerce_price($store_order->get_total_discount());?></p>
-    <p>Shipping: <?php echo woocommerce_price($store_order->get_total_shipping());?></p>
-    <p>Order Total: <?php echo woocommerce_price($store_order->get_total());?></p>
+   <?php foreach ( $store_order->get_order_item_totals() as $key => $total ) {?>
+	 	 <p><?php echo $total['label']; ?> <?php echo $total['value']; ?></p>
+	<?php }?>
   </div>
 </section>
 <!-- /.order-payment-info-cntr -->

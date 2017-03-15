@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Enqueue styles.
  *link vendor css file  on top

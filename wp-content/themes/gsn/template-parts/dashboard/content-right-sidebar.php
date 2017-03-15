@@ -31,9 +31,9 @@ if(!empty($store->storePackage)){
             <li>Featured shop: <span><?php echo $package_gsn_feature_shop; ?> </span> </li>
         </ul>
       </div>
-      <?php if($selected_package!=="platinum"){ ?>
+      <?php /* if($selected_package!=="platinum"){ ?>
 		<div class="user__upgrade--btn"><a href="#" class="btn  btn-primary">Upgrade your plan!</a></div>
-	<?php } ?>
+	<?php } */ ?>
 		
       
     </div>

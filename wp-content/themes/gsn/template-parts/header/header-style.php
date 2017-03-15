@@ -12,6 +12,10 @@
 	$light_color=array_shift($theme_setting['light_color']);
 	$lighter_color=array_shift($theme_setting['lighter_color']);
 ?>
+<noscript>
+	
+	<?php var_dump($gsn_settings); ?>
+</noscript>
 <style>
 .btn-submit:hover,
 .landing__tab li,
