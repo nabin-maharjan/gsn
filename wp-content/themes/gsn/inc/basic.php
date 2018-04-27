@@ -5,7 +5,8 @@
  */
 function enquee_style_css(){
 	// Enqueue custom stylesheet//
-	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '', 'all' );
+    wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 
@@ -14,24 +15,11 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
  * link vendor javascript file  on top
  */
 function enquee_scripts(){
-    wp_enqueue_script( 'jquery-min', get_template_directory_uri() . '/assets/js/vendor/jquery-3.1.1.min.js', array('jquery'), '1.0.0', false ); 
-	
-	 wp_enqueue_script( 'jquery-ui',get_template_directory_uri() . '/assets/js/vendor/jquery-ui.js', array('jquery'), '1.0.0', false ); 
-    wp_enqueue_script( 'jquery-validate-min', get_template_directory_uri() . '/assets/js/vendor/jquery.validate.min.js', array('jquery'), '1.0.0', false );
-    wp_enqueue_script( 'tether-js', get_template_directory_uri() . '/assets/js/vendor/tether.min.js', array('jquery'), '1.0.0', true );
-    wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js', array('jquery'), '1.0.0', true );
-	
+    wp_enqueue_script( 'jquery-min', 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );    
+    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', false );
 
-	wp_enqueue_script( 'bootstrap-datepicker-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap-datepicker.min.js', array('jquery'), '1.0.0', true );
-    // wp_enqueue_script( 'custom-scrollbar', get_template_directory_uri() . '/assets/js/vendor/jquery.mCustomScrollbar.concat.min.js', array('jquery'), '1.0.0', true );
-	
-	if(is_page_template( 'page-templates/register.php')){
-		wp_enqueue_script( 'lazylinepainter-js', get_template_directory_uri() . '/assets/js/vendor/jquery.lazylinepainter-1.7.0.min.js', array('jquery'), '1.0.0', true );
-	}
-	
-	 // Enqueue custom all js//   
-	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array('jquery'), '1.0.0', true );
-	
+    wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
 
@@ -40,13 +28,11 @@ add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
  * link vendor javascript file  on top
  */
 function my_enqueue($hook) {
-   wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
+   wp_enqueue_script( 'all-dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dasboard.min.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
 	//wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
-  wp_enqueue_style( 'jquery-ui' );   
-
-   
+    wp_enqueue_style( 'jquery-ui' );   
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
