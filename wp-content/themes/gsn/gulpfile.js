@@ -138,7 +138,9 @@ gulp.task("vendors-only-scripts", function() {
     .src(`${workingFolder}/js/vendors/*.js`)
     .pipe(sourcemaps.init())
     .pipe(include())
-    .pipe(order([]))
+    .pipe(order([
+
+    ]))
     .pipe(concat("all-vendors.min.js"))
     .pipe(uglify())
     .on("error", function(err) {
@@ -160,6 +162,9 @@ gulp.task("theme-vendor-scripts", function() {
     .pipe(sourcemaps.init())
     .pipe(include())
     .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
     .pipe(concat("vendor.min.js"))
     .pipe(uglify())
     .on("error", function(err) {
@@ -182,6 +187,9 @@ gulp.task("theme-custom-scripts", function() {
     .pipe(include())
     .on("error", console.log)
     .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
     .pipe(concat("theme.min.js"))
     .pipe(uglify())
     .pipe(
@@ -200,6 +208,9 @@ gulp.task("dashboard-vendor-scripts", function() {
     .pipe(sourcemaps.init())
     .pipe(include())
     .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
     .pipe(concat("vendor.min.js"))
     .pipe(uglify())
     .on("error", function(err) {
@@ -222,6 +233,9 @@ gulp.task("dashboard-custom-scripts", function() {
     .pipe(include())
     .on("error", console.log)
     .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
     .pipe(concat("dashboard.min.js"))
     .pipe(uglify())
     .pipe(

@@ -15,8 +15,9 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
  * link vendor javascript file  on top
  */
 function enquee_scripts(){
-    wp_enqueue_script( 'jquery-min', 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );    
-    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', false );
+    wp_enqueue_script( 'jquery-main', 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', true );
 
     wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
     wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
