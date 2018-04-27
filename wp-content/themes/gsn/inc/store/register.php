@@ -464,8 +464,9 @@ class Store{
 	
 	 /* Add the media uploader script */
   public function my_media_lib_uploader_enqueue() {
+	 // echo stylesheet_directory_uri( 'media-lib-uploader.js' , __FILE__ );die;
     wp_enqueue_media();
-    wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
+  //  wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
     wp_enqueue_script( 'media-lib-uploader-js' );
   }
  
@@ -566,7 +567,7 @@ class Store{
 	public function check_access_store(){
 		
 		global $store;
-		if(is_page("activate")){
+		if(is_page("activate") || is_page("Test Map")){
 		}else if(!empty($store->id) && $store->is_shop==true && is_page_template( 'page-templates/register.php')){
 			  global $wp_query;
 			  $wp_query->set_404();
