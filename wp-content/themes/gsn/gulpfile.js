@@ -1,214 +1,354 @@
-var gulp = require('gulp'),
-  gutil = require('gulp-util'),
- sass = require('gulp-sass'),
- include  = require("gulp-include")
- sourcemaps = require('gulp-sourcemaps'),
- jshint = require('gulp-jshint'),
- concat = require('gulp-concat'),
- imagemin = require('gulp-imagemin'),
- plumber = require('gulp-plumber'),
- notify = require('gulp-notify'),
-  minifyCss = require('gulp-minify-css'),
- browserSync = require('browser-sync').create(),
- reload      = browserSync.reload, 
- uglify = require('gulp-uglify'),
-  rename = require('gulp-rename'),
-  pngquant = require('pngquant'),
-  postcss = require('gulp-postcss'),
-  cache = require('gulp-cache'),
-  size = require('gulp-size'),
-  cssnano = require('gulp-cssnano'),
-  del = require('del'),
-  runSequence = require('run-sequence'),
-  prefix = require('gulp-autoprefixer'),
-  order = require('gulp-order'),
-  combineMq = require('gulp-combine-mq');
-  
-  
-  var wpFolderName="gsn";
+var gulp = (gulp = require("gulp")),
+  gutil = require("gulp-util"),
+  sass = require("gulp-sass"),
+  include = require("gulp-include"),
+  eslint = require("gulp-eslint"),
+  sourcemaps = require("gulp-sourcemaps"),
+  concat = require("gulp-concat"),
+  imagemin = require("gulp-imagemin"),
+  plumber = require("gulp-plumber"),
+  notify = require("gulp-notify"),
+  uglify = require("gulp-uglify"),
+  rename = require("gulp-rename"),
+  pngquant = require("gulp-pngquant"),
+  postcss = require("gulp-postcss"),
+  cache = require("gulp-cache"),
+  size = require("gulp-size"),
+  cssnano = require("gulp-cssnano"),
+  del = require("del"),
+  runSequence = require("run-sequence"),
+  prefix = require("gulp-autoprefixer"),
+  order = require("gulp-order"),
+  combineMq = require("gulp-combine-mq"),
+  cleanCss = require("gulp-clean-css"),
+  babel = require("gulp-babel");
 
-/ SASS OUTPUT OPTION /
+// Destination folder
+var destFolder = "assets";
+
+// Working folder
+var workingFolder = "work-assets";
+
+var wpFolderName = "gsn";
+
+// SASS OUTPUT OPTION
 var sassOptions = {
-  outputStyle: 'expanded'
+  outputStyle: "expanded"
 };
-/ CSS VENDOR PREFIX OPTION /
+
+// CSS VENDOR PREFIX OPTION
 var prefixerOptions = {
-  browsers: ['last 2 versions', 'ie 9']
+  browsers: ["> 1%", "last 3 versions", "iOS >=7"]
 };
 
-
-////// Styles TASK ///////
-
-gulp.task('sass', function () {
- return gulp.src('work-assests/scss/**/*.scss', { base: 'work-assests/scss/' })
-  .pipe(plumber(plumberErrorHandler))  
-  .pipe(sourcemaps.init()) 
-  .pipe(sass(sassOptions))
-  .pipe(size({ gzip: true, showFiles: true }))  
-  .pipe(prefix(prefixerOptions))
-  .pipe(minifyCss())       
-  .pipe(concat('style.css'))
-  .pipe(rename({              //renames the concatenated CSS file
-      basename : 'style',       //the base name of the renamed CSS file
-      extname : '.min.css'      //the extension fo the renamed CSS file
-    }))    
-  .pipe(size({ gzip: true, showFiles: true }))  
-  .pipe(sourcemaps.write('./'))
-  .pipe(gulp.dest('assets/css/'))        
-  .pipe(reload({stream:true}));
+////// Theme Styles TASK ///////
+gulp.task("theme-styles", function() {
+  return gulp
+    .src(`${workingFolder}/scss/theme/**/*.scss`)
+    .pipe(plumber(plumberErrorHandler))
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions))
+    .pipe(prefix(prefixerOptions))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(
+      cleanCss({
+        format: "beautify",
+        level: {
+          2: {
+            removeUnusedAtRules: true
+          }
+        }
+      })
+    )
+    .pipe(
+      combineMq({
+        beautify: false
+      })
+    )
+    .pipe(concat("theme.css"))
+    .pipe(
+      rename({
+        //renames the concatenated CSS file
+        basename: "theme", //the base name of the renamed CSS file
+        extname: ".min.css" //the extension fo the renamed CSS file
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/css/theme/`))
+    .pipe(size({ gzip: true, showFiles: true }));
 });
 
+////// Dashboard Styles TASK ///////
+gulp.task("dashboard-styles", function() {
+  return gulp
+    .src(`${workingFolder}/scss/dashboard/**/*.scss`)
+    .pipe(plumber(plumberErrorHandler))
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions))
+    .pipe(prefix(prefixerOptions))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(
+      cleanCss({
+        format: "beautify",
+        level: {
+          2: {
+            removeUnusedAtRules: true
+          }
+        }
+      })
+    )
+    .pipe(
+      combineMq({
+        beautify: false
+      })
+    )
+    .pipe(concat("dashboard.css"))
+    .pipe(
+      rename({
+        //renames the concatenated CSS file
+        basename: "dashboard", //the base name of the renamed CSS file
+        extname: ".min.css" //the extension fo the renamed CSS file
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/css/dashboard/`))
+    .pipe(size({ gzip: true, showFiles: true }));
+});
 
-/////////// Script TASK /////////////
-gulp.task("global-scripts", function() {
-  return gulp.src("work-assests/js/custom/**/*.js")
-   .pipe(sourcemaps.init()) 
-   .pipe(jshint())
-   .pipe(include())      
-   .on('error', console.log)
-   .pipe(jshint.reporter('default'))
-   .pipe(order([
-		"work-assests/js/custom/**/*.js"
-	  ]))
-	.pipe(concat("all.js"))
+// JS LINT
+gulp.task("lint", function() {
+  return (
+    gulp
+      .src(`${workingFolder}/js/**`)
+      .pipe(
+        eslint({
+          rules: {
+            quotes: [1, "single"],
+            semi: [1, "always"]
+          }
+        })
+      )
+      .pipe(eslint.format())
+      // Brick on failure to be super strict
+      .pipe(eslint.failOnError())
+  );
+});
+
+/////////// ALL VENDOR Script TASK /////////////
+gulp.task("vendors-only-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/vendors/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .pipe(order([
+
+    ]))
+    .pipe(concat("all-vendors.min.js"))
     .pipe(uglify())
-    .pipe(size({ gzip: true, showFiles: true }))
-	
-   .pipe(gulp.dest("assets/js/custom/"))
-    .pipe(reload({stream:true}));
+    .on("error", function(err) {
+      gutil.log(gutil.colors.red("[Error]"), err.toString());
+    })
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/vendors/`));
 });
-/////////// Script TASK /////////////
-gulp.task("global-scripts-vendors", function() {
-  return gulp.src("work-assests/js/vendor/**/*.js")
-   .pipe(sourcemaps.init()) 
-   //.pipe(jshint())
-   .pipe(include())      
-   .on('error', console.log)
-   .pipe(jshint.reporter('default'))
-   .pipe(order([
-		"work-assests/js/vendor/**/*.js"
-	  ]))
-	//.pipe(concat("vendor-min.js"))
+
+/////////// THEME VENDOR Script TASK /////////////
+gulp.task("theme-vendor-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/theme/vendors/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("vendor.min.js"))
     .pipe(uglify())
-    .pipe(size({ gzip: true, showFiles: true }))
-	
-   .pipe(gulp.dest("assets/js/vendor/"))
-    .pipe(reload({stream:true}));
+    .on("error", function(err) {
+      gutil.log(gutil.colors.red("[Error]"), err.toString());
+    })
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/theme/`));
 });
 
-/////////// Script TASK /////////////
-gulp.task("global-scripts-admin", function() {
-  return gulp.src("work-assests/js/admin/*.js")
-   .pipe(sourcemaps.init()) 
-   .pipe(jshint())
-   .pipe(include())      
-   .on('error', console.log)
-   .pipe(jshint.reporter('default'))
-   .pipe(order([
-		"work-assests/js/admin/**/*.js"
-	  ]))
-	.pipe(concat("all-admin.js"))
-    .pipe(uglify().on('error', function(e){
-            console.log(e);
-         }))
-    .pipe(size({ gzip: true, showFiles: true }))
-	
-   .pipe(gulp.dest("assets/js/admin/"))
-    .pipe(reload({stream:true}));
+/////////// THEME CUSTOM Script TASK /////////////
+gulp.task("theme-custom-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/theme/custom/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .on("error", console.log)
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("theme.min.js"))
+    .pipe(uglify())
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/theme/`));
 });
 
+/////////// ADMIN VENDOR Script TASK /////////////
+gulp.task("dashboard-vendor-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/dashboard/vendors/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("vendor.min.js"))
+    .pipe(uglify())
+    .on("error", function(err) {
+      gutil.log(gutil.colors.red("[Error]"), err.toString());
+    })
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/dashboard/`));
+});
 
-
+/////////// ADMIN CUSTOM Script TASK /////////////
+gulp.task("dashboard-custom-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/dashboard/custom/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .on("error", console.log)
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("dashboard.min.js"))
+    .pipe(uglify())
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/dashboard/`));
+});
 
 ////// Optimize Image TASK ///////
-gulp.task('img', function() {
-  return gulp.src('work-assests/images/*.+(png|jpg|jpeg|gif|svg)')
-    .pipe(cache(imagemin({
-      optimizationLevel: 7,
-      interlaced: true,
-      progressive: true,
-      svgoPlugins: [{removeViewBox: false}],
-      use: [pngquant()]
-    })))
-    .pipe(gulp.dest('assets/images'))
+gulp.task("img", function() {
+  return gulp
+    .src(`${workingFolder}/images/*.+(png|jpg|jpeg|gif|svg)`)
+    .pipe(
+      cache(
+        imagemin({
+          optimizationLevel: 7,
+          interlaced: true,
+          progressive: true,
+          svgoPlugins: [{ removeViewBox: false }],
+          use: [pngquant()]
+        })
+      )
+    )
+    .pipe(gulp.dest(`${destFolder}/images/`));
 });
 
-//Copy Fonts
-//gulp.task('fonts', function(){
-//  return gulp.src('work-assests/fonts/**/*')
-//    .pipe(gulp.dest('assets/fonts'))
-//});
-
-// Cleaning 
-gulp.task('clean', function() {
-  return del.sync('assets').then(function(cb) {
+// Cleaning
+gulp.task("clean", function() {
+  return del.sync(`${destFolder}`).then(function(cb) {
     return cache.clearAll(cb);
   });
-})
-
-gulp.task('clean:assets', function() {
-  return del.sync(['assets/**/*', '!assets/images', '!assets/images/**/*']);
 });
 
-// browser-sync task for starting the server.
-gulp.task('browser-sync', function() {
-  //watch files
-  var files = [
-    './**/*.php',
-    './*.php',
-    './*.js',
-	'./**/*.js',
-    './*.css'
-  ];
-  //initialize browsersync
-  browserSync.init(files, {
-  //browsersync with a php server
-	 proxy: "http://localhost/"+wpFolderName+"/",
-   // host: 'nabin.com',
-    injectChanges: true,
-    open: 'internal',
-    notify: false
-  });
+gulp.task(`clean:${destFolder}`, function() {
+  return del.sync([
+    `${destFolder}/**/*`,
+    `!${destFolder}/images`,
+    `!${destFolder}/images/**/*`,
+    `!${destFolder}/css`,
+    `!${destFolder}/css/theme`,
+    `!${destFolder}/css/dashboard`,
+    `!${destFolder}/js`,
+    `!${destFolder}/js/vendors`,
+    `!${destFolder}/js/theme`,
+    `!${destFolder}/js/dashboard`
+  ]);
 });
 
 ////// PLUMBER TASK ///////
-
-var plumberErrorHandler = { errorHandler: notify.onError({
-    title: 'Gulp',
-    message: 'Error: <%= error.message %>'
+var plumberErrorHandler = {
+  errorHandler: notify.onError({
+    title: "Gulp",
+    message: "Error: <%= error.message %>"
   })
 };
 
-
 //Watch task
-gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin','global-scripts-vendors'], function(){
-   gulp.watch('work-assests/scss/**/*.scss', ['sass']); 
-   gulp.watch('work-assests/js/**/*.js', ['global-scripts']);
-    gulp.watch('work-assests/js/admin/**/*.js', ['global-scripts-admin']);
-   gulp.watch('work-assests/images/*.+(png|jpg|jpeg|gif|svg)', ['img']);
-    gulp.watch('./**/*.php', reload);
+gulp.task(
+  "watch",
+  [
+    "theme-styles",
+    "dashboard-styles",
+    "vendors-only-scripts",
+    "img",
+    "theme-vendor-scripts",
+    "theme-custom-scripts",
+    "dashboard-vendor-scripts",
+    "dashboard-custom-scripts"
+  ],
+  function() {
+    gulp.watch(`${workingFolder}/scss/theme/**/*.scss`, ["theme-styles"]);
+    gulp.watch(`${workingFolder}/scss/dashboard/**/*.scss`, [
+      "dashboard-styles"
+    ]);
+    gulp.watch(`${workingFolder}/js/vendors/*.js`, [
+      "vendors-only-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/js/theme/custom/*.js`, [
+      "theme-custom-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/js/theme/vendor/*.js`, [
+      "theme-vendor-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/js/dashboard/custom/*.js`, [
+      "dashboard-custom-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/js/dashboard/vendor/*.js`, [
+      "dashboard-vendor-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/images/*.+(png|jpg|jpeg|gif|svg)`, ["img"]);
+  }
+);
+
+gulp.task("default", function(callback) {
+  runSequence(["theme-styles", "dashboard-styles", "watch", "img"], callback);
 });
 
-// Default task to be run with `gulp`
-
-// gulp.task('default', ['sass', 'browser-sync','img','global-scripts'], function () {
-//    gulp.watch("sass/**/*.scss", ['sass']);
-//    gulp.watch('scss/**/*.scss', ['sass']); 
-//    gulp.watch('working-js/*.js', ['global-scripts']);
-//    gulp.watch('images/*.+(png|jpg|jpeg|gif|svg)', ['img']);
-// });
-
-gulp.task('default', function (callback) {
-  runSequence(['sass','browser-sync', 'watch', 'img'],
-    callback
-  )
-});
-
-
-gulp.task('build', function(callback){
+gulp.task("build", function(callback) {
   runSequence(
-    'clean:assets',
-    ['sass', 'global-scripts', 'img','global-scripts-admin','global-scripts-vendors'],
+    `clean:${destFolder}`,
+    [
+      "theme-styles",
+      "dashboard-styles",
+      "vendors-only-scripts",
+      "theme-vendor-scripts",
+      "theme-custom-scripts",
+      "dashboard-vendor-scripts",
+      "dashboard-custom-scripts",
+      "img"
+    ],
     callback
-  )
+  );
 });
