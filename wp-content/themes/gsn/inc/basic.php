@@ -5,7 +5,8 @@
  */
 function enquee_style_css(){
 	// Enqueue custom stylesheet//
-	wp_enqueue_style( 'style-min-css', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
+    wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 
@@ -15,12 +16,16 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
  */
 function enquee_scripts(){
 
-	// Enqueue custom all js//
+    // Enqueue custom all js//
+    wp_enqueue_script( 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );
+    
 	if( is_page_template( 'page-templates/register.php') || is_page_template( 'page-templates/dashboard.php')){
-		wp_enqueue_script( 'jquery-validate-min', get_template_directory_uri() . '/assets/js/vendor/jquery.validate.min.js', array(), '1.0.0', true );
+		wp_enqueue_script( 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array(), '1.0.0', true );
 	}
 
-	wp_enqueue_script( 'all-js', get_template_directory_uri() . '/assets/js/custom/all.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
+
+    wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
 
