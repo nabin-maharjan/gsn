@@ -1,15 +1,24 @@
 // JavaScript Document
-function myMap() {	
+jQuery(document).ready(function(e){
+	  myMap();
+});
+function myMap() {
+	var geocoder = new google.maps.Geocoder();
+if(jQuery('#map').length){
   var storeLocation=document.getElementById("storeFullAddress");
   var latittude_cntr=document.getElementById("latitute");
   var lognitude_cntr=document.getElementById("lognitute");
   var mapCanvas = document.getElementById("map");
-  var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
- 
+   var defaultLocation= new google.maps.LatLng(27.700769,85.300140);
+   var zoomlevel=12;
+  if(location_Lat!==0){
+	 defaultLocation= new google.maps.LatLng(location_Lat,location_Lan);
+	 zoomlevel=16;
+  }
 
   var mapOptions = {
     center:defaultLocation, 
-    zoom: 10
+    zoom: zoomlevel
   };
 
   var map = new google.maps.Map(mapCanvas, mapOptions);
@@ -26,6 +35,10 @@ function myMap() {
 		var longitude = event.latLng.lng();
 		latittude_cntr.value = latitude;
 		lognitude_cntr.value = longitude;
+		 location_Lat=latitude;
+   		location_Lan=longitude;
+		
+		
 		// This event listener will call addMarker() when the map is clicked.
 		marker.setPosition(event.latLng);
 		// Center of map
@@ -66,15 +79,15 @@ function myMap() {
           });
           map.fitBounds(bounds);
         });
-		
-		 var geocoder = new google.maps.Geocoder();
-		 function getAddress(latLng) {
+	}
+	 function getAddress(latLng) {
 			geocoder.geocode( {'latLng': latLng},
 			  function(results, status) {
 				if(status == google.maps.GeocoderStatus.OK) {
 				  if(results[0]) {
 					  console.log(results);
 					  jQuery('#selected_location_label').html(results[0].formatted_address);
+					  jQuery('#change_location_btn .btn_location_text').html(results[0].formatted_address);
 					  	storeLocation.value=results[0].formatted_address;
 				  }
 				  else {

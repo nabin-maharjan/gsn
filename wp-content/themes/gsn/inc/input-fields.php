@@ -17,6 +17,16 @@ class Agile_Input_Fields{
 		return '<input type="text" class="'.$class.'" name="'. $name . '" id="' . $id . '" value="' . $value . '" placeholder="'.$placeholder.'" />';	
 	}
 	/////////////////////////////////////////////////////
+	/* Function for print  input[type=datepicker] */
+	////////////////////////////////////////////////////
+	public function input_datepicker($arg){
+		extract($arg);
+		return '<input type="text" class="'.$class.' admin_datepicker" name="'. $name . '" id="' . $id . '" value="' . $value . '" placeholder="'.$placeholder.'" />';	
+	}
+	
+	
+	
+	/////////////////////////////////////////////////////
 	/* Function for print  input[type=password] */
 	////////////////////////////////////////////////////
 	public function input_password($arg){
@@ -52,8 +62,17 @@ class Agile_Input_Fields{
 	//////////////////////////////////////////////////////////////////
 	public function input_radio($arg){
 		extract($arg);
+		$firstSelected=false;
+		if(empty($prev_selected_options)){
+			$firstSelected=true;
+		}
+		$i=0;
 		foreach($options as $key=>$value){
 			$selected=($key==$prev_selected_options)?"checked":"";
+			if($firstSelected && $i==0){
+				$selected="checked";
+			}
+			$i++;
 			if(!empty($show_label) && $show_label){
 				$html.='<label class="'.$class.'"><input type="radio"   name="' . $name . '" id="' . $id.'_'.$key . '" ' .$selected.' value="' . $key . '" > '.$value.'</label> ';
 			}else{
@@ -101,6 +120,33 @@ class Agile_Input_Fields{
 		return '<tr><th><label for="' . $field_id_name . '">' . $label . '</label></th><td>'.$this->input_text($arg_input).'</td></tr>';	
 		
 	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	/* Function for print  formated input[type=text] with labels */
+	//////////////////////////////////////////////////////////////////
+	public function input_datepicker_html($id,$label,$arg=array()){
+		extract($arg);
+		
+		//$field_id_name  = strtolower( str_replace( ' ', '_', $id) ) . '_' . strtolower( str_replace( ' ', '_', $label ) );
+		$post_id=get_the_ID();
+		
+		$prev_value=get_post_meta($post_id,$name,true);
+		$placeholder=(!empty($placeholder))?$placeholder:"";
+		$arg_input=array(
+						'name'=>$name,
+						'id'=>$id,
+						'class'=>(!empty($class))?$class:"",
+						'placeholder'=>$placeholder,
+						'value'=>$prev_value,
+					);
+		return '<tr><th><label for="' . $field_id_name . '">' . $label . '</label></th><td>'.$this->input_datepicker($arg_input).'</td></tr>';	
+		
+	}
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
 	/* Function for print  formated input[type=password] with labels */
 	//////////////////////////////////////////////////////////////////

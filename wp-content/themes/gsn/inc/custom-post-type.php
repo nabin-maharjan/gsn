@@ -119,6 +119,10 @@ class Custom_Post_Type
 	public function add_post_type_support($supports ){
 		 add_post_type_support($this->post_type_name , $supports );
 	}
+	
+	public function remove_post_type_support($supports ){
+		 remove_post_type_support($this->post_type_name,$supports);
+	}
      
 	//////////////////////////////////////////////////////////////////////////////////////
     ////////////////// Method to attach the taxonomy to the post type /////////////////////
@@ -289,6 +293,9 @@ class Custom_Post_Type
 										case "password":
 											echo $ag_input_fields->input_password_html($data['id'] ,$label,$arg);
 											break;
+										case "datepicker":
+											echo $ag_input_fields->input_datepicker_html($data['id'] ,$label,$arg);											
+											break;
 									};
 
 								}
@@ -387,7 +394,7 @@ class Custom_Post_Type
 		foreach($post_types as $types){
 			$ext = pathinfo($types, PATHINFO_EXTENSION);
 			if($ext=="php"){
-				include("/post-types/".$types);
+				include(get_stylesheet_directory()."/inc/post-types/".$types);
 			};
 		}
 	}
@@ -422,7 +429,7 @@ class Custom_Post_Type
 							//var_dump($meta_field);
 							if(!empty($meta_field['show_in_admin_table']) && $meta_field['show_in_admin_table']==true && $column==$meta_field['name']){
 								$meta_value=get_post_meta( $post_id,$column,true );
-								echo apply_filters( 'admin_custom_'.$post->post_type.'_meta_field_table', $meta_value);
+								echo apply_filters( 'admin_custom_'.$post->post_type.'_meta_field_table', $meta_value,$column);
 							}
 						}
 					}

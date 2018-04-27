@@ -1,3 +1,179 @@
-p {
-  color: $red_bg;
+body {
+  font-size: 14px;  
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+a {
+  display: inline-block;
+}
+a, a:hover, a:focus {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  display: inline-block;
+}
+select {
+  outline: 0;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: none;
+}
+.page-title {
+  font-weight: bolder;
+  margin: 0 0 25px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-control {
+  border-radius: 0;
+
+  &.error {
+    border-color: red;
+  }
+}
+.btn-submit {
+  background: $dark_gray;
+  border-radius: 0;
+  color: white;
+  font-weight: bold;
+  padding: 10px 30px;
+  text-transform: uppercase;
+
+  &:hover {
+    background: $gray_bg;
+  }
+}
+label.error {
+  color: red;
+  display: block;
+  font-size: 12px;
+  margin-top: 3px;
+}
+.btn {
+  border-radius: 0;
+  border: none;
+}
+.p15 {
+  padding: 0 15px;
+}
+.pl0 {
+  padding-left: 0
+}
+.pr0 {
+  padding-right: 0
+}
+.mb15 {
+  margin-bottom: 15px;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.fn {
+  float: none;
+}
+.hidden {
+  display: none;
+}
+.wp-editor-container {
+  border: 1px solid $light_gray;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.modal-open{  
+  .screen-reader-text {
+    display: none;
+  }
+}
+
+.desktop {
+  display: block;
+
+  @include max-screen($mq-mobile) {
+    display: none;
+  }
+}
+
+.desktop-inline {
+  display: inline-block;
+
+  @include max-screen($mq-mobile) {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+
+  @include max-screen($mq-mobile) {
+    display: block;
+  }
+}
+
+@include max-screen($mq-tablet) {
+  .container {
+    width: 100%;
+    padding: 0 20px;
+  }
+  [class*='col-'] {
+    padding: 0 20px;
+  }
+  .row {
+    margin: 0 -20px;
+  }
+  .p15 {
+    padding: 0 20px;
+  }
+  .dashboard-forms-main-cntr {
+    margin: 0 -10px;
+
+    [class*='col-'] {
+      padding: 0 10px;
+    }
+    .pl0 {
+      padding-left: 0;
+    }
+    .pr0 {
+      padding-right: 0;
+    }
+  } 
+}
+
+@include max-screen($mq-mobile) {
+  .dashboard-forms-main-cntr {
+    margin: 0 -10px;
+
+    [class*='col-'] {
+      display: block;
+      width: auto;
+      float: none;
+    }
+    .col-form-label-sm {
+      padding-right: 0;
+      margin-bottom: 10px;
+    }
+    .pl0, .pr0 {
+      padding: 0;
+    }
+  }
 }

@@ -1,0 +1,32 @@
+.main-pagination-cntr {
+  nav.woocommerce-pagination {
+    ul {
+      font-size: 0;
+      border: 0;
+      li {
+        float: none;
+        a, span {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 16px;
+          height: 42px;
+          line-height: 1.4;
+        }
+        span.current {
+          background: $dark_gray;
+          color: $white;
+          font-weight: bold;
+        }
+
+        .next, .prev {
+          font-size: 22px;
+          line-height: 1;
+        }
+
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+  }
+}

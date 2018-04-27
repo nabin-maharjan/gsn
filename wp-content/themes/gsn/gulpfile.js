@@ -40,23 +40,21 @@ var prefixerOptions = {
 ////// Styles TASK ///////
 
 gulp.task('sass', function () {
- return gulp.src('work-assests/scss/**/*.scss')
-  .pipe(plumber(plumberErrorHandler))
-  
+ return gulp.src('work-assests/scss/**/*.scss', { base: 'work-assests/scss/' })
+  .pipe(plumber(plumberErrorHandler))  
   .pipe(sourcemaps.init()) 
   .pipe(sass(sassOptions))
+  .pipe(size({ gzip: true, showFiles: true }))  
   .pipe(prefix(prefixerOptions))
-  .pipe(combineMq({
-        beautify: false
-    }))
-  .pipe(minifyCss())
+  .pipe(minifyCss())       
   .pipe(concat('style.css'))
   .pipe(rename({              //renames the concatenated CSS file
       basename : 'style',       //the base name of the renamed CSS file
       extname : '.min.css'      //the extension fo the renamed CSS file
-    }))
-  .pipe(gulp.dest('assets/css/'))
+    }))    
   .pipe(size({ gzip: true, showFiles: true }))  
+  .pipe(sourcemaps.write('./'))
+  .pipe(gulp.dest('assets/css/'))        
   .pipe(reload({stream:true}));
 });
 
@@ -79,6 +77,24 @@ gulp.task("global-scripts", function() {
    .pipe(gulp.dest("assets/js/custom/"))
     .pipe(reload({stream:true}));
 });
+/////////// Script TASK /////////////
+gulp.task("global-scripts-vendors", function() {
+  return gulp.src("work-assests/js/vendor/**/*.js")
+   .pipe(sourcemaps.init()) 
+   //.pipe(jshint())
+   .pipe(include())      
+   .on('error', console.log)
+   .pipe(jshint.reporter('default'))
+   .pipe(order([
+		"work-assests/js/vendor/**/*.js"
+	  ]))
+	//.pipe(concat("vendor-min.js"))
+    .pipe(uglify())
+    .pipe(size({ gzip: true, showFiles: true }))
+	
+   .pipe(gulp.dest("assets/js/vendor/"))
+    .pipe(reload({stream:true}));
+});
 
 /////////// Script TASK /////////////
 gulp.task("global-scripts-admin", function() {
@@ -92,7 +108,9 @@ gulp.task("global-scripts-admin", function() {
 		"work-assests/js/admin/**/*.js"
 	  ]))
 	.pipe(concat("all-admin.js"))
-    .pipe(uglify())
+    .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
     .pipe(size({ gzip: true, showFiles: true }))
 	
    .pipe(gulp.dest("assets/js/admin/"))
@@ -163,7 +181,7 @@ var plumberErrorHandler = { errorHandler: notify.onError({
 
 
 //Watch task
-gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin'], function(){
+gulp.task('watch',['browser-sync', 'sass', 'img', 'global-scripts','global-scripts-admin','global-scripts-vendors'], function(){
    gulp.watch('work-assests/scss/**/*.scss', ['sass']); 
    gulp.watch('work-assests/js/**/*.js', ['global-scripts']);
     gulp.watch('work-assests/js/admin/**/*.js', ['global-scripts-admin']);
@@ -190,7 +208,7 @@ gulp.task('default', function (callback) {
 gulp.task('build', function(callback){
   runSequence(
     'clean:assets',
-    ['sass', 'global-scripts', 'img','global-scripts-admin'],
+    ['sass', 'global-scripts', 'img','global-scripts-admin','global-scripts-vendors'],
     callback
   )
 });
