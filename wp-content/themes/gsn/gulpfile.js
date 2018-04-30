@@ -362,10 +362,12 @@ gulp.task(`clean:${destFolder}`, function() {
     `!${destFolder}/css`,
     `!${destFolder}/css/theme`,
     `!${destFolder}/css/dashboard`,
+    `!${destFolder}/css/landing`,
     `!${destFolder}/js`,
     `!${destFolder}/js/vendors`,
     `!${destFolder}/js/theme`,
-    `!${destFolder}/js/dashboard`
+    `!${destFolder}/js/dashboard`,
+    `!${destFolder}/js/landing`
   ]);
 });
 
@@ -383,7 +385,7 @@ gulp.task(
   [
     "theme-styles",
     "dashboard-styles",
-    "landing-styles",,
+    "landing-styles",
     "vendors-only-scripts",
     "img",
     "theme-vendor-scripts",
@@ -407,19 +409,19 @@ gulp.task(
     gulp.watch(`${workingFolder}/js/theme/custom/*.js`, [
       "theme-custom-scripts"
     ]);
-    gulp.watch(`${workingFolder}/js/theme/vendor/*.js`, [
+    gulp.watch(`${workingFolder}/js/theme/vendors/*.js`, [
       "theme-vendor-scripts"
     ]);
     gulp.watch(`${workingFolder}/js/dashboard/custom/*.js`, [
       "dashboard-custom-scripts"
     ]);
-    gulp.watch(`${workingFolder}/js/dashboard/vendor/*.js`, [
+    gulp.watch(`${workingFolder}/js/dashboard/vendors/*.js`, [
       "dashboard-vendor-scripts"
     ]);
     gulp.watch(`${workingFolder}/js/landing/custom/*.js`, [
       "landing-custom-scripts"
     ]);
-    gulp.watch(`${workingFolder}/js/landing/vendor/*.js`, [
+    gulp.watch(`${workingFolder}/js/landing/vendors/*.js`, [
       "landing-vendor-scripts"
     ]);
     gulp.watch(`${workingFolder}/images/*.+(png|jpg|jpeg|gif|svg)`, ["img"]);

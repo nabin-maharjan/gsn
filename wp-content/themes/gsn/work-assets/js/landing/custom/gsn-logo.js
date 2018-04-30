@@ -4,13 +4,13 @@
 (function($) {
   $(window).on("load", function() {
     /* 
-         * Lazy Line Painter - Path Object 
-         * Generated using 'SVG to Lazy Line Converter'
-         * 
-         * http://lazylinepainter.info 
-         * Copyright 2013, Cam O'Connell  
-         *  
-         */
+      * Lazy Line Painter - Path Object 
+      * Generated using 'SVG to Lazy Line Converter'
+      * 
+      * http://lazylinepainter.info 
+      * Copyright 2013, Cam O'Connell  
+      *  
+    */
 
     var pathObj = {
       logo_svg: {
@@ -129,10 +129,5 @@
         });
       }
     }
-
-    setTimeout(function() {
-      $(".landing-buttons-cntr").addClass("move-up");
-      $(".landing-about-link").addClass("move-right");
-    }, 300);
   });
 })(jQuery);
