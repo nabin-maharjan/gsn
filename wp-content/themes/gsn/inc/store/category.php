@@ -123,6 +123,7 @@ class GsnCategory{
 			global $store;			
 			$storeParentCatName=$store->storeName." ".$store->user_id;
 			$storeParentCat=get_term_by( 'name', $storeParentCatName,'product_cat');
+			if(!empty($storeParentCat)){
 			$args = array(
 				'child_of' =>$storeParentCat->term_id,
 				'taxonomy'     => 'product_cat',
@@ -130,6 +131,9 @@ class GsnCategory{
 			);
 			$store_category=get_terms($args);
 			return count($store_category);
+			}else{
+				return 0;
+			}
 		}
 }
 global $gsnCategory;
