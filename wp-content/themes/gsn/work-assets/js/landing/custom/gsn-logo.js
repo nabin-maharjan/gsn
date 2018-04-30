@@ -78,8 +78,8 @@
       }
     };
 
-    if ($("#logo_svg").length > 0) {
-      jQuery("#logo_svg")
+    if ($("#js-logo_svg").length > 0) {
+      jQuery("#js-logo_svg")
         .lazylinepainter({
           svgData: pathObj,
           strokeWidth: 2,
@@ -87,19 +87,19 @@
           drawSequential: true,
           ease: "easeInOutQuad",
           onComplete: function() {
-            $("#img_cntr, #logo-shadow").animate(
+            $("#js-img-cntr, #js-logo-shadow").animate(
               {
                 opacity: "1"
               },
               1000,
               function() {
-                $("#logo_svg").animate({ opacity: 0 }, 500);
+                $("#js-logo_svg").animate({ opacity: 0 }, 500);
               }
             );
             initLogo();
             setTimeout(function() {
-              //  $(".landing-buttons-cntr").addClass("move-up");
-              //   $(".landing-about-link").addClass("move-right");
+              //  $(".js-landing-buttons").addClass("js-move-up");
+              //   $(".js-landing-about-link").addClass("js-move-right");
             }, 300);
           }
         })
@@ -107,9 +107,9 @@
     }
 
     function initLogo() {
-      var _LOGO = document.querySelector("#main-logo-svg"),
-        _LOGO_GRAPHIC = _LOGO.querySelector("#img_cntr"),
-        _LOGO_SHADOW = _LOGO.querySelector("#logo-shadow");
+      var _LOGO = document.querySelector("#js-main-logo-svg"),
+        _LOGO_GRAPHIC = _LOGO.querySelector("#js-img-cntr"),
+        _LOGO_SHADOW = _LOGO.querySelector("#js-logo-shadow");
 
       if (!("ontouchstart" in window)) {
         document.body.addEventListener("mousemove", function(e) {

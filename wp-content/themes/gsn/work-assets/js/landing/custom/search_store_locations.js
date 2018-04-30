@@ -65,7 +65,6 @@ function myMap() {
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
           return;
         }
         marker.setPosition(place.geometry.location);
@@ -83,18 +82,15 @@ function myMap() {
     geocoder.geocode({ latLng: latLng }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[0]) {
-          console.log(results);
           jQuery("#selected_location_label").html(results[0].formatted_address);
-          jQuery("#change_location_btn .btn_location_text").html(
+          jQuery("#js-gsn-landing-change-lbtn .btn_location_text").html(
             results[0].formatted_address
           );
           storeLocation.value = results[0].formatted_address;
         } else {
-          console.log("No results");
           //document.getElementById("address").value = "No results";
         }
       } else {
-        console.log(status);
         document.getElementById("address").value = status;
       }
     });
