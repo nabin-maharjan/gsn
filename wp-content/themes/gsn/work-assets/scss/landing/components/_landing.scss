@@ -5,7 +5,7 @@ body.page-template-register {
 // HERO SECTION WITH LOGO
 
 .landing-hero-cntr {
-  width: 100%;
+  width:100%;   
   top: 0;
   bottom: 0;
   left: 0;
@@ -19,16 +19,16 @@ body.page-template-register {
   background-size: cover;
 
   @include max-screen($mq-tablet) {
-    position: fixed;
-    height: auto !important;
+     position: fixed;
+     height: auto !important;
   }
 
   .logo-wrap {
-    width: 40%;
+    width:40%;
     max-width: 550px;
-    min-width: 280px;
-    margin: 0 auto;
-    position: relative;
+	  min-width: 280px;
+    margin:0 auto; 
+    position:relative;
     perspective: 1000px;
 
     @include max-screen($mq-tablet) {
@@ -47,32 +47,32 @@ body.page-template-register {
   }
 }
 #logo_svg {
-  width: 100%;
-  position: relative;
+  width:100%; 
+  position:relative;
   svg {
     padding: 16px 0;
-    margin: 0 23px;
+    margin:0 23px;
 
     @include max-screen($mq-tablet) {
       padding: 0;
       margin: 0;
     }
-  }
+  }    
 }
 #img_cntr {
-  position: absolute;
-  overflow: hidden;
+  position: absolute; 
+  overflow:hidden; 
   opacity: 0;
-  top: -2px;
-  left: 0;
+  top:-2px;   
+  left:0; 
   bottom: 0;
   right: 0;
   z-index: 9;
   will-change: transform;
-  svg {
-    box-sizing: border-box;
-    padding: 19px;
-    overflow: auto;
+  svg{ 
+    box-sizing:border-box; 
+    padding:19px; 
+    overflow:auto;
 
     @include max-screen($mq-tablet) {
       padding: 0;
@@ -82,8 +82,7 @@ body.page-template-register {
 #logo-shadow {
   opacity: 0;
 }
-#main-logo-svg,
-#logo-shadow {
+#main-logo-svg, #logo-shadow {
   position: absolute;
   top: 0;
   left: 0;
@@ -111,22 +110,22 @@ body.page-template-register {
   transform: scale(1, 2) rotate(270deg) translate(0, 0);
   -webkit-animation: moving-panel 5s infinite alternate;
   animation: moving-panel 5s infinite alternate;
-  opacity: 0.2;
+  opacity: 0.2
 }
 .colortext .anim-shape:nth-child(1) {
-  fill: #f2385a;
+  fill: #F2385A;
 }
 .colortext .anim-shape:nth-child(2) {
-  fill: #f5a503;
+  fill: #F5A503;
 }
 .colortext .anim-shape:nth-child(3) {
-  fill: #e9f1df;
+  fill: #E9F1DF;
 }
 .colortext .anim-shape:nth-child(4) {
-  fill: #56d9cd;
+  fill: #56D9CD;
 }
 .colortext .anim-shape:nth-child(5) {
-  fill: #3aa1bf;
+  fill: #3AA1BF;
 }
 .shadow {
   -webkit-transform: translate(10px, 10px);
@@ -135,35 +134,36 @@ body.page-template-register {
 }
 .anim-shape--shadow {
   fill: #000;
-  fill-opacity: 0.2;
+  fill-opacity: .2;
 }
-@-webkit-keyframes moving-panel {
-  100% {
-    -webkit-transform: scale(1, 1) translate(20px, 0);
-    transform: scale(1, 1) translate(20px, 0);
+ @-webkit-keyframes moving-panel {
+ 100% {
+   -webkit-transform: scale(1, 1) translate(20px, 0);
+   transform: scale(1, 1) translate(20px, 0);
   }
 }
 @keyframes moving-panel {
-  100% {
-    -webkit-transform: scale(1, 1) translate(20px, 0);
-    transform: scale(1, 1) translate(20px, 0);
+ 100% {
+   -webkit-transform: scale(1, 1) translate(20px, 0);
+   transform: scale(1, 1) translate(20px, 0);
   }
 }
 // HERO SECTION WITH LOGO END
 
-// Landing buttons
+
+// Landing buttons 
 .landing-buttons-cntr {
   position: fixed;
   bottom: -100%;
   width: 350px;
   z-index: 9;
-  transition: all 350ms cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all 350ms cubic-bezier(.77, 0, .175, 1);
 
   @include max-screen($mq-sm-mobile) {
     width: 280px;
   }
-
-  &.move-up {
+  
+  &.move-up {        
     bottom: 20px;
   }
 }
@@ -183,10 +183,10 @@ body.page-template-register {
     transition: all 0s 0.5s;
 
     &.about-section {
-      background: $brick_red;
+      background:$brick_red;
 
-      .about-content {
-        margin-top: 20px;
+      .about-content {   
+        margin-top: 20px;     
         line-height: 26px;
         font-size: 18px;
 
@@ -198,13 +198,13 @@ body.page-template-register {
 
     &.open-form {
       opacity: 1;
-      visibility: visible;
+      visibility: visible;      
       z-index: 99;
       animation-name: reveal;
       animation-duration: 1s;
-      animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-      animation-delay: 0s;
-      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(.77, 0, .175, 1);
+      animation-delay: 0s;      
+      animation-fill-mode: forwards;      
     }
 
     .landingform__logo {
@@ -231,7 +231,7 @@ body.page-template-register {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(-40%);
+    transform: translateX(-50%) translateY(-40%);    
     transition: all 0.5s ease-in-out;
     transition-delay: 0.5s;
     color: $white;
@@ -250,7 +250,7 @@ body.page-template-register {
 
     &.forms-active {
       transition-delay: 0s;
-      transition: all 0.2s ease-in-out;
+      transition: all .2s ease-in-out;
     }
 
     &.opened {
@@ -277,7 +277,7 @@ body.page-template-register {
       margin-bottom: 15px;
       font-weight: bold;
     }
-
+    
     .form-group {
       margin-bottom: 20px;
       position: relative;
@@ -287,7 +287,7 @@ body.page-template-register {
       margin-bottom: 2px;
       font-weight: normal;
     }
-
+    
     label.error {
       position: absolute;
       margin: 0;
@@ -350,7 +350,7 @@ body.page-template-register {
     position: fixed;
     top: 20px;
     right: -100%;
-    transition: all 350ms cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all 350ms cubic-bezier(.77,0,.175,1);
 
     &.move-right {
       right: 20px;
@@ -359,7 +359,7 @@ body.page-template-register {
     a {
       text-transform: uppercase;
       color: $white;
-      font-size: 16px;
+      font-size: 16px;            
 
       &:hover {
         color: $petal_green;
@@ -368,19 +368,19 @@ body.page-template-register {
   }
 }
 
-.wipe-block {
+.wipe-block {  
   background: $brick_red;
   height: 100%;
   position: absolute;
   width: 100%;
   z-index: 998;
   opacity: 0;
-  visibility: hidden;
-  animation-name: hide;
+  visibility: hidden; 
+  animation-name: hide; 
   animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-  animation-delay: 0s;
-  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.77, 0, .175, 1);
+  animation-delay: 0s;      
+  animation-fill-mode: forwards;  
   &.open-form {
     animation-name: cover;
   }
@@ -407,7 +407,7 @@ body.page-template-register {
     width: auto;
   }
 
-  .close__btn {
+  .close__btn {  
     svg {
       height: 20px;
       width: 20px;
@@ -440,63 +440,33 @@ body.page-template-register {
 
 // animations
 @keyframes reveal {
-  0% {
-    transform: translateY(100%);
-  }
-  50% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(0); }
 }
 
 @keyframes cover {
-  0% {
-    transform: translateY(100%);
-  }
-  50% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
+  0% { transform: translateY(100%); }
+  50%{ transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
 }
 
 @keyframes hide {
-  0% {
-    transform: translateY(100%);
-  }
-  50% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
 
 @keyframes wipeSlide {
-  0% {
-    transform: translateX(100%);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 @keyframes wipeRight {
-  0% {
-    transform: translateX(100%);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 // Location Modal
@@ -514,14 +484,13 @@ body.page-template-register {
       .location__modal-content {
         visibility: visible;
         opacity: 1;
-        transition: opacity 350ms ease-in-out, visibility 350ms ease-in-out,
-          transform 500ms cubic-bezier(0.68, -0.165, 0.265, 1.55);
+        transition: opacity 350ms ease-in-out, visibility 350ms ease-in-out, transform 500ms cubic-bezier(0.680, -0.165, 0.265, 1.55);
         transform: translate(-50%, -50%) scale(1);
       }
     }
   }
   &__modal-content {
-    opacity: 0;
+    opacity: 0; 
     visibility: hidden;
     position: absolute;
     background: $white;
@@ -533,8 +502,7 @@ body.page-template-register {
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
     box-shadow: 0px 4px 5px 0px rgba(56, 56, 56, 0.5);
-    transition: transform 350ms cubic-bezier(0.68, -0.55, 0.265, 1.18),
-      opacity 500ms ease-out, visibility 500ms ease-out;
+    transition: transform 350ms cubic-bezier( 0.680, -0.550, 0.265, 1.18 ), opacity 500ms ease-out, visibility 500ms ease-out;
 
     @include max-screen($mq-sm-mobile) {
       width: 100%;
@@ -592,6 +560,7 @@ body.page-template-register {
     }
   }
 }
+
 
 @include max-screen($mq-sm-mobile) {
   .location_cntr {

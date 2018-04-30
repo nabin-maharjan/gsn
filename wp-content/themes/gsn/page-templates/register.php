@@ -10,9 +10,9 @@
 
 <div class="landing-hero-cntr"  style=" background-image:url('<?php echo get_template_directory_uri();?>/assets/images/bg.jpg');">
   	<div class="logo-wrap">
-    	<div id="logo_svg"></div>
-    <div id="main-logo-svg">
-	   <?php /* ?> <div  id="img_cntr">
+    <?php /* ?>	<div id="logo_svg"></div> <?php */ ?>
+		<?php /* ?> <div id="main-logo-svg">
+	  <div  id="img_cntr">
 	      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		 width="100%" height="100%" viewBox="0 0 840 521" enable-background="new 0 0 840 521"
 		 xml:space="preserve">
@@ -304,11 +304,11 @@
 			
 	      </svg>
 
-	    </div> <?php */ ?>
+	    </div> 
     	<!-- /#img-cntr -->
     	<div id="logo-shadow"></div>
     	<!-- /#logo-shadow -->
-    </div>   
+    </div>   <?php */ ?>
     <!-- /.main-logo-svg --> 
     
   </div>
