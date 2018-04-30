@@ -113,6 +113,42 @@ gulp.task("dashboard-styles", function() {
     .pipe(size({ gzip: true, showFiles: true }));
 });
 
+////// Landing Styles TASK ///////
+gulp.task("landing-styles", function() {
+  return gulp
+    .src(`${workingFolder}/scss/landing/**/*.scss`)
+    .pipe(plumber(plumberErrorHandler))
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions))
+    .pipe(prefix(prefixerOptions))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(
+      cleanCss({
+        format: "beautify",
+        level: {
+          2: {
+            removeUnusedAtRules: true
+          }
+        }
+      })
+    )
+    .pipe(
+      combineMq({
+        beautify: false
+      })
+    )
+    .pipe(concat("landing.css"))
+    .pipe(
+      rename({
+        //renames the concatenated CSS file
+        basename: "landing", //the base name of the renamed CSS file
+        extname: ".min.css" //the extension fo the renamed CSS file
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/css/landing/`))
+    .pipe(size({ gzip: true, showFiles: true }));
+});
+
 // JS LINT
 gulp.task("lint", function() {
   return (
@@ -201,7 +237,7 @@ gulp.task("theme-custom-scripts", function() {
     .pipe(gulp.dest(`${destFolder}/js/theme/`));
 });
 
-/////////// ADMIN VENDOR Script TASK /////////////
+/////////// DASHBOARD VENDOR Script TASK /////////////
 gulp.task("dashboard-vendor-scripts", function() {
   return gulp
     .src(`${workingFolder}/js/dashboard/vendors/*.js`)
@@ -225,7 +261,7 @@ gulp.task("dashboard-vendor-scripts", function() {
     .pipe(gulp.dest(`${destFolder}/js/dashboard/`));
 });
 
-/////////// ADMIN CUSTOM Script TASK /////////////
+/////////// DASHBOARD CUSTOM Script TASK /////////////
 gulp.task("dashboard-custom-scripts", function() {
   return gulp
     .src(`${workingFolder}/js/dashboard/custom/*.js`)
@@ -245,6 +281,52 @@ gulp.task("dashboard-custom-scripts", function() {
       })
     )
     .pipe(gulp.dest(`${destFolder}/js/dashboard/`));
+});
+
+/////////// LANDING VENDOR Script TASK /////////////
+gulp.task("landing-vendor-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/landing/vendors/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("vendor.min.js"))
+    .pipe(uglify())
+    .on("error", function(err) {
+      gutil.log(gutil.colors.red("[Error]"), err.toString());
+    })
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/landing/`));
+});
+
+/////////// LANDING CUSTOM Script TASK /////////////
+gulp.task("landing-custom-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/landing/custom/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .on("error", console.log)
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("landing.min.js"))
+    .pipe(uglify())
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/landing/`));
 });
 
 ////// Optimize Image TASK ///////
@@ -301,17 +383,23 @@ gulp.task(
   [
     "theme-styles",
     "dashboard-styles",
+    "landing-styles",,
     "vendors-only-scripts",
     "img",
     "theme-vendor-scripts",
     "theme-custom-scripts",
     "dashboard-vendor-scripts",
-    "dashboard-custom-scripts"
+    "dashboard-custom-scripts",
+    "landing-vendor-scripts",
+    "landing-custom-scripts"
   ],
   function() {
     gulp.watch(`${workingFolder}/scss/theme/**/*.scss`, ["theme-styles"]);
     gulp.watch(`${workingFolder}/scss/dashboard/**/*.scss`, [
       "dashboard-styles"
+    ]);
+    gulp.watch(`${workingFolder}/scss/landing/**/*.scss`, [
+      "landing-styles"
     ]);
     gulp.watch(`${workingFolder}/js/vendors/*.js`, [
       "vendors-only-scripts"
@@ -328,6 +416,12 @@ gulp.task(
     gulp.watch(`${workingFolder}/js/dashboard/vendor/*.js`, [
       "dashboard-vendor-scripts"
     ]);
+    gulp.watch(`${workingFolder}/js/landing/custom/*.js`, [
+      "landing-custom-scripts"
+    ]);
+    gulp.watch(`${workingFolder}/js/landing/vendor/*.js`, [
+      "landing-vendor-scripts"
+    ]);
     gulp.watch(`${workingFolder}/images/*.+(png|jpg|jpeg|gif|svg)`, ["img"]);
   }
 );
@@ -342,11 +436,14 @@ gulp.task("build", function(callback) {
     [
       "theme-styles",
       "dashboard-styles",
+      "landing-styles",
       "vendors-only-scripts",
       "theme-vendor-scripts",
       "theme-custom-scripts",
       "dashboard-vendor-scripts",
       "dashboard-custom-scripts",
+      "landing-vendor-scripts",
+      "landing-custom-scripts",
       "img"
     ],
     callback

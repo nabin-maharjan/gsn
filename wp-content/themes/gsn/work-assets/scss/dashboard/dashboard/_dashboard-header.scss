@@ -68,7 +68,7 @@ section {
 	background: $dark__gray;
 	width: 70px;	
 	z-index: 3;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.3s ease-in-out;
 
 	@include max-screen($mq-tablet) {
 		width: 0;
