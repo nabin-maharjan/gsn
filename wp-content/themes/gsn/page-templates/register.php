@@ -484,7 +484,7 @@ c105.168,0,193.454-72.238,217.973-169.799L276.646,256.167z"/>
 						<div class="gsn-landing__form__group form-group clearfix">
 							<div class="form-input">
 								<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-								<div id="map" style="width:100%;height:400px"></div>
+								<div id="map" style="width:100%;height:400px; margin-bottom: 10px;"></div>
 								Selected Location:<span id="selected_location_label"></span>
 							</div>
 						</div>

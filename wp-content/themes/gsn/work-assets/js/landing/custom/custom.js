@@ -1,7 +1,20 @@
 (function($) {
   $(document).ready(function() {
     // landing button open forms
-    if ($(".js-gsn-landing-hero").length > 0) {
+    if ($(".js-gsn-landing-hero").length) {
+      // CLASSES
+      const JS_CLASSES = {
+        wipeSlide: 'js-wipe-slide',
+        wipeRight: 'js-wipe-right',
+        openForm: 'js-open-form',
+        activeForm: 'js-forms-active',
+        opened: 'js-opened',
+        aboutSection: 'js-about-section',
+        moveUp: 'js-move-up',
+        moveRight: 'js-move-right',
+        modalOpen: 'js-open-modal'
+      };
+
       var landingContainer = $(".js-gsn-landing-hero"),
         landingButtons = landingContainer.find(".js-gsn-landing-access-link"),
         landingAboutBtn = landingContainer.find("#js-about-btn"),
@@ -9,34 +22,32 @@
         landingWipeBlock = landingContainer.find("#js-wipe-block"),
         landingCloseBtn = landingContainer.find(".js-close-form-anchor"),
         landingForms = landingContainer.find(".js-gsn-landing-tab-content"),
-        landingChangeLinks = landingForms.find(".js-gsn-landing-form-link"),
-        landingModalContainer = landingContainer.find("#js-gsn-grid-system-modal");
-
-      // set height equal to window height for main container
-      var landingHeight = function() {
-        landingContainer.height($(window).innerHeight());
-      };
-      landingHeight();
-
-      window.addEventListener("resize", landingHeight);
+        landingChangeLinks = landingContainer.find(".js-gsn-landing-form-link"),
+        landingModalContainer = landingContainer.find("#js-gsn-grid-system-modal"),
+        landingSetLocationBtn = landingContainer.find(".js-gsn-set-lbtn"),
+        landingOpenLocationModalBtn = landingContainer.find(".js-gsn-landing-location-btn"),
+        landingChangeLocationBtn = landingContainer.find("#js-gsn-landing-change-lbtn"),
+        landingCloseModalIcon = landingContainer.find('#js-gsn-landing-close-lmodal'),
+        landingAboutLink = landingContainer.find(".js-landing-about-link"),
+        landingAccessBtnsWrap = landingContainer.find(".js-landing-buttons");
 
       // login / register button click
       var openForm = function() {
         $(landingButtons).on("click", function(e) {
           e.preventDefault();
           // addClass on landingContainer for wipe effects
-          if ($(landingWipeBlock).hasClass("js-wipe-slide")) {
-            landingWipeBlock.removeClass("js-wipe-slide").addClass("js-open-form");
+          if ($(landingWipeBlock).hasClass(JS_CLASSES.wipeSlide)) {
+            landingWipeBlock.removeClass(JS_CLASSES.wipeSlide).addClass(JS_CLASSES.openForm);
           }
-          landingWipeBlock.addClass("js-open-form");
-          landingFormContainer.toggleClass("js-open-form");
+          landingWipeBlock.addClass(JS_CLASSES.openForm);
+          landingFormContainer.toggleClass(JS_CLASSES.openForm);
           // display form according to button
           var target = $(this.hash);
           if (target.length) {
             setTimeout(function() {
-              landingForms.addClass("js-forms-active");
+              landingForms.addClass(JS_CLASSES.activeForm);
             }, 300);
-            target.addClass("js-opened");
+            target.addClass(JS_CLASSES.opened);
           }
         });
       };
@@ -47,19 +58,19 @@
         $(landingAboutBtn).on("click", function(e) {
           e.preventDefault();
           // addClass on landingContainer for wipe effects
-          if ($(landingWipeBlock).hasClass("js-wipe-slide")) {
-            landingWipeBlock.removeClass("js-wipe-slide").addClass("js-wipe-right");
+          if ($(landingWipeBlock).hasClass(JS_CLASSES.wipeSlide)) {
+            landingWipeBlock.removeClass(JS_CLASSES.wipeSlide).addClass(JS_CLASSES.wipeRight);
           }
-          landingWipeBlock.addClass("js-wipe-right");
-          landingFormContainer.addClass("js-about-section");
-          landingFormContainer.toggleClass("js-open-form");
+          landingWipeBlock.addClass(JS_CLASSES.wipeRight);
+          landingFormContainer.addClass(JS_CLASSES.aboutSection);
+          landingFormContainer.toggleClass(JS_CLASSES.openForm);
           // display form according to button
           var target = $(this.hash);
           if (target.length) {
             setTimeout(function() {
-              landingForms.addClass("js-forms-active");
+              landingForms.addClass(JS_CLASSES.activeForm);
             }, 300);
-            target.addClass("js-opened");
+            target.addClass(JS_CLASSES.opened);
           }
         });
       };
@@ -69,20 +80,20 @@
       var closeForm = function() {
         $(landingCloseBtn).on("click", function(e) {
           e.preventDefault();
-          if ($(landingWipeBlock).hasClass("js-open-form")) {
-            landingWipeBlock.removeClass("js-open-form");
-          } else if ($(landingWipeBlock).hasClass("js-wipe-right")) {
-            landingWipeBlock.removeClass("js-wipe-right").addClass("js-wipe-slide");
+          if ($(landingWipeBlock).hasClass(JS_CLASSES.openForm)) {
+            landingWipeBlock.removeClass(JS_CLASSES.openForm);
+          } else if ($(landingWipeBlock).hasClass(JS_CLASSES.wipeRight)) {
+            landingWipeBlock.removeClass(JS_CLASSES.wipeRight).addClass(JS_CLASSES.wipeSlide);
           }
-          if ($(landingFormContainer).hasClass("js-about-section")) {
+          if ($(landingFormContainer).hasClass(JS_CLASSES.aboutSection)) {
             setTimeout(function() {
-              landingFormContainer.removeClass("js-about-section");
+              landingFormContainer.removeClass(JS_CLASSES.aboutSection);
             }, 800);
           }
-          landingFormContainer.removeClass("js-open-form");
-          landingForms.removeClass("js-forms-active");
-          if ($(landingForms).hasClass("js-opened")) {
-            $(".js-gsn-landing-tab-content").removeClass("js-opened");
+          landingFormContainer.removeClass(JS_CLASSES.openForm);
+          landingForms.removeClass(JS_CLASSES.activeForm);
+          if ($(landingForms).hasClass(JS_CLASSES.opened)) {
+            $(landingForms).removeClass(JS_CLASSES.opened);
           }
         });
       };
@@ -94,9 +105,9 @@
           e.preventDefault();
           var targetForm = $(this.hash);
           if (targetForm.length) {
-            if ($(".js-gsn-landing-tab-content").hasClass("js-opened")) {
-              $(".js-gsn-landing-tab-content.js-opened").removeClass("js-opened");
-              targetForm.addClass("js-opened");
+            if ($(landingForms).hasClass(JS_CLASSES.opened)) {
+              $(".js-gsn-landing-tab-content.js-opened").removeClass(JS_CLASSES.opened);
+              targetForm.addClass(JS_CLASSES.opened);
             }
           }
         });
@@ -105,25 +116,25 @@
 
       // open map modal
       var openLocationModal = function() {
-        $(".js-gsn-landing-location-btn").on("click", function(e) {
+        $(landingOpenLocationModalBtn).on("click", function(e) {
           e.preventDefault();
-          landingModalContainer.addClass("js-open-modal");
+          landingModalContainer.addClass(JS_CLASSES.modalOpen);
         });
       };
       openLocationModal();
 
       // close map modal
       var closeLocationModal = function() {
-        landingModalContainer.removeClass("js-open-modal");
+        landingModalContainer.removeClass(JS_CLASSES.modalOpen);
       };
 
-      $("#js-gsn-landing-close-lmodal").on("click", function(e) {
+      $(landingCloseModalIcon).on("click", function(e) {
         e.preventDefault();
         closeLocationModal();
       });
 
       //event trigger when set location click
-      $(".js-gsn-set-lbtn").on("click", function() {
+      $(landingSetLocationBtn).on("click", function() {
         var location_selected = $("#storeFullAddress")
           .val()
           .trim();
@@ -136,30 +147,28 @@
               );
           }
         } else {
-          $("#js-gsn-landing-set-lbtn").hide();
-          $("#js-gsn-landing-change-lbtn").show();
+          $(landingOpenLocationModalBtn).hide();
+          $(landingChangeLocationBtn).show();
           $(this)
             .parent()
-            .find(".alert")
+            .find(".js-landing-lmap-error")
             .remove();
           //$('#js-gsn-grid-system-modal').modal('hide');
           closeLocationModal();
         }
       });
+
+      $(window).on("load", function() {
+        $(landingWipeBlock).css({
+          opacity: 1,
+          visibility: "visible"
+        });
+    
+        setTimeout(function() {
+          $(landingAccessBtnsWrap).addClass(JS_CLASSES.moveUp);
+          $(landingAboutLink).addClass(JS_CLASSES.moveRight);
+        }, 300);
+      });
     }
-    // landing button open forms end
-  });
-
-  // on window load
-  $(window).on("load", function() {
-    $("#js-wipe-block").css({
-      opacity: 1,
-      visibility: "visible"
-    });
-
-    setTimeout(function() {
-      $(".js-landing-buttons").addClass("js-move-up");
-      $(".js-landing-about-link").addClass("js-move-right");
-    }, 300);
-  });  
+  });   
 })(jQuery);
