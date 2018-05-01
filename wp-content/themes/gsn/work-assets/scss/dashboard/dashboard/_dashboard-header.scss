@@ -1,0 +1,238 @@
+section {
+	clear: both;
+	display: block;
+}
+.dashboard {
+	&-header {
+		background: $dark__gray;
+		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5);
+		color: $white;
+		padding: 0 20px;
+		text-align: right;
+		height: 60px;
+		position: fixed;
+		z-index: 4;
+		width: 100%;
+
+		&.nav-open .dashboard__nav {
+			width: 250px;
+
+			@include max-screen($mq-tablet) {
+				transform: translateX(0);
+			}
+
+			a span.nav-text {
+				transform: translateX(0);
+				opacity: 1;
+				transition: transform 0.3s ease-in-out, opacity 0.8s ease-in-out;
+			}
+		}
+		&.nav-open .dashboard-tooltip {
+			display: none;
+		}
+		&.nav-open .dashboard-nav-overlay {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+	&__header-left {
+		position: relative;
+		z-index: 4;
+		margin-top: 15px;
+
+		h1 {
+			display: inline-block;
+			font-size: 26px;
+			font-weight: bold;
+			line-height: 1;
+			margin-left: 20px;
+			text-transform: uppercase;			
+		}
+	}
+}
+.dashboard-hamburger {
+	cursor: pointer;
+	display: inline-block;
+	height: 18px;
+	width: 30px;
+	float: left;
+	margin-top: 4px;
+
+	
+}
+.dashboard__nav {
+	position: fixed;
+	height: 100%;
+	top: 60px;
+	left: 0;	
+	background: $dark__gray;
+	width: 70px;	
+	z-index: 3;
+	transition: all 0.3s ease-in-out;
+
+	@include max-screen($mq-tablet) {
+		width: 0;
+		transform: translateX(-70px);
+	}
+
+	ul {
+		li {
+			display: block;
+			height: 50px;
+
+			a {
+				display: block;
+				padding: 0 20px;
+				text-align: left;
+				height: 50px;
+				line-height: 50px;
+				position: relative;
+				transition: all 0.2s ease-in-out;
+				white-space: nowrap;
+				overflow: hidden;
+
+				&::before {
+					content: '';
+					position: absolute;
+					height: 100%;
+					width: 3px;
+					background: $brick_red;
+					left: 0;
+					top: 0;
+					transition: all 0.2s ease-in-out;
+				}
+				&:hover {
+					overflow: visible;
+				}
+				&:hover:before {
+					width: 100%;
+				}
+				&:hover .dashboard-tooltip {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0);
+				}
+				.dashboard-icons {
+					height: 50px;
+					width: 30px;
+					text-align: center;
+					line-height: 50px;
+					font-size: 18px;
+					position: relative;
+				}
+				span.nav-text {
+					padding-left: 10px;
+					position: relative;
+					display: inline-block;
+					opacity: 0;
+					transform: translateX(-120px);
+					transition: transform 0.8s ease-in-out, opacity 0.3s ease-in-out;
+				}
+			}
+		}
+	}
+}
+.dashboard-nav-overlay {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background: rgba(0, 0, 0, 0.3);
+	transition: all 0.2s ease-in-out;
+}
+.header-profile-cntr {
+	position: relative;
+
+	@include max-screen($mq-mobile) {
+		font-size: 26px;
+	}
+
+	.profile-info {
+		line-height: 60px;
+		padding: 0 20px;
+
+		span {
+			margin-left: 5px;
+		}
+		&:hover {
+			background: $brick_red;
+		}
+	}
+	.profile__links {
+		background: $dark__gray;
+		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .5);
+		position: absolute;
+		right: 0;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease-in-out;
+
+		li {
+			display: block;
+
+			a {
+				display: block;
+				padding: 10px 20px;
+
+				&:hover {
+					background: $brick_red;
+				}
+			}
+		}
+	}
+	&:hover .profile__links {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+.dashboard-tooltip {
+	position: absolute;
+	left: 100%;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	transition: all 0.2s ease-in-out;
+
+	span {
+		background: rgba(0, 0, 0, 0.5);
+		padding: 5px 15px;
+		font-size: 14px;
+		margin-left: 8px;
+		border-radius: 4px;
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 0;
+			left: -8px;
+			top: 10px;
+			border-style: solid;
+			border-width: 5px 8px 5px 0;
+			border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
+		}
+	}
+}
+
+.go-to-shop-link {
+	background: $brick_red;
+	padding: 10px 15px;
+	margin-top: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
+
+  @include max-screen($mq-mobile) {
+  	font-size: 12px;
+  	margin-top: 11px;
+  }
+
+  &:hover {
+  	background: $petal_green;
+  }
+}

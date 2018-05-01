@@ -3,19 +3,23 @@
 
 /* ====== Import Vendor CSS ====== */
 
-/* Bootstrap */
-@import "vendor/bootstrap/bootstrap";
-
-
-/* ====== BASE CSS ====== */
-
-@import "base/variable";
-@import "base/mixin";
+/* Common Styles */
+@import "../COMMON-STYLES-DEFINATIONS/common";
 
 /* ====== Import COMPONENT CSS ====== */
-@import "components/header";
-@import "components/footer";
-@import "components/gallery";
 @import "components/global";
 @import "components/map";
-/* ====== Import COMPONENT CSS ====== */
+@import "components/alert";
+@import "components/pagination";
+/* ====== Import COMPONENT CSS END ====== */
+
+/* ====== Theme Styles CSS ====== */
+@import "theme/theme-hero";
+@import "theme/theme-product-section";
+@import "theme/theme-category-page";
+@import "theme/theme-cart-page";
+@import "theme/theme-about";
+@import "theme/theme-contact";
+@import "theme/theme-product-single";
+
+/* ====== Theme Styles CSS END ====== */
