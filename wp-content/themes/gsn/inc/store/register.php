@@ -882,7 +882,7 @@ class Store{
 									$start_year=date('F d, Y');
 									$end_year=date('F d, Y', strtotime('+1 years'));
 									$package='normal';
-									if($count_users['store_contributor']<109){
+									if($count_users['store_contributor']<20){
 										$package='bronze';
 									}
 									update_post_meta($post_id,'selected_package',$package);
