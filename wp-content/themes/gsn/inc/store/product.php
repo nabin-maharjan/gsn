@@ -461,7 +461,9 @@ class GsnProduct{
 					/* add images gallery */
 					update_post_meta($post_id,'_product_image_gallery',$datas['image_ids']);			
 					update_post_meta( $post_id, '_regular_price', $datas['price']  );
+					update_post_meta( $post_id, '_price',  $datas['price'] );
 					if(!$edit_flag){
+						
 						update_post_meta( $post_id, '_visibility', 'visible' );
 						update_post_meta( $post_id, '_downloadable', 'no' );
 						update_post_meta( $post_id, '_virtual', 'no' );
@@ -487,7 +489,6 @@ class GsnProduct{
 						if($edit_flag){
 							$prev_sale_price=get_post_meta($post_id, '_sale_price', true);
 							if($prev_sale_price>=$datas['price'] ){
-								update_post_meta( $post_id, '_price',  $datas['price'] );
 								update_post_meta( $post_id, '_sale_price','');
 								update_post_meta( $post_id, '_sale_price_dates_from', '' );
 								update_post_meta( $post_id, '_sale_price_dates_to', '' );
