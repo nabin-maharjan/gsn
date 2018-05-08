@@ -1,6 +1,5 @@
 /**
  * Define the screen sizes in the varible
- * @author Nabin Maharjan <nabin.maharjan17@gmail.com>
  */
 
 // media query 
@@ -23,13 +22,9 @@ $mid_gray: #777777;
 $light_gray: #dcdcdc;
 $lighter_gray: #ececec;
 $border-gray: #eaeaea;
-
 $brick_red: #E74F4A;
 $petal_green: #68BD74;
-
 $darker__gray: #283643;
-
-
 
 /* dashboard colors */
 $dark_blue:#232429;
@@ -42,3 +37,20 @@ $yellow: #ff0;
 $dark__gray: #252525;
 $white_smoke: #f5f5f5;
 $rating_color: #ffae00;
+
+// Font Sizes, Family and Weights
+$fs-etiny: 11px;
+$fs-tiny: 12px;
+$fs-small: 14px;
+$fs-sbody: 15px;
+$fs-body: 16px;
+$fs-ebody: 18px;
+$fs-medium: 20px;
+$fs-mbig: 24px;
+$fs-big: 26px;
+$fs-large: 30px;
+$fs-elarge: 48px;
+
+$fw-reg: 400;
+$fw-sbold: 600;
+$fw-bold: 700;

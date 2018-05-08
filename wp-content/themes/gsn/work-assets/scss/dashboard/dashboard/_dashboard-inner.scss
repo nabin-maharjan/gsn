@@ -14,7 +14,7 @@
   }
 
   a {
-    font-size: 14px;
+    font-size: rem($fs-small);
     margin-right: 10px;
   }
 }
@@ -44,7 +44,7 @@
 
         .product-info-cntr {
           h4 {
-            font-size: 14px;
+            font-size: rem($fs-small);
             font-weight: normal;
             margin-bottom: 5px;
 
@@ -53,7 +53,7 @@
             }
           }
           .price {
-            font-size: 14px;
+            font-size: rem($fs-small);
           }
         }
       }
@@ -62,11 +62,11 @@
       height: 150px;
     }
     .cart-btn a {
-      font-size: 11px;
+      font-size: rem($fs-tiny);
       padding: 10px 20px;
 
       &::before {
-        font-size: 20px;
+        font-size: rem($fs-medium);
       }
     }
   }
@@ -86,7 +86,7 @@
       }
 
       .product-filter-form {
-        font-size: 14px;
+        font-size: rem($fs-small);
 
         label {
           line-height: 30px;
@@ -116,12 +116,12 @@
 
           label {
             display: block;
-            font-size: 14px;
+            font-size: rem($fs-small);
           }
           select {
             width: 70%;
             margin-left: 0;
-            font-size: 14px;
+            font-size: rem($fs-small);
           }
           button {
             width: 30%;
@@ -172,14 +172,14 @@
 
   .input-daterange {
     input {
-      font-size: 14px;
+      font-size: rem($fs-small);
 
       &:first-child, &:last-child {
         border-radius: 0;
       }
     }
     .input-group-addon {
-      font-size: 14px;
+      font-size: rem($fs-small);
       padding: 6px 10px;
     }
   }
@@ -194,7 +194,7 @@
 }
 .dashboard-main-cntr {
   button, input[type="button"] {
-    font-size: 14px;
+    font-size: rem($fs-small);
   }
 }
 .add-image-btn {
@@ -388,7 +388,7 @@
     padding: 0 15px;
     vertical-align: top;
     width: 25%;
-    font-size: 14px;
+    font-size: rem($fs-small);
     margin-bottom: 30px;
   }
   &__detail-cntr {
@@ -397,7 +397,7 @@
       background: $lighter_gray;
       padding: 10px 10px;
       h4 {
-        font-size: 15px;        
+        font-size: rem($fs-sbody);
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
@@ -413,7 +413,7 @@
 
         span {
           display: inline-block;
-          font-size: 14px;
+          font-size: rem($fs-small);
         }
 
         .package__info-left {
@@ -504,7 +504,7 @@
   .order-list-item {
     display: inline-block;
     vertical-align: top;
-    font-size: 14px;
+    font-size: rem($fs-small);
     float: none;
     margin-bottom: 30px;
 
@@ -538,7 +538,7 @@
       margin-bottom: 0;
     }
     .view-order-detail {
-      font-size: 14px;
+      font-size: rem($fs-small);
       float: right;
     }
   }
@@ -592,7 +592,7 @@
   margin-bottom: 15px;
 
   h4 {
-    font-size: 16px;
+    font-size: rem($fs-body);
     margin-bottom: 10px;
     text-transform: uppercase;
     font-weight: bold;
@@ -619,7 +619,7 @@
   select {
     border-color: $light_gray;
     padding: 5px 12px;
-    font-size: 14px;
+    font-size: rem($fs-small);
     width: 250px;
     background: $white;
   }
@@ -698,7 +698,7 @@
   }
 }
 .category-lists {
-  font-size: 14px;
+  font-size: rem($fs-small);
 
   li {
     display: block;
@@ -715,7 +715,7 @@
       position: absolute;
       right: 15px;
       top: 10px;
-      font-size: 18px;
+      font-size: rem($fs-ebody);
       cursor: pointer;
       width: 25px;
       height: 25px;

@@ -2,7 +2,7 @@
   &__top {
     background: $black;
     color: $white;
-    font-size: 14px;
+    font-size: rem($fs-small);
     height: 35px;
     line-height: 35px;
 
@@ -39,7 +39,7 @@
     }
 
     h1 {
-      font-size: 20px;
+      font-size: rem($fs-medium);
       font-weight: bolder; 
 
       .logo__image {
@@ -116,7 +116,7 @@
   font-size: 0;
 
   li {
-    font-size: 16px;
+    font-size: rem($fs-body);
     position: relative;
     cursor: pointer;
     float: left;
@@ -132,7 +132,7 @@
         position: absolute;
         top: 7px;
         right: 20px;
-        font-size: 30px;
+        font-size: rem($fs-large);
         text-align: center;
         transition: all 0.3s ease-in-out;
 
@@ -142,7 +142,7 @@
       }
 
       .dropdown__menu li i {
-        font-size: 24px;
+        font-size: rem($fs-mbig);
         top: 10px;
       }
     }
@@ -212,7 +212,7 @@
         line-height: 1;
         padding: 10px 25px;
         text-align: left;
-        font-size: 14px;
+        font-size: rem($fs-small);
         font-weight: normal;
 
         &.dropdown__link::after {
@@ -288,7 +288,7 @@
 
     li{
       a {
-        font-size: 16px;
+        font-size: rem($fs-body);
         padding: 15px 30px;
       }
       .dropdown__menu {
@@ -531,7 +531,7 @@
       padding: 9px 11px 8px;
       height: auto !important;
       border-color: $light_gray;
-      font-size: 14px;
+      font-size: rem($fs-small);
 
       option {
         padding: 0;
@@ -554,7 +554,7 @@
       outline: 0;
       border-width: 1px;
       border-style: solid;
-      font-size: 14px;
+      font-size: rem($fs-small);
       line-height: 1.2;
     }
   }
@@ -594,7 +594,7 @@
       padding: 10px;
       cursor: pointer;
       background: $white;
-      font-size: 14px;
+      font-size: rem($fs-small);
       border-bottom: 1px solid $lighter_gray;
 
       .autocomplete-search-item {

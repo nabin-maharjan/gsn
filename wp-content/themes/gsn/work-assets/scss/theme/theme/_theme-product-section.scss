@@ -6,7 +6,7 @@ main {
   margin: 20px 0 30px;
 }
 .section-title {
-  font-size: 24px;
+  font-size: rem($fs-mbig);
   font-weight: bolder;
   letter-spacing: -1px;
   margin-bottom: 30px;
@@ -20,7 +20,7 @@ main {
     li.product-list-item {
       display: inline-block;
       float: none !important;
-      font-size: 16px;
+      font-size: rem($fs-body);
       margin: 0;
       margin-bottom: 30px;
       padding: 0 15px;
@@ -34,7 +34,7 @@ main {
 
         h3 {
           font-style: italic;
-          font-size: 16px;
+          font-size: rem($fs-body);
           margin-bottom: 5px;
           padding: 0;
 
@@ -44,7 +44,7 @@ main {
         }
         span.price {
           color: $black;
-          font-size: 14px;
+          font-size: rem($fs-small);
           font-weight: bold;
 
           del {

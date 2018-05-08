@@ -64,6 +64,10 @@ class Store{
 			/* change order email to store email */
 			add_filter( 'woocommerce_email_recipient_new_order', array($this,'order_email_recipent'), 10, 2 );
 			
+
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_get_store_data', array($this,'get_store_data') );
+			add_action( 'wp_ajax_nopriv_gsn_get_store_data', array($this,'get_store_data') );
 			
 			
 	}
@@ -655,7 +659,7 @@ class Store{
 			if(isset($matches[1])) {
 				$subdomain = $matches[1];
 			}
-			$subdomain="puja-electronics";
+		//	$subdomain="puja-electronics";
 			global $wpdb;
 			if(!empty($subdomain) && strtolower($subdomain)!=="www"){
 				$query=$wpdb->prepare("select * from ".$this->store_table." where domainName=%s",$subdomain); // Prepare query
@@ -1066,8 +1070,23 @@ class Store{
 				return true;	
 			}
 		}
+
+		/*
+		*Function to get all stores with  locations
+		* Return array
+		*/
+		public function get_all_stores_locations(){
+			global $wpdb;
+			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id from ".$this->store_table." where activated=%d",1); // Prepare query
+			return $wpdb->get_results($query,ARRAY_N );
+	
+		}
 		
-		
+		public function get_store_data($user_id=0){
+			global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get($user_id);
+			echo json_encode($gsn_settings);die;
+		}
 		
 }
 global $store;

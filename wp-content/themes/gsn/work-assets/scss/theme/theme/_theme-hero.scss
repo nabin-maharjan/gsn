@@ -73,7 +73,7 @@
       left: 0;
       right: 00;
       color: $white;
-      font-size: 13px;
+      font-size: rem($fs-small);
       line-height: 16px;
       padding: 5px 10px;
       margin: 0;
@@ -101,7 +101,7 @@
     box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
     color: $white;
     display: block;
-    font-size: 12px;
+    font-size: rem($fs-tiny);
     font-weight: bold;
     height: 46px;
     left: -34px;
@@ -125,7 +125,7 @@
   }
   .cart-btn {
     color: $white;
-    font-size: 11px;
+    font-size: rem($fs-etiny);
     left: 0;
     opacity: 0;
     position: absolute;
@@ -154,7 +154,7 @@
         content: '\f05a';
         display: block;
         font-family: FontAwesome;
-        font-size: 24px;
+        font-size: rem($fs-mbig);
       }
       &.add_to_cart_button::before {
         content: '\f217';
@@ -211,7 +211,7 @@
     &::before {
       content: '\f104';
       font-family: FontAwesome;
-      font-size: 24px;
+      font-size: rem($fs-mbig);
       font-weight: bold;
     }
     &.slick-next {
@@ -259,7 +259,7 @@
     margin-bottom: 10px;
 
     @include max-screen($mq-mobile) {
-      font-size: 24px;
+      font-size: rem($fs-mbig);
     }
   }
   span {

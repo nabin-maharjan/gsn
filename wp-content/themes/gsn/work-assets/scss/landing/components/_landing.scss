@@ -1,0 +1,606 @@
+body.page-template-register {
+  overflow: hidden;
+}
+
+.gsn-landing {
+  &__hero {
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+
+    @include max-screen($mq-tablet) {
+      // position: fixed;
+      // height: auto !important;
+    }
+  }
+
+  &__logo {
+    &__wrapper {
+      width: 40%;
+      max-width: 550px;
+      min-width: 280px;
+      margin: 0 auto;
+      position: relative;
+      perspective: 1000px;
+
+      @include max-screen($mq-tablet) {
+        max-width: 95%;
+        width: 60%;
+      }
+
+      @include max-screen($mq-mobile) {
+        width: 80%;
+      }
+
+      @include max-screen($mq-sm-mobile) {
+        width: 90%;
+        top: -15%;
+      }
+    }
+
+    &__svg {
+      width: 100%;
+      position: relative;
+
+      svg {
+        padding: 16px 0;
+        margin: 0 23px;
+
+        @include max-screen($mq-tablet) {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    &__main,
+    &__shadow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      will-change: transform;
+    }
+
+    &__shadow {
+      background: url(../../images/main-logo-plain.svg) center center no-repeat;
+      background-size: 90% 100%;
+      filter: url(#shadow);
+      opacity: 0;
+      will-change: transform;
+      transform: translateZ(-10px) translateY(5px);
+      z-index: -1;
+    }
+
+    &__img {
+      position: absolute;
+      overflow: hidden;
+      opacity: 0;
+      top: -2px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 9;
+      will-change: transform;
+
+      svg {
+        box-sizing: border-box;
+        padding: 19px;
+        overflow: auto;
+
+        @include max-screen($mq-tablet) {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  &__form {
+    &__wrapper {
+      background: $petal_green;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100vh;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+      transition: all 0s 0.5s;
+
+      &.js-about-section {
+        background: $brick_red;
+
+        .gsn-landing__close__fwrap {
+          bottom: auto;
+          top: 20px;
+          right: 20px;
+          width: auto;
+        }
+      }
+
+      &.js-open-form {
+        opacity: 1;
+        visibility: visible;
+        z-index: 99;
+        animation-name: reveal;
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+        animation-delay: 0s;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    &__group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    &__label {
+      margin-bottom: 2px;
+      font-weight: normal;
+    }
+
+    &__message {
+      margin-top: 15px;
+      font-size: 16px;
+      text-align: center;
+
+      a {
+        @include inline-anchor($yellow, 'uppercase');
+      }
+    }
+  }
+
+  &__about {
+    &__lwrap {
+      position: fixed;
+      top: 20px;
+      right: -100%;
+      @include transition;
+
+      &.js-move-right {
+        right: 20px;
+      }
+    }
+
+    &__link {
+      font-size: 16px;
+      @include inline-anchor($white, 'uppercase');
+    }
+
+    &__content {
+      margin-top: 20px;
+      line-height: 26px;
+      font-size: 16px;
+
+      @include min-screen($mq-min-mobile) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__wipe {
+    &__block {
+      background: $brick_red;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      animation-name: hide;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      animation-delay: 0s;
+      animation-fill-mode: forwards;
+
+      &.js-open-form {
+        animation-name: cover;
+      }
+
+      &.js-wipe-right {
+        background: $petal_green;
+        animation-name: wipeRight;
+      }
+
+      &.js-wipe-slide {
+        background: $petal_green;
+        animation-name: wipeSlide;
+      }
+    }
+  }
+
+  &__access {
+    &__btns {
+      position: fixed;
+      bottom: -100%;
+      width: 350px;
+      z-index: 9;
+      @include transition;
+
+      @include max-screen($mq-sm-mobile) {
+        width: 280px;
+      }
+
+      &.js-move-up {
+        bottom: 20px;
+      }
+    }
+
+    &__items {
+      border-bottom: none;
+    }
+
+    &__item {      
+      text-align: center;
+      width: 50%;
+      background: $darker__gray;
+      @include transition;
+
+      @include min-screen($mq-min-mobile) {
+        &:hover {
+          background: $petal_green;
+        }
+      }
+    }
+
+    &__link {
+      color: white;
+      display: block;
+      font-size: 16px;
+      padding: 15px 15px;
+      text-transform: uppercase;
+
+      @include min-screen($mq-min-mobile) {
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &__close {
+    &__fwrap {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__flink {
+      svg {
+        height: 20px;
+        width: 20px;
+        fill: $white;
+        vertical-align: middle;
+        transition: all 0.3s ease-in;
+      }
+
+      span {
+        display: inline-block;
+        line-height: 24px;
+        vertical-align: top;
+        color: $white;
+        text-transform: uppercase;
+        margin-left: 5px;
+        font-size: 20px;
+        letter-spacing: 2px;
+        transition: all 0.3s ease-in;
+      }
+
+      @include min-screen($mq-min-mobile) {
+        &:hover {
+          svg {
+            fill: $black;
+          }
+
+          span {
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+
+  &__tab {
+    &__content {
+      max-width: 640px;
+      min-width: 640px;
+      margin: 0 auto;
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-40%);
+      transition: all 0.5s ease-in-out;
+      transition-delay: 0.5s;
+      color: $white;
+
+      @include max-screen($mq-sm-mobile) {
+        min-width: inherit;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 60px;
+        padding: 0 20px 0;
+        overflow: hidden;
+        overflow-y: auto;
+        transform: translateX(0) translateY(40%);
+      }
+
+      &.js-forms-active {
+        transition-delay: 0s;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &.js-opened {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-50%);
+
+        @include max-screen($mq-sm-mobile) {
+          transform: translateX(0) translateY(0);
+        }
+      }
+
+      &.js-closing {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-60%);
+        transition: all 0.5s ease-in;
+        transition-delay: 0s;
+      }
+
+      label.error {
+        position: absolute;
+        margin: 0;
+        top: 100%;
+      }
+    }
+
+    &__title {
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+  }
+
+  &__location {
+    &__btn {
+      white-space: normal;
+
+      &__text {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // location modal
+  &-lmodal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+    &.js-open-modal {
+      z-index: 999;
+
+      .gsn-landing-lmodal__content {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 350ms ease-in-out, visibility 350ms ease-in-out,
+          transform 500ms cubic-bezier(0.68, -0.165, 0.265, 1.55);
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &__content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      background: $white;
+      padding: 15px;
+      border-radius: 5px;
+      max-width: 640px;
+      width: 640px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      box-shadow: 0px 4px 5px 0px rgba(56, 56, 56, 0.5);
+      transition: transform 350ms cubic-bezier(0.68, -0.55, 0.265, 1.18),
+        opacity 500ms ease-out, visibility 500ms ease-out;
+
+      @include max-screen($mq-sm-mobile) {
+        width: 100%;
+      }
+    }
+
+    &__heading {
+      padding-bottom: 6px;
+      border-bottom: 1px solid $black;
+
+      h4 {
+        text-transform: uppercase;
+        font-size: 18px;
+        color: $black;
+      }
+
+      a {
+        margin-top: 2px;
+        svg {
+          width: 13px;
+          height: 13px;
+          transition: all 0.3s ease-in;
+        }
+
+        &:hover svg {
+          fill: $brick_red;
+        }
+      }
+    }
+
+    &__body {
+      padding: 15px 0 10px;
+
+      .form-group {
+        margin-bottom: 0;
+
+        #selected_location_label {
+          font-weight: bold;
+          margin-left: 5px;
+        }
+      }
+
+      #pac-input {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+
+    &__footer {
+      padding-top: 15px;
+      border-top: 1px solid $black;
+    }
+
+    .js-landing-lmap-error {
+      color: red;
+      background: rgba(255, 0, 0, 0.16);
+      padding: 7px 20px;
+      float: left;
+    }
+  }
+}
+
+@include max-screen($mq-sm-mobile) {
+  .location_cntr {
+    margin-bottom: 20px;
+
+    button.btn {
+      display: block;
+      width: 100%;
+      padding: 9px;
+    }
+  }
+}
+
+.anim-shape {
+  transform-origin: 0 150px;
+  transform: scale(1, 2) rotate(270deg) translate(0, 0);
+  animation: moving-panel 5s infinite alternate;
+  opacity: 0.2;
+}
+
+.colortext .anim-shape:nth-child(1) {
+  fill: #f2385a;
+}
+
+.colortext .anim-shape:nth-child(2) {
+  fill: #f5a503;
+}
+
+.colortext .anim-shape:nth-child(3) {
+  fill: #e9f1df;
+}
+
+.colortext .anim-shape:nth-child(4) {
+  fill: #56d9cd;
+}
+
+.colortext .anim-shape:nth-child(5) {
+  fill: #3aa1bf;
+}
+
+.shadow {
+  -webkit-transform: translate(10px, 10px);
+  -ms-transform: translate(10px, 10px);
+  transform: translate(10px, 10px);
+}
+
+.anim-shape--shadow {
+  fill: #000;
+  fill-opacity: 0.2;
+}
+
+// animations
+@keyframes reveal {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes cover {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes wipeSlide {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes wipeRight {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes moving-panel {
+  100% {
+    transform: scale(1, 1) translate(20px, 0);
+  }
+}

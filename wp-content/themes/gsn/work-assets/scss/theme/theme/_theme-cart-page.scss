@@ -25,7 +25,7 @@ h2.entry-title {
 		background: $dark_gray;
 		color: $white;
 		font-style: italic;
-		font-size: 1rem;
+		font-size: rem($fs-body);
 		line-height: 1.5;
 		font-weight: normal;
 		padding: 15px 20px;

@@ -8,7 +8,7 @@
     font-weight: normal;
     color: $white;
     background: $dark_gray;
-    font-size: 14px;
+    font-size: rem($fs-small);
     padding: 15px 20px;
     margin: 0 15px 30px;
     
@@ -92,7 +92,7 @@
   //   }
 
   //   h5 {
-  //     font-size: 16px;
+  //     font-size: rem($fs-body);
   //     padding-bottom: 3px;            
   //     margin-bottom: 5px;
   //     a {
@@ -141,7 +141,7 @@
 }
 .dashboard-title {
   text-transform: uppercase;
-  font-size: 24px;
+  font-size: rem($fs-mbig);
   font-weight: bold;
   padding: 0 15px;
 
@@ -201,14 +201,14 @@
         z-index: 2;
       }
       span {
-        font-size: 30px;
+        font-size: rem($fs-large);
         line-height: 1;
         font-weight: bold;
       }
       h2 {
         margin-top: 5px;
         text-transform: uppercase;
-        font-size: 16px;
+        font-size: rem($fs-body);
       }
       &:after {
         content: '';
@@ -236,7 +236,7 @@
   }
 }
 .custom-pagination {
-  font-size: 15px;
+  font-size: rem($fs-sbody);
 
   span.page-numbers.page-num {
     background-color: $lighter_gray;
@@ -264,7 +264,7 @@
 
     &::before {
       position: absolute;
-      font-size: 20px;
+      font-size: rem($fs-mbig);
       transform: translateY(-50%);
       line-height: 0;
       top: 49%;

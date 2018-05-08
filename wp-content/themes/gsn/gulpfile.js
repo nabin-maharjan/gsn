@@ -335,6 +335,28 @@ gulp.task("landing-custom-scripts", function() {
     .pipe(gulp.dest(`${destFolder}/js/landing/`));
 });
 
+/////////// ADMIN CUSTOM Script TASK /////////////
+gulp.task("admin-custom-scripts", function() {
+  return gulp
+    .src(`${workingFolder}/js/admin/custom/*.js`)
+    .pipe(sourcemaps.init())
+    .pipe(include())
+    .on("error", console.log)
+    .pipe(order([]))
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(concat("all-admin.js"))
+    .pipe(uglify())
+    .pipe(
+      size({
+        gzip: true,
+        showFiles: true
+      })
+    )
+    .pipe(gulp.dest(`${destFolder}/js/admin/`));
+});
+
 ////// Optimize Image TASK ///////
 gulp.task("img", function() {
   return gulp
@@ -373,7 +395,8 @@ gulp.task(`clean:${destFolder}`, function() {
     `!${destFolder}/js/vendors`,
     `!${destFolder}/js/theme`,
     `!${destFolder}/js/dashboard`,
-    `!${destFolder}/js/landing`
+    `!${destFolder}/js/landing`,
+    `!${destFolder}/js/admin`
   ]);
 });
 
@@ -399,7 +422,8 @@ gulp.task(
     "dashboard-vendor-scripts",
     "dashboard-custom-scripts",
     "landing-vendor-scripts",
-    "landing-custom-scripts"
+    "landing-custom-scripts",
+    "admin-custom-scripts",
   ],
   function() {
     gulp.watch(`${workingFolder}/scss/theme/**/*.scss`, ["theme-styles"]);
@@ -430,6 +454,9 @@ gulp.task(
     gulp.watch(`${workingFolder}/js/landing/vendors/*.js`, [
       "landing-vendor-scripts"
     ]);
+    gulp.watch(`${workingFolder}/js/admin/custom/*.js`, [
+      "admin-custom-scripts"
+    ]);
     gulp.watch(`${workingFolder}/images/*.+(png|jpg|jpeg|gif|svg)`, ["img"]);
   }
 );
@@ -452,6 +479,7 @@ gulp.task("build", function(callback) {
       "dashboard-custom-scripts",
       "landing-vendor-scripts",
       "landing-custom-scripts",
+      "admin-custom-scripts",
       "img"
     ],
     callback
