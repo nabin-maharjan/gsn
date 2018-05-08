@@ -8,17 +8,15 @@
 get_header();
 ?>
 
-<main class="gsn-landing__main gsn-lmain">  
-  <div class="gsn-lmain__wrapper">
-    <section class="ta-c gsn-lmain__cta__wrapper gsn-lmcta">
-      <div class="container">
-        <div class="gsn-lmcta__heading">
-          <h1>Create your own free <br> <span>Ecommerce Website</span></h1>
-        </div>
+<div class="gsn-lmain__wrapper">
+  <section class="ta-c gsn-section gsn-lmain__cta__wrapper gsn-lmcta">
+    <div class="container">
+      <div class="gsn-lmcta__heading">
+        <h1 class="gsn-section__title">Create your own free <br> <span>Ecommerce Website</span></h1>
       </div>
-    </section>
-    
-  </div>
-</main>
+    </div>
+  </section>
+
+</div>
 
 <?php get_footer();?>

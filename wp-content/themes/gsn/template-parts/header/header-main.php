@@ -97,4 +97,4 @@ Goshopnepal :: Boost your sale with your own website.
     </div>
 	</header>
 
-	<main class="main" role="presentation">
+	<main class="gsn-landing__main gsn-lmain" role="presentation">
