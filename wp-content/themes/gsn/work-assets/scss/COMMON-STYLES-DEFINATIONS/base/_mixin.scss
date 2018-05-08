@@ -1,23 +1,154 @@
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+// font-size REM Converter from PX
+
+$rem-baseline: 16px !default;
+$rem-fallback: false !default;
+$rem-px-only: false !default;
+
+@function rem-separator($list, $separator: false) {
+  @if $separator == "comma" or $separator == "space" {
+    @return append($list, null, $separator);
+  } 
+  
+  @if function-exists("list-separator") == true {
+    @return list-separator($list);
+  }
+
+  // list-separator polyfill by Hugo Giraudel (https://sass-compatibility.github.io/#list_separator_function)
+  $test-list: ();
+  @each $item in $list {
+    $test-list: append($test-list, $item, space);
+  }
+
+  @return if($test-list == $list, space, comma);
 }
 
+@mixin rem-baseline($zoom: 100%) {
+  font-size: $zoom / 16px * $rem-baseline;
+}
+
+@function rem-convert($to, $values...) {
+  $result: ();
+  $separator: rem-separator($values);
+  
+  @each $value in $values {
+    @if type-of($value) == "number" and unit($value) == "rem" and $to == "px" {
+      $result: append($result, $value / 1rem * $rem-baseline, $separator);
+    } @else if type-of($value) == "number" and unit($value) == "px" and $to == "rem" {
+      $result: append($result, $value / $rem-baseline * 1rem, $separator);
+    } @else if type-of($value) == "list" {
+      $value-separator: rem-separator($value);
+      $value: rem-convert($to, $value...);
+      $value: rem-separator($value, $value-separator);
+      $result: append($result, $value, $separator);
+    } @else {
+      $result: append($result, $value, $separator);
+    }
+  }
+
+  @return if(length($result) == 1, nth($result, 1), $result);
+}
+
+@function rem($values...) {
+  @if $rem-px-only {
+    @return rem-convert(px, $values...);
+  } @else {
+    @return rem-convert(rem, $values...);
+  }
+}
+
+@mixin rem($properties, $values...) {
+  @if type-of($properties) == "map" {
+    @each $property in map-keys($properties) {
+      @include rem($property, map-get($properties, $property));
+    }
+  } @else {
+    @each $property in $properties {
+      @if $rem-fallback or $rem-px-only {
+        #{$property}: rem-convert(px, $values...);
+      }
+      @if not $rem-px-only {
+        #{$property}: rem-convert(rem, $values...);
+      }
+    }
+  }
+}
+
+// border-radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+// box-shadow
 @mixin box-shadow($x, $y, $blur, $spread, $alpha){
-	-webkit-box-shadow:$x $y $blur $spread $alpha;
-	-moz-box-shadow:$x $y $blur $spread $alpha;
 	box-shadow:$x $y $blur $spread $alpha;
 }
 
+// tansition
+@mixin transition( $val: all .3s cubic-bezier(0.77, 0, 0.175, 1) ) {
+  transition: $val;
+}
 
-@mixin transition( $val : ease 0.5s ) {
-  -webkit-transition: $val;
-  -moz-transition:$val;
-  -o-transition:$val;
-  -ms-transition:$val;
-  transition:$val;
+// background image mixin
+@mixin bg-img {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+// Placeholder Mixin
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+// hover underline animation
+@mixin inline-anchor($color: $white, $textTrasform: 'none') {
+  display: inline-block;
+  color: $color;
+  position: relative;
+  text-transform: $textTrasform;
+
+  &::after {
+    content: '';
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    background: $color;
+    left: auto;
+    right: 0;
+    @include transition;
+  }
+
+  @include min-screen($mq-min-mobile) {
+    &:hover {
+      color: $color;
+
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
 }
 
 

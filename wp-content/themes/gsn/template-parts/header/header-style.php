@@ -18,7 +18,7 @@
 </noscript>
 <style>
 .btn-submit:hover,
-.landing__tab li,
+.gsn-landing__access__item,
 footer {
 background:<?php echo  $footer_background_color;?>;
 }
@@ -101,7 +101,7 @@ border-color:<?php echo $lighter_color;?>;
 .woocommerce .single-product-details #content .woocommerce-tabs .panel ul.specification-list li span {
 border-color:<?php echo $light_color;?>;
 }
-.landing__tab li.active,
+.gsn-landing__access__item.active,
 .dashboard-hamburger:hover span,
 .dashboard__nav ul li a::before,
 .header-profile-cntr .profile-info:hover,
@@ -150,7 +150,7 @@ color:<?php echo $primary_color;?>;
 .product-block .cart-btn>a:hover {
 border-color:<?php echo $primary_color;?>;
 }
-.landing__tab li:hover,
+.gsn-landing__access__item:hover,
 .summary-cards-cntr .summary__card .summary-info:after,
 .summary-cards-cntr .summary__card.active .summary-info,
 .back-to-top a:hover,
@@ -447,7 +447,7 @@ button.list-group-item-danger.active,
 button.list-group-item-danger.active:focus,
 button.list-group-item-danger.active:hover,
 .btn-submit,
-.landing__tab li a,
+.gsn-landing__access__link,
 #pac-input,
 #type-selector,
 .dashboard-header,

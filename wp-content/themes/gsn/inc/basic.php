@@ -4,23 +4,63 @@
  *link vendor css file  on top
  */
 function enquee_style_css(){
-	// Enqueue custom stylesheet//
-    wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
-    wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
+    // Enqueue custom stylesheet//
+    global $post;
+    $page_type=get_post_meta($post->ID,'store_page',true);
+
+    /*
+        Style enque for dashboard pages
+    */
+    if('dashboard'==$page_type){
+        wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
+    }
+     /*
+        Style enque for shop pages
+    */
+    if('store'==$page_type  || empty($page_type)){
+        wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
+    }
+     /*
+        Style enque for main pages
+    */
+    if('main'==$page_type){
+        wp_enqueue_style( 'landing-css', get_template_directory_uri() . '/assets/css/landing/landing.min.css', array(), '1.0.0', 'all' );
+    } 
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
+
+//add_theme_support( 'wc-product-gallery-zoom' );
+add_theme_support( 'wc-product-gallery-lightbox' );
+add_theme_support( 'wc-product-gallery-slider' );
 
 /**
  * Enqueue Scripts.
  * link vendor javascript file  on top
  */
 function enquee_scripts(){
-    wp_enqueue_script( 'jquery-main', 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', true );
+    global $post;
+    $page_type=get_post_meta($post->ID,'store_page',true);
 
-    wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', false );
+
+    /*
+        Script enque for store pages
+    */
+    if('store'==$page_type || empty($page_type)){
+        wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
+    }
+    /*
+        Script enque for dashboard pages
+    */
+    if('dashboard'==$page_type){
+        wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
+    }
+    /*
+        Script enque for main pages
+    */
+    if('main'==$page_type){
+        wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/assets/js/landing/landing.min.js', array(), '1.0.0', true );
+    } 
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
 
@@ -29,11 +69,11 @@ add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
  * link vendor javascript file  on top
  */
 function my_enqueue($hook) {
-   wp_enqueue_script( 'all-dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dasboard.min.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
+   wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
 	//wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
-    wp_enqueue_style( 'jquery-ui' );   
+    wp_enqueue_style( 'jquery-ui' );
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
@@ -73,7 +113,7 @@ function term_link_filter( $url, $term, $taxonomy ) {
 	$top_level_category=get_term_top_most_parent($term->term_id,$taxonomy);
 	$exploded_slug=explode(' ',$top_level_category->name);
 	$id=$exploded_slug[count($exploded_slug)-1];
-    return str_replace($top_level_category->slug."/",$id."/",$url );
+    return str_replace($top_level_category->slug."/","",$url );
 }
 
 

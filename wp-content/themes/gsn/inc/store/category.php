@@ -56,7 +56,9 @@ class GsnCategory{
 						
 						$storeParentCatName=$store->storeName." ".$store->user_id;									
 						$storeParentCat=get_term_by( 'name',$storeParentCatName ,'product_cat');
-						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);		if($edit_flag){
+						
+						$parent_id=($datas['parent']=="-1")?$storeParentCat->term_id:sanitize_text_field($datas['parent']);		
+						if($edit_flag){
 							$cid=wp_update_term(sanitize_text_field($datas['term_id']), 'product_cat', array(
 							  'name' => sanitize_text_field($datas['name']),
 							 // 'slug' => sanitize_title($datas['name']),
@@ -69,7 +71,7 @@ class GsnCategory{
 									'product_cat', // the taxonomy
 									array(
 										'description'=> sanitize_text_field($datas['description']),
-										'slug' => sanitize_title($datas['name']),
+										'slug' => sanitize_title($datas['name']."-".$parent_id),
 										'parent' =>$parent_id
 									)
 								);
@@ -123,6 +125,7 @@ class GsnCategory{
 			global $store;			
 			$storeParentCatName=$store->storeName." ".$store->user_id;
 			$storeParentCat=get_term_by( 'name', $storeParentCatName,'product_cat');
+			if(!empty($storeParentCat)){
 			$args = array(
 				'child_of' =>$storeParentCat->term_id,
 				'taxonomy'     => 'product_cat',
@@ -130,6 +133,9 @@ class GsnCategory{
 			);
 			$store_category=get_terms($args);
 			return count($store_category);
+			}else{
+				return 0;
+			}
 		}
 }
 global $gsnCategory;

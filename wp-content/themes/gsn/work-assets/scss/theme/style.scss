@@ -8,13 +8,14 @@
 
 /* ====== Import COMPONENT CSS ====== */
 @import "components/global";
-@import "components/landing";
 @import "components/map";
 @import "components/alert";
 @import "components/pagination";
 /* ====== Import COMPONENT CSS END ====== */
 
 /* ====== Theme Styles CSS ====== */
+@import "theme/theme-header";
+@import "theme/theme-footer";
 @import "theme/theme-hero";
 @import "theme/theme-product-section";
 @import "theme/theme-category-page";

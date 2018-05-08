@@ -246,7 +246,6 @@ if(!empty($middle_section_right_ad)){
   <!-- /.main -->
 
   <?php get_footer('store') ?>
-  <script src="<?php echo get_template_directory_uri(); ?>/assets/js/vendor/slick.min.js"></script>
 
   <script>
     $(document).ready(function() {
