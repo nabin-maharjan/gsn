@@ -10,7 +10,7 @@ Goshopnepal :: Boost your sale with your own website.
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
 <!-- Place this data between the <head> tags of your website -->
 <meta name="description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale." />
@@ -53,9 +53,42 @@ Goshopnepal :: Boost your sale with your own website.
 	<header class="gsn-landing__header gsn-lheader">
     <div class="container">
       <div class="gsn-lheader__wrapper">
-        
+        <div class="gsn-lheader__logo">
+          <a href="<?php echo site_url();?>" class="gsn-lheader__lolink">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/main-logo.svg" alt="Main GSN Logo" class="gsn-lheader__loimg">
+          </a>
+        </div>
+
+        <div class="gsn-lheader__nav__wrapper">
+          <div class="gsn-lheader__nav__wrap">
+            <nav class="gsn-lheader__nav">
+              <ul class="gsn-lheader__nitems">
+                <li class="gsn-lheader__nitem">
+                  <a href="" class="gsn-lheader__nlink">
+                    <span class="gsn-lheader__ntext">About</span>
+                  </a>
+                </li>
+                <li class="gsn-lheader__nitem">
+                  <a href="" class="gsn-lheader__nlink">
+                    <span class="gsn-lheader__ntext">Register</span>
+                  </a>
+                </li>
+                <li class="gsn-lheader__nitem">
+                  <a href="" class="gsn-lheader__nlink">
+                    <span class="gsn-lheader__ntext">Documentation</span>
+                  </a>
+                </li>
+                <li class="gsn-lheader__nitem">
+                  <a href="" class="gsn-lheader__nlink">
+                    <span class="gsn-lheader__ntext">Contact</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </div>
 	</header>
 
-	<main class="main" role="presentation">
+	<main class="gsn-landing__main gsn-lmain" role="presentation">
