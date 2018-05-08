@@ -12,6 +12,7 @@ $page->add_meta_box(
 				'options'=>array(
 						'store'=>'Store',
 						'dashboard'=>'Dashboard',
+						'main'=>'Main',
 					)
 				),
 	)

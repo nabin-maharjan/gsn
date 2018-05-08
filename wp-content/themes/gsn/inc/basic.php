@@ -4,10 +4,28 @@
  *link vendor css file  on top
  */
 function enquee_style_css(){
-	// Enqueue custom stylesheet//
-    wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
-    wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
-    wp_enqueue_style( 'landing-css', get_template_directory_uri() . '/assets/css/landing/landing.min.css', array(), '1.0.0', 'all' );
+    // Enqueue custom stylesheet//
+    global $post;
+    $page_type=get_post_meta($post->ID,'store_page',true);
+
+    /*
+        Style enque for dashboard pages
+    */
+    if('dashboard'==$page_type){
+        wp_enqueue_style( 'dashboard-css', get_template_directory_uri() . '/assets/css/dashboard/dashboard.min.css', array(), '1.0.0', 'all' );
+    }
+     /*
+        Style enque for shop pages
+    */
+    if('store'==$page_type  || empty($page_type)){
+        wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/assets/css/theme/theme.min.css', array(), '1.0.0', 'all' );
+    }
+     /*
+        Style enque for main pages
+    */
+    if('main'==$page_type){
+        wp_enqueue_style( 'landing-css', get_template_directory_uri() . '/assets/css/landing/landing.min.css', array(), '1.0.0', 'all' );
+    } 
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 
@@ -16,13 +34,29 @@ add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
  * link vendor javascript file  on top
  */
 function enquee_scripts(){
-    wp_enqueue_script( 'jquery-main', 'http://code.jquery.com/jquery-3.3.1.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', true );
+    global $post;
+    $page_type=get_post_meta($post->ID,'store_page',true);
 
-    wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
-    wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/assets/js/landing/landing.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'jquery-all-vendors', get_template_directory_uri() . '/assets/js/vendors/all-vendors.min.js', array('jquery'), '1.0.0', false );
+
+    /*
+        Script enque for store pages
+    */
+    if('store'==$page_type || empty($page_type)){
+        wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/assets/js/theme/theme.min.js', array(), '1.0.0', true );
+    }
+    /*
+        Script enque for dashboard pages
+    */
+    if('dashboard'==$page_type){
+        wp_enqueue_script( 'dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dashboard.min.js', array(), '1.0.0', true );
+    }
+    /*
+        Script enque for main pages
+    */
+    if('main'==$page_type){
+        wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/assets/js/landing/landing.min.js', array(), '1.0.0', true );
+    } 
 }
 add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
 
@@ -35,7 +69,7 @@ function my_enqueue($hook) {
 	//wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
-    wp_enqueue_style( 'jquery-ui' );   
+    wp_enqueue_style( 'jquery-ui' );
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 

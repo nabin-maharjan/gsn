@@ -603,6 +603,7 @@ class Store{
 			if(isset($matches[1])) {
 				$subdomain = $matches[1];
 			}
+			$subdomain="puja-electronics";
 			global $wpdb;
 			if(!empty($subdomain) && strtolower($subdomain)!=="www"){
 				$query=$wpdb->prepare("select * from ".$this->store_table." where domainName=%s",$subdomain); // Prepare query

@@ -175,7 +175,13 @@ gulp.task("vendors-only-scripts", function() {
     .pipe(sourcemaps.init())
     .pipe(include())
     .pipe(order([
-
+      'jquery-3.3.1.min.js',
+      'jquery-validate.min.js',
+      'jquery-ui.js',
+      'tether.min.js',
+      'bootstrap.min.js',
+      'bootstrap-datepicker.min.js',
+      'slick.min.js',
     ]))
     .pipe(concat("all-vendors.min.js"))
     .pipe(uglify())
