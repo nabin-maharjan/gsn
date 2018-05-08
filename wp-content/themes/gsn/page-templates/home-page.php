@@ -8,6 +8,14 @@
 get_header();
 ?>
 
-Thi sis home pagee
+<main class="gsn-landing__main gsn-lmain">
+  <div class="container">
+    <div class="gsn-lmain__wrapper">
+      <div class="ta-c gsn-lmain__cta__wrapper">
+
+      </div>
+    </div>
+  </div>
+</main>
 
 <?php get_footer();?>

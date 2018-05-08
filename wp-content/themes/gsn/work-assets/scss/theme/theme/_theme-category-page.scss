@@ -15,7 +15,7 @@
       text-transform: uppercase;
 
       @include max-screen($mq-mobile) {
-        font-size: 30px;
+        font-size: rem($fs-large);
       }
     }
   }
@@ -63,7 +63,7 @@
     select {
       border: none;
       cursor: pointer;
-      font-size: 14px;
+      font-size: rem($fs-small);
       outline: none;
       padding: 8px 12px;
 
@@ -128,13 +128,13 @@
   text-align: center;  
   color: $white;
   background: $brick_red;
-  font-size: 18px;
+  font-size: rem($fs-ebody);
   padding: 15px;
   margin: 0 20px;
   transition: all 0.3s ease-in-out;
 
   h2 {
-    font-size: 18px;
+    font-size: rem($fs-ebody);
   }
 
   span {

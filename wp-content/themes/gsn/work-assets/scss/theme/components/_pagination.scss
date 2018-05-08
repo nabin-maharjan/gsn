@@ -8,7 +8,7 @@
         a, span {
           display: inline-block;
           padding: 10px 20px;
-          font-size: 16px;
+          font-size: rem($fs-body);
           height: 42px;
           line-height: 1.4;
         }
@@ -19,7 +19,7 @@
         }
 
         .next, .prev {
-          font-size: 22px;
+          font-size: rem($fs-mbig);
           line-height: 1;
         }
 
