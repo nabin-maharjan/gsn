@@ -79,6 +79,18 @@ $store_setting->add_meta_box(
 				'placeholder'=>"",
 				'show_in_admin_table'=>true,
 				),
+		'Store Status' =>array(
+					'name'=>'activate_store',
+					'id'=>'activate_store',
+					'type'=>"radio",
+					'placeholder'=>"",
+					'options'=>array(
+						'inactive'=>'Inactive',
+						'active'=>'Active',
+					),
+					'show_in_admin_table'=>true,
+					),
+		
 		)	
 	);
 
@@ -117,7 +129,8 @@ function save_book_meta( $post_id, $post, $update ) {
 	$curr_post_package=$_POST['selected_package'];
 	$curr_post_package_start=$_POST['package_start_date'];
 	$curr_post_package_end=$_POST['package_end_date'];
-
+	$curr_post_store_status=$_POST['activate_store'];
+	
 	if(!empty($curr_post_package) &&  $curr_post_package_start &&  $curr_post_package_end){
 		global $wpdb;
 		if($prev_post_package!=$curr_post_package ||  
@@ -144,6 +157,10 @@ function save_book_meta( $post_id, $post, $update ) {
 				array('user_id'=>$_POST['post_author'])
 			);
 		}
+	}
+	global $store;
+	if($curr_post_store_status=="active"){
+		$store->store_activate($post->post_author);
 	}
 
 }

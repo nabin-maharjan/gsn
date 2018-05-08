@@ -59,10 +59,37 @@ class Store{
 			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
 			/* add media upload files */
 			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
+
+
+			/* change order email to store email */
+			add_filter( 'woocommerce_email_recipient_new_order', array($this,'order_email_recipent'), 10, 2 );
 			
+
+			/*  add ajax function  for uodate domain name */
+			add_action( 'wp_ajax_gsn_get_store_data', array($this,'get_store_data') );
+			add_action( 'wp_ajax_nopriv_gsn_get_store_data', array($this,'get_store_data') );
 			
 			
 	}
+	function order_email_recipent( $recipient, $order ) {
+		// Bail on WC settings pages since the order object isn't yet set yet
+		// Not sure why this is even a thing, but shikata ga nai
+		$page = $_GET['page'] = isset( $_GET['page'] ) ? $_GET['page'] : '';
+		if ( 'wc-settings' === $page ) {
+			return $recipient; 
+		}
+		// just in case
+		if ( ! $order instanceof WC_Order ) {
+			return $recipient; 
+		}
+		$items = $order->get_items();
+		global $store;
+		if($store->emailAddress){
+			return $store->emailAddress;
+		}
+		return $recipient;
+	}
+	
 	
 	/*
 	* Function to create package track table
@@ -537,7 +564,20 @@ class Store{
 					'activated'=>1
 			),
 			array('id'=>$storeobj->id)
-	);	
+		);	
+
+		// for update store setting status
+		$args = array(
+			'author' => $user_id,
+			'post_type' => 'store_setting',
+		);
+		$author_posts=get_posts( $args );
+		if($author_posts){
+			$author_post=$author_posts[0];
+			update_post_meta( $author_post->ID, 'activate_store', 'active');
+		}
+
+
 	}
 	/*
 	& Function to activate store with link
@@ -619,7 +659,7 @@ class Store{
 			if(isset($matches[1])) {
 				$subdomain = $matches[1];
 			}
-			$subdomain="puja-electronics";
+		//	$subdomain="puja-electronics";
 			global $wpdb;
 			if(!empty($subdomain) && strtolower($subdomain)!=="www"){
 				$query=$wpdb->prepare("select * from ".$this->store_table." where domainName=%s",$subdomain); // Prepare query
@@ -1030,8 +1070,23 @@ class Store{
 				return true;	
 			}
 		}
+
+		/*
+		*Function to get all stores with  locations
+		* Return array
+		*/
+		public function get_all_stores_locations(){
+			global $wpdb;
+			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id from ".$this->store_table." where activated=%d",1); // Prepare query
+			return $wpdb->get_results($query,ARRAY_N );
+	
+		}
 		
-		
+		public function get_store_data($user_id=0){
+			global $gsnSettingsClass;
+			$gsn_settings=$gsnSettingsClass->get($user_id);
+			echo json_encode($gsn_settings);die;
+		}
 		
 }
 global $store;

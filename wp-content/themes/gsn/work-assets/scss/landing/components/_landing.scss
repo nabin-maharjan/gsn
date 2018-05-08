@@ -155,7 +155,7 @@ body.page-template-register {
 
     &__message {
       margin-top: 15px;
-      font-size: rem($fs-body);
+      font-size: 16px;
       text-align: center;
 
       a {
@@ -177,17 +177,17 @@ body.page-template-register {
     }
 
     &__link {
-      font-size: rem($fs-body);
+      font-size: 16px;
       @include inline-anchor($white, 'uppercase');
     }
 
     &__content {
       margin-top: 20px;
       line-height: 26px;
-      font-size: rem($fs-body);
+      font-size: 16px;
 
       @include min-screen($mq-min-mobile) {
-        font-size: rem($fs-ebody);
+        font-size: 18px;
       }
     }
   }
@@ -260,7 +260,7 @@ body.page-template-register {
     &__link {
       color: white;
       display: block;
-      font-size: rem($fs-body);
+      font-size: 16px;
       padding: 15px 15px;
       text-transform: uppercase;
 
@@ -296,7 +296,7 @@ body.page-template-register {
         color: $white;
         text-transform: uppercase;
         margin-left: 5px;
-        font-size: rem($fs-medium);
+        font-size: 20px;
         letter-spacing: 2px;
         transition: all 0.3s ease-in;
       }
@@ -438,7 +438,7 @@ body.page-template-register {
 
       h4 {
         text-transform: uppercase;
-        font-size: rem($fs-ebody);
+        font-size: 18px;
         color: $black;
       }
 

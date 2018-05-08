@@ -1,9 +1,3 @@
-<?php 
-global $store;
-$store->check_access_store();
-/*echo "<pre>";
-var_dump($store); die;*/
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head profile="http://www.w3.org/2005/10/profile">

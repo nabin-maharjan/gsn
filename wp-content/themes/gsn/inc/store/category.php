@@ -121,7 +121,7 @@ class GsnCategory{
 			echo json_encode($response);die();
 			
 		}
-		public function get_count_store_category($user_id){
+		public function get_count_store_category($user_id=0){
 			global $store;			
 			$storeParentCatName=$store->storeName." ".$store->user_id;
 			$storeParentCat=get_term_by( 'name', $storeParentCatName,'product_cat');
