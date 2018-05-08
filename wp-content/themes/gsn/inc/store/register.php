@@ -1077,7 +1077,7 @@ class Store{
 		*/
 		public function get_all_stores_locations(){
 			global $wpdb;
-			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id from ".$this->store_table." where activated=%d",1); // Prepare query
+			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id,domainName from ".$this->store_table." where activated=%d",1); // Prepare query
 			return $wpdb->get_results($query,ARRAY_N );
 	
 		}
@@ -1087,7 +1087,17 @@ class Store{
 			if ( wp_doing_ajax() ){
 				$user_id=sanitize_text_field($_POST['user_id']);
 				$gsn_settings=$gsnSettingsClass->get($user_id);
-				echo json_encode($gsn_settings);die;
+				$logo="";
+				if(!empty($gsn_settings->logo)){
+					$logo=wp_get_attachment_url($gsn_settings->logo, 'thumbnail' );
+				  }
+				$response=array(
+					'logo'=>$logo,
+					'gsn_featured'=>$gsn_settings->gsn_featured
+
+
+				);
+				echo json_encode($response);die;
 			}else{
 				$gsn_settings=$gsnSettingsClass->get($user_id);
 				return  $gsn_settings;
