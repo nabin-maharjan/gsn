@@ -29,6 +29,10 @@ function enquee_style_css(){
 }
 add_action( 'wp_enqueue_scripts', 'enquee_style_css' );
 
+//add_theme_support( 'wc-product-gallery-zoom' );
+add_theme_support( 'wc-product-gallery-lightbox' );
+add_theme_support( 'wc-product-gallery-slider' );
+
 /**
  * Enqueue Scripts.
  * link vendor javascript file  on top
@@ -65,7 +69,7 @@ add_action( 'wp_enqueue_scripts', 'enquee_scripts' );
  * link vendor javascript file  on top
  */
 function my_enqueue($hook) {
-   wp_enqueue_script( 'all-dashboard-js', get_template_directory_uri() . '/assets/js/dashboard/dasboard.min.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
+   wp_enqueue_script( 'all-admin-js', get_template_directory_uri() . '/assets/js/admin/all-admin.js', array('jquery','media-upload','thickbox', 'jquery-ui-core', 'jquery-ui-datepicker'), '', true );
 	//wp_enqueue_script( 'jquery-ui' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
@@ -109,7 +113,7 @@ function term_link_filter( $url, $term, $taxonomy ) {
 	$top_level_category=get_term_top_most_parent($term->term_id,$taxonomy);
 	$exploded_slug=explode(' ',$top_level_category->name);
 	$id=$exploded_slug[count($exploded_slug)-1];
-    return str_replace($top_level_category->slug."/",$id."/",$url );
+    return str_replace($top_level_category->slug."/","",$url );
 }
 
 

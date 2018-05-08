@@ -207,7 +207,19 @@ class Store{
 	public function send_activation_mail($user_id,$emailAddress){
 		global $store, $wpdb;
 		$randomGenCode=$store->generateRandomString();	
-			$insert = $wpdb->insert(
+		
+		$store_activation_code=$wpdb->get_var( "SELECT id FROM $wpdb->activate_code where user_id=".$user_id );
+		if($store_activation_code){
+		    $insert = $wpdb->update(
+							$wpdb->activate_code,
+							array(
+								'code' =>$randomGenCode,
+								),
+								array( 'id' =>$store_activation_code )
+							);	
+		    
+		}else{
+		    $insert = $wpdb->insert(
 							$wpdb->activate_code,
 							array(
 								'user_id'=>$user_id,
@@ -215,16 +227,16 @@ class Store{
 								'code_used' =>0
 								)
 							);	
-			
-				
-			$to = sanitize_text_field($emailAddress);
-			$subject = 'Email Verification!';
-			
-			$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
-			$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
-			
-			$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal <support@goshopnepal.com>');
-			return wp_mail( $to, $subject, $body, $headers );
+		}
+
+		$to = sanitize_text_field($emailAddress);
+		$subject = 'Email Verification!';
+		
+		$url=site_url('/activate/?shop_id='.$user_id.'&activate_code='.$randomGenCode);
+		$body = 'The email body content <br> <a href="'.$url.'">Activate my shop</a>';
+		
+		$headers = array('Content-Type: text/html; charset=UTF-8','From: GoshopNepal <support@goshopnepal.com>');
+		return wp_mail( $to, $subject, $body, $headers );
 		
 	}
 	
@@ -464,9 +476,8 @@ class Store{
 	
 	 /* Add the media uploader script */
   public function my_media_lib_uploader_enqueue() {
-	 // echo stylesheet_directory_uri( 'media-lib-uploader.js' , __FILE__ );die;
     wp_enqueue_media();
-  //  wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
+    wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
     wp_enqueue_script( 'media-lib-uploader-js' );
   }
  
@@ -497,7 +508,37 @@ class Store{
 			)
 		);
 	}
-	
+	/*
+		Store activate function
+
+
+	*/
+	public function store_activate($user_id){
+		global $wpdb;
+		/*get  store object of user*/
+		$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$user_id); // Prepare query
+		$storeobj = $wpdb->get_row($query );
+		
+		$store_cat_name=$storeobj->storeName." ".$user_id; // name of shop parent category
+		/*Add shop  parent Category*/
+		$cid = wp_insert_term(
+					$store_cat_name, // the term 
+						'product_cat', // the taxonomy
+						array(
+							'description'=>"Store Parent  Category ",
+							'slug' => sanitize_title($store_cat_name),
+							'parent' =>0
+						)
+					);
+		// Update store activated status
+		$wpdb->update(
+			$this->store_table,
+				array(
+					'activated'=>1
+			),
+			array('id'=>$storeobj->id)
+	);	
+	}
 	/*
 	& Function to activate store with link
 	*/
@@ -517,23 +558,7 @@ class Store{
 						throw new Exception("already_activated");
 					}
 
-					
-					/*get  store object of user*/
-					$query=$wpdb->prepare("select * from ".$this->store_table." where user_id=%s",$user_id); // Prepare query
-					$storeobj = $wpdb->get_row($query );
-					
-					$store_cat_name=$storeobj->storeName." ".$user_id; // name of shop parent category
-					/*Add shop  parent Category*/
-					$cid = wp_insert_term(
-								$store_cat_name, // the term 
-									'product_cat', // the taxonomy
-									array(
-										'description'=>"Store Parent  Category ",
-										'slug' => sanitize_title($store_cat_name),
-										'parent' =>0
-									)
-								);
-								
+					$this->store_activate($user_id);
 					// Update code used status
 					$wpdb->update(
 								$wpdb->activate_code,
@@ -542,16 +567,7 @@ class Store{
 								),
 								array('id'=>$activateObj->id)
 						);
-								
-					// Update store activated status
-					$wpdb->update(
-								$this->store_table,
-								 array(
-										'activated'=>1
-								),
-								array('id'=>$storeobj->id)
-						);	
-						
+
 						$activated="activated";
 				}else{
 					throw new Exception("not_found");
@@ -567,7 +583,7 @@ class Store{
 	public function check_access_store(){
 		
 		global $store;
-		if(is_page("activate") || is_page("Test Map")){
+		if(is_page("activate")){
 		}else if(!empty($store->id) && $store->is_shop==true && is_page_template( 'page-templates/register.php')){
 			  global $wp_query;
 			  $wp_query->set_404();
@@ -867,7 +883,7 @@ class Store{
 									$start_year=date('F d, Y');
 									$end_year=date('F d, Y', strtotime('+1 years'));
 									$package='normal';
-									if($count_users['store_contributor']<109){
+									if($count_users['store_contributor']<20){
 										$package='bronze';
 									}
 									update_post_meta($post_id,'selected_package',$package);
