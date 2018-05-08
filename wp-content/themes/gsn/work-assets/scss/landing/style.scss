@@ -1,14 +1,24 @@
-
 /* CSS Document */
+
 
 /* ====== Import Vendor CSS ====== */
 
+
 /* Common Styles */
+
 @import "../COMMON-STYLES-DEFINATIONS/common";
 
 /* ====== Import COMPONENT CSS ====== */
+
 @import "components/global";
 @import "components/landing";
 @import "components/map";
 @import "components/alert";
+
 /* ====== Import COMPONENT CSS END ====== */
+
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/main/sec-cta";
+@import "layouts/main/sec-find-shop";
+@import "layouts/main/sec-featured-shops";

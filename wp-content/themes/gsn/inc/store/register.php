@@ -1084,8 +1084,14 @@ class Store{
 		
 		public function get_store_data($user_id=0){
 			global $gsnSettingsClass;
-			$gsn_settings=$gsnSettingsClass->get($user_id);
-			echo json_encode($gsn_settings);die;
+			if ( wp_doing_ajax() ){
+				$user_id=sanitize_text_field($_POST['user_id']);
+				$gsn_settings=$gsnSettingsClass->get($user_id);
+				echo json_encode($gsn_settings);die;
+			}else{
+				$gsn_settings=$gsnSettingsClass->get($user_id);
+				return  $gsn_settings;
+			}
 		}
 		
 }
