@@ -13,6 +13,7 @@
         Activation link was sent to you email address. Please open your email and click on link.
         <br>
         Didn't get activation email? <br> <button class="btn btn-primary send-activation-link" id="send_activation_link">Send Activation link</button></a>
+				or contact us on goshopnepal@gmail.com
       </div>
     </section>
     
