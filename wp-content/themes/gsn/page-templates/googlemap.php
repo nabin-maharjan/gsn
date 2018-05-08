@@ -14,7 +14,7 @@ $stores=$store->get_all_stores_locations();
 <script type="text/javascript">
   var locations =<?php echo json_encode($stores);?>;
 var map, infoWindow,pos,radius, cityCircle;
-radius=3;// miles
+radius=3;// KM
 
   function initMap() {
      pos = {
@@ -32,8 +32,11 @@ radius=3;// miles
         function load_marker(pos){
           var marker, i;
           for (i = 0; i < locations.length; i++) { 
-            dist = sqrt(pow(locations[i][1]-pos.lat, 2) + cos(pos.lat)*pow(locations[i][2]-pos.lng, 2)); //distances(pos.lat, pos.lng, locations[i][1], locations[i][2]);
+           // dist = sqrt(pow(locations[i][1]-pos.lat, 2) + cos(pos.lat)*pow(locations[i][2]-pos.lng, 2)); //distances(pos.lat, pos.lng, locations[i][1], locations[i][2]);
+		   dist = calc_dist(pos.lat, pos.lng, locations[i][1], locations[i][2]);
+		  
                   if(dist<radius){
+					  // console.log(dist);
                     marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                     map: map
@@ -66,6 +69,18 @@ radius=3;// miles
              } 
           }
         }
+		function calc_dist(lat1, lon1, lat2, lon2){
+			var earthRadius = 6371;
+			var lat = lat2-lat1; // Difference of latitude
+			var lon = lon2-lon1; // Difference of longitude
+		
+			var disLat = (lat*Math.PI*earthRadius)/180; // Vertical distance
+			var disLon = (lon*Math.PI*earthRadius)/180; // Horizontal distance
+		
+			var ret = Math.pow(disLat, 2) + Math.pow(disLon, 2); 
+			ret = Math.sqrt(ret);
+			return ret;	
+		}
         function distances(lat1, lon1, lat2, lon2) {
             // ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
             // Convert lattitude/longitude (degrees) to radians for calculations
@@ -102,7 +117,7 @@ radius=3;// miles
                       fillOpacity: 0.1,
                       map: map,
                       center:  pos,
-                      radius: radius  * 1609.34
+                      radius: radius  * 1000
                     });
             load_marker(pos);
           }, function() {
