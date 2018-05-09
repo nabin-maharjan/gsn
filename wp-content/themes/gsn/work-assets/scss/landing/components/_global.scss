@@ -1,5 +1,7 @@
 body {
-  font-size: 14px;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: rem($fs-small);
 }
 h1,
 h2,
@@ -26,7 +28,7 @@ ul {
   font-size: 0;
 }
 li {
-  font-size: rem(16px);
+  font-size: rem($fs-body);
   display: inline-block;
 }
 select {
@@ -73,7 +75,7 @@ select {
 label.error {
   color: red;
   display: block;
-  font-size: 12px;
+  font-size: rem($fs-tiny);
   margin-top: 3px;
 }
 .btn {
@@ -103,6 +105,10 @@ label.error {
 }
 .hidden {
   display: none;
+}
+.visible-hidden {
+  position: absolute;
+  top: -9999999px;
 }
 .wp-editor-container {
   border: 1px solid $light_gray;

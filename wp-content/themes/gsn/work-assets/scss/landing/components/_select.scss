@@ -1,0 +1,143 @@
+.gsn-custom {
+  &__select {
+    position: relative;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    font-size: rem($fs-body);
+  }
+
+  // s == select (i.e. stoggle => select__toggle)
+  &__s {
+    &toggle {
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;      
+      padding: 5px 15px;
+      border-radius: 4px;
+      background: #f6f9fc;
+      height: 50px;
+      box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+      @include transition;
+
+      &.js-active {
+        background: #e7eef7;
+        box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        .gsn-custom__sarrow svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      @include min-screen($mq-min-mobile) {
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+        }
+      }
+    }
+
+    &totext {
+      font-weight: $fw-sbold;
+    }
+
+    &arrow {
+      width: 20px;
+      position: relative;
+      transform: translateY(2px);
+    }
+
+    &aicon {
+      width: 100%;
+      display: block;
+      height: 12px;
+      @include transition;
+    }
+
+    &dropdown {
+      background: #f6f9fc;
+      position: absolute;
+      max-height: 355px;
+      overflow-y: auto;
+      right: 0;
+      left: 0;
+      top: 100%;
+      box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);      
+      border-radius: 4px;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      opacity: 0;
+      visibility: hidden;
+      animation-iteration-count: 1;
+      animation-duration: 0.3s;
+      animation-timing-function: ease;
+      animation-fill-mode: both;
+      transition: opacity 0.1s ease;
+      z-index: 2;
+
+      &.js-visible {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &.js-animate-slide-in {
+        animation-duration: 200ms;
+        animation-name: slideInY;
+        transform-origin: top center;
+      }
+
+      &.js-animate-slide-out {
+        animation-name: slideOutY;
+        transform-origin: top center;
+        animation-duration: 200ms;
+      }
+    }
+
+    &item {
+      display: block;
+      text-align: left;
+      padding: 10px 15px;
+      cursor: pointer;
+      @include transition;
+
+      &.js-selected {
+        background: #c8d3e0;
+      }
+
+      @include min-screen($mq-min-mobile) {
+        &:hover {
+          background: #e7eef7;
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideInY {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes slideOutY {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
