@@ -70,7 +70,7 @@ Goshopnepal :: Boost your sale with your own website.
                 </li>
                 <li class="gsn-lheader__nitem">
                   <a href="" class="gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">Register</span>
+                    <span class="gsn-lheader__ntext">Pricing</span>
                   </a>
                 </li>
                 <li class="gsn-lheader__nitem">
@@ -81,6 +81,11 @@ Goshopnepal :: Boost your sale with your own website.
                 <li class="gsn-lheader__nitem">
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Contact</span>
+                  </a>
+                </li>
+                <li class="gsn-lheader__nitem">
+                  <a href="" class="gsn-lheader__nlink">
+                    <span class="gsn-lheader__ntext">Sign in</span>
                   </a>
                 </li>
               </ul>

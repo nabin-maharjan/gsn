@@ -1,7 +1,7 @@
 .gsn-custom {
   &__select {
     position: relative;
-    width: 200px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     font-size: rem($fs-body);
@@ -61,7 +61,7 @@
     &dropdown {
       background: #f6f9fc;
       position: absolute;
-      max-height: 355px;
+      max-height: 375px;
       overflow-y: auto;
       right: 0;
       left: 0;
