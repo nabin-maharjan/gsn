@@ -13,37 +13,95 @@ $stores=$store->get_all_stores_locations();
 <div id="map" style="width: 100%; height: 50vh;"></div>
 <script type="text/javascript">
   var locations =<?php echo json_encode($stores);?>;
-var map, infoWindow;
+var map, infoWindow,pos,radius, cityCircle;
+radius=3;// KM
+
   function initMap() {
+     pos = {
+              lat: 27.704222,
+              lng: 85.306513
+            };
         map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(27.704222, 85.306513),
-          zoom: 13,
+          center: new google.maps.LatLng(pos.lat, pos.lng),
+          zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         infoWindow = new google.maps.InfoWindow;
-        var marker, i;
+        load_marker(pos);
+        }
+        function load_marker(pos){
+          var marker, i;
           for (i = 0; i < locations.length; i++) { 
-        
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-              map: map
-            });
+           // dist = sqrt(pow(locations[i][1]-pos.lat, 2) + cos(pos.lat)*pow(locations[i][2]-pos.lng, 2)); //distances(pos.lat, pos.lng, locations[i][1], locations[i][2]);
+		   dist = calc_dist(pos.lat, pos.lng, locations[i][1], locations[i][2]);
+		  
+                  if(dist<radius){
+					  // console.log(dist);
+                    marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                  });
 
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              return function() {
-                call_shop_data(locations[i][3]);
-               // infoWindow.setContent(locations[i][0]);
-               // infoWindow.open(map, marker);
-              }
-            })(marker, i));
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                    // call_shop_data(locations[i]);
+                    // infoWindow.setContent(locations[i][0]);
+                    // infoWindow.open(map, marker);
+                    let user_id=locations[i][3];
+                      var data= {action: "gsn_get_store_data", user_id : user_id};
+                      var xhr = jQuery.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: ajaxUrl,
+                        data: data,
+                        success: function(response) {
+                          console.log(response);
+                          var html = "<table><tr><td><img src='"+response.logo+"' width='100'></td><td width='150'>" + locations[i][0]+"</td></tr></table>";
+                          infoWindow.setContent(html);
+                          infoWindow.open(map, marker);
+                        },
+                        complete: function(response) {
+
+                        }
+                      });
+                    }
+                  })(marker, i));
+             } 
           }
-
+        }
+		function calc_dist(lat1, lon1, lat2, lon2){
+			var earthRadius = 6371;
+			var lat = lat2-lat1; // Difference of latitude
+			var lon = lon2-lon1; // Difference of longitude
+		
+			var disLat = (lat*Math.PI*earthRadius)/180; // Vertical distance
+			var disLon = (lon*Math.PI*earthRadius)/180; // Horizontal distance
+		
+			var ret = Math.pow(disLat, 2) + Math.pow(disLon, 2); 
+			ret = Math.sqrt(ret);
+			return ret;	
+		}
+        function distances(lat1, lon1, lat2, lon2) {
+            // ACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-lon1))*6371
+            // Convert lattitude/longitude (degrees) to radians for calculations
+            var R = 3963.189; // meters
+            // Find the deltas
+            delta_lon = deg2rad(lon2) - deg2rad(lon1);
+            // Find the Great Circle distance
+            distance = Math.acos(Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.cos(delta_lon)) * 3963.189;
+            return distance;
         }
 
+        function deg2rad(val) {
+          var pi = Math.PI;
+          var de_ra = ((eval(val))*(pi/180));
+          return de_ra;
+        }
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
@@ -51,8 +109,29 @@ var map, infoWindow;
             // infoWindow.setContent('Location found.');
             // infoWindow.open(map);
             map.setCenter(pos);
+            cityCircle = new google.maps.Circle({
+                      strokeColor: '#FF0000',
+                      strokeOpacity: 0.3,
+                      strokeWeight: 2,
+                      fillColor: '#FF0000',
+                      fillOpacity: 0.1,
+                      map: map,
+                      center:  pos,
+                      radius: radius  * 1000
+                    });
+            load_marker(pos);
           }, function() {
            // handleLocationError(true, infoWindow, map.getCenter());
+           cityCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.3,
+                      strokeWeight: 2,
+                      fillColor: '#FF0000',
+                      fillOpacity: 0.1,
+              map: map,
+              center:  pos,
+              radius: radius * 1609.34
+            });
           });
         } else {
           // Browser doesn't support Geolocation
@@ -66,22 +145,6 @@ var map, infoWindow;
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
-      }
-      function call_shop_data(id){
-        let user_id=id;
-        var data= {action: "gsn_get_store_data", user_id : user_id};
-        var xhr = $.ajax({
-          type: "post",
-          dataType: "json",
-          url: ajaxUrl,
-          data: data,
-          success: function(response) {
-            console.log(response);
-          },
-          complete: function(response) {
-
-          }
-        });
       }
   </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places&callback=initMap" async defer></script>

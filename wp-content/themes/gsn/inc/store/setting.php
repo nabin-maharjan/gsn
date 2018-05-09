@@ -183,19 +183,19 @@ public function filter_customize_nav_menu_available_items( $items, $menu, $arg )
 		$post=array_shift($posts);
 		$post_metas=get_post_meta($post->ID);
 		$this->id=$post->ID;
-		$this->logo=array_shift($post_metas['logo']);
-		$this->selected_theme=array_shift($post_metas['selected_theme']);
-		$this->facebook=array_shift($post_metas['facebook']);
-		$this->twitter=array_shift($post_metas['twitter']);
-		$this->googleplus=array_shift($post_metas['googleplus']);
+		$this->logo=(!empty($post_metas['logo']))?array_shift($post_metas['logo']):'';
+		$this->selected_theme=(!empty($post_metas['selected_theme']))?array_shift($post_metas['selected_theme']):'';
+		$this->facebook=(!empty($post_metas['facebook']))?array_shift($post_metas['facebook']):'';
+		$this->twitter=(!empty($post_metas['twitter']))?array_shift($post_metas['twitter']):'';
+		$this->googleplus=(!empty($post_metas['googleplus']))?array_shift($post_metas['googleplus']):'';
 		$this->aboutStore=$post->post_content;
-		$this->esewaId=array_shift($post_metas['esewaId']); // esewa ID
+		$this->esewaId=(!empty($post_metas['esewaId']))?array_shift($post_metas['esewaId']):''; // esewa ID
 		$this->storePackageSettings=$this->get_store_settings(); //get store package settings
-		$this->fbPageId=array_shift($post_metas['fbPageId']); //get facebook page Id
-		$this->fbAppId=array_shift($post_metas['fbAppId']); //get facebook App ID
-		$this->flat_rate=array_shift($post_metas['flat_rate']); //get shipping flat rate
-		$this->flat_rate_note=array_shift($post_metas['flat_rate_note']); //get shipping flat rate note
-		
+		$this->fbPageId=(!empty($post_metas['fbPageId']))?array_shift($post_metas['fbPageId']):''; //get facebook page Id
+		$this->fbAppId=(!empty($post_metas['fbAppId']))?array_shift($post_metas['fbAppId']):''; //get facebook App ID
+		$this->flat_rate=(!empty($post_metas['flat_rate']))?array_shift($post_metas['flat_rate']):''; //get shipping flat rate
+		$this->flat_rate_note=(!empty($post_metas['flat_rate_note']))?array_shift($post_metas['flat_rate_note']):''; //get shipping flat rate note
+
 		return $this;
 	}
 	/*
