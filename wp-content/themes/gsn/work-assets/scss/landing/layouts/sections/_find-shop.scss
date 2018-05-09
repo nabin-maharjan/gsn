@@ -1,0 +1,19 @@
+.gsn-lmfind {
+  &__filter {
+    margin-left: 20px;
+
+    &__wrapper {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > span {
+        font-size: rem($fs-body);
+        text-transform: uppercase;
+        font-weight: $fw-sbold;
+      }
+    }
+  }
+}

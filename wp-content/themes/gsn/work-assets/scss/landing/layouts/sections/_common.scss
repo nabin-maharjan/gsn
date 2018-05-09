@@ -1,0 +1,29 @@
+.gsn-section {
+  padding: 100px 0;
+
+  &__title {
+    font-size: rem($fs-elarge);
+    font-weight: $fw-ebold;
+    line-height: 1.2;
+    position: relative;
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: $dark__gray;
+      margin: 15px auto 0;
+    }
+
+    &--small {
+      font-size: rem($fs-large);
+    }
+  }
+
+  &__subtitle {
+    font-size: rem($fs-small);
+    margin-top: 20px;
+    font-weight: $fw-sbold;
+  }
+}

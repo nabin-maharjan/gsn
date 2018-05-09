@@ -10,7 +10,7 @@ Goshopnepal :: Boost your sale with your own website.
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <link rel="icon"  type="image/ico"  href="<?php echo get_template_directory_uri(); ?>/favicn.ico">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
 <!-- Place this data between the <head> tags of your website -->
 <meta name="description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale." />
