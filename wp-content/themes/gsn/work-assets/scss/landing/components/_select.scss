@@ -5,6 +5,10 @@
     display: flex;
     flex-direction: column;
     font-size: rem($fs-body);
+
+    &--small {
+      width: 100px;
+    }
   }
 
   // s == select (i.e. stoggle => select__toggle)

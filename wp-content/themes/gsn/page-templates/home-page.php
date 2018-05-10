@@ -62,6 +62,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -77,6 +81,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -92,6 +100,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -107,6 +119,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -122,6 +138,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -137,6 +157,10 @@ $stores=$store->get_all_stores_locations();
                   <h3 class="gsn-card__name">Shop name</h3>
                   <h4 class="gsn-card__category">Shop category</h4>
                   <h5 class="gsn-card__location">Shop location</h5>
+                  <span class="gsn-card__view">
+                    View Shop
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 75.925"><path d="M0 30.37a1.5 1.5 0 0 1 1.5-1.5h86.31l-27-26.29a1.5 1.5 0 0 1 0-2.12 1.49 1.49 0 0 1 2.12 0l29.62 28.83a1.5 1.5 0 0 1 0 2.13L62.88 60.31a1.5 1.5 0 0 1-2.09-2.15l27-26.29H1.5a1.5 1.5 0 0 1-1.5-1.5z"/>
+                  </span>
                 </div>
               </div>
             </a>
@@ -153,7 +177,7 @@ $stores=$store->get_all_stores_locations();
       </div>
       <div class="gsn-lmfind__filter__wrapper">        
         <div class="gsn-custom__select__wrap gsn-lmfind__filter gsn-lmfind__filter--select">
-          <span>Find by category:</span>
+          <span>Category:</span>
           <div class="js-custom-select gsn-custom__select gsn-lmfind__select">
             <select id="shop-type" class="js-default-select visible-hidden">
               <option value="all" selected>All</option>
@@ -180,8 +204,37 @@ $stores=$store->get_all_stores_locations();
         </div>
 
         <div class="gsn-custom__input__wrap gsn-lmfind__filter gsn-lmfind__filter--input">
-          <span>Find by location:</span>
+          <span>Location:</span>
           <input type="text" class="gsn-custom__input" placeholder="Store location" name="findStore">
+        </div>
+
+        <div class="gsn-custom__select__wrap gsn-lmfind__filter gsn-lmfind__filter--select">
+          <span>Range (KM):</span>
+          <div class="js-custom-select gsn-custom__select gsn-custom__select--small gsn-lmfind__select">
+            <select id="shop-type-range" class="js-default-select visible-hidden">
+              <option value="all">1</option>
+              <option value="food">2</option>
+              <option value="beverage">3</option>
+              <option value="clothing" selected>4</option>
+              <option value="electronics">5</option>
+              <option value="handicraft">6</option>
+            </select>
+
+            <div class="js-custom-select-toggle gsn-custom__stoggle">
+              <span class="js-custom-select-text gsn-custom__stotext"></span>
+              <i class="js-gsn-custom-select-arrow gsn-custom__sarrow">
+                <svg xmlns="http://www.w3.org/2000/svg" class="gsn-custom__saicon" viewBox="0 0 57.31 38.638"><path d="M28.66 30.91a1.51 1.51 0 0 1-1.08-.46L.42 2.55A1.52 1.52 0 0 1 .45.42a1.51 1.51 0 0 1 2.12 0l26.09 26.84L54.74.45a1.5 1.5 0 1 1 2.15 2.1l-27.16 27.9a1.5 1.5 0 0 1-1.07.46z"/></svg>
+              </i>
+            </div>
+
+            <div class="js-custom-select-dropdown js-hidden gsn-custom__sdropdown">
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="gsn-custom__btn__wrap gsn-lmfind__filter gsn-lmfind__filter--btn">
+          <button type="button" class="gsn-custom__btn gsn-custom__btn--green">Filter</button>
         </div>
       </div>
     </div>
