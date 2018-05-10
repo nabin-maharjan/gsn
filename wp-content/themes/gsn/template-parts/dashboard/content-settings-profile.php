@@ -129,10 +129,18 @@
  <script>
  
 /* Store Setting jQuery validation Procress */
+jQuery.validator.addMethod("noSpace", function(value, element) { 
+  return value.indexOf(" ") < 0 && value != ""; 
+}, "No space please and don't leave it empty");
+jQuery.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
+}, "Letters, numbers, and dashes only please");
 jQuery("#store_domain_setting_form").validate({
 	rules: {
-      domainName:{
-		required: true ,
+    domainName:{
+    required: true ,
+    noSpace: true,
+    alphanumeric: true,
 		remote:{
          	url :ajaxUrl,
 			type: "post",

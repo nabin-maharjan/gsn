@@ -26,51 +26,50 @@ class Store{
 			/* add ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_profile_setting', array($this,'store_registration') );
 			add_action( 'wp_ajax_nopriv_gsn_store_profile_setting', array($this,'store_registration') );
-			
 			/* add ajax function for store logout */
 			add_action( 'wp_ajax_gsn_store_contact_action', array($this,'store_contact_action') );
 			add_action( 'wp_ajax_nopriv_gsn_store_contact_action', array($this,'store_contact_action') );
-			
 			/* add ajax function for store domain unique check */
 			add_action( 'wp_ajax_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
 			add_action( 'wp_ajax_nopriv_gsn_check_domain_name_unique', array($this,'check_domain_name_unique') );
 			/*  add ajax function  for uodate domain name */
 			add_action( 'wp_ajax_gsn_update_store_domain', array($this,'update_store_domain') );
 			add_action( 'wp_ajax_nopriv_gsn_update_store_domain', array($this,'update_store_domain') );
-			
-			
 			/*  add ajax function  for uodate domain name */
 			add_action( 'wp_ajax_gsn_check_mobile_exists', array($this,'check_mobile_exists') );
 			add_action( 'wp_ajax_nopriv_gsn_check_mobile_exists', array($this,'check_mobile_exists') );
-			
 			/*  add ajax function  for uodate domain name */
 			add_action( 'wp_ajax_gsn_send_activation_code', array($this,'send_activation_code') );
 			add_action( 'wp_ajax_nopriv_gsn_send_activation_code', array($this,'send_activation_code') );
-			
 			/* set store properties */
 			add_action('init',array($this,'get'),1);
 			/* limit store publish product */
 			add_action('init',array($this,'limit_publish_product'),2);
 		   // add_action('init',array($this,'change_draft_topublish'),2);
-
 			/* add store role*/
 			add_action('init',array($this,'add_store_role'));
 			/* add filter only show current user media */
 			add_filter( 'ajax_query_attachments_args', array($this,'show_current_user_attachments') );
 			/* add media upload files */
 			add_action('wp_enqueue_scripts', array($this,'my_media_lib_uploader_enqueue'));
-
-
 			/* change order email to store email */
 			add_filter( 'woocommerce_email_recipient_new_order', array($this,'order_email_recipent'), 10, 2 );
-			
-
 			/*  add ajax function  for uodate domain name */
 			add_action( 'wp_ajax_gsn_get_store_data', array($this,'get_store_data') );
 			add_action( 'wp_ajax_nopriv_gsn_get_store_data', array($this,'get_store_data') );
+			/*  add ajax function  for retrieving filterd store by shop type */
+			add_action( 'wp_ajax_gsn_filtered_locations', array($this,'get_all_stores_locations') );
+			add_action( 'wp_ajax_nopriv_gsn_filtered_locations', array($this,'get_all_stores_locations') );
+
+
+
+			
 			
 			
 	}
+	/*
+		Function : set shop email address on order email
+	*/
 	function order_email_recipent( $recipient, $order ) {
 		// Bail on WC settings pages since the order object isn't yet set yet
 		// Not sure why this is even a thing, but shikata ga nai
@@ -126,7 +125,6 @@ class Store{
 		
 	}
 
-	
 	/*
 	* Function regarding store table  database
 	
@@ -192,9 +190,7 @@ class Store{
 				) );
 
 	}
-	
-	
-	
+
 	/*
 	*create activation table
 	*/
@@ -343,9 +339,7 @@ class Store{
 		}
 		//die;
 	}
-	
-	
-	
+
 	public function change_draft_topublish(){
 		global $store;
 		//var_dump($store);die;
@@ -369,8 +363,7 @@ class Store{
 		}
 		
 	}
-	
-	
+
 	/*
 	* fUNCTION  to update store domain
 	*/
@@ -448,10 +441,7 @@ class Store{
 		}
 			return $response;
 	}
-	
-	
-	
-	
+
 	/*
 	*Function to contact store owner 
 	*/
@@ -475,7 +465,7 @@ class Store{
 							'post_status' => 'publish',
 							'post_type' => "store_contact",
 						) );
-						
+
 					$headers = 'From: '.$datas['fullName'].' <'.$datas['emailAddress'].'>' . "\r\n";
 					$email_subject="Store Enquiry";
 					foreach($datas as $key=>$value){
@@ -508,7 +498,6 @@ class Store{
     wp_enqueue_script( 'media-lib-uploader-js' );
   }
  
-	
 	/*
 	*function to restrict user to media
 	*/
@@ -768,9 +757,7 @@ class Store{
 			 return $exists;
 		 }
 	}
-	
-	
-	
+
 	/*
 	
 	* funciton to check mobile number is already already used 
@@ -840,269 +827,306 @@ class Store{
 	/*
 	* Store registration
 	*/
-		public function store_registration(){
-			$response=array();
-			try{
-				if(!empty($_POST['formdata'])){
-					parse_str($_POST['formdata'], $datas);
-					
-					$edit_flag=false;
-					if(!empty($datas['action']) && $datas['action']=="edit"){
-						$edit_flag=true;
-					}
-					$v = new Valitron\Validator($datas);
-					if($edit_flag){
-						$v->rule('required', array('firstName','lastName','mobileNumber','panNumber','storeFullAddress','shopType'));
-					}else{
-						$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress','shopType'));
-					}
-					$v->rule('email','emailAddress');
-					$v->rule('lengthMin','password',5);
-					$v->rule('numeric','mobileNumber');
-					$v->rule('lengthMin','mobileNumber',9);
-					$v->rule('lengthMax','mobileNumber',10);					
-					$v->rule('numeric','shopType');
-					if(!$edit_flag){
-						$v->rule('equals','cpassword','password');
-					}
-					if($v->validate()) {
-						/* insert to database */
-						global $wpdb;
-						if($edit_flag){
-							$store_id=$datas['gsn_store_id'];
-							unset($datas['action']);
-							unset($datas['gsn_store_id']);
-							$update_status=$wpdb->update($this->store_table,$datas, array('id'=>$store_id));
-							if($update_status){
-								$response['status']="success";
-								$response['code']='200';
-								$response['msg']="weldone !!!!";
-								$response['redirectUrl']=site_url("/dashboard/");
-							}else{
-								throw new Exception("Error while updating store",'400');	
-							}
-							
-						}else{
-							/* check email unique */
-							$email_exists=email_exists(sanitize_text_field($datas['emailAddress']));
-							if($email_exists) {
-								$msg=json_encode(array('emailAddress'=>array("This email is already used.")));
-								throw new Exception($msg,'406');
-							 }
-							 
-							 /* check mobile number unique */
-							 $mob_check=$this->check_mobile_exists(sanitize_text_field($datas['mobileNumber']));
-							 if($mob_check>0){
-								$msg=json_encode(array('mobileNumber'=>array("This email is already used.")));
-								throw new Exception($msg,'406');
-								
-							 }
-							
-							$user_id=wp_create_user(sanitize_text_field($datas['emailAddress']), sanitize_text_field($datas['password']), sanitize_text_field($datas['emailAddress']));
-							if($user_id){
-								unset($datas['cpassword']);// remove cpassword field
-								unset($datas['password']); // remove password field
-								$datas['user_id']=$user_id;
-								$insert = $wpdb->insert($this->store_table, $datas);
-								
-								$user = new WP_User($user_id);
-								// Replace the current role with 'editor' role
-								$user->set_role( 'store_contributor' );
-								//set_user_role($user_id,'store_contributor');
-								if($insert){
-									/* Send activation code */
-									$send_activation_code=$this->send_activation_mail($user_id, sanitize_text_field($datas['emailAddress']));
-									$post_id = wp_insert_post( array(
-										'post_author' => $user_id,
-										'post_title' => $datas['storeName']." ".$user_id,
-										'post_status' => 'publish',
-										'post_type' => "store_setting"
-									) );
-									
-									$count_users=count_users();
-									$start_year=date('F d, Y');
-									$end_year=date('F d, Y', strtotime('+1 years'));
-									$package='normal';
-									if($count_users['store_contributor']<20){
-										$package='bronze';
-									}
-									update_post_meta($post_id,'selected_package',$package);
-									update_post_meta($post_id,'package_start_date',$start_year);
-									update_post_meta($post_id,'package_end_date',$end_year);
-									
-									$wpdb->update(
-											$wpdb->store,
-											 array(
-													'storePackage'=>$package
-											),
-											array('user_id'=>$user_id)
-										);
-									$insert = $wpdb->insert(
-											$wpdb->package_log,
-											array(
-												'package'=>$package,
-												'start_date' =>normal_date_to_db_date($start_year),
-												'end_date' =>normal_date_to_db_date($end_year),
-												'update_date' =>date('Y-m-d h:m:s'),
-												'user_id'=>$user_id,
-												)
-											);
-										
-								}
-								/* login user */
-								wp_set_current_user($user_id);
-								wp_set_auth_cookie($user_id);
-								
-								$response['status']="success";
-								$response['code']='200';
-								$response['msg']="weldone !!!!";
-								$response['redirectUrl']=site_url("/dashboard/");
-							}else{
-								throw new Exception("Error while proccessing data!",'400');
-							}
-						}
-						
-					} else {
-						// Errors
-						$err_msg=json_encode($v->errors());
-					    throw new Exception($err_msg,'406');
-					}
+	public function store_registration(){
+		$response=array();
+		try{
+			if(!empty($_POST['formdata'])){
+				parse_str($_POST['formdata'], $datas);
+				
+				$edit_flag=false;
+				if(!empty($datas['action']) && $datas['action']=="edit"){
+					$edit_flag=true;
 				}
-			}catch(Exception $e){
-				$response['status']="error";
-				$response['code']=$e->getCode();
-				$response['msg']=$e->getMessage();
-			}
-			echo json_encode($response);die();
-		}
-		
-		
-		/*
-			* Store registration
-		*/
-		public function store_login(){
-			$response=array();
-			try{
-				if(!empty($_POST['formdata'])){
-					parse_str($_POST['formdata'], $datas);
-					$v = new Valitron\Validator($datas);
-					$v->rule('required', array('loginEmailAddress','loginPassword'));
-					$v->rule('email','loginEmailAddress');
-					if($v->validate()) {
-						/* insert to database */
-						global $wpdb;
-						
-						//$datas['loginPassword']= sha1(md5($datas['loginPassword']));// encrpt password
-						
-						
-						$creds['user_login'] = $datas['loginEmailAddress'];
-    					$creds['user_password'] = $datas['loginPassword'];
-						$user=wp_signon( $creds, false );
-						
-						//$query=$wpdb->prepare("select id from ".$wpdb->prefix ."store where emailAddress=%s and password=%s Limit 1",$datas['loginEmailAddress'],$datas['loginPassword']); // Prepare query
-						//$store = $wpdb->get_var($query); // get data from table
-						if(!empty($user->ID)){
-							/* login user */
-							wp_set_current_user($user->ID);
-    						wp_set_auth_cookie($user->ID);
-							
-							//$_SESSION['gsn_store_id']=mc_encrypt($store,ENCRYPTION_KEY);
+				$v = new Valitron\Validator($datas);
+				if($edit_flag){
+					$v->rule('required', array('firstName','lastName','mobileNumber','panNumber','storeFullAddress','shopType'));
+				}else{
+					$v->rule('required', array('firstName','lastName','emailAddress','password','mobileNumber','storeName','panNumber','storeFullAddress','shopType'));
+				}
+				$v->rule('email','emailAddress');
+				$v->rule('lengthMin','password',5);
+				$v->rule('numeric','mobileNumber');
+				$v->rule('lengthMin','mobileNumber',9);
+				$v->rule('lengthMax','mobileNumber',10);					
+				$v->rule('numeric','shopType');
+				if(!$edit_flag){
+					$v->rule('equals','cpassword','password');
+				}
+				if($v->validate()) {
+					/* insert to database */
+					global $wpdb;
+					if($edit_flag){
+						$store_id=$datas['gsn_store_id'];
+						unset($datas['action']);
+						unset($datas['gsn_store_id']);
+						$update_status=$wpdb->update($this->store_table,$datas, array('id'=>$store_id));
+						if($update_status){
 							$response['status']="success";
 							$response['code']='200';
 							$response['msg']="weldone !!!!";
 							$response['redirectUrl']=site_url("/dashboard/");
 						}else{
-							// Errors
-							throw new Exception("Your username or password didnot match.",'404');
+							throw new Exception("Error while updating store",'400');	
 						}
-					} else {
-						// Errors
-						$err_msg=json_encode($v->errors());
-					    throw new Exception($err_msg,'406');
+						
+					}else{
+						/* check email unique */
+						$email_exists=email_exists(sanitize_text_field($datas['emailAddress']));
+						if($email_exists) {
+							$msg=json_encode(array('emailAddress'=>array("This email is already used.")));
+							throw new Exception($msg,'406');
+							}
+							
+							/* check mobile number unique */
+							$mob_check=$this->check_mobile_exists(sanitize_text_field($datas['mobileNumber']));
+							if($mob_check>0){
+							$msg=json_encode(array('mobileNumber'=>array("This email is already used.")));
+							throw new Exception($msg,'406');
+							
+							}
+						
+						$user_id=wp_create_user(sanitize_text_field($datas['emailAddress']), sanitize_text_field($datas['password']), sanitize_text_field($datas['emailAddress']));
+						if($user_id){
+							unset($datas['cpassword']);// remove cpassword field
+							unset($datas['password']); // remove password field
+							$datas['user_id']=$user_id;
+							$insert = $wpdb->insert($this->store_table, $datas);
+							
+							$user = new WP_User($user_id);
+							// Replace the current role with 'editor' role
+							$user->set_role( 'store_contributor' );
+							//set_user_role($user_id,'store_contributor');
+							if($insert){
+								/* Send activation code */
+								$send_activation_code=$this->send_activation_mail($user_id, sanitize_text_field($datas['emailAddress']));
+								$post_id = wp_insert_post( array(
+									'post_author' => $user_id,
+									'post_title' => $datas['storeName']." ".$user_id,
+									'post_status' => 'publish',
+									'post_type' => "store_setting"
+								) );
+								
+								$count_users=count_users();
+								$start_year=date('F d, Y');
+								$end_year=date('F d, Y', strtotime('+1 years'));
+								$package='normal';
+								if($count_users['store_contributor']<20){
+									$package='bronze';
+								}
+								update_post_meta($post_id,'selected_package',$package);
+								update_post_meta($post_id,'package_start_date',$start_year);
+								update_post_meta($post_id,'package_end_date',$end_year);
+								
+								$wpdb->update(
+										$wpdb->store,
+											array(
+												'storePackage'=>$package
+										),
+										array('user_id'=>$user_id)
+									);
+								$insert = $wpdb->insert(
+										$wpdb->package_log,
+										array(
+											'package'=>$package,
+											'start_date' =>normal_date_to_db_date($start_year),
+											'end_date' =>normal_date_to_db_date($end_year),
+											'update_date' =>date('Y-m-d h:m:s'),
+											'user_id'=>$user_id,
+											)
+										);
+									
+							}
+							/* login user */
+							wp_set_current_user($user_id);
+							wp_set_auth_cookie($user_id);
+							
+							$response['status']="success";
+							$response['code']='200';
+							$response['msg']="weldone !!!!";
+							$response['redirectUrl']=site_url("/dashboard/");
+						}else{
+							throw new Exception("Error while proccessing data!",'400');
+						}
 					}
+					
+				} else {
+					// Errors
+					$err_msg=json_encode($v->errors());
+					throw new Exception($err_msg,'406');
 				}
-			}catch(Exception $e){
-				$response['status']="error";
-				$response['code']=$e->getCode();
-				$response['msg']=$e->getMessage();
 			}
-			echo json_encode($response);die();
+		}catch(Exception $e){
+			$response['status']="error";
+			$response['code']=$e->getCode();
+			$response['msg']=$e->getMessage();
 		}
-		/*
-		*Function to check product limit status
-		* Return Boolean
-		*/
-		public function get_product_limit_status(){
-			global $store,$gsnSettingsClass,$gsnProduct;
-			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
-			$package=$gsn_settings->storePackageSettings;//get store package settings
-			$storeProducts=$gsnProduct->get_new_product_list(-1);// get store products
-			if($storeProducts->found_posts<$package['product']){
-				return false;
-			}else{
-				return true;	
-			}
-		}
-		
-		/*
-		*Function to get Number of image use in product
-		* Return Boolean
-		*/
-		public function get_product_image_limit(){
-			global $store,$gsnSettingsClass,$gsnProduct;
-			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
-			$package=$gsn_settings->storePackageSettings;//get store package settings
-			return $package['product_image'];
-		}
-		
-		/*
-		*Function to check sale product limit status
-		* Return Boolean
-		*/
-		public function get_sale_product_limit_status(){
-			global $store,$gsnSettingsClass,$gsnProduct;
-			$gsn_settings=$gsnSettingsClass->get(); // get store Settings
-			$package=$gsn_settings->storePackageSettings;//get store package settings
-			$storeProducts=$gsnProduct->get_sale_product_list(-1);// get store products
-			if($storeProducts->found_posts<$package['sale_product']){
-				return false;
-			}else{
-				return true;	
-			}
-		}
-
-		/*
-		*Function to get all stores with  locations
-		* Return array
-		*/
-		public function get_all_stores_locations(){
-			global $wpdb;
-			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id,domainName from ".$this->store_table." where activated=%d",1); // Prepare query
-			return $wpdb->get_results($query,ARRAY_N );
+		echo json_encode($response);die();
+	}
 	
+	
+	/*
+		* Store registration
+	*/
+	public function store_login(){
+		$response=array();
+		try{
+			if(!empty($_POST['formdata'])){
+				parse_str($_POST['formdata'], $datas);
+				$v = new Valitron\Validator($datas);
+				$v->rule('required', array('loginEmailAddress','loginPassword'));
+				$v->rule('email','loginEmailAddress');
+				if($v->validate()) {
+					/* insert to database */
+					global $wpdb;
+					
+					//$datas['loginPassword']= sha1(md5($datas['loginPassword']));// encrpt password
+					
+					
+					$creds['user_login'] = $datas['loginEmailAddress'];
+					$creds['user_password'] = $datas['loginPassword'];
+					$user=wp_signon( $creds, false );
+					
+					//$query=$wpdb->prepare("select id from ".$wpdb->prefix ."store where emailAddress=%s and password=%s Limit 1",$datas['loginEmailAddress'],$datas['loginPassword']); // Prepare query
+					//$store = $wpdb->get_var($query); // get data from table
+					if(!empty($user->ID)){
+						/* login user */
+						wp_set_current_user($user->ID);
+						wp_set_auth_cookie($user->ID);
+						
+						//$_SESSION['gsn_store_id']=mc_encrypt($store,ENCRYPTION_KEY);
+						$response['status']="success";
+						$response['code']='200';
+						$response['msg']="weldone !!!!";
+						$response['redirectUrl']=site_url("/dashboard/");
+					}else{
+						// Errors
+						throw new Exception("Your username or password didnot match.",'404');
+					}
+				} else {
+					// Errors
+					$err_msg=json_encode($v->errors());
+					throw new Exception($err_msg,'406');
+				}
+			}
+		}catch(Exception $e){
+			$response['status']="error";
+			$response['code']=$e->getCode();
+			$response['msg']=$e->getMessage();
 		}
-		
-		public function get_store_data($user_id=0){
-			global $gsnSettingsClass;
-			if ( wp_doing_ajax() ){
-				$user_id=sanitize_text_field($_POST['user_id']);
-				$gsn_settings=$gsnSettingsClass->get($user_id);
-				$logo="";
-				if(!empty($gsn_settings->logo)){
-					$logo=wp_get_attachment_url($gsn_settings->logo, 'thumbnail' );
-				  }
-				$response=array(
-					'logo'=>$logo,
-					'gsn_featured'=>$gsn_settings->gsn_featured
+		echo json_encode($response);die();
+	}
+	/*
+	*Function to check product limit status
+	* Return Boolean
+	*/
+	public function get_product_limit_status(){
+		global $store,$gsnSettingsClass,$gsnProduct;
+		$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+		$package=$gsn_settings->storePackageSettings;//get store package settings
+		$storeProducts=$gsnProduct->get_new_product_list(-1);// get store products
+		if($storeProducts->found_posts<$package['product']){
+			return false;
+		}else{
+			return true;	
+		}
+	}
+	
+	/*
+	*Function to get Number of image use in product
+	* Return Boolean
+	*/
+	public function get_product_image_limit(){
+		global $store,$gsnSettingsClass,$gsnProduct;
+		$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+		$package=$gsn_settings->storePackageSettings;//get store package settings
+		return $package['product_image'];
+	}
+	
+	/*
+	*Function to check sale product limit status
+	* Return Boolean
+	*/
+	public function get_sale_product_limit_status(){
+		global $store,$gsnSettingsClass,$gsnProduct;
+		$gsn_settings=$gsnSettingsClass->get(); // get store Settings
+		$package=$gsn_settings->storePackageSettings;//get store package settings
+		$storeProducts=$gsnProduct->get_sale_product_list(-1);// get store products
+		if($storeProducts->found_posts<$package['sale_product']){
+			return false;
+		}else{
+			return true;	
+		}
+	}
 
-
-				);
-				echo json_encode($response);die;
-			}else{
-				$gsn_settings=$gsnSettingsClass->get($user_id);
-				return  $gsn_settings;
+	/*
+	*Function to get all stores with  locations
+	* Return array
+	*/
+	public function get_all_stores_locations($shop_type="all"){
+		global $wpdb;
+		if ( wp_doing_ajax() ){
+			if(!empty($_POST['shop_type'])){
+				$shop_type=sanitize_text_field($_POST['shop_type']);
 			}
 		}
+		if($shop_type=="all"){
+			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id,domainName,shopType from ".$this->store_table." where activated=%d",1); // Prepare query
+		}else{
+			$query=$wpdb->prepare("select storeName, latitute, lognitute,user_id,domainName,shopType from ".$this->store_table." where activated=%d and shopType=%d",1,$shop_type); // Prepare query
+		}
+		if ( wp_doing_ajax() ){
+			echo json_encode($wpdb->get_results($query,ARRAY_N ));die;
+		}
+		return $wpdb->get_results($query,ARRAY_N );
+	}
+	
+	public function get_store_data($user_id=0,$shopType=0){
+		global $gsnSettingsClass;
+		if ( wp_doing_ajax() ){
+			$user_id=sanitize_text_field($_POST['user_id']);
+			
+			if(!empty($_POST['shopType'])){
+				$shopType=sanitize_text_field($_POST['shopType']);
+			}
+		}
+		$gsn_settings=$gsnSettingsClass->get($user_id);
+			$term_name="";
+			if($shopType!=0){
+				$term = get_term( $shopType, 'shop_type');
+				$term_name=$term->name;
+			}
+
+			$logo="";
+			if(!empty($gsn_settings->logo)){
+				$logo=wp_get_attachment_url($gsn_settings->logo, 'thumbnail' );
+				}
+			$response=array(
+				'logo'=>$logo,
+				'gsn_featured'=>$gsn_settings->gsn_featured,
+				'shop_type'=>$term_name,
+			);
+			if ( wp_doing_ajax() ){
+			echo json_encode($response);die;
+			}else{
+				return $response;
+			}
+	}
+
+	/*
+	* Function : Retrieve feature shop
+	*/
+
+	public function get_random_featured_shop($limit=0){
+		$package_type='bronze,silver,gold,platinium';
+		global $wpdb;
+		if($limit!=0){
+			$query=$wpdb->prepare("select * from ".$this->store_table." where domainName IS NOT NULL AND activated=%d and find_in_set(storePackage,%s) ORDER BY RAND() LIMIT %d",1,$package_type,$limit); // Prepare query
+		}else{
+			$query=$wpdb->prepare("select * from ".$this->store_table." where domainName IS NOT NULL AND activated=%d and find_in_set(storePackage,%s) ORDER BY RAND()",1,$package_type); // Prepare query
+		}
+		
+		return $wpdb->get_results($query);
+	}
 		
 }
 global $store;
