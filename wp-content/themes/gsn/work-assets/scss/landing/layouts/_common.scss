@@ -1,0 +1,95 @@
+// body
+body {
+  color: $dark__gray;
+}
+
+// Container widht
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+// Negative margin
+.neg {
+  &-m {
+    @include min-screen($mq-min-mobile) {
+      margin: 0 -15px;
+    }
+  }
+}
+
+// Flex Wrapper
+.f {
+  &-w {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// margins
+.m-auto {
+  margin-right: auto;
+  margin-left: auto; 
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mt-auto {
+ margin-top: auto;
+}
+
+// padding
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+
+// Column Widths - Mobile
+
+// Column Widths - Desktop
+.d {
+
+  &-6 {
+    @include min-screen($mq-min-mobile) {
+      width: 50%;
+      padding: 0 15px;
+    }
+  }
+}
+
+
+.gsn-messenger {
+  &__btn {
+    position: absolute !important;
+    bottom: 3px;
+    right: 3px;
+  }
+}

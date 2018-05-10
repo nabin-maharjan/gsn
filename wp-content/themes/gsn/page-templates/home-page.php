@@ -3,6 +3,7 @@
  * Template Name: Home Page
  * 
  * Class Convention with BEM
+ * l~ => landing > ~
  * lmain => landing > main
  * lmcta => landing > main > cta
  * lmfind => landing > main > find

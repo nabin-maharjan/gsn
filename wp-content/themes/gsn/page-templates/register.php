@@ -217,10 +217,7 @@ get_header();
 
 		<div style="color:#fff; margin-top:5px">This site is in under testing phase. All data will be wiped out before we go live.</div>
 	</div>
-	<!-- /.gsn-landing__access__btns -->
-
-	<div class="gsn-landing__wipe__block" id="js-wipe-block"></div>
-	<!-- /.wipe-block -->
+	<!-- /.gsn-landing__access__btns -->	
 </div>
 
 <?php get_footer();?>
