@@ -72,7 +72,6 @@ class Store{
 	*/
 	function order_email_recipent( $recipient, $order ) {
 		// Bail on WC settings pages since the order object isn't yet set yet
-		// Not sure why this is even a thing, but shikata ga nai
 		$page = $_GET['page'] = isset( $_GET['page'] ) ? $_GET['page'] : '';
 		if ( 'wc-settings' === $page ) {
 			return $recipient; 
@@ -81,8 +80,8 @@ class Store{
 		if ( ! $order instanceof WC_Order ) {
 			return $recipient; 
 		}
-		$items = $order->get_items();
 		global $store;
+		$store->get();
 		if($store->emailAddress){
 			return $store->emailAddress;
 		}
@@ -658,9 +657,7 @@ class Store{
 							$this->$key=$value;
 						}
 					}
-					$this->is_shop=true;
-				
-				
+					$this->is_shop=true;	
 			}else{
 				$id=get_current_user_id();
 				//var_dump($id);
