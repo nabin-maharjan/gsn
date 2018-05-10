@@ -1,5 +1,7 @@
 // body
-
+body {
+  color: $dark__gray;
+}
 
 // Container widht
 .container {
@@ -80,5 +82,14 @@
       width: 50%;
       padding: 0 15px;
     }
+  }
+}
+
+
+.gsn-messenger {
+  &__btn {
+    position: absolute !important;
+    bottom: 3px;
+    right: 3px;
   }
 }
