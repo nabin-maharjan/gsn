@@ -150,16 +150,6 @@ get_header();
 		</div>
 		<!-- Register Form End -->
 
-		<div id="about" class="js-gsn-landing-tab-content gsn-landing__tab__content tab-content__register">
-			<h2 class="gsn-landing__tab__title">About Us</h2>
-			<div class="gsn-landing__about__content">
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-				<br>
-				<br>
-				Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-			</div>
-		</div>
-
 		<div class="gsn-landing__close__fwrap">
 			<a href="#" class="js-close-form-anchor gsn-landing__close__flink close__btn">
 				<svg>
@@ -223,132 +213,132 @@ get_header();
 <?php get_footer();?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcldtJlaZ2nGXLR7OnH36zzZs1UEREDTU&libraries=places"></script>
 <script>
-/* Login jQuery validation Procress */
-jQuery("#login_form").validate({
-	rules: {
-      loginEmailAddress: {
-        required: true,
-        email: true
-      },
-      loginPassword: {
-        required: true,
-      },
-    },
-	// Specify validation error messages
-    messages: {
-      password: "Please provide a password",
-      emailAddress: "Please enter a valid email address",
-    },
-  submitHandler: function(form) {
-	  var formdata=jQuery(form).serialize();
-	  var data= {action: "store_login", formdata : formdata};
-	 var response=ajax_call_post(data,'#login_form','',function(response){
-		  window.location.href=response.redirectUrl;
-		return false;
-	 });
-
-  }
-
-});
-
-/* Registration jQuery validation process */
-jQuery("#register_form").validate({
-	 ignore: ['storeFullAddress'],
-	// Specify validation rules
-    rules: {
-      // The key name on the left side is the name attribute
-      // of an input field. Validation rules are defined
-      // on the right side
-      firstName: "required",
-      lastName: "required",
-	  shopType:"required",
-      emailAddress: {
-        required: true,
-        email: true,
-		remote:{
-         	url :ajaxUrl,
-			type: "post",
-			data: {
-				action: "email_is_exists",
-				email : function(){
-					return jQuery('#emailAddress').val();
+	/* Login jQuery validation Procress */
+	jQuery("#login_form").validate({
+		rules: {
+				loginEmailAddress: {
+					required: true,
+					email: true
 				},
-				jquery : 'jquery'
-			}
-		}
-      },
-      password: {
-        required: true,
-        minlength: 5
-      },
-	  cpassword :{
-		  minlength : 5,
-          equalTo : "#password"
-
-	  },
-	  mobileNumber: {
-		required: true,
-		minlength:9,
-		maxlength:10,
-		number: true,
-		remote:{
-         	url :ajaxUrl,
-			type: "post",
-			data: {
-				action: "gsn_check_mobile_exists",
-				mobileNumber : function(){
-					return jQuery('#mobileNumber').val();
+				loginPassword: {
+					required: true,
 				},
-				jquery : 'jquery'
-			}
+			},
+		// Specify validation error messages
+			messages: {
+				password: "Please provide a password",
+				emailAddress: "Please enter a valid email address",
+			},
+		submitHandler: function(form) {
+			var formdata=jQuery(form).serialize();
+			var data= {action: "store_login", formdata : formdata};
+		var response=ajax_call_post(data,'#login_form','',function(response){
+				window.location.href=response.redirectUrl;
+			return false;
+		});
+
 		}
-      },
-	  storeName : "required",
-	  panNumber : "required",
-	  storeFullAddress :  "required"
+
+	});
+
+	/* Registration jQuery validation process */
+	jQuery("#register_form").validate({
+		ignore: ['storeFullAddress'],
+		// Specify validation rules
+			rules: {
+				// The key name on the left side is the name attribute
+				// of an input field. Validation rules are defined
+				// on the right side
+				firstName: "required",
+				lastName: "required",
+			shopType:"required",
+				emailAddress: {
+					required: true,
+					email: true,
+			remote:{
+						url :ajaxUrl,
+				type: "post",
+				data: {
+					action: "email_is_exists",
+					email : function(){
+						return jQuery('#emailAddress').val();
+					},
+					jquery : 'jquery'
+				}
+			}
+				},
+				password: {
+					required: true,
+					minlength: 5
+				},
+			cpassword :{
+				minlength : 5,
+						equalTo : "#password"
+
+			},
+			mobileNumber: {
+			required: true,
+			minlength:9,
+			maxlength:10,
+			number: true,
+			remote:{
+						url :ajaxUrl,
+				type: "post",
+				data: {
+					action: "gsn_check_mobile_exists",
+					mobileNumber : function(){
+						return jQuery('#mobileNumber').val();
+					},
+					jquery : 'jquery'
+				}
+			}
+				},
+			storeName : "required",
+			panNumber : "required",
+			storeFullAddress :  "required"
 
 
-    },
-    // Specify validation error messages
-    messages: {
-      firstname: "Please enter your firstname",
-      lastname: "Please enter your lastname",
-	  shopType:"Please select shop type",
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-	  cpassword: {
-		  equalTo : "Comfirm password and password must be same."
-	  },
-      emailAddress: {
-        required: "Please enter a valid email address",
-        email:"Please enter a valid email address",
-		remote: "This email is already registered.",
+			},
+			// Specify validation error messages
+			messages: {
+				firstname: "Please enter your firstname",
+				lastname: "Please enter your lastname",
+			shopType:"Please select shop type",
+				password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long"
+				},
+			cpassword: {
+				equalTo : "Comfirm password and password must be same."
+			},
+				emailAddress: {
+					required: "Please enter a valid email address",
+					email:"Please enter a valid email address",
+			remote: "This email is already registered.",
 
-	  },
-	  mobileNumber: {
-		  remote: "This mobile number is already registered.",
-	  },
-	  storeLocation : "Please mark your location on map",
-    },
+			},
+			mobileNumber: {
+				remote: "This mobile number is already registered.",
+			},
+			storeLocation : "Please mark your location on map",
+			},
 
-  submitHandler: function(form) {
-	  var formdata=jQuery(form).serialize();
-	  var data= {action: "store_registration", formdata : formdata};
-	 var response=ajax_call_post(data,'#register_form','',function(response){
-		 window.location.href=response.redirectUrl;
-		 return false;
+		submitHandler: function(form) {
+			var formdata=jQuery(form).serialize();
+			var data= {action: "store_registration", formdata : formdata};
+		var response=ajax_call_post(data,'#register_form','',function(response){
+			window.location.href=response.redirectUrl;
+			return false;
 
-	 });
-  }
- });
+		});
+		}
+	});
 
- function check_email_exists(email){
-	 var data= {action: "email_is_exists", email : email};
-	 var response=ajax_call_post(data,'.btn-primary','after',function(response){
-		 console.log(response);
-	 });
- }
+	function check_email_exists(email){
+		var data= {action: "email_is_exists", email : email};
+		var response=ajax_call_post(data,'.btn-primary','after',function(response){
+			console.log(response);
+		});
+	}
 
 </script>

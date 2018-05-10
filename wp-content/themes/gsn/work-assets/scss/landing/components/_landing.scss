@@ -196,9 +196,11 @@ body.page-template-register {
     &__block {
       background: $brick_red;
       height: 100%;
-      position: absolute;
+      position: fixed;
       width: 100%;
       z-index: 998;
+      top: 0;
+      left: 0;
       opacity: 0;
       visibility: hidden;
       animation-name: hide;

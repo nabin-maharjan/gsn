@@ -28,7 +28,7 @@ get_header();
       <div class="gsn-lmcta__btns">
         <ul class="gsn-lmcta__bitems">
           <li class="gsn-lmcta__bitem">
-            <a href="#" class="gsn-cta__btn gsn-cta__btn--green">
+            <a href="#register" class="js-gsn-access-link gsn-cta__btn gsn-cta__btn--green">
               Register
             </a>
           </li>
