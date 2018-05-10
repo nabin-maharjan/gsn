@@ -45,7 +45,7 @@ Goshopnepal :: Boost your sale with your own website.
   </script>
 <?php wp_head(); ?>
 <?php if(!is_page("Register")){
-	get_template_part( 'template-parts/header/header','style');
+	// get_template_part( 'template-parts/header/header','style');
 	}   ?>
 </head>
 

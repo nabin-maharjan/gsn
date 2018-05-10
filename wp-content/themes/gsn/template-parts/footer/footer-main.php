@@ -1,7 +1,46 @@
 </main>
 <!-- /.main -->
-<footer>
-  This is foiote
+<footer class="gsn-landing__footer gsn-footer">
+  <div class="gsn-footer__top" style="background: #a1a1a1;">
+    <div class="container">
+      <div class="f-w neg-m gsn-footer__tcontent">
+        <div class="d-6 gsn-lfooter__tleft">
+          <div class="gsn-footer__logo">
+            <a href="<?php echo site_url(); ?>">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/main-logo.svg" alt="GSN Logo" class="gsn-footer__logo__img">
+            </a>
+          </div>
+
+          <div class="gsn-footer__info">
+            A place where you can have you own <br>
+            <b>e-Commerce Site.</b>
+          </div>
+
+          <div class="gsn-footer__social">
+            
+          </div>
+        </div>
+
+        <div class="d-6 gsn-lfooter__tright">
+          This is top right
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gsn-footer__bottom">
+    <div class="container">
+      <div class="f-w neg-m gsn-footer__bcontent">
+        <div class="d-6 gsn-lfooter__bleft">
+          This is bottom left
+        </div>
+
+        <div class="d-6 gsn-footer__bright">
+          This is bottom right
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <div class="fb-messengermessageus" 

@@ -3,6 +3,7 @@
  * Template Name: Home Page
  * 
  * Class Convention with BEM
+ * l~ => landing > ~
  * lmain => landing > main
  * lmcta => landing > main > cta
  * lmfind => landing > main > find
@@ -170,7 +171,7 @@ $stores=$store->get_all_stores_locations();
     </div>
   </section>
 
-  <section class="ta-c gsn-section pb-0 gsn-lmain__find__wrapper gsn-lmfind">
+  <section class="ta-c gsn-section gsn-lmain__find__wrapper gsn-lmfind">
     <div class="container">
       <div class="gsn-lmfind__heading">
         <h1 class="gsn-section__title">Find a shop</h1>
