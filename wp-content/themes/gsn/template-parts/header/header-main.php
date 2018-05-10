@@ -84,7 +84,7 @@ Goshopnepal :: Boost your sale with your own website.
                   </a>
                 </li>
                 <li class="gsn-lheader__nitem">
-                  <a href="" class="gsn-lheader__nlink">
+                  <a href="#login" class="js-gsn-access-link gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Sign in</span>
                   </a>
                 </li>
