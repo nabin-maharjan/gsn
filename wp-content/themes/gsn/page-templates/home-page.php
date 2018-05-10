@@ -32,11 +32,11 @@ get_header();
               Register
             </a>
           </li>
-          <li class="gsn-lmcta__bitem">
+          <!--li class="gsn-lmcta__bitem">
             <a href="#" class="gsn-cta__btn gsn-cta__btn--white">
               View Docs
             </a>
-          </li>
+          </li-->
         </ul>
       </div>
     </div>

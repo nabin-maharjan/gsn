@@ -195,14 +195,15 @@
           </div>          
         </div>
 
-        <div class="gsn-footer__col gsn-footer__col--info">
+        <div class="gsn-footer__col gsn-footer__col--info" style="border:none">
           <div class="gsn-footer__blurb">
             A place where you can have your own <br>
             <b>e-Commerce Site.</b>
           </div>
           <div class="gsn-footer__qinfo">
             <b>SALES AND MARKETING</b>
-            <a href="tel:0123647589">0123647589</a>
+						<a href="mailto:goshopnepal@gmail.com">goshopnepal@gmail.com</a>
+            <!--a href="tel:0123647589">0123647589</a-->
             <span>Mon-Fri 10am - 5pm</span>
           </div>
           <div class="gsn-footer__social">
@@ -226,7 +227,7 @@
           </div>
         </div>
 
-        <div class="gsn-footer__col gsn-footer__col--links">
+        <!--div class="gsn-footer__col gsn-footer__col--links">
           <div class="gsn-footer__links">
             <ul class="gsn-footer__litems">
               <li class="gsn-footer__litem">
@@ -261,7 +262,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div-->
       </div>
     </div>
   </div>
@@ -287,7 +288,7 @@
             <a href="#" class="gsn-footer__blink">
               <span>Sitemap</span>
             </a>
-          </li>
+          </li-->
         </ul>
       </div>
     </div>

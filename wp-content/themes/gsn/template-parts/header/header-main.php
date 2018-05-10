@@ -63,7 +63,7 @@ Goshopnepal :: Boost your sale with your own website.
           <div class="gsn-lheader__nav__wrap">
             <nav class="gsn-lheader__nav">
               <ul class="gsn-lheader__nitems">
-                <li class="gsn-lheader__nitem">
+                <!--li class="gsn-lheader__nitem">
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">About</span>
                   </a>
@@ -82,7 +82,7 @@ Goshopnepal :: Boost your sale with your own website.
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Contact</span>
                   </a>
-                </li>
+                </li-->
                 <li class="gsn-lheader__nitem">
                   <a href="#login" class="js-gsn-access-link gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Sign in</span>
