@@ -60,6 +60,8 @@ class Store{
 			/*  add ajax function  for retrieving filterd store by shop type */
 			add_action( 'wp_ajax_gsn_filtered_locations', array($this,'get_all_stores_locations') );
 			add_action( 'wp_ajax_nopriv_gsn_filtered_locations', array($this,'get_all_stores_locations') );
+			
+				add_filter( 'template_include', array($this,'wpse_100854_switch_template') );
 
 
 
@@ -67,6 +69,22 @@ class Store{
 			
 			
 	}
+	
+
+
+function wpse_100854_switch_template( $template )
+{
+    global $store;
+    if(!empty($store->id) && $store->is_shop==true){
+        // do not allow to break out of the directory
+		if (strpos($template, 'page-templates/home-page.php') !== false) {
+			$path = get_template_directory() . "/page-templates/client-theme.php";
+			if ( file_exists( $path ) )
+				return $path;
+		}      
+    }
+    return $template;
+}
 	/*
 		Function : set shop email address on order email
 	*/
@@ -493,8 +511,8 @@ class Store{
 	 /* Add the media uploader script */
   public function my_media_lib_uploader_enqueue() {
     wp_enqueue_media();
-    wp_register_script( 'media-lib-uploader-js', plugins_url( 'media-lib-uploader.js' , __FILE__ ), array('jquery') );
-    wp_enqueue_script( 'media-lib-uploader-js' );
+   // wp_register_script( 'media-lib-uploader-js', get_template_directory_uri( 'media-lib-uploader.js'), array('jquery') );
+    //wp_enqueue_script( 'media-lib-uploader-js' );
   }
  
 	/*
@@ -619,9 +637,12 @@ class Store{
 			  get_template_part( 404 ); exit();
 			
 			
-		}else if(!empty($store->id) && $store->is_shop==true){
+		}else if(!empty($store->id) && $store->is_shop==true && is_front_page()){
+		    global $post;
+		    $post   = get_post( 93 );
+
 		}else if($store->id==NULL&& !is_page_template( 'page-templates/register.php')){
-			wp_redirect( site_url("/register/"));
+			wp_redirect( site_url());
 			exit;
 		}else if($store->id!=NULL && is_page_template( 'page-templates/register.php')){
 			//var_dump($store);die;
@@ -647,6 +668,7 @@ class Store{
 			if(isset($matches[1])) {
 				$subdomain = $matches[1];
 			}
+			//var_dump($subdomain);
 		//	$subdomain="puja-electronics";
 			global $wpdb;
 			if(!empty($subdomain) && strtolower($subdomain)!=="www"){
@@ -657,7 +679,7 @@ class Store{
 							$this->$key=$value;
 						}
 					}
-					$this->is_shop=true;	
+					$this->is_shop=true;
 			}else{
 				$id=get_current_user_id();
 				//var_dump($id);
@@ -686,7 +708,7 @@ class Store{
 		$response['status']="success";
 		$response['code']='200';
 		$response['msg']="weldone !!!!";
-		$response['redirectUrl']=site_url("/register/");
+		$response['redirectUrl']=site_url();
 		echo json_encode($response); die;
 	}
 	/*

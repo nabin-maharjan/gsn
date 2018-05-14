@@ -43,7 +43,7 @@ function modify_merchant_id($merchant_id){
 add_action('init',function(){
 	if(!is_admin()){
 		add_filter('upload_size_limit',function(){
-			return "5242880";
+			return "1000000";
 		});
 	}
 	

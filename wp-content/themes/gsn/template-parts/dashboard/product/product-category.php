@@ -105,7 +105,7 @@ jQuery("#category_create_form").validate({
 			 jQuery(form)[0].reset();
 			 jQuery('.parent_dropdown_cntr').html(response.dropdown);
 			 
-			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error!</strong>'+response.msg+'</div>').insertBefore(form);
+			 jQuery('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+response.msg+'</div>').insertBefore(form);
 	 });
   }
 	
