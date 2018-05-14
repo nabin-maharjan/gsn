@@ -1,17 +1,18 @@
 .gsn-footer {
   position: relative;
+  box-shadow: inset 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 
   &__top {
     padding: 50px 0;
   }
 
-  &__col {    
+  &__col {
     padding: 0 15px;
     min-width: 17%;
 
     &--info {
       border-right: 1px solid #dfdfdf;
-      padding-right: 100px;
+      // padding-right: 100px;
     }
   }
 

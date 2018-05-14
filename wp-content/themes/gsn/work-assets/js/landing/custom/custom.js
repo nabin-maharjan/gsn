@@ -99,6 +99,7 @@
                         landingSetLocationBtn = landingContainer.find(".js-gsn-set-lbtn"),
                         landingOpenLocationModalBtn = landingContainer.find(".js-gsn-landing-location-btn"),
                         landingChangeLocationBtn = landingContainer.find("#js-gsn-landing-change-lbtn"),
+                        landingSelectedLocationText = landingContainer.find('.js-gsn-selected-location-text'),
                         landingCloseModalIcon = landingContainer.find('#js-gsn-landing-close-lmodal'),
                         landingAboutLink = landingContainer.find(".js-landing-about-link"),
                         landingAccessBtnsWrap = landingContainer.find(".js-landing-buttons");
@@ -187,15 +188,17 @@
                         var location_selected = $("#storeFullAddress")
                             .val()
                             .trim();
+                        
                         if (location_selected === "") {
                             if (!$(".alert.alert-danger").length) {
                                 $(this)
                                     .parent()
                                     .prepend(
-                                        '<span class="js-landing-lmap-error fl"> Please select location</span>'
+                                        '<span class="js-landing-lmap-error fl">Please select location</span>'
                                     );
                             }
                         } else {
+                            $(landingSelectedLocationText).text(location_selected);
                             $(landingOpenLocationModalBtn).hide();
                             $(landingChangeLocationBtn).show();
                             $(this)

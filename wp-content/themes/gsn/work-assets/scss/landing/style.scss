@@ -1,8 +1,8 @@
 /* Common Styles */
 
-@import "../COMMON-STYLES-DEFINATIONS/common";
-// @import "../COMMON-STYLES-DEFINATIONS/base/mixin";
-// @import "../COMMON-STYLES-DEFINATIONS/base/variable";
+// @import "../COMMON-STYLES-DEFINATIONS/common";
+@import "../COMMON-STYLES-DEFINATIONS/base/mixin";
+@import "../COMMON-STYLES-DEFINATIONS/base/variable";
 
 @import "base/reset";
 @import "base/types";
@@ -11,10 +11,8 @@
 
 @import "layouts/common";
 @import "components/global";
-@import "components/landing";
 @import "components/map";
 @import "components/alert";
-@import "components/cta-buttons";
 @import "components/select";
 @import "components/input";
 @import "components/card";
@@ -27,3 +25,7 @@
 @import "layouts/sections/cta";
 @import "layouts/sections/find-shop";
 @import "layouts/sections/featured-shops";
+
+// Form elements
+@import "layouts/forms/layout";
+@import "layouts/forms/input";

@@ -1,111 +1,4 @@
-body.page-template-register {
-  overflow: hidden;
-}
-
 .gsn-landing {
-  &__hero {
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 100vh;
-
-    @include max-screen($mq-tablet) {
-      // position: fixed;
-      // height: auto !important;
-    }
-  }
-
-  &__logo {
-    &__wrapper {
-      width: 40%;
-      max-width: 550px;
-      min-width: 280px;
-      margin: 0 auto;
-      position: relative;
-      perspective: 1000px;
-
-      @include max-screen($mq-tablet) {
-        max-width: 95%;
-        width: 60%;
-      }
-
-      @include max-screen($mq-mobile) {
-        width: 80%;
-      }
-
-      @include max-screen($mq-sm-mobile) {
-        width: 90%;
-        top: -15%;
-      }
-    }
-
-    &__svg {
-      width: 100%;
-      position: relative;
-
-      svg {
-        padding: 16px 0;
-        margin: 0 23px;
-
-        @include max-screen($mq-tablet) {
-          padding: 0;
-          margin: 0;
-        }
-      }
-    }
-
-    &__main,
-    &__shadow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      will-change: transform;
-    }
-
-    &__shadow {
-      background: url(../../images/main-logo-plain.svg) center center no-repeat;
-      background-size: 90% 100%;
-      filter: url(#shadow);
-      opacity: 0;
-      will-change: transform;
-      transform: translateZ(-10px) translateY(5px);
-      z-index: -1;
-    }
-
-    &__img {
-      position: absolute;
-      overflow: hidden;
-      opacity: 0;
-      top: -2px;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 9;
-      will-change: transform;
-
-      svg {
-        box-sizing: border-box;
-        padding: 19px;
-        overflow: auto;
-
-        @include max-screen($mq-tablet) {
-          padding: 0;
-        }
-      }
-    }
-  }
-
   &__form {
     &__wrapper {
       background: $petal_green;
@@ -119,17 +12,7 @@ body.page-template-register {
       visibility: hidden;
       z-index: 999;
       transition: all 0s 0.5s;
-
-      &.js-about-section {
-        background: $brick_red;
-
-        .gsn-landing__close__fwrap {
-          bottom: auto;
-          top: 20px;
-          right: 20px;
-          width: auto;
-        }
-      }
+      overflow: auto;
 
       &.js-open-form {
         opacity: 1;
@@ -143,51 +26,38 @@ body.page-template-register {
       }
     }
 
-    &__group {
+    &__items {
+      font-size: 0;
+    }
+
+    &__item {
       margin-bottom: 20px;
       position: relative;
+      display: inline-block;
+      font-size: rem($fs-body);
+      display: block;
+      
+      @include min-screen($mq-min-mobile) {
+        width: 50%;
+        padding: 0 15px;
+        display: inline-block;
+        vertical-align: top;
+      }
     }
 
     &__label {
       margin-bottom: 2px;
       font-weight: normal;
+      display: none;
     }
 
     &__message {
       margin-top: 15px;
-      font-size: rem($fs-body);
+      font-size: rem($fs-sbody);
       text-align: center;
 
       a {
         @include inline-anchor($yellow, 'uppercase');
-      }
-    }
-  }
-
-  &__about {
-    &__lwrap {
-      position: fixed;
-      top: 20px;
-      right: -100%;
-      @include transition;
-
-      &.js-move-right {
-        right: 20px;
-      }
-    }
-
-    &__link {
-      font-size: rem($fs-body);
-      @include inline-anchor($white, 'uppercase');
-    }
-
-    &__content {
-      margin-top: 20px;
-      line-height: 26px;
-      font-size: rem($fs-body);
-
-      @include min-screen($mq-min-mobile) {
-        font-size: rem($fs-ebody);
       }
     }
   }
@@ -221,55 +91,6 @@ body.page-template-register {
       &.js-wipe-slide {
         background: $petal_green;
         animation-name: wipeSlide;
-      }
-    }
-  }
-
-  &__access {
-    &__btns {
-      position: fixed;
-      bottom: -100%;
-      width: 350px;
-      z-index: 9;
-      @include transition;
-
-      @include max-screen($mq-sm-mobile) {
-        width: 280px;
-      }
-
-      &.js-move-up {
-        bottom: 20px;
-      }
-    }
-
-    &__items {
-      border-bottom: none;
-    }
-
-    &__item {      
-      text-align: center;
-      width: 50%;
-      background: $darker__gray;
-      @include transition;
-
-      @include min-screen($mq-min-mobile) {
-        &:hover {
-          background: $petal_green;
-        }
-      }
-    }
-
-    &__link {
-      color: white;
-      display: block;
-      font-size: rem($fs-body);
-      padding: 15px 15px;
-      text-transform: uppercase;
-
-      @include min-screen($mq-min-mobile) {
-        &:hover {
-          color: $white;
-        }
       }
     }
   }
@@ -377,8 +198,20 @@ body.page-template-register {
     &__title {
       text-align: center;
       text-transform: uppercase;
-      margin-bottom: 15px;
-      font-weight: bold;
+      margin-bottom: 30px;
+      font-weight: $fw-l;
+      font-size: rem($fs-mbig);
+      position: relative;
+      letter-spacing: 8px;
+
+      &::after {
+        content: '';
+        width: 25px;
+        height: 2px;
+        background: $white;
+        display: block;
+        margin: 7px auto 0 auto;
+      }
     }
   }
 
@@ -388,6 +221,7 @@ body.page-template-register {
 
       &__text {
         margin-bottom: 0;
+        line-height: 1;
       }
     }
   }
@@ -419,7 +253,7 @@ body.page-template-register {
       position: absolute;
       background: $white;
       padding: 15px;
-      border-radius: 5px;
+      border-radius: 4px;
       max-width: 640px;
       width: 640px;
       top: 50%;
@@ -437,19 +271,26 @@ body.page-template-register {
     &__heading {
       padding-bottom: 6px;
       border-bottom: 1px solid $black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       h4 {
-        text-transform: uppercase;
+        font-weight: $fw-sbold;
         font-size: rem($fs-ebody);
         color: $black;
+        flex: 1;
+        padding-right: 10px;
       }
 
       a {
         margin-top: 2px;
+        display: block;
+
         svg {
-          width: 13px;
-          height: 13px;
-          transition: all 0.3s ease-in;
+          width: 18px;
+          height: 18px;
+          @include transition;
         }
 
         &:hover svg {
@@ -461,24 +302,26 @@ body.page-template-register {
     &__body {
       padding: 15px 0 10px;
 
-      .form-group {
-        margin-bottom: 0;
-
-        #selected_location_label {
-          font-weight: bold;
-          margin-left: 5px;
-        }
+      #selected_location_label {
+        font-weight: bold;
+        margin-left: 5px;
       }
 
       #pac-input {
         margin-left: 0;
         margin-top: 10px;
+        height: 40px;
+        border-radius: 4px;
       }
     }
 
     &__footer {
       padding-top: 15px;
       border-top: 1px solid $black;
+
+      button {
+        font-size: rem($fs-tiny);
+      }
     }
 
     .js-landing-lmap-error {
@@ -486,6 +329,7 @@ body.page-template-register {
       background: rgba(255, 0, 0, 0.16);
       padding: 7px 20px;
       float: left;
+      border-radius: 4px;
     }
   }
 }
@@ -500,44 +344,6 @@ body.page-template-register {
       padding: 9px;
     }
   }
-}
-
-.anim-shape {
-  transform-origin: 0 150px;
-  transform: scale(1, 2) rotate(270deg) translate(0, 0);
-  animation: moving-panel 5s infinite alternate;
-  opacity: 0.2;
-}
-
-.colortext .anim-shape:nth-child(1) {
-  fill: #f2385a;
-}
-
-.colortext .anim-shape:nth-child(2) {
-  fill: #f5a503;
-}
-
-.colortext .anim-shape:nth-child(3) {
-  fill: #e9f1df;
-}
-
-.colortext .anim-shape:nth-child(4) {
-  fill: #56d9cd;
-}
-
-.colortext .anim-shape:nth-child(5) {
-  fill: #3aa1bf;
-}
-
-.shadow {
-  -webkit-transform: translate(10px, 10px);
-  -ms-transform: translate(10px, 10px);
-  transform: translate(10px, 10px);
-}
-
-.anim-shape--shadow {
-  fill: #000;
-  fill-opacity: 0.2;
 }
 
 @keyframes reveal {

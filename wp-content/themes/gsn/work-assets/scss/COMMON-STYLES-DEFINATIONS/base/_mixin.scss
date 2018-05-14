@@ -151,6 +151,47 @@ $rem-px-only: false !default;
   }
 }
 
+@mixin common-btn {
+  border: 0;
+  text-align: center;
+  letter-spacing: .025em;
+  font-family: inherit;
+  font-weight: $fw-sbold;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  outline: 0;
+  padding: 0 10px;
+  @include transition;
+
+  @include min-screen($mq-min-mobile) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+    }
+
+    &:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    &:focus {
+      box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+    }
+  }
+}
+
+@mixin create-custom-btn($color: $white, $background: $dark_gray, $width: '160px', $height: '40px', $fontSize: rem($fs-sbody), $fontWeight: $fw-sbold, $padding: '0 10px', $lineHeight: '40px', $textTrasform: 'none') {
+  padding: $padding;
+  height: $height;
+  line-height: $lineHeight;
+  background: $background;
+  color: $color;
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  width: $width;  
+}
+
 
 // =============================================================================
 // String Replace

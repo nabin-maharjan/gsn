@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="gsn-custom__btn__wrap gsn-lmfind__filter gsn-lmfind__filter--btn">
-          <button type="button" class="gsn-custom__btn gsn-custom__btn--green" id="gsn_shop_filter">Filter</button>
+          <button type="button" class="gsn-custom__btn gsn-custom__btn--green gsn-custom__btn--medium" id="gsn_shop_filter">Filter</button>
         </div>
       </div>
     </div>

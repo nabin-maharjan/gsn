@@ -1,24 +1,26 @@
   <div class="gsn-landing__form__wrapper clearfix" id="js-landing-form-cntr">
 		<div id="login" class="js-gsn-landing-tab-content gsn-landing__tab__content tab-content__login">
 			<h2 class="gsn-landing__tab__title">Login</h2>
-			<form name="login_form" id="login_form">
+			<form name="login_form" id="login_form" class="ta-c">
 				<!-- Row start -->
-				<div class="gsn-landing__form__group form-group">
-					<label for="loginEmailAddress" class="gsn-landing__form__label form-label">Email Address</label>
-					<div class="form-input">
-						<input type="text" class="form-control" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
+				<div class="gsn-landing__form__item">
+					<label for="loginEmailAddress" class="gsn-landing__form__label">Email Address</label>
+					<div class="gsn-landing__form__input">
+						<input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="loginEmailAddress" id="loginEmailAddress" placeholder="Enter your email address">
 					</div>
 				</div>
 				<!-- Row end -->
 				<!-- Row start -->
-				<div class="gsn-landing__form__group form-group">
-					<label for="login_password" class="gsn-landing__form__label form-label" type="password">Password</label>
-					<div class="form-input">
-						<input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Enter your password">
+				<div class="gsn-landing__form__item">
+					<label for="login_password" class="gsn-landing__form__label" type="password">Password</label>
+					<div class="gsn-landing__form__input">
+						<input type="password" class="gsn-landing__form__field gsn-landing__form__field--input" name="loginPassword" id="loginPassword" placeholder="Enter your password">
 					</div>
 				</div>
 				<!-- Row end -->
-				<button type="submit" class="btn btn-submit">Login</button>
+				<div class="ta-c gsn-landing__form__bwrap">
+					<button type="submit" class="btn-submit gsn-custom__btn gsn-custom__btn--grey gsn-custom__btn--big">Login</button>
+				</div>
 			</form>
 			<div class="gsn-landing__form__message login-message">
 				<span>Haven't registered yet? <a href="#register" class="js-gsn-landing-form-link">Register Here</a></span>
@@ -30,39 +32,42 @@
 		<div id="register" class="js-gsn-landing-tab-content gsn-landing__tab__content tab-content__register">
 			<h2 class="gsn-landing__tab__title">Register</h2>
 		  <form name="register_form" id="register_form">
-		    <div class="row">
+		    <div class="neg-m gsn-landing__form__items">
 		      <!-- Row start -->
-		      <div class="gsn-landing__form__group form-group col-sm-6">
-		        <label for="firstName" class="gsn-landing__form__label form-label">First Name</label>
-		        <div class="form-input">
-		          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter your first name">
+		      <div class="gsn-landing__form__item">
+		        <label for="firstName" class="gsn-landing__form__label">First Name</label>
+		        <div class="gsn-landing__form__input">
+		          <input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="firstName" id="firstName" placeholder="Enter your first name">
 		        </div>
 		      </div>
 		      <!-- Row end -->
+
 		      <!-- Row start -->
-		      <div class="gsn-landing__form__group form-group col-sm-6">
-		        <label for="lastName" class="gsn-landing__form__label form-label">Last Name</label>
-		        <div class="form-input">
-		          <input type="text" class="form-control"  name="lastName"  id="lastName"  placeholder="Enter your last name">
+		      <div class="gsn-landing__form__item">
+		        <label for="lastName" class="gsn-landing__form__label">Last Name</label>
+		        <div class="gsn-landing__form__input">
+		          <input type="text" class="gsn-landing__form__field gsn-landing__form__field--input"  name="lastName"  id="lastName"  placeholder="Enter your last name">
 		        </div>
 		      </div>
 		      <!-- Row end -->
+
 		      <!-- Row start -->
-		      <div class="gsn-landing__form__group form-group col-sm-6">
-		        <label for="emailAddress" class="gsn-landing__form__label form-label">Email Address</label>
-		        <div class="form-input">
-		          <input type="text" class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
+		      <div class="gsn-landing__form__item">
+		        <label for="emailAddress" class="gsn-landing__form__label">Email Address</label>
+		        <div class="gsn-landing__form__input">
+		          <input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="emailAddress" id="emailAddress" placeholder="Enter your email address">
 		        </div>
 		      </div>
 		      <!-- Row end -->
+
 		      <!-- Row start -->
-		      <div class="gsn-landing__form__group form-group col-sm-6">
-		        <label for="shopType" class="gsn-landing__form__label form-label">Shop Type</label>
-		        <div class="form-input">
+		      <div class="gsn-landing__form__item">
+		        <label for="shopType" class="gsn-landing__form__label">Shop Type</label>
+		        <div class="gsn-landing__form__input">
 							<?php global $store;
 								$shop_types = $store->shop_types();
 							?>
-							<select class="form-control" name="shopType" id="shopType">
+							<select class="gsn-landing__form__field gsn-landing__form__field--select" name="shopType" id="shopType">
 								<option value="">Choose shop type</option>
 								<?php foreach ($shop_types as $type) {?>
 									<option value="<?php echo $type->term_id; ?>"><?php echo $type->name; ?></option>
@@ -71,66 +76,76 @@
 		        </div>
 		      </div>
 		      <!-- Row end -->
-		      <div class="clearfix">
+		      
 		      <!-- Row start -->
-		      <div class="gsn-landing__form__group form-group col-sm-6">
-		        <label for="password" class="gsn-landing__form__label form-label">Password</label>
-		        <div class="form-input">
-		          <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+		      <div class="gsn-landing__form__item">
+		        <label for="password" class="gsn-landing__form__label">Password</label>
+		        <div class="gsn-landing__form__input">
+		          <input type="password" class="gsn-landing__form__field gsn-landing__form__field--input" name="password" id="password" placeholder="Enter your password">
 		        </div>
 		      </div>
 		      <!-- Row end -->
 					<!-- Row start -->
-					<div class="gsn-landing__form__group form-group col-sm-6">
-						<label for="cpassword" class="gsn-landing__form__label form-label">Confirm Password</label>
-						<div class="form-input">
-							<input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password">
+					<div class="gsn-landing__form__item">
+						<label for="cpassword" class="gsn-landing__form__label">Confirm Password</label>
+						<div class="gsn-landing__form__input">
+							<input type="password" class="gsn-landing__form__field gsn-landing__form__field--input" name="cpassword" id="cpassword" placeholder="Confirm your password">
 						</div>
 					</div>
 					<!-- Row end -->
-		      </div>
-		          <!-- Row start -->
-		          <div class="gsn-landing__form__group form-group col-sm-6">
-		            <label for="mobileNumber" class="gsn-landing__form__label form-label">Mobile Number</label>
-		            <div class="form-input">
-		              <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
-		            </div>
-		          </div>
-		          <!-- Row end -->
+		      
+					<!-- Row start -->
+					<div class="gsn-landing__form__item">
+						<label for="mobileNumber" class="gsn-landing__form__label">Mobile Number</label>
+						<div class="gsn-landing__form__input">
+							<input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="mobileNumber" id="mobileNumber" placeholder="Enter your mobile number">
+						</div>
+					</div>
+					<!-- Row end -->
 
+					<!-- Row start -->
+					<div class="gsn-landing__form__item">
+						<label for="storeName" class="gsn-landing__form__label">Store Name</label>
+						<div class="gsn-landing__form__input">
+							<input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="storeName" id="storeName" placeholder="Enter your store name">
+						</div>
+					</div>
+					<!-- Row end -->
 
-		          <!-- Row start -->
-		          <div class="gsn-landing__form__group form-group col-sm-6">
-		            <label for="storeName" class="gsn-landing__form__label form-label">Store Name</label>
-		            <div class="form-input">
-		              <input type="text" class="form-control" name="storeName" id="storeName" placeholder="Enter your store name">
-		            </div>
-		          </div>
-		          <!-- Row end -->
-
-		          <!-- Row start -->
-		          <div class="gsn-landing__form__group form-group col-sm-6">
-		            <label for="panNumber" class="gsn-landing__form__label form-label">Pan Number</label>
-		            <div class="form-input">
-		              <input type="text" class="form-control" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
-		            </div>
-		          </div>
-		          <!-- Row end -->
+					<!-- Row start -->
+					<div class="gsn-landing__form__item">
+						<label for="panNumber" class="gsn-landing__form__label">Pan Number</label>
+						<div class="gsn-landing__form__input">
+							<input type="text" class="gsn-landing__form__field gsn-landing__form__field--input" name="panNumber"  id="panNumber" placeholder="Enter your pan number">
+						</div>
+					</div>
+					<!-- Row end -->
 
 		      <!-- Row start -->
-		      <div class="bd-example bd-example-padded-bottom col-sm-6 location_cntr">
-		        <label for="location" class="gsn-landing__form__label form-label">Set Your Store Location</label>
-		        <button type="button" class="js-gsn-landing-location-btn btn btn-primary col-sm-12 brick_red gsn-landing__location__btn" id="js-gsn-landing-set-lbtn"> Location </button>
-		        <button type="button" style="display:none" class="js-gsn-landing-location-btn btn btn-success col-sm-12 gsn-landing__location__btn"  id="js-gsn-landing-change-lbtn"> <span>Your location</span>
-		        <p class="gsn-landing__location__btn__text"></p>
+		      <div class="gsn-landing__form__item location_cntr">
+		        <label for="location" class="gsn-landing__form__label">
+							Set Your Store Location
+						</label>
+
+		        <button type="button" style="width: 100%;" class="js-gsn-landing-location-btn gsn-custom__btn gsn-custom__btn--blue gsn-custom__btn--small" id="js-gsn-landing-set-lbtn">
+							Set your Location
+						</button>
+
+						<button type="button" style="display:none; width: 100%;" class="js-gsn-landing-location-btn gsn-custom__btn gsn-custom__btn--green gsn-custom__btn--small"  id="js-gsn-landing-change-lbtn">
+							<!-- <span>Your location</span> -->
+							<p class="js-gsn-selected-location-text gsn-landing__location__btn__text"></p>
 		        </button>
-		        <input type="hidden" class="form-control" name="storeFullAddress" id="storeFullAddress">
-		                <input type="hidden" class="form-control" name="latitute" id="latitute">
-		                <input type="hidden" class="form-control" name="lognitute" id="lognitute">
+
+		        <input type="hidden" class="gsn-landing__form__field gsn-landing__form__field--input" name="storeFullAddress" id="storeFullAddress">
+		        <input type="hidden" class="gsn-landing__form__field gsn-landing__form__field--input" name="latitute" id="latitute">
+		        <input type="hidden" class="gsn-landing__form__field gsn-landing__form__field--input" name="lognitute" id="lognitute">
 		      </div>
 		      <!-- Row end -->
-		    </div>
-		    <button type="submit" class="btn btn-submit">Register</button>
+
+				</div>
+				<div class="ta-r gsn-landing__form__bwrap">
+					<button type="submit" class="btn-submit gsn-custom__btn gsn-custom__btn--grey gsn-custom__btn--big">Register</button>
+				</div>
 		  </form>
 		  <div class="gsn-landing__form__message register-message">
 				<span>Already registered? <a href="#login" class="js-gsn-landing-form-link">Login Here</a></span>
@@ -141,41 +156,39 @@
 
 		<div class="gsn-landing__close__fwrap">
 			<a href="#" class="js-close-form-anchor gsn-landing__close__flink close__btn">
-				<svg>
-					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cross"></use>
-				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" fill="#000"><path d="M90 3.7L86.5.2 45.1 41.6 3.5 0 0 3.5l41.6 41.6L.2 86.5 3.7 90l41.4-41.4 41.2 41.2 3.5-3.5-41.2-41.2L90 3.7z"></path></svg>
 				<span>Close</span>
 			</a>
 		</div>
 		<!-- /.gsn-landing__close__fwrap -->
-		<!-- Row start -->
+
+		<!-- Location Modal -->
 		<div id="js-gsn-grid-system-modal" class="gsn-landing__location__modal gsn-landing-lmodal">
-				<div class="gsn-landing-lmodal__content">
-					<div class="gsn-landing-lmodal__heading clearfix" id="js-gsn-landing-close-lmodal">
-						<a href="#" class="modal--close fr">
-							<span>
-								<svg>
-						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cross"></use>
-					</svg>
-				</span>
-			</a>
-						<h4 class="modal--text fl" id="gridModalLabel">Find Your Store Location</h4>
-					</div>
-					<div class="gsn-landing-lmodal__body">
-						<div class="gsn-landing__form__group form-group clearfix">
-							<div class="form-input">
-								<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-								<div id="map" style="width:100%;height:400px; margin-bottom: 10px;"></div>
-								Selected Location:<span id="selected_location_label"></span>
-							</div>
+			<div class="gsn-landing-lmodal__content">
+				<div class="gsn-landing-lmodal__heading clearfix">					
+					<h4 class="modal--text fl" id="gridModalLabel">Find your store location</h4>
+
+					<a href="#" class="modal--close" id="js-gsn-landing-close-lmodal">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" fill="#000"><path d="M90 3.7L86.5.2 45.1 41.6 3.5 0 0 3.5l41.6 41.6L.2 86.5 3.7 90l41.4-41.4 41.2 41.2 3.5-3.5-41.2-41.2L90 3.7z"></path></svg>
+						</span>
+					</a>
+				</div>
+				<div class="gsn-landing-lmodal__body">
+					<div class="clear">
+						<div class="gsn-landing__form__input">
+							<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+							<div id="map" style="width:100%;height:400px; margin-bottom: 10px;"></div>
+							Selected Location:<span id="selected_location_label"></span>
 						</div>
 					</div>
-					<div class="gsn-landing-lmodal__footer clearfix">
-						<button type="button" class="js-gsn-set-lbtn btn btn-primary fr" >Set location</button>
-					</div>
 				</div>
+				<div class="gsn-landing-lmodal__footer clear">
+					<button type="button" class="js-gsn-set-lbtn fr gsn-custom__btn gsn-custom__btn--blue gsn-custom__btn--small" >Set location</button>
+				</div>
+			</div>
 		</div>
-		<!-- Row end -->
+		<!-- Location Modal end -->
 	</div>
 	<!-- /.gsn-landing__form__wrapper -->
   

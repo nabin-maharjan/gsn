@@ -3,11 +3,31 @@ body {
   color: $dark__gray;
 }
 
+.clear::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
 // Container widht
 .container {
   max-width: 1170px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+// Flex Wrapper
+.f {
+  &-w {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// types
+.ta-r {
+  text-align: right;
 }
 
 // Negative margin
@@ -19,15 +39,6 @@ body {
   }
 }
 
-// Flex Wrapper
-.f {
-  &-w {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-// margins
 .m-auto {
   margin-right: auto;
   margin-left: auto; 
@@ -88,7 +99,7 @@ body {
 
 .gsn-messenger {
   &__btn {
-    position: absolute !important;
+    position: fixed !important;
     bottom: 3px;
     right: 3px;
   }

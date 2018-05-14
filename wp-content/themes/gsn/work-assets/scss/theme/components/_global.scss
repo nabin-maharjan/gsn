@@ -45,18 +45,7 @@ select {
     border-color: red;
   }
 }
-.btn-submit {
-  background: $dark_gray;
-  border-radius: 0;
-  color: white;
-  font-weight: bold;
-  padding: 10px 30px;
-  text-transform: uppercase;
 
-  &:hover {
-    background: $gray_bg;
-  }
-}
 label.error {
   color: red;
   display: block;
