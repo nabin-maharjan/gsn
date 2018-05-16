@@ -295,7 +295,10 @@ gulp.task("landing-vendor-scripts", function() {
     .src(`${workingFolder}/js/landing/vendors/*.js`)
     .pipe(sourcemaps.init())
     .pipe(include())
-    .pipe(order([]))
+    .pipe(order([
+      'jquery.ba-throttle-debounce.min.js',
+      'fluidbox.min.js'
+    ]))
     .pipe(babel({
       presets: ['env']
     }))

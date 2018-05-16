@@ -63,8 +63,8 @@ Goshopnepal :: Boost your sale with your own website.
           <div class="gsn-lheader__nav__wrap">
             <nav class="gsn-lheader__nav">
               <ul class="gsn-lheader__nitems">
-                <!--li class="gsn-lheader__nitem">
-                  <a href="" class="gsn-lheader__nlink">
+              <?php /* <li class="gsn-lheader__nitem">
+                  <a href="<?php echo site_url(); ?>/landing-about" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">About</span>
                   </a>
                 </li>
@@ -72,7 +72,7 @@ Goshopnepal :: Boost your sale with your own website.
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Pricing</span>
                   </a>
-                </li>
+                </li> */ ?>
                 <li class="gsn-lheader__nitem">
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Documentation</span>
@@ -82,7 +82,7 @@ Goshopnepal :: Boost your sale with your own website.
                   <a href="" class="gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Contact</span>
                   </a>
-                </li-->
+                </li>
                 <li class="gsn-lheader__nitem">
                   <a href="#login" class="js-gsn-access-link gsn-lheader__nlink">
                     <span class="gsn-lheader__ntext">Sign in</span>
@@ -96,4 +96,4 @@ Goshopnepal :: Boost your sale with your own website.
     </div>
 	</header>
 
-	<main class="js-landing-home gsn-landing__main gsn-lmain" role="presentation">
+	<main class="js-landing-main gsn-landing__main gsn-lmain" role="presentation">

@@ -59,6 +59,7 @@ function enquee_scripts(){
         Script enque for main pages
     */
     if('main'==$page_type){
+        wp_enqueue_script( 'landing-vendor-js', get_template_directory_uri() . '/assets/js/landing/vendor.min.js', array(), '1.0.0', true );
         wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/assets/js/landing/landing.min.js', array(), '1.0.0', true );
     } 
 }
