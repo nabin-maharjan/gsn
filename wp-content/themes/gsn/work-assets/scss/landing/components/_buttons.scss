@@ -105,13 +105,21 @@
     }
 
     &--large {
-      text-transform: uppercase;
-      font-size: rem($fs-ebody);
+      text-transform: uppercase;      
       font-weight: $fw-bold;
-      height: 60px;
-      line-height: 60px;
-      padding: 0 20px;
-      min-width: 200px;
+      font-size: rem($fs-body);
+      height: 50px;
+      line-height: 50px;
+      padding: 0 15px;
+      min-width: 150px;
+
+      @include min-screen($mq-min-mobile) {
+        font-size: rem($fs-ebody);
+        height: 60px;
+        line-height: 60px;
+        padding: 0 20px;
+        min-width: 200px;
+      }
     }
   }
 }

@@ -33,7 +33,6 @@ Goshopnepal :: Boost your sale with your own website.
 <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/goshopnepal_banner.png" />
 <meta property="og:description" content="Experience new way of online shopping. Create your own website with Goshopnepal and boost your sale." />
 <meta property="og:site_name" content="GoShopNepal" />
-
 <script>
     var ajaxUrl="<?php echo admin_url( 'admin-ajax.php' ); ?>";
     var location_Lat=0;

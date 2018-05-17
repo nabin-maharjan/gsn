@@ -1,3 +1,10 @@
 .ta-c {
   text-align: center;
 }
+
+.gsn-page {
+  &__title {
+    font-size: rem($fs-large);
+    font-weight: $fw-sbold;
+  }
+}

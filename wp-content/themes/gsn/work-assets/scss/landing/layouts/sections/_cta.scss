@@ -1,6 +1,10 @@
 .gsn-lmcta {
   background: #b5e3bc;
-  padding: 100px 0;
+  padding: 60px 0 45px;
+
+  @include min-screen($mq-min-mobile) {
+    padding: 100px 0;
+  }
 
   h1 {
     color: #022a07;
@@ -11,6 +15,12 @@
   }
 
   &__bitem {
-    margin: 0 20px;
+    margin: 15px 0;
+    display: block;
+
+    @include min-screen($mq-min-mobile) {
+      display: inline-block;
+      margin: 0 20px;
+    }
   }
 }

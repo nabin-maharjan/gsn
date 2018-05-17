@@ -1,19 +1,31 @@
 .gsn-section {
-  padding: 80px 0;
+  padding: 40px 0;
+
+  @include min-screen($mq-min-mobile) {
+    padding: 80px 0;
+  }  
 
   &__title {
-    font-size: rem($fs-elarge);
+    font-size: rem($fs-mbig);
     font-weight: $fw-ebold;
     line-height: 1.2;
     position: relative;
+
+    @include min-screen($mq-min-mobile) {
+      font-size: rem($fs-elarge);
+    }
     
     &::after {
       content: '';
       display: block;
-      width: 80px;
+      width: 40px;
       height: 4px;
       background: $dark__gray;
       margin: 15px auto 0;
+
+      @include min-screen($mq-min-mobile) {
+        width: 80px;
+      }
     }
 
     &--small {

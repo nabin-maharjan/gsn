@@ -313,9 +313,21 @@
     color="blue"
     size="large">
   </div>
-</footer> 
+</footer>
 
 <?php wp_footer(); ?>
+
+<script>
+	window.sr = ScrollReveal();
+	
+	sr.reveal('.js-scroll-visible-step', {
+		container: $('.js-scroll-visible-step-cntr'),
+		duration: 500,
+		reset: false,
+		distance: '50px',
+		scale: 0.8
+	});
+</script>
 <script>
 		/* Login jQuery validation Procress */
 		jQuery("#login_form").validate({

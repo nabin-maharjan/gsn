@@ -5,18 +5,29 @@
   }
 
   &__items {
-    display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 -20px;
+    @include min-screen($mq-min-sm-mobile) {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0 -20px;
+    }
   }
 
   &__item {
-    width: 33.33333%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+    padding: 15px 0;
+    display: block;
+
+    @include min-screen($mq-min-sm-mobile) {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      width: 50%;
+    }
+
+    @include min-screen($mq-min-mobile) {
+      width: 33.33333%;
+    }
   }
 
   &__link {
