@@ -86,6 +86,7 @@ function gsn_register_my_menus() {
   register_nav_menus(
     array(
       'store-header-menu' => __( 'Store Header Menu' ),
+      'main-menu' => __( 'Main Header Menu' ),
     )
   );
 }
