@@ -1,11 +1,15 @@
 .gsn-ldocs {
   &__wrapper {
-    padding: 40px 0;
+    padding: 40px 0 0;
   }  
 
   &__step {
     padding: 60px 0;
     visibility: hidden;
+
+    &:nth-child(even) {
+      background: #f7f7f7;
+    }
 
     @include min-screen($mq-min-mobile) {
       &:hover {

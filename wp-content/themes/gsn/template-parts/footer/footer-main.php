@@ -297,11 +297,6 @@
               <span>Privacy Policy</span>
             </a>
           </li>
-          <li class="gsn-footer__bitem">
-            <a href="#" class="gsn-footer__blink">
-              <span>Sitemap</span>
-            </a>
-          </li-->
         </ul>
       </div>
     </div>
