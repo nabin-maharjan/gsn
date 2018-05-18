@@ -3,6 +3,7 @@ date_default_timezone_set("Asia/Kathmandu");
 include("vendor/autoload.php");
 include("inc/basic.php");
 include("inc/boostrap-walker.php");
+include("inc/boostrap-walker-main-menu.php");
 include("inc/input-fields.php");
 include("inc/settings.php");
 

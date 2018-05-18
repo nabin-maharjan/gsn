@@ -61,33 +61,12 @@ Goshopnepal :: Boost your sale with your own website.
         <div class="gsn-lheader__nav__wrapper">
           <div class="gsn-lheader__nav__wrap">
             <nav class="gsn-lheader__nav">
-              <ul class="gsn-lheader__nitems">
-              <?php /* <li class="gsn-lheader__nitem">
-                  <a href="<?php echo site_url(); ?>/landing-about" class="gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">About</span>
-                  </a>
-                </li>
-                <li class="gsn-lheader__nitem">
-                  <a href="" class="gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">Pricing</span>
-                  </a>
-                </li> */ ?>
-                <li class="gsn-lheader__nitem">
-                  <a href="" class="gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">Documentation</span>
-                  </a>
-                </li>
-                <li class="gsn-lheader__nitem">
-                  <a href="" class="gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">Contact</span>
-                  </a>
-                </li>
-                <li class="gsn-lheader__nitem">
-                  <a href="#login" class="js-gsn-access-link gsn-lheader__nlink">
-                    <span class="gsn-lheader__ntext">Sign in</span>
-                  </a>
-                </li>
-              </ul>
+            <?php wp_nav_menu( array( 
+          				'theme_location' => 'main-menu',
+          				'menu_class' => 'gsn-lheader__nitems',
+          				'walker' => new Wp_Bootstrap_Main_Menuwalker ()
+          				 ) ); 
+                ?>
             </nav>
           </div>
         </div>
