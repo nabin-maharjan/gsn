@@ -101,7 +101,7 @@
            <div class="col-sm-6">
                  <h3>Payment Information</h3>
                  
-			           <h6 class="mb15">Shipping information</h6>
+			           <h6 class="mb15">Shipping informations</h6>
                 <!-- Row start -->
                   <div class="form-group clearfix">
                     <label for="flat_rate" class="col-sm-4 col-form-label col-form-label-sm pl0">Shipping Charge (Rs)</label>
@@ -137,6 +137,7 @@
         
               <!-- Row start -->
               <div class="form-group clearfix">
+                <h6>Social informations</h6>
                 <label for="firstName" class="col-sm-4 col-form-label col-form-label-sm pl0">Facebook Url</label>
                 <div class="col-sm-8 pr0">
                   <input type="text" class="form-control form-control-sm" value="<?php echo (!empty($gsn_settings->facebook))?$gsn_settings->facebook:"";?>" name="facebook" id="facebook">

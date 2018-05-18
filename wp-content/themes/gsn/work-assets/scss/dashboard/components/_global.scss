@@ -46,6 +46,12 @@ select {
   }
 }
 
+.dash-custom__messenger {
+  position: fixed !important;
+  right: 3px;
+  bottom: 3px;
+}
+
 label.error {
   color: red;
   display: block;

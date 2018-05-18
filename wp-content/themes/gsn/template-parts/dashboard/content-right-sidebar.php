@@ -12,7 +12,7 @@ if(!empty($store->storePackage)){
    <div class="dashboard__info-content">
     <?php /*?><h3>Plans &amp; Limits</h3><?php */?>
     <div class="plan__user">
-      <h5>Your current plan is <span><?php echo $selected_package; ?></span></h5>
+      <h5 class="plan__user__type">Your current plan is <span><?php echo $selected_package; ?></span></h5>
       <div class="plan-info--user">
        <?php 
 			  $package_product=get_option($selected_package.'_package_product');

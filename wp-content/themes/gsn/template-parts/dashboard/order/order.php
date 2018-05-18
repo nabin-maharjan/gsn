@@ -23,7 +23,7 @@ if(!empty($_GET['action']) && $_GET['action']=="view"){
   <div class="filter-container">
     <div class="container">
       <div class="filter__items filter__orders clearfix">
-        <form action="<?php echo site_url('/dashboard/order/'); ?>" class="order-search-form fr"  method="get">
+        <form action="<?php echo site_url('/dashboard/order/'); ?>" class="order-search-form"  method="get">
           <input type="text" name="id"  class="form-control form-control-sm" placeholder="Search order">
           <input type="hidden" name="action"  class="form-control form-control-sm" value="edit">
           <button type="submit" class="btn btn-primary product-search-btn">Search</button>
@@ -50,11 +50,15 @@ if(!empty($_GET['action']) && $_GET['action']=="view"){
 				gsn_pagination_link($storeOrders->max_num_pages,$post_per_page);
 			}
 		?>
+  </div>  
+    <?php  
+      } else {
+    ?>
+    <div class="col-md-12">
+    <?php 
+        echo "Sorry! we are so tired to search for order which status is ".$_GET['status'];
+      }
+    ?>
   </div>
-  <?php  
-  	} else {
-  		echo "Sorry! we are so tired to search for order which status is ".$_GET['status'];
-  	}
-  ?>
 </section>
 <!-- /.products__order-cntr -->

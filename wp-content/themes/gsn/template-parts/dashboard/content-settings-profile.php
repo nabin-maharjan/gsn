@@ -104,10 +104,10 @@
       <div class="form-group clearfix">
         <label class="col-sm-2 col-form-label col-form-label-sm">Location</label>
         <div class="col-sm-10">
-          <div class="form-input">
-            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+          <div class="form-input profile-map__wrapper">
+            <input id="pac-input" class="controls profile-map__input" type="text" placeholder="Search Box">
             <div id="map" style="width:100%;height:500px"></div>
-             Selected Location :<span id="selected_location_label"><?php echo (!empty($store->storeFullAddress))?$store->storeFullAddress:"";?></span>
+             Selected Location:<span id="selected_location_label" class="profile-map__selected"><?php echo (!empty($store->storeFullAddress))?$store->storeFullAddress:"";?></span>
             <input type="hidden" class="form-control" value="<?php echo (!empty($store->storeFullAddress))?$store->storeFullAddress:"";?>" name="storeFullAddress" id="storeFullAddress">
             <input type="hidden" class="form-control" value="<?php echo (!empty($store->latitute))?$store->latitute:"";?>" name="latitute" id="latitute">
             <input type="hidden" class="form-control" value="<?php echo (!empty($store->lognitute))?$store->lognitute:"";?>" name="lognitute" id="lognitute">                  

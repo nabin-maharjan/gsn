@@ -2,7 +2,7 @@
 <!-- /.main -->
 <footer></footer>
 
-<div class="fb-messengermessageus" 
+<div class="fb-messengermessageus dash-custom__messenger" 
   messenger_app_id="838219992986201" 
   page_id="358436614540954"
   color="blue"

@@ -85,6 +85,7 @@ color:<?php echo $light_color; ?>;
 border-color:<?php echo $light_color; ?>;
 }
 .products__list-cntr .filter__items,
+.filter__orders,
 .orders .order-list-item .order-detail-top,
 .orders .order-list-item .order-detail-bottom,
 .category-lists li,

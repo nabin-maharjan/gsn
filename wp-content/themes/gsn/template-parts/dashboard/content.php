@@ -21,8 +21,8 @@
 <section class="dashboard-landing-cntr">
   <div class="container">
   <?php if(empty( $store->domainName)){ ?>
-  <div class="alert alert-info">
-  	Domain name is not set yet. you can set it from <a class="btn btn-sm btn-primary" href="<?php echo site_url("/dashboard/profile");?>" >profile setting.</a>
+  <div class="alert alert-info user-notification">
+  	Domain name is not set yet. you can set it from <a class="btn btn-sm btn-primary dash-custom__btn" href="<?php echo site_url("/dashboard/profile");?>" >profile setting.</a>
   </div>
   
   <?php }?>

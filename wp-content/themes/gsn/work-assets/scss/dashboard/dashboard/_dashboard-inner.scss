@@ -15,7 +15,9 @@
 
   a {
     font-size: rem($fs-small);
-    margin-right: 10px;
+    margin-right: 15px;
+    border-radius: 4px;
+    padding: 10px 20px;
   }
 }
 .products__list-cntr {
@@ -23,11 +25,17 @@
   }
   .product-list-cntr {
     ul.products {
+      font-size: 0;
+
       @include max-screen($mq-tablet) {
         padding: 0 10px;
       }
+
       li.product-list-item {
+        padding: 0 15px;
         width: 20%;
+        margin-bottom: 30px;
+        vertical-align: top;
 
         @include max-screen($mq-tablet) {
           width: 25%; 
@@ -43,10 +51,12 @@
         }
 
         .product-info-cntr {
+          margin-top: 15px;
+
           h4 {
             font-size: rem($fs-small);
-            font-weight: normal;
-            margin-bottom: 5px;
+            font-weight: $fw-reg;
+            margin-bottom: 10px;
 
             a:hover {
               color: $brick_red;
@@ -54,12 +64,24 @@
           }
           .price {
             font-size: rem($fs-small);
+
+            .amount {
+              font-weight: $fw-bold;
+            }            
+
+            .woocommerce-Price-currencySymbol {
+              font-weight: $fw-reg;
+            }
           }
         }
       }
     }
     .product-image-cntr .product-image {
       height: 150px;
+      display: block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
     }
     .cart-btn a {
       font-size: rem($fs-tiny);
@@ -80,6 +102,7 @@
     &__items {
       background: $lighter_gray;
       padding: 10px 15px;
+      border-radius: 4px;
 
       @include max-screen($mq-mobile) {
         padding-bottom: 20px;
@@ -103,11 +126,14 @@
           margin-left: 6px;
           outline: 0;
           background: $white;
+          border-radius: 4px;
         }
         button {
           padding: 8px 25px;
           vertical-align: top;
           margin-left: 6px;
+          border-radius: 4px;
+          @include transition;
         }
 
         @include max-screen($mq-mobile) {
@@ -138,11 +164,14 @@
           padding: 8px 15px;
           border: 0;
           width: 200px;
+          border-radius: 4px;
         }
         button {
           margin-left: 6px;
           padding: 8px 25px;
           vertical-align: top;
+          border-radius: 4px;
+          @include transition;
         }
 
         @include max-screen($mq-mobile) {            
@@ -193,8 +222,19 @@
   }
 }
 .dashboard-main-cntr {
+  button {
+    padding: 8px 20px;
+    border-radius: 4px;
+    @include transition;
+  }
+
   button, input[type="button"] {
     font-size: rem($fs-small);
+  }
+
+  h6 {
+    font-size: rem($fs-small);
+    margin-bottom: 15px;
   }
 }
 .add-image-btn {
@@ -376,6 +416,45 @@
   }
 }
 
+.profile-map {
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__input {
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: inherit;
+    font-size: rem($fs-small);
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    outline: 0;
+    border: 1px solid transparent;
+    color: #373a3c !important;
+    position: absolute;
+    z-index: 2;
+    left: 100px;
+
+    &:focus {
+      border: 1px solid lightblue;
+    }
+  }
+
+  &__selected {
+    font-weight: $fw-bold;
+    margin-top: 15px;
+    margin-left: 5px;
+    display: inline-block;
+  }
+}
+
 // PACKAGE TYPES
 
 .package {
@@ -473,10 +552,14 @@
 // order pages
 // ===================== //
 .filter__orders {
-  margin-bottom: 20px;
-  form {
-    width: 330px;
+  margin-bottom: 20px; 
+  background: #ececec;
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: flex-end;
 
+  form {
     input {
       width: 250px;
       float: left;
