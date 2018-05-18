@@ -17,7 +17,7 @@ get_header();
 <div class="ta-c gsn-linner__hero gsn-li__hero">
   <div class="container">
     <div class="gsn-li__hero__wrapper">
-      <h1 class="gsn-section__title gsn-li__hero__title">Documentation</h1>
+      <h1 class="gsn-section__title gsn-li__hero__title">Get started</h1>
       <h5 class="gsn-section__subtitle">Follow the steps to create your online store.</h5>
     </div>
   </div>

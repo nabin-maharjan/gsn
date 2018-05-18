@@ -1,10 +1,13 @@
 .gsn-ldocs {
   &__wrapper {
-    padding: 40px 0 0;
+
+    @include min-screen($mq-min-mobile) {
+      padding: 40px 0 0;
+    }
   }  
 
   &__step {
-    padding: 60px 0;
+    padding: 40px 0;
     visibility: hidden;
 
     &:nth-child(even) {
@@ -12,6 +15,8 @@
     }
 
     @include min-screen($mq-min-mobile) {
+      padding: 60px 0;
+
       &:hover {
         .gsn-ldocs__stitle::after {
           transform: scaleX(1);
@@ -57,12 +62,16 @@
 
   &__stitle {
     color: $black;
-    font-size: rem($fs-medium);
+    font-size: rem($fs-ebody);
     font-weight: $fw-bold;
     text-transform: uppercase;
     padding-bottom: 15px;
     position: relative;
     line-height: 1;
+
+    @include min-screen($mq-min-mobile) {
+      font-size: rem($fs-medium);
+    }
 
     &::after {
       content: '';
@@ -80,10 +89,22 @@
   }
 
   &__scontent {
+    @include max-screen($mq-mobile) {
+      * {
+        width: 100%;
+      }
+    }
+
     &__wrap {
       @include min-screen($mq-min-mobile) {
         padding-left: 45px;
       }
+    }
+  }
+
+  &__sright {
+    @include max-screen($mq-mobile) {
+      margin-top: 40px;
     }
   }
 

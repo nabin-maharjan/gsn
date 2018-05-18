@@ -1,7 +1,11 @@
 .gsn-li {
   &__hero {
-    padding: 80px 0;
+    padding: 60px 0;
     background: #b5e3bc;
+
+    @include min-screen($mq-min-mobile) {
+      padding: 80px 0;
+    }
 
     &__title {
       color: #022a07;

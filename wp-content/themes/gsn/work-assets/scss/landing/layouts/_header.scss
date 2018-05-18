@@ -19,6 +19,12 @@
     &:not(:first-child) {
       margin-left: 20px;
     }
+
+    &.current_page_item {
+      .gsn-lheader__ntext::after {
+        transform: translateX(-50%) scale(1);
+      }
+    }
   }
 
   &__nlink {
