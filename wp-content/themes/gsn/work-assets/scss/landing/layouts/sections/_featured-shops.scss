@@ -20,7 +20,6 @@
 
     @include min-screen($mq-min-sm-mobile) {
       display: flex;
-      flex-direction: column;
       padding: 20px;
       width: 50%;
     }
@@ -31,6 +30,7 @@
   }
 
   &__link {
-    display: flex;    
+    display: flex;
+    width: 100%;    
   }
 }

@@ -342,15 +342,5 @@
         }, 300);
       });
     }
-
-    // Zoom images in docs
-    // if($('.js-docs-image-zoom').length) {
-    //   $('.js-docs-image-zoom').fluidbox();
-
-    //   // Call public methods
-    //   $(window).scroll(function() {
-    //     $('.js-docs-image-zoom').fluidbox('close');
-    //   });
-    // }
   });
 })(jQuery);

@@ -561,7 +561,7 @@ jQuery(document).ready(function($) {
   });
 
   $(".dashboard-nav-overlay").on("click", function() {
-    $(".dashboard__hamburger--icon").removeClass("active");
+    $(".dashboard__hamburger--icon").removeClass("nav-active");
     $(".dashboard-header").removeClass("nav-open");
   });
 });
