@@ -1,6 +1,10 @@
 // body
 body {
   color: $dark__gray;
+
+  &.js-modal-active {
+    overflow: hidden;
+  }
 }
 
 img {

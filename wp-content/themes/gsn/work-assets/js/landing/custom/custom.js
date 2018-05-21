@@ -221,7 +221,6 @@
           .parent()
           .find(".js-landing-lmap-error")
           .remove();
-        //$('#js-gsn-grid-system-modal').modal('hide');
         closeLocationModal();
       }
     });
@@ -340,6 +339,44 @@
         setTimeout(function() {
           dropdown.addClass(JS_CLASSES.hidden);
         }, 300);
+      });
+    }
+
+    // Custom Modal
+    if($('.js-gsn-custom-modal').length) {
+      const ACTIVE_CLASS = 'js-modal-active';
+      const INACTIVE_CLASS = 'js-modal-inactive';
+
+      const trigger = $('.js-gsn-custom-modal-trigger');
+      const wrapper = $('.js-gsn-custom-modal');
+      const body = wrapper.find('.js-gsn-custom-modal-body');
+      const backdrop = wrapper.find('.js-gsn-custom-modal-backdrop');
+      const close = wrapper.find('.js-custom-modal-close');
+
+      trigger.on('click', function(e) {
+        e.preventDefault();
+        wrapper.addClass(ACTIVE_CLASS);
+        $('body').addClass(ACTIVE_CLASS);
+      });
+
+      const closeModal = function() {
+        wrapper.addClass(INACTIVE_CLASS);
+
+        setTimeout(function() {
+          $('body').removeClass(ACTIVE_CLASS);
+          wrapper.removeClass(INACTIVE_CLASS);
+          wrapper.removeClass(ACTIVE_CLASS);
+        }, 250);
+      };
+
+      close.on('click', function(e) {
+        e.preventDefault();
+        closeModal();
+      });
+
+      backdrop.on('click', function(e) {
+        e.preventDefault();
+        closeModal();
       });
     }
   });

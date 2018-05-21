@@ -310,6 +310,29 @@
   </div>
 </footer>
 
+<div class="js-gsn-custom-modal gsn-custom__modal__wrapper">
+	<div class="js-gsn-custom-modal-backdrop gsn-custom__modal__backdrop"></div>
+	<div class="js-gsn-custom-modal-body gsn-custom__modal__content gsn-custom__mbody">
+		<div class="gsn-custom__mbody__close">
+			<a href="#" class="js-custom-modal-close gsn-custom__mbody__cicon">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" fill="#000"><path d="M90 3.7L86.5.2 45.1 41.6 3.5 0 0 3.5l41.6 41.6L.2 86.5 3.7 90l41.4-41.4 41.2 41.2 3.5-3.5-41.2-41.2L90 3.7z"></path></svg>
+			</a>
+		</div>
+
+    <div class="gsn-custom__mbody__left">
+			<div class="gsn-custom__mbody__map" id="js_noshop__location" style="background-image: url(<?php echo get_template_directory_uri(); ?>/assets/images/map-dummy.png); background-size: cover; background-position: center center; background-repeat: no-repeat; height: 100%;"></div>
+		</div>
+
+		<div class="gsn-custom__mbody__right">
+		  <h3 class="gsn-custom__mbody__title">Some Shop</h3>
+			<h4 class="gsn-custom__mbody__category">Some shop's category</h4>
+			<h5 class="gsn-custom__mbody__location">Some shop's location</h5>
+		</div>
+	</div>
+</div>
+
+<button class="js-gsn-custom-modal-trigger">Trigger Modal</button>
+
 <?php wp_footer(); ?>
 
 <script>
